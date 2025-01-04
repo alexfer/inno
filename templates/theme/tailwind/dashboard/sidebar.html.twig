@@ -8,11 +8,11 @@
 </button>
 {% set _part = app.request.pathinfo|split('/')[2]|default(0) %}
 <aside id="sidebar"
-       class="fixed top-0 left-0 mr-2 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-       aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto overflow-ellipsis bg-gray-50 dark:bg-gray-900">
-        <a href="{{ url('app_index') }}" target="_blank" class="flex items-center ps-2.5 mb-5 dark:text-white">
-            <svg class="h-8 me-2 sm:h-12" xmlns="http://www.w3.org/2000/svg"
+       class="fixed top-0 left-0 mr-2 z-40 w-64 border-r dark:border-gray-600 h-screen transition-transform -translate-x-full sm:translate-x-0"
+       aria-labelledby="sidebar-a" aria-hidden="true">
+    <div id="sidebar-a" class="h-full px-3 py-4 overflow-y-auto overflow-ellipsis bg-indigo-700 dark:bg-gray-900">
+        <a href="{{ url('app_dashboard') }}" target="_blank" class="flex items-center ps-2.5 text-white mb-5">
+            <svg class="h-8 me-2 sm:h-12 dark:text-indigo-500" xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 17.481 17.481" xml:space="preserve" fill="currentColor">
                 <g stroke-width="0"></g>
                 <g stroke-linecap="round" stroke-linejoin="round"></g>
@@ -22,13 +22,13 @@
                     </g>
                 </g>
             </svg>
-            <span class="self-center text-2xl font-oswald whitespace-nowrap dark:text-white uppercase">{{ 'site.title'|trans }}</span>
+            <span class="self-center text-2xl font-oswald whitespace-nowrap dark:text-indigo-500 uppercase">{{ 'site.title'|trans }}</span>
         </a>
         <ul class="space-y-1 font-medium">
             <li>
                 <a href="{{ path('app_dashboard') }}"
-                   class="flex relative items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                   class="flex relative items-center w-full p-2 text-white transition duration-75 rounded-lg group hover:bg-indigo-200 hover:bg-opacity-75 hover:text-indigo-700 dark:text-white dark:hover:bg-gray-700">
+                    <svg class="flex-shrink-0 w-4 h-4"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                         <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"></path>
                         <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"></path>
@@ -39,9 +39,9 @@
             </li>
             <li>
                 <button type="button"
-                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        class="sidebar-button"
                         aria-controls="dropdown-market" data-collapse-toggle="dropdown-market" aria-expanded="false">
-                    <svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                    <svg class="flex-shrink-0 w-4 h-4"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
                         <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"></path>
                     </svg>
@@ -55,8 +55,8 @@
                 <ul id="dropdown-market" class="{{ _part != 'market-place' ? 'hidden' : null }}">
                     <li>
                         <a href="{{ path('app_dashboard_market_place_market') }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -68,8 +68,8 @@
                     </li>
                     <li>
                         <a href="{{ path('app_dashboard_market_place_order_stores') }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -81,8 +81,8 @@
                     </li>
                     <li>
                         <a href="{{ path('app_dashboard_market_place_message_stores') }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -93,8 +93,8 @@
                     </li>
                     <li>
                         <a href="{{ path('app_dashboard_market_place_operation') }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -106,8 +106,8 @@
                     </li>
                     <li>
                         <a href="{{ path('app_dashboard_market_place_create_market', {tab: 'details'}) }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -122,9 +122,9 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
                     <button type="button"
-                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            class="sidebar-button"
                             aria-controls="dropdown-faq" data-collapse-toggle="dropdown-faq">
-                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
@@ -139,8 +139,8 @@
                     <ul id="dropdown-faq" class="{{ _part != 'faq' ? 'hidden' : null }}">
                         <li>
                             <a href="{{ path('app_dashboard_faq') }}"
-                               class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                               class="sidebar-children">
+                                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -152,8 +152,8 @@
                         </li>
                         <li>
                             <a href="{{ path('app_dashboard_create_faq') }}"
-                               class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                               class="sidebar-children">
+                                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -167,8 +167,8 @@
                 </li>
                 <li>
                     <a href="{{ path('app_dashboard_config', {tab: 'pg'}) }}"
-                       class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                       class="sidebar-button">
+                        <svg class="flex-shrink-0 w-4 h-4"
                              aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M20.1 9.2214C18.29 9.2214 17.55 7.9414 18.45 6.3714C18.97 5.4614 18.66 4.3014 17.75 3.7814L16.02 2.7914C15.23 2.3214 14.21 2.6014 13.74 3.3914L13.63 3.5814C12.73 5.1514 11.25 5.1514 10.34 3.5814L10.23 3.3914C9.78 2.6014 8.76 2.3214 7.97 2.7914L6.24 3.7814C5.33 4.3014 5.02 5.4714 5.54 6.3814C6.45 7.9414 5.71 9.2214 3.9 9.2214C2.86 9.2214 2 10.0714 2 11.1214V12.8814C2 13.9214 2.85 14.7814 3.9 14.7814C5.71 14.7814 6.45 16.0614 5.54 17.6314C5.02 18.5414 5.33 19.7014 6.24 20.2214L7.97 21.2114C8.76 21.6814 9.78 21.4014 10.25 20.6114L10.36 20.4214C11.26 18.8514 12.74 18.8514 13.65 20.4214L13.76 20.6114C14.23 21.4014 15.25 21.6814 16.04 21.2114L17.77 20.2214C18.68 19.7014 18.99 18.5314 18.47 17.6314C17.56 16.0614 18.3 14.7814 20.11 14.7814C21.15 14.7814 22.01 13.9314 22.01 12.8814V11.1214C22 10.0814 21.15 9.2214 20.1 9.2214ZM12 15.2514C10.21 15.2514 8.75 13.7914 8.75 12.0014C8.75 10.2114 10.21 8.7514 12 8.7514C13.79 8.7514 15.25 10.2114 15.25 12.0014C15.25 13.7914 13.79 15.2514 12 15.2514Z"></path>
@@ -178,8 +178,8 @@
                 </li>
                 <li>
                     <a href="{{ path('app_dashboard_user') }}"
-                       class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                       class="sidebar-button">
+                        <svg class="flex-shrink-0 w-4 h-4"
                              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                              viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"></path>
@@ -189,8 +189,8 @@
                 </li>
                 <li>
                     <a href="{{ path('app_dashboard_contact') }}"
-                       class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                       class="sidebar-button">
+                        <svg class="flex-shrink-0 w-4 h-4"
                              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                              viewBox="0 0 20 20">
                             <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"></path>
@@ -201,9 +201,9 @@
             {% endif %}
             <li>
                 <button type="button"
-                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        class="sidebar-button"
                         aria-controls="dropdown-blog" data-collapse-toggle="dropdown-blog">
-                    <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M15.583 8.445h.01M10.86 19.71l-6.573-6.63a.993.993 0 0 1 0-1.4l7.329-7.394A.98.98 0 0 1 12.31 4l5.734.007A1.968 1.968 0 0 1 20 5.983v5.5a.992.992 0 0 1-.316.727l-7.44 7.5a.974.974 0 0 1-1.384.001Z"></path>
@@ -218,8 +218,8 @@
                 <ul id="dropdown-blog" class="{{ _part != 'blog' ? 'hidden' : null }}">
                     <li>
                         <a href="{{ path('app_dashboard_blog') }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -231,8 +231,8 @@
                     </li>
                     <li>
                         <a href="{{ path('app_dashboard_create_blog') }}"
-                           class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <svg class="w-4 h-4 text-gray-800 dark:text-white inline-flex mr-2" aria-hidden="true"
+                           class="sidebar-children">
+                            <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                  viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -246,8 +246,8 @@
             </li>
             <li>
                 <a href="{{ path('app_logout') }}"
-                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                   class="sidebar-button">
+                    <svg class="flex-shrink-0 w-4 h-4"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                          viewBox="0 0 19 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

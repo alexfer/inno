@@ -214,10 +214,10 @@ class Store
     }
 
     /**
-     * @param string $address
+     * @param null|string $address
      * @return $this
      */
-    public function setAddress(string $address): static
+    public function setAddress(?string $address): static
     {
         $this->address = $address;
 

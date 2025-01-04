@@ -8,94 +8,76 @@
     {% if stores|length > 1 %}
         {% include 'dashboard/content/market_place/navbar/stores-nav.html.twig' %}
     {% endif %}
-    <div class="relative shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-500 uppercase bg-info-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">{{ 'table.header.title'|trans }}</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <th scope="col" class="px-6 py-3">{{ 'table.header.owner'|trans }}</th>
-                {% endif %}
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.products'|trans }}</th>
-                <th class="text-center px-6 py-3" scope="col">{{ 'table.header.created_at'|trans }}</th>
-                <th class="text-right px-6 py-3" scope="col">{{ 'table.header.handle'|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for store in stores %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <a data-twe-toggle="tooltip"
-                           data-twe-placement="left"
-                           class="block text-wrap font-semibold hover:underline hover:text-gray-400 dark:text-gray-400 {% if store.deleted is not null %}line-through{% endif %}"
-                           title="{{ store.name }}"
-                           href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">
-                            {{ store.name|length > 25 ? store.name|slice(0, 50) ~ ' ... ' : store.name }}
-                        </a>
-                    </th>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <td class="px-6 py-3">{{ store.owner.email }}</td>
-                    {% endif %}
-                    <td class="text-center px-6 py-3">{{ store.products }}</td>
-                    <td class="text-center px-6 py-3">{{ store.created|date(date_format) }}</td>
-                    <td class="text-right px-6 py-3">
-                        <a id="dropdown-menu-{{ store.id }}" role="button"
-                           data-dropdown-toggle="dropdown-context-{{ store.id }}" class="flex justify-end">
-                            <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
-                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                        <div id="dropdown-context-{{ store.id }}"
-                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                            <ul class="py-2 text-left text-sm text-gray-700 dark:text-gray-200"
-                                aria-labelledby="dropdown-menu-{{ store.id }}">
+    <div class="block w-full">
+        {% for store in stores %}
+            <div class="grid-loop-cols-3">
+                <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
+                    <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
+                       href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
+                    <p class="mt-1 hidden md:block dark:text-white">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="mailto:{{ store.owner.email }}"
+                               class="mt-1 dark:text-white">{{ store.owner.email }}</a>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="ps-2.5 pt-2 flex-1">
+                    <div class="text-xs text-gray-500 dark:text-white">{{ store.created|date(date_format) }}</div>
+                </div>
+                <div class="ps-2.5 pt-2 flex-1">
+                    <span class="text-gray-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
+                            class="bg-indigo-100 text-indigo-800 text-xs font-medium ms-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{{ store.products }}</span>
+                </div>
+                <div class="pe-3.5 pt-4 md:pe-2 md:flex md:flex-row md:justify-end text-nowrap items-start absolute right-2">
+                    <a id="dropdown-menu-{{ store.id }}" role="button"
+                       data-dropdown-toggle="dropdown-context-{{ store.id }}" class="">
+                        <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
+                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <div id="dropdown-context-{{ store.id }}"
+                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-left text-sm font-medium text-indigo-700 dark:text-gray-200"
+                            aria-labelledby="dropdown-menu-{{ store.id }}">
+                            <li>
+                                <a href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"
+                                   class="d-hover">
+                                    {{ 'store.products'|trans }}
+                                </a>
+                            </li>
+                            {% if store.deleted is not null %}
                                 <li>
-                                    <a href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"
-                                       class="block text-blue-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{ 'store.products.overview'|trans }}
+                                    <a class="d-hover {{ store.locked ? 'pointer-events-none' : null }}"
+                                       href="{{ path('app_dashboard_restore_market', {id: store.id}) }}">
+                                        {{ store.locked ? 'store.action.unlock'|trans : 'store.action.locked'|trans }}
                                     </a>
                                 </li>
-                                {% if store.deleted is not null %}
+                            {% else %}
+                                <li>
+                                    <a href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}"
+                                       class="d-hover">
+                                        {{ 'text.edit'|trans }}
+                                    </a>
+                                </li>
+                                {% if 'ROLE_ADMIN' not in app.user.roles %}
                                     <li>
-                                        <a class="block px-4 py-2 text-purple-500 hover:text-purple-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white {{ store.locked ? 'pointer-events-none' : null }}"
-                                           href="{{ path('app_dashboard_restore_market', {id: store.id}) }}">
-                                            {{ store.locked ? 'store.action.unlock'|trans : 'store.action.locked'|trans }}
+                                        <a role="button" href="#"
+                                           class="delete-entry d-drop-hover"
+                                           data-token="{{ csrf_token('delete') }}"
+                                           data-url="{{ url('app_dashboard_delete_market', {id: store.id}) }}">
+                                            {{ 'text.delete'|trans }}
                                         </a>
                                     </li>
-                                {% else %}
-                                    <li>
-                                        <a href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}"
-                                           class="block px-4 py-2 text-green-500 hover:text-green-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                            {{ 'text.edit'|trans }}
-                                        </a>
-                                    </li>
-                                    {% if 'ROLE_ADMIN' not in app.user.roles %}
-                                        <li>
-                                            <a role="button" href="#"
-                                               class="block px-4 py-2 text-red-500 hover:text-red-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                               data-token="{{ csrf_token('delete') }}"
-                                               data-url="{{ url('app_dashboard_delete_market', {id: store.id}) }}">
-                                                {{ 'text.delete'|trans }}
-                                            </a>
-                                        </li>
-                                    {% endif %}
                                 {% endif %}
-
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="{{ is_granted('ROLE_ADMIN') ? 5 : 6 }}"
-                        class="px-6 py-3 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
     <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
     {% if stores|length %}
