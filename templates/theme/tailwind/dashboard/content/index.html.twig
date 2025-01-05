@@ -28,7 +28,7 @@
                 </div>
                 <div class="block w-full px-2.5 py-2">
                     {% for store in stores %}
-                        <div class="grid-loop-cols-4">
+                        <div id="el-{{ store.id }}" class="grid-loop-cols-4 {{ store.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
                             <div class="ps-2.5 p-0 md:py-1.5">
                                 <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
                                    href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="ps-2.5 pt-3 flex-1">
                                 <span class="text-gray-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
-                                        class="bg-indigo-100 text-indigo-800 text-sm lg:text-xs font-medium ms-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{{ store.products|length }}</span>
+                                        class="badge-indigo ms-1.5">{{ store.products|length }}</span>
                                 <a href="mailto:{{ store.owner.email }}"
                                    class="mt-1 hidden md:block dark:text-white">{{ store.owner.email }}</a>
                             </div>
@@ -98,8 +98,7 @@
                             <p class="text-sm font-medium text-gray-800 dark:text-white">{{ countries[customer.country] }}</p>
                         </div>
                         <div class="ps-2.5 pt-3 flex-1">
-                            <p class="text-sm text-gray-500 dark:text-white">{{ 'table.header.orders'|trans }}<span
-                                        class="bg-yellow-100 text-yellow-800 text-xs font-medium ms-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ customer.orders }}</span>
+                            <p class="text-sm text-gray-500 dark:text-white">{{ 'table.header.orders'|trans }}<span class="badge-yellow ms-1.5">{{ customer.orders }}</span>
                             </p>
                         </div>
                         <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
@@ -142,7 +141,7 @@
                         </div>
                         <p class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1 text-sm text-nowrap text-gray-800 dark:text-white">{{ 'table.header.quantity'|trans }}
                             <span
-                                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ product.quantity }}</span>
+                                    class="badge-green me-2">{{ product.quantity }}</span>
                         </p>
                         <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
                             <a id="dropdown-menu" role="button" data-dropdown-toggle="dropdown-context"
@@ -212,7 +211,7 @@
                             <span class="bg-green-600 text-white text-xs font-medium px-1.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ message.answers }}</span>
                         </div>
                         <div class="ps-2.5 pt-2 sm:pt-0 me-2 sm:me-0 flex-1 block md:items-end md:justify-end">
-                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ message.priority }}</span>
+                            <span class="badge-blue">{{ message.priority }}</span>
                         </div>
                         <div class="sm:p-3 pt-3 me-4 md:me-6 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
                             <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}">
@@ -244,7 +243,7 @@
                             <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ order.createdAt|date(date_format) }}</p>
                         </div>
                         <div class="ps-2.5 pt-2 sm:pt-0 flex-1">
-                            <span class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">{{ order.status.name }}</span>
+                            <span class="badge-purple me-2">{{ order.status.name }}</span>
                         </div>
                         <div class="ps-2.5 pt-0 flex-1 font-oswald text-gray-500 dark:text-white">{{ order.total|amount_format }}
                             <span class="text-xs ps-0.5">{{ store.currency|currency }}</span></div>
