@@ -1,30 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
 module.exports = {
     mode: 'jit',
     content: [
         './assets/**/*.js',
         './templates/theme/tailwind/**/*.{html.twig,js}',
         './node_modules/flowbite/**/*.js',
-    ],
-    safelist: [
-        'bg-red-50',
-        'bg-green-50',
-        'bg-blue-50',
-        'bg-sky-50',
-        'bg-orange-50',
-        'bg-purple-50',
-        'bg-pink-50',
-        'bg-cyan-50',
-        'bg-stone-50',
-        'bg-yellow-50',
-        'bg-gray-50',
-        'bg-lime-50',
-        'bg-emerald-50',
-        'bg-amber-50',
-        'bg-violet-50',
-        'bg-fuchsia-50',
-        'bg-slate-50',
-        'bg-indigo-50',
     ],
     theme: {
         fontFamily: {
@@ -33,6 +14,14 @@ module.exports = {
             'sans': ['Helvetica', 'Arial', 'sans-serif'],
         },
         extend: {
+            colors: {
+                stone: colors.warmGray,
+                sky: colors.lightBlue,
+                neutral: colors.trueGray,
+                gray: colors.coolGray,
+                slate: colors.blueGray,
+                ...colors,
+            },
             height: {
                 '100': '100px',
                 '150': '150px',
