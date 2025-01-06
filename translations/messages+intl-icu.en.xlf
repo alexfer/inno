@@ -2394,6 +2394,14 @@
                 <source>text.end</source>
                 <target>Left</target>
             </trans-unit>
+            <trans-unit id="text.cant.delete">
+                <source>text.cant.delete</source>
+                <target>Cant be deleted</target>
+            </trans-unit>
+            <trans-unit id="text.notused">
+                <source>text.notused</source>
+                <target>Not used</target>
+            </trans-unit>
             <trans-unit id="text.days">
                 <source>text.days</source>
                 <target>days</target>

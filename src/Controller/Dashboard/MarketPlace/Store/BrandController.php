@@ -2,11 +2,11 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\ORM\{EntityManagerInterface, NonUniqueResultException};
 use Inno\Entity\MarketPlace\StoreBrand;
 use Inno\Form\Type\Dashboard\MarketPlace\BrandType;
 use Inno\Service\MarketPlace\Dashboard\Store\Interface\ServeStoreInterface;
 use Inno\Service\MarketPlace\StoreTrait;
-use Doctrine\ORM\{EntityManagerInterface, NonUniqueResultException};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,7 +50,6 @@ class BrandController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @param ServeStoreInterface $serveStore
@@ -60,13 +59,12 @@ class BrandController extends AbstractController
     #[Route('/create/{store}', name: 'app_dashboard_market_place_create_brand', methods: ['GET', 'POST'])]
     public function create(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $brand = new StoreBrand();
 
         $form = $this->createForm(BrandType::class, $brand);
@@ -99,8 +97,6 @@ class BrandController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
-     * @param StoreBrand $brand
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @param ServeStoreInterface $serveStore
@@ -109,16 +105,14 @@ class BrandController extends AbstractController
     #[Route('/edit/{store}/{id}', name: 'app_dashboard_market_place_edit_brand', methods: ['GET', 'POST'])]
     public function edit(
         Request                $request,
-        UserInterface          $user,
-        StoreBrand             $brand,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
-
-        $form = $this->createForm(BrandType::class, new StoreBrand());
+        $store = $this->store($serveStore, $this->getUser());
+        $brand = $em->getRepository(StoreBrand::class)->find($request->get('id'));
+        $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -168,7 +162,7 @@ class BrandController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_dashboard_market_place_store_brand', ['store' => $store->getId()]);
+        return $this->json(['success' => true, 'redirect' => $this->generateUrl('app_dashboard_market_place_store_brand', ['store' => $store->getId()])]);
     }
 
     /**

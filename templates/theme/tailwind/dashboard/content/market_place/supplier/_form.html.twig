@@ -14,13 +14,13 @@
         {{ form_start(form, {attr: {class: 'group', novalidate: 'novalidate'}}) }}
         <div class="block mb-3">
             {{ form_label(form.name, 'label.form.supplier_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.supplier_name'}}) }}
+            {{ form_widget(form.name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.supplier_name'}}) }}
             <span class="mt-0.5 block hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.name.invalid'|trans }}</span>
             <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.name) }}</span>
         </div>
         <div class="block mb-3">
             {{ form_label(form.country, 'label.form.supplier_country', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.country, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+            {{ form_widget(form.country, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
             <span class="mt-0.5 block hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.country.invalid'|trans }}</span>
             <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.country) }}</span>
         </div>
