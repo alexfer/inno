@@ -8,6 +8,10 @@ body {
     font-family: "Montserrat", serif;
 }
 
+.swal2-popup {
+    font-size: 0.85rem !important;
+}
+
 .area {
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
 }

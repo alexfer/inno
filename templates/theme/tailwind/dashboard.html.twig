@@ -20,7 +20,7 @@
 <body class="dark:bg-gray-600">
 <div class="h-screen" id="key" data-id="{{ app.user.id }}" data-hash="{{ app.user.email|crypto|base64encode }}">
     {{ include('dashboard/sidebar.html.twig') }}
-    <div class="sm:ml-64">
+    <div class="lg:ml-64">
         <div class="grid grid-cols-1 md:grid-cols-2 relative border-b dark:border-gray-600 w-full p-2 justify-between items-center dark:bg-gray-700">
             <form class="inline-flex items-center max-w-2xl group" autocomplete="off">
                 <label for="dashboard-search" class="sr-only">{{ 'title.search'|trans }}</label>

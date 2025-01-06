@@ -66,4 +66,20 @@
     .badge-purple {
         @apply bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300;
     }
+
+    .nav-link-btn {
+        @apply flex items-center h-10 whitespace-nowrap leading-10 rounded-md px-4 text-xs font-medium text-gray-600 hover:text-indigo-700 hover:shadow-md transition-colors duration-100 mx-1 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800;
+    }
+
+    .nav-link-btn-extra {
+        @apply flex items-center h-10 whitespace-nowrap leading-10 rounded-md px-4 text-xs font-semibold text-indigo-600 bg-indigo-100 hover:text-white shadow-md transition-colors duration-100 mx-1 dark:text-indigo-700 dark:hover:text-white hover:bg-indigo-700 dark:hover:bg-gray-800;
+    }
+
+    .nav-link-btn.active {
+        @apply bg-gray-200 border dark:bg-gray-700 dark:hover:bg-gray-900 dark:border-gray-500 shadow-md;
+    }
+
+    .nav-link-mobile {
+        @apply block text-xs font-medium hover:bg-indigo-100 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-gray-800 p-3 rounded;
+    }
 }
