@@ -13,7 +13,7 @@
         </button>
         <div id="stores" class="z-10 hidden rounded-lg shadow-lg w-60 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
             {% if stores|length > 1 %}
-                <div class="p-3">
+                <div class="p-1.5">
                     <label for="input-store-search" class="sr-only">{{ 'title.search'|trans }}</label>
                     <div class="relative">
                         <div class="absolute z-50 inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -30,12 +30,12 @@
                 </div>
             {% endif %}
             <ul id="search-list"
-                class="p-3 h-auto space-y-1 overflow-y-auto font-medium text-sm text-gray-700 dark:text-gray-200">
+                class="p-1.5 h-auto space-y-1 overflow-y-auto font-medium text-sm text-gray-700 dark:text-gray-200">
                 {% for store in stores %}
                     <li>
-                        <a href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"
-                           class="block mx-1.5 rounded hover:text-white hover:bg-indigo-800 px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">
-                            {{ store.name|length > 25 ? store.name|slice(0, 25) ~ ' ... ' : store.name }}
+                        <a href="{{ path(route_name, {store: store.id}) }}"
+                           class="block rounded hover:text-white hover:bg-indigo-800 hover:bg-opacity-75 px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white line-clamp-1">
+                            {{ store.name }}
                         </a>
                     </li>
                 {% endfor %}
