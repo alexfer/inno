@@ -26,25 +26,25 @@
     {% endif %}
     <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
         <div class="block mb-3">
-            {{ form_label(form.title, 'label.form.title', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.title, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.title'}}) }}
-            <small class="mt-1 block text-xs text-red-500">{{ error ? error : form_errors(form.title) }}</small>
+            {{ form_label(form.title, 'label.form.title', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.title, {attr: {class: 'input-widget', placeholder: 'label.form.title'}}) }}
+            <small class="input-wrong">{{ error ? error : form_errors(form.title) }}</small>
         </div>
         <div class="block mb-3">
-            {{ form_label(form.short_content, 'label.form.short_content', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.short_content, {attr: {class: 'resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', rows: 3, placeholder: 'label.form.short_content'}}) }}
-            <small class="mt-1 block text-xs text-red-500">{{ form_errors(form.short_content) }}</small>
+            {{ form_label(form.short_content, 'label.form.short_content', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.short_content, {attr: {class: 'resize-none input-widget', rows: 3, placeholder: 'label.form.short_content'}}) }}
+            <small class="input-wrong">{{ form_errors(form.short_content) }}</small>
         </div>
         {% include 'dashboard/content/form/category.html.twig' with {'categories': categories, 'collection': form.vars.data.entryCategories} %}
         <div class="block mb-3">
-            {{ form_label(form.content, 'label.form.content', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.content, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', rows: 6, placeholder: 'label.form.content'}}) }}
-            <small class="mt-1 block text-xs text-red-500">{{ form_errors(form.content) }}</small>
+            {{ form_label(form.content, 'label.form.content', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.content, {attr: {class: 'input-widget', rows: 6, placeholder: 'label.form.content'}}) }}
+            <small class="input-wrong">{{ form_errors(form.content) }}</small>
         </div>
         <div class="block mb-3">
-            {{ form_label(form.status, 'label.form.status', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.status, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', disabled: app.request.get('id') ? false : true}}) }}
-            <small class="mt-1 block text-xs text-red-500">{{ form_errors(form.status) }}</small>
+            {{ form_label(form.status, 'label.form.status', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.status, {attr: {class: 'input-widget', disabled: app.request.get('id') ? false : true}}) }}
+            <small class="input-wrong">{{ form_errors(form.status) }}</small>
         </div>
         {% if app.request.get('id') %}
             {% include 'dashboard/content/form/attachment.html.twig' with {
@@ -59,9 +59,9 @@
         {% endif %}
         <input type="hidden" name="flash" value="{{ _message[0]|default([]|json_encode) }}">
         <div class="block text-center mx-3">
-            {{ form_widget(form.next, { label: app.request.get('id') ? 'form.action.update' : 'form.action.next', attr: {class: 'inline-flex rounded-md bg-red-500 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md hover:bg-red-700 focus:outline-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong'}}) }}
+            {{ form_widget(form.next, { label: app.request.get('id') ? 'form.action.update' : 'form.action.next', attr: {class: 'btn-red'}}) }}
             <a role="button" href="{{ url('app_dashboard_blog') }}"
-               class="inline-flex rounded-md bg-gray-500 hover:bg-gray-900 px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md focus:outline-none focus:ring-0dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">{{ 'form.action.back'|trans }}</a>
+               class="btn-gray-strong">{{ 'form.action.back'|trans }}</a>
         </div>
     </div>
     {{ form_end(form) }}

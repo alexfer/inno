@@ -1,7 +1,7 @@
 <div class="flex flex-col mt-4 px-4">
     <div class="mb-3">
-        {{ form_label(form.category, 'entry.form.categories', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.category, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+        {{ form_label(form.category, 'entry.form.categories', {label_attr: {class: 'form-label'}}) }}
+        {{ form_widget(form.category, {attr: {class: 'input-widget'}}) }}
         <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.category) }}</span>
     </div>
     <div class="relative mb-3">
@@ -17,8 +17,8 @@
                       clip-rule="evenodd"/>
             </svg>
         </a>
-        {{ form_label(form.brand, 'label.form.brand_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.brand, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+        {{ form_label(form.brand, 'label.form.brand_name', {label_attr: {class: 'form-label'}}) }}
+        {{ form_widget(form.brand, {attr: {class: 'input-widget'}}) }}
     </div>
     <div class="relative mb-3">
         <a data-modal-toggle="modal-supplier"
@@ -34,8 +34,8 @@
                       clip-rule="evenodd"/>
             </svg>
         </a>
-        {{ form_label(form.supplier, 'label.form.supplier_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.supplier, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+        {{ form_label(form.supplier, 'label.form.supplier_name', {label_attr: {class: 'form-label'}}) }}
+        {{ form_widget(form.supplier, {attr: {class: 'input-widget'}}) }}
     </div>
     <div class="relative mb-3">
         <a data-modal-toggle="modal-manufacturer"
@@ -50,7 +50,7 @@
                       clip-rule="evenodd"/>
             </svg>
         </a>
-        {{ form_label(form.manufacturer, 'label.form.manufacturer_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.manufacturer, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+        {{ form_label(form.manufacturer, 'label.form.manufacturer_name', {label_attr: {class: 'form-label'}}) }}
+        {{ form_widget(form.manufacturer, {attr: {class: 'input-widget'}}) }}
     </div>
 </div>

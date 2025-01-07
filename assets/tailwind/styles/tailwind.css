@@ -90,4 +90,40 @@
     .checkbox-teal {
         @apply w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600;
     }
+
+    .tab-list {
+        @apply flex flex-row flex-wrap text-sm font-medium space-x-4 text-center justify-stretch border-b-0 items-stretch;
+    }
+
+    .tab-list-inactive {
+        @apply dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300;
+    }
+
+    .tab-list-active {
+        @apply text-gray-950 hover:text-red-600 dark:text-white dark:hover:text-white border-red-600 dark:border-red-500;
+    }
+
+    .tab-list-item {
+        @apply inline-block p-4 border-b-2 hover:text-gray-600 hover:border-red-600 dark:hover:text-gray-300;
+    }
+
+    .input-widget {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-400 focus:ring-0 focus:border-gray-400 block w-full p-1.5 md:p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500;
+    }
+
+    .form-label {
+        @apply block mb-1 text-sm font-medium text-gray-900 dark:text-gray-100;
+    }
+
+    .input-wrong {
+        @apply mt-0.5 block text-xs text-red-500;
+    }
+
+    .btn-red {
+        @apply inline-flex rounded-md bg-red-600 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md hover:bg-red-700 focus:outline-none dark:shadow-black/30 dark:hover:shadow-gray-950 dark:focus:shadow-gray-950;
+    }
+
+    .btn-gray-strong {
+        @apply inline-flex rounded-md bg-gray-500 hover:bg-gray-700 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md focus:outline-none dark:shadow-black/30 dark:hover:shadow-gray-950 dark:focus:shadow-gray-950 dark:active:shadow-gray-950
+    }
 }

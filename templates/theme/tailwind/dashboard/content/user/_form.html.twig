@@ -8,21 +8,21 @@
 <div class="flex mb-3">
     {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inlin-block w-32 mr-2 pt-3 align-baseline mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
     <div class="w-1/2">
-        {{ form_widget(form.plainPassword.children.first, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.new_password', autocomplete: 'off'}}) }}
+        {{ form_widget(form.plainPassword.children.first, {attr: {class: 'input-widget', placeholder: 'label.form.new_password', autocomplete: 'off'}}) }}
         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.first) }}</span>
     </div>
 </div>
 <div class="flex mb-3">
     {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inlin-block mr-2 pt-3 w-32 text-sm font-medium text-gray-900 dark:text-white'}}) }}
     <div class="w-1/2">
-        {{ form_widget(form.plainPassword.children.second, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.repeat_password', autocomplete: 'off'}}) }}
+        {{ form_widget(form.plainPassword.children.second, {attr: {class: 'input-widget', placeholder: 'label.form.repeat_password', autocomplete: 'off'}}) }}
         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.second) }}</span>
     </div>
 </div>
 <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
 <div class="flex mb-3">
     <div class="mt-3">
-        {{ form_widget(form.change, { label: 'form.action.change', attr: {class: 'inline-flex rounded-md bg-red-500 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md hover:bg-red-700 focus:outline-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong'} }) }}
+        {{ form_widget(form.change, { label: 'form.action.change', attr: {class: 'btn-red'} }) }}
     </div>
 </div>
 {{ form_end(form) }}

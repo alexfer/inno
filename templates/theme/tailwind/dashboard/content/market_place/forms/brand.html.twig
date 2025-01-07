@@ -19,9 +19,9 @@
                 <div class="p-4 md:p-5 space-y-4">
                     <div class="flex flex-col mb-3 px-5">
                         <label for="brand_name"
-                               class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">{{ 'label.form.brand_name'|trans }}</label>
+                               class="form-label">{{ 'label.form.brand_name'|trans }}</label>
                         <input type="text" name="brand[name]"
-                               class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget"
                                id="brand_name" min="3" max="250" pattern=".{3,200}"
                                placeholder="{{ 'label.form.brand_name'|trans }}" required>
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.name.invalid'|trans }}</span>
