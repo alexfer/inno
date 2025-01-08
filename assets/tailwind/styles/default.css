@@ -16,6 +16,10 @@ body {
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
 }
 
+.sun-editor-editable {
+    font: 0.85rem "Montserrat", serif !important;
+}
+
 .circles li {
     position: absolute;
     display: block;

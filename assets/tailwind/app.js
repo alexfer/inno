@@ -2,9 +2,9 @@
 import './styles/tailwind.css';
 import './styles/default.css';
 import 'flowbite/dist/flowbite.min.css';
+import 'animate.css';
 // import js files into app.js
 import './bootstrap';
-import 'animate.css';
 import './js/market';
 import './flowbite';
 import './js/main';

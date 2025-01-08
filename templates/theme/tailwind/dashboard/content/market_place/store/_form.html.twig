@@ -310,18 +310,38 @@
         {{ form_end(form) }}
     {% endif %}
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('suneditor/suneditor.min.css') }}">
+{% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('suneditor/suneditor.min.js') }}"></script>
     <script type="text/javascript">
-        if (document.getElementById('store_description')) {
-            CKEDITOR.replace('store_description', {
-                language: '{{ app.locale }}',
-                extraPlugins: 'editorplaceholder',
-                editorplaceholder: '{{ 'label.form.store_description'|trans }}',
-                removePlugins: 'simage,image,youtube,html5video,iframe,uicolor,videodetector,preview'
-            });
-            CKEDITOR.addCss(".cke_editable{cursor:text; font-size: 15px; color: #000000;}");
+        const options = {
+            height: '300',
+            plugins: ['undo', 'redo', 'formatBlock', 'paragraphStyle',
+                'blockquote', 'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
+                'fontColor', 'hiliteColor', 'textStyle', 'removeFormat', 'outdent', 'indent',
+                'align', 'horizontalRule', 'list', 'lineHeight', 'fullScreen', 'showBlocks', 'codeView',
+                'table', 'link', 'image', 'video', 'audio'],
+            buttonList: [
+                ['undo', 'redo'],
+                ['formatBlock'],
+                ['paragraphStyle', 'blockquote'],
+                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                ['fontColor', 'hiliteColor', 'textStyle'],
+                ['removeFormat'],
+                ['outdent', 'indent'],
+                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                ['table', 'link', 'image', 'video', 'audio'],
+                /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+                ['fullScreen', 'showBlocks', 'codeView'],
+            ]
+        };
+        const editor = SUNEDITOR.create((document.getElementById('store_description') || 'store_description'), options);
+        editor.onChange = (contents, core) => {
+            editor.save();
         }
     </script>
 {% endblock %}
