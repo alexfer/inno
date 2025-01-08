@@ -128,7 +128,7 @@ class StoreCoupon
      */
     public function setPrice(?string $price): static
     {
-        $this->price = number_format($price, 2, '.', '');;
+        $this->price = number_format((float)$price, 2, '.', '');;
 
         return $this;
     }

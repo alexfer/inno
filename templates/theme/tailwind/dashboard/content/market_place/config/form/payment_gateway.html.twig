@@ -20,17 +20,17 @@
             {{ form_start(pgForm, {attr: {autocomplete: 'off', action: path('app_dashboard_config_save', {target: 'payment_gateway'})}}) }}
             <div class="p-4 md:p-5 space-y-4">
                 <div class="relative">
-                    {{ form_label(pgForm.name, 'label.form.short_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    {{ form_label(pgForm.name, 'label.form.short_name', {label_attr: {class: 'form-label'}}) }}
                     {{ form_widget(pgForm.name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white', placeholder: 'label.form.short_name'}}) }}
                     <div class="counter ordinal slashed-zero tabular-nums text-end mt-0.5 text-xs"></div>
                 </div>
                 <div class="relative">
-                    {{ form_label(pgForm.handlerText, 'label.form.text', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    {{ form_label(pgForm.handlerText, 'label.form.text', {label_attr: {class: 'form-label'}}) }}
                     {{ form_widget(pgForm.handlerText, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white', placeholder: 'label.form.text'}}) }}
                     <div class="counter ordinal slashed-zero tabular-nums text-end mt-0.5 text-xs"></div>
                 </div>
                 <div class="relative">
-                    {{ form_label(pgForm.summary, 'label.form.description', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    {{ form_label(pgForm.summary, 'label.form.description', {label_attr: {class: 'form-label'}}) }}
                     {{ form_widget(pgForm.summary, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 resize-none dark:text-white', placeholder: 'label.form.description'}}) }}
                 </div>
                 <div class="relative mt-2">

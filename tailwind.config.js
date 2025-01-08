@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
 module.exports = {
     mode: 'jit',
     content: [
@@ -13,6 +14,14 @@ module.exports = {
             'sans': ['Helvetica', 'Arial', 'sans-serif'],
         },
         extend: {
+            colors: {
+                stone: colors.warmGray,
+                sky: colors.lightBlue,
+                neutral: colors.trueGray,
+                gray: colors.coolGray,
+                slate: colors.blueGray,
+                ...colors,
+            },
             height: {
                 '100': '100px',
                 '150': '150px',
@@ -45,6 +54,7 @@ module.exports = {
         'tailwindcss/inset',
         'tailwindcss/plugin',
         '@tailwindcss/container-queries',
+        '@tailwindcss/line-clamp',
     ],
     darkMode: "class"
 }

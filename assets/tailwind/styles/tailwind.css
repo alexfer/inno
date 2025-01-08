@@ -1,3 +1,129 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .grid-loop-cols-3 {
+        @apply grid grid-cols-1 md:grid-cols-3 rounded-md border-b gap-x-6 relative hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-100 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
+    }
+
+    .grid-loop-cols-4 {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 rounded-md border-b gap-x-6 hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-100 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
+    }
+
+    .grid-loop-cols-5 {
+        @apply grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 rounded-md border-b gap-x-6 hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-100 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
+    }
+
+    .d-hover {
+        @apply block mx-1.5 rounded hover:text-white hover:bg-indigo-800 hover:bg-opacity-75 px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white;
+    }
+
+    .d-drop-hover {
+        @apply block mx-1.5 rounded px-4 py-2 text-red-500 hover:text-white hover:bg-red-700 hover:bg-opacity-75 dark:hover:bg-gray-600 dark:hover:text-white
+    }
+
+    .no-results {
+        @apply grid grid-cols-1 shadow-sm rounded-lg bg-indigo-50 dark:bg-gray-700 border-gray-200 dark:border-gray-500 mb-2 mt-3 mx-3 px-5 py-3;
+    }
+
+    .no-results div {
+        @apply mx-3 h-12 text-center mt-5 dark:text-white;
+    }
+
+    .sidebar-button {
+        @apply inline-flex items-center w-full p-2 text-white transition duration-75 rounded-lg hover:bg-white hover:text-indigo-600 dark:text-white dark:hover:bg-gray-700;
+    }
+
+    .sidebar-children {
+        @apply inline-flex items-center w-48 p-2 text-white ms-5 transition duration-75 rounded-lg hover:bg-white hover:text-indigo-600 dark:text-white dark:hover:bg-gray-700;
+    }
+
+    .caption {
+        @apply px-5 text-lg font-medium text-gray-900 bg-white dark:text-white dark:bg-gray-600;
+    }
+
+    .caption p {
+        @apply mt-1 text-sm font-normal text-gray-500 dark:text-gray-300;
+    }
+
+    .badge-green {
+        @apply inline-block bg-green-100 text-green-800 lg:text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300;
+    }
+
+    .badge-indigo {
+        @apply bg-indigo-100 text-indigo-800 text-sm lg:text-xs font-medium px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300;
+    }
+
+    .badge-yellow {
+        @apply bg-yellow-100 text-yellow-800 lg:text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300;
+    }
+
+    .badge-blue {
+        @apply bg-blue-100 text-blue-800 lg:text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300;
+    }
+
+    .badge-purple {
+        @apply bg-purple-100 text-purple-800 lg:text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300;
+    }
+
+    .nav-link-btn {
+        @apply flex items-center h-10 whitespace-nowrap leading-10 rounded-md px-4 text-xs font-medium text-gray-600 hover:text-indigo-700 hover:shadow-md transition-colors duration-100 mx-1 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800;
+    }
+
+    .nav-link-btn-extra {
+        @apply flex items-center h-10 whitespace-nowrap leading-10 rounded-md px-4 text-xs font-semibold text-indigo-600 bg-indigo-100 hover:text-white shadow-md transition-colors duration-100 mx-1 dark:text-indigo-700 dark:hover:text-white hover:bg-indigo-700 dark:hover:bg-gray-800;
+    }
+
+    .nav-link-btn.active {
+        @apply bg-gray-200 border dark:bg-gray-700 dark:hover:bg-gray-900 dark:border-gray-500 shadow-md;
+    }
+
+    .nav-link-mobile {
+        @apply block text-xs font-medium hover:bg-indigo-100 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-gray-800 p-3 rounded;
+    }
+
+    .check-all {
+        @apply inline-block border rounded px-2.5 hover:bg-indigo-200 transition-shadow duration-300 ease-in dark:border-gray-700 dark:hover:bg-gray-800;
+    }
+
+    .checkbox-teal {
+        @apply w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600;
+    }
+
+    .tab-list {
+        @apply flex flex-row flex-wrap text-sm font-medium space-x-4 text-center justify-stretch border-b-0 items-stretch;
+    }
+
+    .tab-list-inactive {
+        @apply dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300;
+    }
+
+    .tab-list-active {
+        @apply text-gray-950 hover:text-red-600 dark:text-white dark:hover:text-white border-red-600 dark:border-red-500;
+    }
+
+    .tab-list-item {
+        @apply inline-block p-4 border-b-2 hover:text-gray-600 hover:border-red-600 dark:hover:text-gray-300;
+    }
+
+    .input-widget {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-400 focus:ring-0 focus:border-gray-400 block w-full p-1.5 md:p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500;
+    }
+
+    .form-label {
+        @apply block mb-1 text-sm font-medium text-gray-900 dark:text-gray-100;
+    }
+
+    .input-wrong {
+        @apply mt-0.5 block text-xs text-red-500;
+    }
+
+    .btn-red {
+        @apply inline-flex rounded-md bg-red-600 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md hover:bg-red-700 focus:outline-none dark:shadow-black/30 dark:hover:shadow-gray-950 dark:focus:shadow-gray-950;
+    }
+
+    .btn-gray-strong {
+        @apply inline-flex rounded-md bg-gray-500 hover:bg-gray-700 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md focus:outline-none dark:shadow-black/30 dark:hover:shadow-gray-950 dark:focus:shadow-gray-950 dark:active:shadow-gray-950
+    }
+}

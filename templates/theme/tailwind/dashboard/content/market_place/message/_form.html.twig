@@ -4,25 +4,9 @@
     <input type="hidden" id="customer" name="customer" value="{{ customer }}">
     <input type="hidden" id="last" name="last" value="{{ last }}">
     <label for="message" class="sr-only">{{ 'form.your.message'|trans }}</label>
-    <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
-        <button type="button"
-                class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-            <input type="radio" id="low" name="priority" value="low" checked
-                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="low"
-                   class="bg-green-100 text-green-800 text-xs font-medium mx-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 capitalize">{{ 'low' }}</label>
-            <input type="radio" id="medium" name="priority" value="medium"
-                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="medium"
-                   class="bg-yellow-100 text-yellow-800 text-xs font-medium mx-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 capitalize">{{ 'mediim' }}</label>
-            <input type="radio" id="high" name="priority" value="high"
-                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="high"
-                   class="bg-red-100 text-red-800 text-xs font-medium mx-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 capitalize">{{ 'high' }}</label>
-            <span class="sr-only">{{ 'label.form.picture'|trans }}</span>
-        </button>
+    <div class="flex items-center py-2">
         <textarea id="message" autocomplete="off" name="message" minlength="20" maxlength="255" rows="1" required
-                  class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer md:block p-2.5 w-full text-sm text-gray-900 resize-none bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="{{ 'form.your.message'|trans }}"></textarea>
         <button type="submit"
                 class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600 group-invalid:pointer-events-none group-invalid:opacity-30">

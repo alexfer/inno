@@ -2,14 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
-    font-size: 0.90rem;
+    font-size: 0.85rem;
     font-weight: 200;
     line-height: 1.5;
     font-family: "Montserrat", serif;
 }
 
+.swal2-popup {
+    font-size: 0.85rem !important;
+}
+
 .area {
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+}
+
+.sun-editor-editable {
+    font: 0.85rem "Montserrat", serif !important;
 }
 
 .circles li {

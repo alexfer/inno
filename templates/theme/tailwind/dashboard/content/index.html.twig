@@ -7,7 +7,7 @@
         <form name="store" method="get" id="store">
             <label for="slug">
                 <select name="slug" id="slug"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
                     {% if stores|length > 1 %}
                         <option value="{{ url('app_dashboard') }}">{{ 'menu.dashboard'|trans }}</option>
                     {% endif %}
@@ -18,383 +18,252 @@
             </label>
         </form>
     {% endif %}
-    <h4 class="my-5 ms-2 text-3xl text-gray-500 dark:text-gray-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
+    <h4 class="my-5 ms-2 text-2xl text-gray-500 dark:text-gray-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
     {% if store %}
         {% if is_granted('ROLE_ADMIN') %}
-            <div class="grid grid-cols-1 gap-3 mb-5">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <caption
-                                class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                            {{ 'table.header.stores'|trans }}
-                            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.shops'|trans({limit: limit}) }}</p>
-                        </caption>
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                {{ 'table.header.stores'|trans }}
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                {{ 'table.header.created_at'|trans }}
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                {{ 'table.header.owner'|trans }}
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                {{ 'table.header.products'|trans }}
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                {{ 'table.header.country'|trans }}
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">{{ 'table.header.handle'|trans }}</span>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for store in stores %}
-                            <tr id="el-{{ store.id }}"
-                                class="{{ store.lockedTo is not null ? 'bg-red-100 dark:bg-red-950' : 'bg-white' }}  border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row"
-                                    data-twe-toggle="tooltip" data-twe-placement="left"
-                                    title="{{ store.name }}"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-xs truncate cursor-pointer">
-                                    {{ store.name }}
-                                </th>
-                                <td class="px-6 py-4">{{ store.createdAt|date(date_format) }}</td>
-                                <td class="px-6 py-4">{{ store.owner.email }}</td>
-                                <td class="px-6 py-4">{{ store.products|length }}</td>
-                                <td class="px-6 py-4">{{ countries[store.country] }}</td>
-                                <td class="px-6 py-4 flex justify-end items-end">
-                                    {% if 'ROLE_ADMIN' not in store.owner.roles %}
-                                        <a role="button"
-                                           class="permit"
-                                           data-id="{{ store.id }}"
-                                           data-url="{{ path('app_dashboard_permit_xhr', {target: 'store'}) }}"
-                                           data-permit="{{ store.lockedTo is null ? 'lock' : 'unlock' }}">
-                                            <svg class="w-[20px] h-[20px] text-yellow-300 me-2 dark:text-white"
-                                                 fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01"></path>
-                                            </svg>
-                                        </a>
-                                    {% endif %}
-                                    <a href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}"
-                                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                        <svg class="w-[20px] h-[20px] text-green-700 dark:text-white" aria-hidden="true"
-                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                             viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                  stroke-width="2"
-                                                  d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path>
+            <div class="grid grid-cols-1 gap-x-3 mb-5">
+                <div class="caption">
+                    {{ 'table.header.stores'|trans }}
+                    <p>{{ 'table.caption.shops'|trans({limit: limit}) }}</p>
+                </div>
+                <div class="block w-full px-2.5 py-2">
+                    {% for store in stores %}
+                        <div id="el-{{ store.id }}" class="grid-loop-cols-4 {{ store.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
+                            <div class="ps-2.5 p-0 md:py-1.5">
+                                <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
+                                   href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
+                                <p class="m-0 sm:mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ store.createdAt|date(date_format) }}</p>
+                            </div>
+                            <div class="ps-2.5 pt-3 flex-1">
+                                <span class="text-gray-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
+                                        class="badge-indigo ms-1.5">{{ store.products|length }}</span>
+                                <a href="mailto:{{ store.owner.email }}"
+                                   class="mt-1 hidden md:block dark:text-white">{{ store.owner.email }}</a>
+                            </div>
+                            <div class="ps-2.5 pt-2 flex-1">
+                                <p class="mt-1 text-sm font-semibold text-gray-800 dark:text-white">{{ countries[store.country] }}</p>
+                                <p class="mt-1 text-sm text-nowrap text-gray-500 dark:text-white">{{ 'label.form.store_currency'|trans }}
+                                    :<span class="font-oswald ps-1">{{ store.currency }}</span></p>
+                            </div>
+                            <div class="sm:p-3 pt-3 me-6 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
+                                {% if 'ROLE_ADMIN' not in store.owner.roles %}
+                                    <a role="button"
+                                       class="permit inline-flex"
+                                       data-id="{{ store.id }}"
+                                       data-url="{{ path('app_dashboard_permit_xhr', {target: 'store'}) }}"
+                                       data-permit="{{ store.lockedTo is null ? 'lock' : 'unlock' }}">
+                                        <svg class="w-[20px] h-[20px] text-yellow-300 me-1 dark:text-white"
+                                             fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01"></path>
                                         </svg>
                                     </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                                {% endif %}
+                                <a href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}"
+                                   class="inline-flex">
+                                    <svg class="w-[20px] h-[20px] text-green-700 dark:text-white" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                         viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="no-results">
+                            <div>{{ 'table.footer.not_found'|trans }}</div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         {% endif %}
-        <div class="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-3">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <caption
-                            class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        {{ 'table.header.customers'|trans }}
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.customers'|trans }}</p>
-                    </caption>
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'customer.name'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.joined_at'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.orders'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.country'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">{{ 'table.header.handle'|trans }}</span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for customer in customers %}
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                data-twe-toggle="tooltip" data-twe-placement="top"
-                                title="{{ customer.full_name }}"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-10 truncate cursor-pointer">
-                                {{ customer.full_name }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ customer.created_at|date(date_format) }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ customer.orders }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ countries[customer.country] }}
-                            </td>
-                            <td class="px-6 py-4 flex justify-end items-end">
-                                <a href="#" data-modal-target="customer-modal" data-modal-toggle="customer-modal"
-                                   data-url="{{ path('app_dashboard_customer_xhr', {id: customer.id}) }}"
-                                   class="customer font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <svg class="w-[20px] h-[20px] text-blue-800 dark:text-white" aria-hidden="true"
-                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                         viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"></path>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="5"
-                                class="px-6 py-4 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-3">
+            <div class="relative">
+                <div class="caption">
+                    {{ 'table.header.customers'|trans }}
+                    <p>{{ 'table.caption.customers'|trans }}</p>
+                </div>
+                {% for customer in customers %}
+                    <div class="grid-loop-cols-4">
+                        <div class="ps-2.5 p-0 md:py-1.5">
+                            <a class="customer font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8"
+                               href="#" data-modal-target="customer-modal" data-modal-toggle="customer-modal"
+                               data-url="{{ path('app_dashboard_customer_xhr', {id: customer.id}) }}">{{ customer.full_name }}</a>
+                            <p class="mt-1 text-nowrap text-xs text-gray-500 dark:text-white">{{ customer.created_at|date(date_format) }}</p>
+                        </div>
+                        <div class="ps-2.5 pt-3 flex-1">
+                            <p class="text-sm font-medium text-gray-800 dark:text-white">{{ countries[customer.country] }}</p>
+                        </div>
+                        <div class="ps-2.5 pt-3 flex-1">
+                            <p class="text-sm text-gray-500 dark:text-white">{{ 'table.header.orders'|trans }}<span class="badge-yellow ms-1.5">{{ customer.orders }}</span>
+                            </p>
+                        </div>
+                        <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
+                            <a href="#" data-modal-target="customer-modal" data-modal-toggle="customer-modal"
+                               data-url="{{ path('app_dashboard_customer_xhr', {id: customer.id}) }}"
+                               class="customer">
+                                <svg class="w-[20px] h-[20px] text-blue-800 dark:text-white" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="no-results">
+                        <div>{{ 'table.footer.not_found'|trans }}</div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <caption
-                            class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        {{ 'table.header.products'|trans }}
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.products'|trans({store: store.name, path: path('app_dashboard_market_place_market_product', {store: store.id})})|raw }}</p>
-                    </caption>
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'label.form.product_name'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.created_at'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.price'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.quantity'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">{{ 'table.header.handle'|trans }}</span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for product in products %}
-                        <tr class="{{ product.deletedAt is null ? 'bg-white' : 'bg-red-100' }} border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-10 truncate">
-                                <a class="" data-twe-toggle="tooltip" data-twe-placement="left"
-                                   title="{{ product.name }}"
-                                   href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
-                                   target="_blank">{{ product.shortName }}</a>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ product.createdAt|date(date_format) }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <abbr class="cursor-pointer" data-twe-toggle="tooltip"
-                                      title="{{ (product.cost) }} + {{ (product.fee) }}">
-                                    {{ (product.cost + product.fee)|amount_format }}<small
-                                            class="ps-0.5">{{ store.currency|currency }}</small>
-                                </abbr>
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ product.quantity }}
-                            </td>
-                            <td class="px-6 py-4 flex justify-end items-end">
-                                <a id="dropdown-menu" role="button" data-dropdown-toggle="dropdown-context"
-                                   data-dropdown-placement="bottom">
-                                    <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
-                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                                              clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-                                <div id="dropdown-context"
-                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                    <ul class="py-2 text-xs text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdown-menu">
-                                        <li>
-                                            <a href="{{ path('app_dashboard_market_place_edit_product', {store: store.id, id: product.id, tab: 'details'}) }}"
-                                               class="block text-blue-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'text.edit'|trans }}</a>
-                                        </li>
-                                        <li>
-                                            {% if product.deletedAt is null %}
-                                                <a href="#"
-                                                   data-token="{{ csrf_token('delete') }}"
-                                                   data-bs-toggle="modal"
-                                                   data-bs-target="#modal-delete"
-                                                   data-url="{{ url('app_dashboard_delete_product', {store: store.id, id: product.id}) }}"
-                                                   class="block delete-entry text-red-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'text.remove'|trans }}</a>
-                                            {% else %}
-                                                {% if store.lockedTo is null %}
-                                                    <a href="{{ path('app_dashboard_restore_product', {store: store.id, id: product.id}) }}"
-                                                       class="block text-green-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                    >{{ 'text.restore'|trans }}</a>
-                                                {% endif %}
+            <div class="relative">
+                <div class="caption">
+                    {{ 'table.header.products'|trans }}
+                    <p>{{ 'table.caption.products'|trans({store: store.name, path: path('app_dashboard_market_place_market_product', {store: store.id})})|raw }}</p>
+                </div>
+                {% for product in products %}
+                    <div class="grid-loop-cols-5 {{ product.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
+                        <div class="ps-2.5 p-0 md:py-1.5 col-span-2">
+                            <a target="_blank"
+                               class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline line-clamp-1"
+                               href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">{{ product.shortName }}</a>
+                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ product.createdAt|date(date_format) }}</p>
+                        </div>
+                        <div class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1">
+                            <p class="md:ps-5 text-sm text-nowrap font-oswald text-gray-500 dark:text-white">{{ (product.cost + product.fee)|amount_format }}
+                                <small class="ps-0.5">{{ store.currency|currency }}</small>
+                            </p>
+                        </div>
+                        <p class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1 text-sm text-nowrap text-gray-800 dark:text-white">{{ 'table.header.quantity'|trans }}
+                            <span
+                                    class="badge-green me-2">{{ product.quantity }}</span>
+                        </p>
+                        <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
+                            <a id="dropdown-menu" role="button" data-dropdown-toggle="dropdown-context"
+                               data-dropdown-placement="bottom">
+                                <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                            <div id="dropdown-context"
+                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul class="py-2 text-xs font-medium text-gray-700 dark:text-gray-200"
+                                    aria-labelledby="dropdown-menu">
+                                    <li>
+                                        <a href="{{ path('app_dashboard_market_place_edit_product', {store: store.id, id: product.id, tab: 'details'}) }}"
+                                           class="d-hover">{{ 'text.edit'|trans }}</a>
+                                    </li>
+                                    <li>
+                                        {% if product.deletedAt is null %}
+                                            <a href="#"
+                                               data-token="{{ csrf_token('delete') }}"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#modal-delete"
+                                               data-url="{{ url('app_dashboard_delete_product', {store: store.id, id: product.id}) }}"
+                                               class="delete-entry d-drop-hover">{{ 'text.remove'|trans }}</a>
+                                        {% else %}
+                                            {% if store.lockedTo is null %}
+                                                <a href="{{ path('app_dashboard_restore_product', {store: store.id, id: product.id}) }}"
+                                                   class="block text-green-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                >{{ 'text.restore'|trans }}</a>
                                             {% endif %}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="5"
-                                class="px-6 py-4 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="no-results">
+                        <div>{{ 'table.footer.not_found'|trans }}</div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-        <div class="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-3">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <caption
-                            class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        {{ 'table.header.messages'|trans }}
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.messages'|trans({path: '#'})|raw }}</p>
-                    </caption>
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.customer'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.created_at'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.answers'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.priority'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">{{ 'table.header.review'|trans }}</span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for message in messages %}
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4">
-                                <span data-tooltip-target="tooltip-{{ message.id }}" data-tooltip-placement="right" class="font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-10 truncate cursor-pointer">{{ message.customer.full_name }}</span>
-                                <div id="tooltip-{{ message.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
-                                    {{ message.customer.phone }}
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
-                                </div>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ message.created|date(date_format) }}
-                            </td>
-                            <td class="px-6 py-4 capitalize">
-                                <span class="bg-green-600 text-white text-xs font-medium px-2.5 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ message.answers }}</span>
-                            </td>
-                            <td class="px-6 py-4 capitalize">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ message.priority }}</span>
-                            </td>
-                            <td class="px-6 py-4 flex justify-end items-end">
-                                <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}"
-                                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <svg class="w-[20px] h-[20px] text-blue-700 dark:text-white" aria-hidden="true"
-                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                         viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2" d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"></path>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="5"
-                                class="px-6 py-4 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <hr class="h-px mx-3 my-4 bg-gray-100 border-0 dark:bg-gray-700">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="relative">
+                <div class="caption">
+                    {{ 'table.header.messages'|trans }}
+                    <p>{{ 'table.caption.messages'|trans({path: '#'})|raw }}</p>
+                </div>
+                {% for message in messages %}
+                    <div class="grid-loop-cols-4">
+                        <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white col-span-2">
+                            <span data-tooltip-target="tooltip-{{ message.id }}"
+                                  class="font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-10 truncate cursor-pointer">{{ message.customer.full_name }}</span>
+                            <div id="tooltip-{{ message.id }}" role="tooltip"
+                                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                {{ message.customer.phone }}
+                                <div class="tooltip-arrow" data-popper-arrow=""></div>
+                            </div>
+                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ message.created|date(date_format) }}</p>
+                        </div>
+                        <div class="ps-2.5 pt-2 sm:pt-0 flex-1">
+                            <span class="bg-green-600 text-white text-xs font-medium px-1.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ message.answers }}</span>
+                        </div>
+                        <div class="ps-2.5 pt-2 sm:pt-0 me-2 sm:me-0 flex-1 block md:items-end md:justify-end">
+                            <span class="badge-blue">{{ message.priority }}</span>
+                        </div>
+                        <div class="sm:p-3 pt-3 me-4 md:me-6 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
+                            <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}">
+                                <svg class="w-[20px] h-[20px] text-blue-700 dark:text-white" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="no-results">
+                        <div>{{ 'table.footer.not_found'|trans }}</div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <caption
-                            class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        {{ 'table.header.orders'|trans }}
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.orders'|trans({path: path('app_dashboard_market_place_order_store_current', {store: store.id})})|raw }}</p>
-                    </caption>
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.order_number'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.created_at'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.status'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.amount'|trans }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">{{ 'table.header.handle'|trans }}</span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for order in orders %}
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-10 truncate">
-                                {{ order.number }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ order.createdAt|date(date_format) }}
-                            </td>
-                            <td class="px-6 py-4 capitalize">
-                                {{ order.status.name }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ order.total|amount_format }}<small
-                                        class="ps-0.5">{{ store.currency|currency }}</small>
-                            </td>
-                            <td class="px-6 py-4 flex justify-end items-end">
-                                <a href="{{ path('app_dashboard_market_place_order_details_market', {store: store.id, number: order.number}) }}"
-                                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <svg class="w-[20px] h-[20px] text-blue-700 dark:text-white" aria-hidden="true"
-                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                         viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M12 6h8m-8 6h8m-8 6h8M4 16a2 2 0 1 1 3.321 1.5L4 20h5M4 5l2-1v6m-2 0h4"></path>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="5"
-                                class="px-6 py-4 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <div class="relative">
+                <div class="px-5 text-lg font-semibold text-gray-900 bg-white dark:text-white dark:bg-gray-600">
+                    {{ 'table.header.orders'|trans }}
+                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.orders'|trans({path: path('app_dashboard_market_place_order_store_current', {store: store.id})})|raw }}</p>
+                </div>
+                {% for order in orders %}
+                    <div class="grid-loop-cols-3">
+                        <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
+                            <a href="{{ path('app_dashboard_market_place_order_details_market', {store: store.id, number: order.number}) }}"
+                               class="text-purple-800 hover:text-gray-900 dark:text-purple-300 dark:hover:text-white">{{ order.number }}</a>
+                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ order.createdAt|date(date_format) }}</p>
+                        </div>
+                        <div class="ps-2.5 pt-2 sm:pt-0 flex-1">
+                            <span class="badge-purple me-2">{{ order.status.name }}</span>
+                        </div>
+                        <div class="ps-2.5 pt-0 flex-1 font-oswald text-gray-500 dark:text-white">{{ order.total|amount_format }}
+                            <span class="text-xs ps-0.5">{{ store.currency|currency }}</span></div>
+                        <div class="sm:p-3 pt-3 me-0 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
+                            <a href="{{ path('app_dashboard_market_place_order_details_market', {store: store.id, number: order.number}) }}">
+                                <svg class="w-[20px] h-[20px] text-blue-700 dark:text-white" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M12 6h8m-8 6h8m-8 6h8M4 16a2 2 0 1 1 3.321 1.5L4 20h5M4 5l2-1v6m-2 0h4"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="no-results">
+                        <div>{{ 'table.footer.not_found'|trans }}</div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% if customers|length %}
@@ -487,88 +356,56 @@
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
     {% endif %}
     <div class="grid grid-cols-1 gap-3">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <caption
-                        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    {{ 'title.blogs'|trans }}
-                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-                        {{ 'table.caption.blogs'|trans({path: path('app_dashboard_blog'), create: path('app_dashboard_create_blog')})|raw }}
-                    </p>
-                </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        {{ 'table.header.title'|trans }}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        {{ 'table.header.created_at'|trans }}
-                    </th>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'table.header.owner'|trans }}
-                        </th>
-                    {% endif %}
-                    <th scope="col" class="px-6 py-3">
-                        {{ 'table.header.status'|trans }}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">{{ 'table.header.handle'|trans }}</span>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for blog in blogs %}
-                    <tr id="el-{{ blog.id }}"
-                        class="{{ blog.lockedTo is not null ? 'bg-red-100 dark:bg-red-950' : 'bg-white' }} border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-xs truncate">
-                            <a target="_blank"
-                               href="{{ path('app_blog_view', {slug: blog.slug}) }}">{{ blog.entryDetails.title }}</a>
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ blog.createdAt|date(date_format) }}
-                        </td>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <td class="px-6 py-4 lowercase text-primary-600 dark:text-blue-200">
-                                {{ blog.user.email }}
-                            </td>
-                        {% endif %}
-                        <td class="px-6 py-4 capitalize">
-                            {{ blog.status }}
-                        </td>
-                        <td class="px-6 py-4 flex justify-end items-end">
-                            <a role="button"
-                               class="permit"
-                               data-id="{{ blog.id }}"
-                               data-url="{{ path('app_dashboard_permit_xhr', {target: 'entry'}) }}"
-                               data-permit="{{ blog.lockedTo is null ? 'lock' : 'unlock' }}">
-                                <svg class="w-[20px] h-[20px] text-yellow-300 me-2 dark:text-white" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01"></path>
-                                </svg>
-                            </a>
-                            <a href="{{ path('app_dashboard_edit_blog', {id: blog.id}) }}"
-                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                <svg class="w-[20px] h-[20px] text-green-700 dark:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path>
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="{{ is_granted('ROLE_ADMIN') ? 5 : 4 }}"
-                            class="px-6 py-4 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class="relative">
+            <div class="caption">
+                {{ 'title.blogs'|trans }}
+                <p>{{ 'table.caption.blogs'|trans({path: path('app_dashboard_blog'), create: path('app_dashboard_create_blog')})|raw }}</p>
+            </div>
+            {% for blog in blogs %}
+                <div class="grid-loop-cols-4 {{ blog.lockedTo is not null ? 'bg-red-100 dark:bg-red-950' : 'bg-white' }}">
+                    <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
+                        <a target="_blank"
+                           class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
+                           href="{{ path('app_blog_view', {slug: blog.slug}) }}">{{ blog.entryDetails.title }}</a>
+                        <p class="mt-1 hidden md:block dark:text-white">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="mailto:{{ blog.user.email }}"
+                                   class="mt-1 dark:text-white">{{ blog.user.email }}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="ps-2.5 pt-0 flex-1 text-gray-500 dark:text-white">{{ blog.createdAt|date(date_format) }}</div>
+                    <div class="ps-2.5 pt-2 sm:pt-0 me-2 sm:me-0 flex-1 block md:items-end md:justify-end capitalize">
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">{{ blog.status }}</span>
+                    </div>
+                    <div class="sm:p-3 pt-3 me-0 md:me-2 text-nowrap md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
+                        <a role="button"
+                           class="permit inline-flex"
+                           data-id="{{ blog.id }}"
+                           data-url="{{ path('app_dashboard_permit_xhr', {target: 'entry'}) }}"
+                           data-permit="{{ blog.lockedTo is null ? 'lock' : 'unlock' }}">
+                            <svg class="w-[20px] h-[20px] text-yellow-300 me-1 dark:text-white" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01"></path>
+                            </svg>
+                        </a>
+                        <a href="{{ path('app_dashboard_edit_blog', {id: blog.id}) }}" class=" inline-flex">
+                            <svg class="w-[20px] h-[20px] text-green-700 dark:text-white" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                 viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <div>{{ 'table.footer.not_found'|trans }}</div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

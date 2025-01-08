@@ -14,22 +14,22 @@
     <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
         {{ form_start(form, {attr: {autocomplete: 'off', novalidate: ''}}) }}
         <div class="block mb-3">
-            {{ form_label(form.name, 'label.form.manufacturer_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.manufacturer_name'}}) }}
+            {{ form_label(form.name, 'label.form.manufacturer_name', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.name, {attr: {class: 'input-widget', placeholder: 'label.form.manufacturer_name'}}) }}
             <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.name) }}</span>
         </div>
         <div class="block mb-3">
-            {{ form_label(form.description, 'label.form.description', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.description, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', rows: 4, placeholder: 'label.form.description'}}) }}
+            {{ form_label(form.description, 'label.form.description', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.description, {attr: {class: 'input-widget', rows: 4, placeholder: 'label.form.description'}}) }}
             <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.description) }}</span>
         </div>
         <input type="hidden" name="flash-success" value="{{ _message_seccess[0]|default([]|json_encode) }}">
         <input type="hidden" name="flash-danger" value="{{ _message_danger[0]|default([]|json_encode) }}">
         <div class="w-full text-center pb-1">
-            {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'inline-flex rounded-md bg-red-500 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md hover:bg-red-700 focus:outline-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong'}}) }}
+            {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'btn-red'}}) }}
             <a type="button"
                href="{{ url('app_dashboard_market_place_store_manufacturer', {store: app.request.get('store')}) }}"
-               class="inline-flex rounded-md bg-gray-500 hover:bg-gray-900 px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md focus:outline-none focus:ring-0dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">{{ 'form.action.back'|trans }}</a>
+               class="btn-gray-strong">{{ 'form.action.back'|trans }}</a>
         </div>
         {{ form_end(form) }}
     </div>

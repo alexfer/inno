@@ -120,9 +120,11 @@ class CouponController extends AbstractController
         $coupon = $em->getRepository(StoreCoupon::class)->findOneBy(['store' => $store, 'id' => $payload['id']]);
 
         foreach ($payload['products'] as $product) {
-            $item = $em->getRepository(StoreProduct::class)->find($product);
-            $coupon->addProduct($item)->setStore($store);
-            $em->persist($coupon);
+
+            if($item = $em->getRepository(StoreProduct::class)->find((int)$product)) {
+                $coupon->addProduct($item)->setStore($store);
+                $em->persist($coupon);
+            }
         }
         $em->flush();
 

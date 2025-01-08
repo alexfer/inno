@@ -1,7 +1,8 @@
-CREATE OR REPLACE FUNCTION public.backdrop_products(store_id integer, query text DEFAULT NULL::text, start integer DEFAULT 0, row_count integer DEFAULT 25)
-    RETURNS json
-    LANGUAGE plpgsql
-AS $function$
+create function backdrop_products(store_id integer, query text DEFAULT NULL::text, start integer DEFAULT 0,
+                                  row_count integer DEFAULT 25) returns json
+    language plpgsql
+as
+$$
 DECLARE
     results    JSON;
     rows_count INTEGER;
@@ -29,14 +30,16 @@ BEGIN
                                               'fee', p.fee,
                                               'created', p.created_at,
                                               'deleted', p.deleted_at,
-                                              'coupons', json_build_object(
-                                                      'coupon', sc.id,
-                                                      'product', scsp.store_product_id
-                                                         )
+                                              'coupons', (SELECT json_agg(json_build_object(
+                    'coupon', sc.id,
+                    'product', scsp.store_product_id
+                                                                          ))
+                                                          FROM store_coupon sc
+                                                                   LEFT JOIN store_coupon_store_product scsp on sc.id = scsp.store_coupon_id
+                                                          WHERE sc.store_id = p.store_id
+                                                            AND sc.type = 'product')
                                       ) AS product
                       FROM store_product p
-                               LEFT JOIN store_coupon sc ON sc.store_id = p.store_id AND sc.type = 'product'
-                               LEFT JOIN store_coupon_store_product scsp on sc.id = scsp.store_coupon_id
                       WHERE LOWER(p.short_name) LIKE LOWER('%' || query::text || '%')
                         AND p.store_id = backdrop_products.store_id
                       ORDER BY product DESC
@@ -58,4 +61,6 @@ BEGIN
             'rows', rows_count
            );
 END ;
-$function$
+$$;
+
+alter function backdrop_products(integer, text, integer, integer) owner to inno;

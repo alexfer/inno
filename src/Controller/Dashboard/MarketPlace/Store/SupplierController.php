@@ -2,11 +2,11 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\ORM\{EntityManagerInterface, NonUniqueResultException};
 use Inno\Entity\MarketPlace\StoreSupplier;
 use Inno\Form\Type\Dashboard\MarketPlace\SupplerType;
 use Inno\Service\MarketPlace\Dashboard\Store\Interface\ServeStoreInterface;
 use Inno\Service\MarketPlace\StoreTrait;
-use Doctrine\ORM\{EntityManagerInterface, NonUniqueResultException};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\Intl\Countries;
@@ -172,7 +172,7 @@ class SupplierController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_dashboard_market_place_store_supplier', ['store' => $store->getId()]);
+        return $this->json(['success' => true, 'redirect' => $this->generateUrl('app_dashboard_market_place_store_supplier', ['store' => $store->getId()])]);
     }
 
     /**

@@ -601,15 +601,15 @@
             </trans-unit>
             <trans-unit id="table.caption.products">
                 <source>table.caption.products</source>
-                <target><![CDATA[Browse a list of <a class="underline hover:no-underline" href="{ path }"><strong>{ store }</strong></a> products designed to help you work.]]></target>
+                <target><![CDATA[Browse a list of <a class="underline hover:no-underline font-medium text-indigo-600 dark:text-white" href="{ path }">{ store }</a> products designed to help you work.]]></target>
             </trans-unit>
             <trans-unit id="table.caption.orders">
                 <source>table.caption.orders</source>
-                <target><![CDATA[List of latest <a class="underline hover:no-underline" href="{ path }"><strong>orders</strong></a> placed in your store.]]></target>
+                <target><![CDATA[List of latest <a class="underline hover:no-underline font-medium text-indigo-600 dark:text-white" href="{ path }">orders</a> placed in your store.]]></target>
             </trans-unit>
             <trans-unit id="table.caption.messages">
                 <source>table.caption.messages</source>
-                <target><![CDATA[List of latest <a class="underline hover:no-underline" href="{ path }"><strong>messages</strong></a> from customers.]]></target>
+                <target><![CDATA[List of latest <a class="underline hover:no-underline font-medium text-indigo-600 dark:text-white" href="{ path }">messages</a> from customers.]]></target>
             </trans-unit>
             <trans-unit id="table.caption.customers">
                 <source>table.caption.customers</source>
@@ -621,7 +621,7 @@
             </trans-unit>
             <trans-unit id="table.caption.blogs">
                 <source>table.caption.blogs</source>
-                <target><![CDATA[Your personal <a class="underline hover:no-underline" href="{ path }"><strong>blogs</strong></a> related to your store. <a class="text-success underline font-bold hover:no-underlinse" href="{ create }">Create blog</a>.]]></target>
+                <target><![CDATA[Your personal <a class="underline hover:no-underline font-medium text-indigo-600 dark:text-white" href="{ path }">blogs</a> related to your store. <a class="text-indigo-600 dark:text-white underline font-medium hover:no-underline" href="{ create }">Create blog</a>.]]></target>
             </trans-unit>
             <trans-unit id="table.header.answers">
                 <source>table.header.answers</source>
@@ -2393,6 +2393,14 @@
             <trans-unit id="text.end">
                 <source>text.end</source>
                 <target>Left</target>
+            </trans-unit>
+            <trans-unit id="text.cant.delete">
+                <source>text.cant.delete</source>
+                <target>Cant be deleted</target>
+            </trans-unit>
+            <trans-unit id="text.notused">
+                <source>text.notused</source>
+                <target>Not used</target>
             </trans-unit>
             <trans-unit id="text.days">
                 <source>text.days</source>

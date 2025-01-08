@@ -7,126 +7,128 @@
 {% block content %}
     {% include 'dashboard/content/market_place/navbar/nav.html.twig' %}
     {% if store.deletedAt %}
-        <div class="text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 py-2.5 ps-4 mb-3"
+        <div class="text-yellow-800 border rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 py-2.5 ps-4 mb-3"
              id="liveAlertPlaceholder" role="alert">
             {{ 'product.unavailable'|trans }}
         </div>
     {% endif %}
-    <div class="relative shadow-md sm:rounded-lg">
+    <div class="relative">
+        <div class="check-all">
+            <label class="relative flex ps-0.5 pe-2.5 py-1.5 items-start rounded-full cursor-pointer" for="any">
+                <input type="checkbox"
+                       class="mt-1 checkbox-teal"
+                       id="any"/>
+                <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
+            </label>
+        </div>
         <form id="products" name="products" method="post" autocomplete="off">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs whitespace-nowrap text-gray-500 uppercase bg-info-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th class="p-3 w-4">
-                        <label class="relative flex items-center rounded-full cursor-pointer" for="any">
-                            <input type="checkbox"
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                   id="any"/>
-                        </label>
-                    </th>
-                    <th class="px-3 py-3">{{ 'table.header.name'|trans }}</th>
-                    <th class="px-3 py-3 text-center"
-                        scope="col">{{ 'table.header.price'|trans }}</th>
-                    <th class="px-3 py-3 text-center"
-                        scope="col">{{ 'table.header.quantity'|trans }}</th>
-                    <th class="px-3 py-3 text-center"
-                        scope="col">{{ 'table.header.amount'|trans }}</th>
-                    <th class="px-3 py-3 text-center"
-                        scope="col">{{ 'table.header.created_at'|trans }}</th>
-                    <th class="px-3 py-3"
-                        scope="col"></th>
-                </tr>
-                </thead>
-                <tbody class="whitespace-nowrap">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3">
                 {% for key, product in products %}
                     {% set disabled = null %}
-                    {#                    {% for coupon in product.storeCoupons %} #}
-                    {#                        {% for item in coupon.product %} #}
-                    {#                            {% if item.id == product.id %} #}
-                    {#                                {% set disabled = 'disabled' %} #}
-                    {#                            {% endif %} #}
-                    {#                        {% endfor %} #}
-                    {#                    {% endfor %} #}
-                    <tr class="{{ disabled is null ? 'bg-white' : 'bg-green-100 dark:bg-green-950' }} border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 {% if product.deleted %}text-gray-400 bg-gray-200{% endif %}">
-                        <td class="p-3 w-4">
-                            <label class="relative flex items-center rounded-full cursor-pointer" for="i-{{ key }}">
-                                <input type="checkbox" {{ disabled }} name="product[{{ key }}]" value="{{ product.id }}"
-                                       class="{{ disabled is null ? 'checks' : '' }} w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                       id="i-{{ key }}"/>
-                            </label>
-                        </td>
-                        <td class="px-3 py-3">
-                            <a data-twe-toggle="tooltip"
-                               data-twe-placement="left"
-                               class="block text-nowrap max-w-[351px] font-semibold truncate hover:underline hover:text-gray-400 dark:text-gray-400 {% if product.deleted %}line-through{% endif %}"
-                               title="{{ product.name }}"
-                               href="{{ path('app_dashboard_market_place_edit_product', {store: product.store.id, id: product.id, tab: 'details'}) }}">
-                                {{ product.short_name }}
-                            </a>
-                        </td>
-                        <td class="px-3 py-3 text-center">
-                            <a href="" data-twe-toggle="tooltip"
-                               title="{{ product.cost }} + {{ product.fee }}">{{ (product.cost + product.fee) }}</a><small
-                                    class="text-gray-600">{{ currency['symbol_native'] }}</small>
-                        </td>
-                        <td class="px-3 py-3 text-center">{{ product.quantity }}</td>
-                        <td class="px-3 py-3 text-center">
-                            <a href="#" data-twe-toggle="tooltip"
-                               title="{{ product.cost }} + {{ product.fee }} * {{ product.quantity }}"
-                               class="focus:cursor-help">{{ ((product.cost + product.fee) * product.quantity)|amount_format }}</a><small
-                                    class="text-gray-600">{{ currency['symbol_native'] }}</small>
-                        </td>
-                        <td class="px-3 py-3 text-center">{{ product.created|date(date_format) }}</td>
-                        <td class="px-3 py-3 text-center">
-                            <a id="dropdown-menu-{{ product.id }}" role="button"
-                               data-dropdown-toggle="dropdown-context-{{ product.id }}" class="flex justify-end">
-                                <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                          d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </a>
-                            <div id="dropdown-context-{{ product.id }}"
-                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-left text-sm text-gray-700 dark:text-gray-200 "
-                                    aria-labelledby="dropdown-menu-{{ product.id }}">
-                                    {% if product.deleted %}
-                                        <li>
-                                            <a class="block px-4 py-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:text-gray-100{{ product.store.deleted ? ' pointer-events-none' : '' }}"
-                                               href="{% if product.store.deleted is null %}{{ path('app_dashboard_restore_product', {store: product.store.id, id: product.id}) }}{% endif %}">
-                                                {{ 'text.restore'|trans }}
-                                            </a>
-                                        </li>
-                                    {% else %}
-                                        <a role="button"
-                                           href="{{ path('app_dashboard_market_place_edit_product', {store: product.store.id, id: product.id, tab: 'details'}) }}"
-                                           class="block px-4 py-2 text-indigo-500 dark:text-gray-100 hover:text-indigo-700 hover:bg-gray-100 dark:hover:text-white">
-                                            {{ 'text.edit'|trans }}
+                    {% if product.coupons %}
+                        {% for coupon in product.coupons %}
+                            {% if coupon.product == product.id %}
+                                {% set disabled = 'disabled' %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <div id="el-{{ product.id }}"
+                         class="p-2.5 relative rounded-md border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-gray-950 dark:border-gray-700 {{ disabled is null ? 'bg-white' : 'bg-green-50 bg-opacity-75 dark:bg-green-900' }} {% if product.deleted %}text-gray-400 bg-gray-200{% endif %}">
+                        <a id="dropdown-menu-{{ product.id }}" role="button"
+                           data-dropdown-toggle="dropdown-context-{{ product.id }}" class="absolute end-2">
+                            <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
+                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <div id="dropdown-context-{{ product.id }}"
+                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-xl w-44 dark:bg-gray-700">
+                            <ul class="py-2 text-xs font-medium text-gray-700 dark:text-gray-200"
+                                aria-labelledby="dropdown-menu-{{ product.id }}">
+                                {% if product.deleted %}
+                                    <li>
+                                        <a class="d-hover{{ product.store.deleted ? ' pointer-events-none' : '' }}"
+                                           href="{% if product.store.deleted is null %}{{ path('app_dashboard_restore_product', {store: product.store.id, id: product.id}) }}{% endif %}">
+                                            {{ 'text.restore'|trans }}
                                         </a>
-                                        <a role="button"
-                                           class="block delete-entry px-4 py-2 text-red-500 hover:text-red-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                           data-token="{{ csrf_token('delete') }}"
-                                           data-url="{{ url('app_dashboard_delete_product', {store: product.store.id, id: product.id}) }}"
-                                           data-bs-toggle="modal"
-                                           data-bs-target="#modal-delete">
-                                            {{ 'text.delete'|trans }}
-                                        </a>
-                                    {% endif %}
-                                </ul>
+                                    </li>
+                                {% else %}
+                                    <a role="button"
+                                       href="{{ path('app_dashboard_market_place_edit_product', {store: product.store.id, id: product.id, tab: 'details'}) }}"
+                                       class="d-hover">
+                                        {{ 'text.edit'|trans }}
+                                    </a>
+                                    <a role="button"
+                                       class="d-drop-hover delete-entry"
+                                       data-token="{{ csrf_token('delete') }}"
+                                       data-url="{{ url('app_dashboard_delete_product', {store: product.store.id, id: product.id}) }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#modal-delete">
+                                        {{ 'text.delete'|trans }}
+                                    </a>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <label class="inline-flex rounded-full cursor-pointer" for="i-{{ key }}">
+                            <input type="checkbox" {{ disabled }} name="product[{{ key }}]" value="{{ product.id }}"
+                                   class="{{ disabled is null ? 'checks' : '' }}  checkbox-teal"
+                                   id="i-{{ key }}"/>
+                            <span class="text-xs ms-3 text-nowrap text-gray-500 dark:text-white">{{ product.created|date(date_format) }}</span>
+                        </label>
+                        <a data-tooltip-target="tooltip-{{ key }}"
+                           class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline line-clamp-1 {% if product.deleted %}line-through{% endif %}"
+                           href="{{ path('app_dashboard_market_place_edit_product', {store: product.store.id, id: product.id, tab: 'details'}) }}">
+                            {{ product.short_name }}
+                        </a>
+                        <div id="tooltip-{{ key }}" role="tooltip"
+                             class="absolute z-10 invisible w-48 inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            {{ product.name }}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        <div class="my-1.5 flex justify-between items-center">
+                            <div class="text-sm text-nowrap text-gray-500 dark:text-white">{{ 'label.form.fee'|trans }}:<span
+                                        class="ms-1 font-medium text-lime-600">{{ product.fee|amount_format }}<span
+                                            class="ms-0.5 font-light text-xs text-gray-600 dark:text-gray-100">{{ currency['symbol_native'] }}</span></span>
                             </div>
-
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="8"
-                            class="px-3 py-3 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                    </tr>
+                            <div class="text-nowrap dark:text-white">
+                                <span class="me-1">{{ 'table.header.amount'|trans }}</span><a href="#"
+                                                                                              data-tooltip-target="amount-{{ key }}"
+                                                                                              class="cursor-help text-base font-oswald text-indigo-700 hover:text-indigo-500 dark:text-blue-200 dark:hover:text-blue-50">{{ ((product.cost + product.fee) * product.quantity)|amount_format }}</a><span
+                                        class="ms-0.5 font-light text-xs text-gray-600 dark:text-gray-100">{{ currency['symbol_native'] }}</span>
+                                <div id="amount-{{ key }}" role="tooltip"
+                                     class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    {{ product.cost }} + {{ product.fee }} * {{ product.quantity }}
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-1.5 flex justify-between">
+                            <a href="#" class="font-medium text-nowrap text-orange-800 dark:text-red-50"
+                               data-tooltip-target="price-{{ key }}">
+                                <span class="me-1 text-gray-800 dark:text-white font-light">{{ 'table.header.price'|trans }}:</span>{{ (product.cost + product.fee)|amount_format }}
+                                <span
+                                        class="ms-0.5 font-light text-xs text-gray-600 dark:text-gray-100">{{ currency['symbol_native'] }}</span></a>
+                            <div id="price-{{ key }}" role="tooltip"
+                                 class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                {{ product.cost|amount_format }} + {{ product.fee|amount_format }}
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            <div class="me-1 text-nowrap text-gray-800 dark:text-white">{{ 'table.header.quantity'|trans }}
+                                :
+                                <span class="badge-green">{{ product.quantity }}</span>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
         </form>
+        {% if products|length == 0 %}
+            <div class="no-results !mx-0">
+                <div>{{ 'table.footer.not_found'|trans }}</div>
+            </div>
+        {% endif %}
     </div>
     {% if rows > products|length %}
         <div class="navigation mt-5 pb-5 w-full mx-auto">
@@ -135,4 +137,48 @@
             } %}
         </div>
     {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            // open
+            const burger = document.querySelectorAll('.navbar-burger');
+            const menu = document.querySelectorAll('.navbar-menu');
+
+            if (burger.length && menu.length) {
+                for (let i = 0; i < burger.length; i++) {
+                    burger[i].addEventListener('click', function () {
+                        for (let j = 0; j < menu.length; j++) {
+                            menu[j].classList.toggle('hidden');
+                        }
+                    });
+                }
+            }
+
+            // close
+            const close = document.querySelectorAll('.navbar-close');
+            const backdrop = document.querySelectorAll('.navbar-backdrop');
+
+            if (close.length) {
+                for (let i = 0; i < close.length; i++) {
+                    close[i].addEventListener('click', function () {
+                        for (let j = 0; j < menu.length; j++) {
+                            menu[j].classList.toggle('hidden');
+                        }
+                    });
+                }
+            }
+
+            if (backdrop.length) {
+                for (let i = 0; i < backdrop.length; i++) {
+                    backdrop[i].addEventListener('click', function () {
+                        for (let j = 0; j < menu.length; j++) {
+                            menu[j].classList.toggle('hidden');
+                        }
+                    });
+                }
+            }
+        });
+    </script>
 {% endblock %}

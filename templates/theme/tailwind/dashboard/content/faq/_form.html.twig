@@ -13,25 +13,25 @@
     <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
         {{ form_start(form, {attr: {autocomplete: 'off', novalidate: ''}}) }}
         <div class="block mb-3">
-            {{ form_label(form.title, 'label.form.title', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.title, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.title'}}) }}
-            <span class="mt-1 block text-xs text-red-500">{{ form_errors(form.title) }}</span>
+            {{ form_label(form.title, 'label.form.title', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.title, {attr: {class: 'input-widget', placeholder: 'label.form.title'}}) }}
+            <span class="input-wrong">{{ form_errors(form.title) }}</span>
         </div>
         <div class="block mb-3">
-            {{ form_label(form.content, 'label.form.content', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.content, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', rows: 6, placeholder: 'label.form.content'}}) }}
-            <span class="mt-1 block text-xs text-red-500">{{ form_errors(form.content) }}</span>
+            {{ form_label(form.content, 'label.form.content', {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(form.content, {attr: {class: 'input-widget', rows: 6, placeholder: 'label.form.content'}}) }}
+            <span class="input-wrong">{{ form_errors(form.content) }}</span>
         </div>
         <div class="block mb-3">
             <label for="{{ form.visible.vars.id }}" class="inline-flex items-center -mb-1.5 cursor-pointer">
                 {{ form_widget(form.visible, {attr: {class: 'sr-only peer', checked: form.visible.vars == 1 ? 'checked' : null}}) }}
-                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
                 <span class="ms-3 relative text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'label.form.visible'|trans }}</span>
             </label>
         </div>
         <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
         <div class="w-full text-center pb-1">
-            {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'inline-flex rounded-md bg-red-500 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md hover:bg-red-700 focus:outline-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong'}}) }}
+            {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'btn-red'}}) }}
             <a type="button"
                href="{{ url('app_dashboard_faq') }}"
                class="inline-block rounded bg-secondary hover:text-gray-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-secondary-3 transition duration-150 ease-in-out hover:bg-secondary-accent-300 hover:shadow-secondary-2 focus:bg-secondary-accent-300 focus:shadow-secondary-2 focus:outline-none focus:ring-0 active:bg-secondary-600 active:shadow-secondary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">{{ 'form.action.back'|trans }}</a>
@@ -39,16 +39,38 @@
         {{ form_end(form) }}
     </div>
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('suneditor/suneditor.min.css') }}">
+{% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('suneditor/suneditor.min.js') }}"></script>
     <script type="text/javascript">
-        CKEDITOR.replace('faq_content', {
-            language: '{{ app.locale }}',
-            extraPlugins: 'editorplaceholder',
-            removePlugins: 'simage,image,youtube,html5video,iframe,uicolor,videodetector,preview',
-            editorplaceholder: '{{ 'label.form.content'|trans }}'
-        });
-        CKEDITOR.addCss(".cke_editable{cursor:text; font-size: 15px; color: #000000;}");
+        const options = {
+            height: '300',
+            plugins: ['undo', 'redo', 'formatBlock', 'paragraphStyle',
+                'blockquote', 'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
+                'fontColor', 'hiliteColor', 'textStyle', 'removeFormat', 'outdent', 'indent',
+                'align', 'horizontalRule', 'list', 'lineHeight', 'fullScreen', 'showBlocks', 'codeView',
+                'table', 'link', 'image', 'video', 'audio'],
+            buttonList: [
+                ['undo', 'redo'],
+                ['formatBlock'],
+                ['paragraphStyle', 'blockquote'],
+                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                ['fontColor', 'hiliteColor', 'textStyle'],
+                ['removeFormat'],
+                ['outdent', 'indent'],
+                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                ['table', 'link', 'image', 'video', 'audio'],
+                /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+                ['fullScreen', 'showBlocks', 'codeView'],
+            ]
+        };
+        const editor = SUNEDITOR.create((document.getElementById('store_description') || 'store_description'), options);
+        editor.onChange = (contents, core) => {
+            editor.save();
+        }
     </script>
 {% endblock %}

@@ -249,7 +249,7 @@ class MessageService implements MessageServiceInterface
 
         $answer->setStore($this->store())
             ->setParent($message)
-            ->setPriority($this->payload['priority'])
+            ->setPriority('low')
             ->setMessage($this->payload['message'])
             ->setUpdatedAt(new \DateTimeImmutable());
 

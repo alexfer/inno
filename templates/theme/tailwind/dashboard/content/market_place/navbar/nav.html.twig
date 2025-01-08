@@ -1,84 +1,152 @@
-<nav class="w-full relative mb-3 border rounded-lg shadow-md border-gray-200 dark:border-gray-500">
-    <div class="p-4 md:p-0 bg-gray-50 w-full rounded-lg md:flex md:w-auto md:order-1 dark:bg-gray-500">
-        {% set _part = app.request.get('_route')|split('_')|last %}
-        <ul class="flex flex-col p-2 font-medium w-full md:space-x-2 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-500 dark:border-gray-700">
+<nav class="relative py-1.5 pe-1.5 rounded mb-2 flex justify-between items-start bg-gray-100 dark:bg-gray-600">
+    <div class="lg:hidden">
+        <button class="navbar-burger h-4 absolute end-0 w-full">
+            <svg class="flex ml-auto h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Mobile menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+        </button>
+    </div>
+    {% set _part = app.request.get('_route')|split('_')|last %}
+    <ul class="hidden lg:flex mr-auto items-start w-auto">
+        <li>
+            <a class="nav-link-btn"
+               href="{{ path('app_dashboard_market_place_create_product', {store: store.id, tab: 'details'}) }}">{{ 'store.product.create'|trans }}</a>
+        </li>
+        <li>
+            <a class="nav-link-btn{% if _part == 'product' %} active{% endif %}"
+               href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"> {{ 'store.products'|trans }}</a>
+        </li>
+        <li>
+            <a class="nav-link-btn{% if _part == 'coupon' %} active{% endif %}"
+               href="{{ path('app_dashboard_market_place_product_coupon', {store: store.id}) }}">{{ 'store.coupons'|trans }}</a>
+        </li>
+        <li>
+            <a class="nav-link-btn{% if _part == 'brand' %} active{% endif %}"
+               href="{{ path('app_dashboard_market_place_store_brand', {store: store.id}) }}">{{ 'store.brands'|trans }}</a>
+        </li>
+        <li>
+            <a class="nav-link-btn{% if _part == 'supplier' %} active{% endif %}"
+               href="{{ path('app_dashboard_market_place_store_supplier', {store: store.id}) }}">{{ 'store.suppliers'|trans }}</a>
+        </li>
+        <li>
+            <a class="nav-link-btn{% if _part == 'manufacturer' %} active{% endif %}"
+               href="{{ path('app_dashboard_market_place_store_manufacturer', {store: store.id}) }}">{{ 'store.manufacturers'|trans }}</a>
+        </li>
+        {% if inject is defined %}
             <li>
-                <a role="button" href="{{ path('app_dashboard_market_place_create_product', {store: store.id, tab: 'details'}) }}"
-                   class="flex my-0.5 py-2 px-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    {{ 'store.product.create'|trans }}
-                </a>
+                <a class="nav-link-btn-extra" href="{{ path }}">{{ name }}</a>
             </li>
+        {% endif %}
+        {% if _part == 'product' and products|length > 0 %}
             <li>
-                <a href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"
-                   class="{% if _part == 'product' %}font-semibold dark:bg-black dark:hover:bg-black{% endif %} block my-0.5 py-2 px-3 bg-white shadow hover:bg-gray-100 hover:text-gray-900 rounded-lg text-gray-500 dark:hover:bg-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                    {{ 'store.products'|trans }}
+                <a role="button" id="handler"{% if coupons|length %} data-dropdown-toggle="coupons"{% endif %}
+                   class="nav-link-btn">
+                    {{ 'store.apply.coupon'|trans }}
+                    <svg class="w-2.5 h-2.5 ms-1 inline-flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                         fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m1 1 4 4 4-4"></path>
+                    </svg>
                 </a>
+                {% if coupons|length %}
+                    <div id="coupons"
+                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <ul class="py-2 text-xs font-medium text-gray-700 dark:text-gray-200"
+                            data-url="{{ path('app_dashboard_market_place_apply_coupon', {store: store.id}) }}"
+                            data-token="{{ csrf_token('apply') }}"
+                            aria-labelledby="handler">
+                            {% for coupon in coupons %}
+                                <li>
+                                    <a data-id="{{ coupon.id }}" href="#"
+                                       class="coupons block mx-1.5 rounded px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ coupon.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             </li>
-            <li>
-                <a href="{{ path('app_dashboard_market_place_product_coupon', {store: store.id}) }}"
-                   class="{% if _part == 'coupon' %}font-semibold dark:bg-black dark:hover:bg-black{% endif %} block my-0.5 py-2 px-3 bg-white shadow hover:bg-gray-100 hover:text-gray-900 rounded-lg text-gray-500 dark:hover:bg-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                    {{ 'store.coupons'|trans }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('app_dashboard_market_place_store_brand', {store: store.id}) }}"
-                   class="{% if _part == 'brand' %}font-semibold dark:bg-black dark:hover:bg-black{% endif %} block my-0.5 py-2 px-3 bg-white shadow hover:bg-gray-100 hover:text-gray-900 rounded-lg text-gray-500 dark:hover:bg-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                    {{ 'store.brands'|trans }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('app_dashboard_market_place_store_supplier', {store: store.id}) }}"
-                   class="{% if _part == 'supplier' %}font-semibold dark:bg-black dark:hover:bg-black{% endif %} block my-0.5 py-2 px-3 bg-white shadow hover:bg-gray-100 hover:text-gray-900 rounded-lg text-gray-500 dark:hover:bg-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                    {{ 'store.suppliers'|trans }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('app_dashboard_market_place_store_manufacturer', {store: store.id}) }}"
-                   {% if _part == 'manufacturer' %}aria-current="true"{% endif %}
-                   class="{% if _part == 'manufacturer' %}font-semibold dark:bg-black dark:hover:bg-black{% endif %} block my-0.5 py-2 px-3 bg-white shadow hover:bg-gray-100 hover:text-gray-900 rounded-lg text-gray-500 dark:hover:bg-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                    {{ 'store.manufacturers'|trans }}
-                </a>
-            </li>
-            {% if inject is defined %}
-                <li>
-                    <a role="button"
-                       class="my-0.5 py-2 px-3 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 float-start"
-                       href="{{ path }}">{{ name }}</a>
-                </li>
-            {% endif %}
-            {% if _part == 'product' and products|length > 0 %}
-                <li>
-                    <button id="handler"{% if coupons|length %} data-dropdown-toggle="dropdown-coupons"{% endif %}
-                            class="block my-0.5 py-2 px-3 text-white bg-green-700 hover:bg-green-800 focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">
-                        {{ 'store.apply.coupon'|trans }}
-                        <svg class="w-2.5 h-2.5 ms-1 inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                             fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="m1 1 4 4 4-4"></path>
-                        </svg>
-                    </button>
-                    {% if coupons|length %}
-                        <div id="dropdown-coupons"
-                             class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                data-url="{{ path('app_dashboard_market_place_apply_coupon', {store: store.id}) }}"
-                                data-token="{{ csrf_token('apply') }}"
-                                aria-labelledby="dropdownLargeButton">
-                                {% for coupon in coupons %}
-                                    <li>
-                                        <a data-id="{{ coupon.id }}" href="#"
-                                           class="coupons block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ coupon.name }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                </li>
-            {% endif %}
-        </ul>
-        <div class="flex items-center align-bottom lg:order-2">
-
-            {% include 'dashboard/content/market_place/navbar/search.html.twig' %}
-        </div>
+        {% endif %}
+    </ul>
+    <div class="hidden lg:flex ml-auto">
+        {% include 'dashboard/content/market_place/navbar/search.html.twig' %}
     </div>
 </nav>
+<div class="navbar-menu relative z-50 hidden">
+    <div class="navbar-backdrop fixed inset-0 bg-gray-400 opacity-25"></div>
+    <nav class="fixed top-0 right-0 bottom-0 flex flex-col w-48 max-w-sm py-6 px-6 bg-white dark:bg-gray-900 border-r overflow-y-auto">
+        <div class="flex justify-end mb-2">
+            <button class="navbar-close">
+                <svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div>
+            <ul>
+                <li class="mb-1">
+                    <a class="nav-link-mobile"
+                       href="{{ path('app_dashboard_market_place_create_product', {store: store.id, tab: 'details'}) }}">{{ 'store.product.create'|trans }}</a>
+                </li>
+                <li class="mb-1">
+                    <a class="nav-link-mobile"
+                       href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"> {{ 'store.products'|trans }}</a>
+                </li>
+                <li class="mb-1">
+                    <a class="nav-link-mobile"
+                       href="{{ path('app_dashboard_market_place_product_coupon', {store: store.id}) }}">{{ 'store.coupons'|trans }}</a>
+                </li>
+                <li class="mb-1">
+                    <a class="nav-link-mobile"
+                       href="{{ path('app_dashboard_market_place_store_brand', {store: store.id}) }}">{{ 'store.brands'|trans }}</a>
+                </li>
+                <li class="mb-1">
+                    <a class="nav-link-mobile"
+                       href="{{ path('app_dashboard_market_place_store_supplier', {store: store.id}) }}">{{ 'store.suppliers'|trans }}</a>
+                </li>
+                <li class="mb-1">
+                    <a class="nav-link-mobile"
+                       href="{{ path('app_dashboard_market_place_store_manufacturer', {store: store.id}) }}">{{ 'store.manufacturers'|trans }}</a>
+                </li>
+                {% if inject is defined %}
+                    <li class="mb-1">
+                        <a class="nav-link-mobile"
+                           href="{{ path }}">{{ name }}</a>
+                    </li>
+                {% endif %}
+                {% if _part == 'product' and products|length > 0 %}
+                    <li>
+                        <button id="handler"{% if coupons|length %} data-dropdown-toggle="dropdown-coupons"{% endif %}
+                                class="nav-link-mobile">
+                            {{ 'store.apply.coupon'|trans }}
+                            <svg class="w-2.5 h-2.5 ms-1 inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="m1 1 4 4 4-4"></path>
+                            </svg>
+                        </button>
+                        {% if coupons|length %}
+                            <div id="dropdown-coupons"
+                                 class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                    data-url="{{ path('app_dashboard_market_place_apply_coupon', {store: store.id}) }}"
+                                    data-token="{{ csrf_token('apply') }}"
+                                    aria-labelledby="dropdownLargeButton">
+                                    {% for coupon in coupons %}
+                                        <li>
+                                            <a data-id="{{ coupon.id }}" href="#"
+                                               class="coupons block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ coupon.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>

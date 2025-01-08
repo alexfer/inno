@@ -29,7 +29,7 @@ window.bindForm = (form) => {
         if (!previousValue[i]) {
             previousValue[i] = {};
         }
-        if(currentValue.type === 'checkbox') {
+        if (currentValue.type === 'checkbox') {
             previousValue[i][prop] = !!currentValue.checked;
         } else {
             previousValue[i][prop] = currentValue.value;
@@ -75,7 +75,7 @@ if (any) {
             chx = true;
         }
         for (let i in checks) {
-            if (typeof checks[i] !== "function" && typeof checks[i] !== "number") {
+            if (typeof checks[i] !== "function" && typeof checks[i] !== "number" && !checks[i].hasAttribute('disabled')) {
                 checks[i].checked = chx;
                 checks[i].addEventListener('click', () => {
                     any.checked = false;
