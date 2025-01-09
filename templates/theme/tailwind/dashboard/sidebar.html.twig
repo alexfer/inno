@@ -34,7 +34,8 @@
                         <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"></path>
                     </svg>
                     <span class="ms-3">{{ 'menu.dashboard'|trans }}</span>
-                    <div id="hub" class="absolute inline-flex items-center justify-center w-7 h-7 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ msg.dashboard(app.user.id) }}</div>
+                    {% set count_messages = msg.dashboard(app.user.id) %}
+                    <div id="hub" class="absolute inline-flex items-center{{ count_messages > 0 ? ' animate-pulse' : '' }} justify-center w-7 h-7 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ count_messages }}</div>
                 </a>
             </li>
             <li>
