@@ -6,52 +6,82 @@
 
 {% block content %}
     {% if stores|length > 1 %}
-        {% include 'dashboard/content/market_place/navbar/stores-nav.html.twig' %}
+        {% include 'dashboard/content/market_place/navbar/stores-nav.html.twig' with {route_name: 'app_dashboard_market_place_message_current'} %}
     {% endif %}
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-500 uppercase bg-info-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">{{ 'table.header.title'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.messages'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.products'|trans }}</th>
-                <th class="text-center px-6 py-3" scope="col">{{ 'table.header.created_at'|trans }}</th>
-                <th class="px-6 py-3" scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for store in stores %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <a data-twe-toggle="tooltip"
-                           data-twe-placement="left"
-                           class="block text-wrap font-semibold hover:underline hover:text-gray-400 dark:text-gray-400 {% if store.deleted is not null %}line-through{% endif %}"
-                           title="{{ store.name }}"
-                           href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}">
-                            {{ store.name|length > 25 ? store.name|slice(0, 50) ~ ' ... ' : store.name }}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="relative flex flex-col bg-white dark:bg-gray-600 rounded-md border dark:border-gray-700">
+            <div class="flex justify-between border-b dark:border-gray-700 dark:text-white">
+                <h5 class="text-lg font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_store'|trans }}</h5>
+            </div>
+            <ul class="flex flex-col">
+                {% for store in stores %}
+                    <li class="p-2 mb-2 mt-0 rounded-t hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white">
+                        <a href="{{ path('app_dashboard_market_place_message_current', {store: store.id}) }}"
+                           class="w-full">
+                            <div class="flex items-center">
+                                <div class="leading-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke-width="1.5" stroke="currentColor" class="h-10 w-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-auto ml-2">
+                                    <p class="text-sm font-medium line-clamp-1 text-indigo-700 dark:text-indigo-300">{{ store.name }}</p>
+                                    <p class="text-xs text-gray-400 dark:text-white/80 mb-0 !font-normal">{{ store.created|date(date_format) }}</p>
+                                </div>
+                                <div class="block text-end">
+                                    <span class="text-xs font-medium lg:font-thin lg:text-sm text-nowrap">
+                                        {{ 'table.header.messages'|trans }}<span
+                                                class="badge-green ml-0.5">{{ store.messages }}</span>
+                                    </span>
+                                    <p class="text-xs lg:text-sm font-medium lg:font-thin mt-0.5 text-nowrap">
+                                        {{ 'table.header.products'|trans }}<span
+                                                class="badge-purple ml-0.5">{{ store.products }}</span>
+                                    </p>
+                                </div>
+                            </div>
                         </a>
-                    </th>
-                    <td class="text-center px-6 py-3">{{ store.messages }}</td>
-                    <td class="text-center px-6 py-3">{{ store.products }}</td>
-                    <td class="text-center px-6 py-3">{{ store.created|date(date_format) }}</td>
-                    <td class="text-center px-6 py-3 flex justify-end">
-                        <a role="button"
-                           href="{{ path('app_dashboard_market_place_message_current', {store: store.id}) }}"
-                           class="text-blue-500 dark:text-gray-100 hover:text-blue-700 dark:hover:bg-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902.848.137 1.705.248 2.57.331v3.443a.75.75 0 0 0 1.28.53l3.58-3.579a.78.78 0 0 1 .527-.224 41.202 41.202 0 0 0 5.183-.5c1.437-.232 2.43-1.49 2.43-2.903V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM8 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
-                            </svg>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="relative flex flex-col bg-white dark:bg-gray-600 rounded-md border dark:border-gray-700">
+            <div class="flex justify-between border-b dark:border-gray-700 dark:text-white">
+                <h5 class="text-lg font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_messages'|trans }}</h5>
+            </div>
+            <ul class="flex flex-col divide-y divide-gray-200 dark:divide-white/10">
+                {% for message in messages %}
+                <li class="inline-flex items-center p-2 mb-2 mt-0 line-n rounded-t hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white relative">
+                    <div class="flex items-center space-x-3 w-full">
+                        <div class="flex">
+                            <a class="relative inline-block h-8 w-8 rounded-full" href="">
+                                <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span
+                                        class="online"></span> </a></div>
+                        <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store.id, id: message.id}) }}"
+                           class="w-full">
+                            <div class="flex items-center justify-between">
+                                <p class="text-slate-700 font-semibold text-xs dark:text-white capitalize">{{ message.customer.firstName }} {{ message.customer.lastName }}</p>
+                                <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message.createdAt|date(datetime_format) }}</p>
+                            </div>
+                            <div class="flex items-center justify-between pt-1">
+                                <p class="text-xs text-gray-500 dark:text-white/70 line-clamp-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="w-4 h-4 inline-flex mr-1">
+                                        <path fill-rule="evenodd"
+                                              d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="lg:text-sm">{{ message.message }}</span>
+                                </p>
+                                <span class="badge-green-border capitalize">{{ message.priority }}</span>
+                            </div>
                         </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5"
-                        class="px-6 py-3 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    </div>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
     </div>
     <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
 {% endblock %}
