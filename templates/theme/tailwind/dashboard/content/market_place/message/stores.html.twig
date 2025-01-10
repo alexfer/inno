@@ -9,13 +9,13 @@
         {% include 'dashboard/content/market_place/navbar/stores-nav.html.twig' with {route_name: 'app_dashboard_market_place_message_current'} %}
     {% endif %}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="relative flex flex-col bg-white dark:bg-gray-600 rounded-md border dark:border-gray-700">
-            <div class="flex justify-between border-b dark:border-gray-700 dark:text-white">
-                <h5 class="text-lg font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_store'|trans }}</h5>
+        <div class="box">
+            <div class="box-header">
+                <h5 class="text-base font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_store'|trans }}</h5>
             </div>
             <ul class="flex flex-col">
                 {% for store in stores %}
-                    <li class="p-2 mb-2 mt-0 rounded-t hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white">
+                    <li class="list-item">
                         <a href="{{ path('app_dashboard_market_place_message_current', {store: store.id}) }}"
                            class="w-full">
                             <div class="flex items-center">
@@ -35,7 +35,7 @@
                                         {{ 'table.header.messages'|trans }}<span
                                                 class="badge-green ml-0.5">{{ store.messages }}</span>
                                     </span>
-                                    <p class="text-xs lg:text-sm font-medium lg:font-thin mt-0.5 text-nowrap">
+                                    <p class="text-xs lg:text-sm font-medium lg:font-thin mt-1 md:mt-0.5 text-nowrap">
                                         {{ 'table.header.products'|trans }}<span
                                                 class="badge-purple ml-0.5">{{ store.products }}</span>
                                     </p>
@@ -46,13 +46,13 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="relative flex flex-col bg-white dark:bg-gray-600 rounded-md border dark:border-gray-700">
-            <div class="flex justify-between border-b dark:border-gray-700 dark:text-white">
-                <h5 class="text-lg font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_messages'|trans }}</h5>
+        <div class="box">
+            <div class="box-header">
+                <h5 class="text-base font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_messages'|trans }}</h5>
             </div>
             <ul class="flex flex-col divide-y divide-gray-200 dark:divide-white/10">
                 {% for message in messages %}
-                <li class="inline-flex items-center p-2 mb-2 mt-0 line-n rounded-t hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white relative">
+                <li class="list-item">
                     <div class="flex items-center space-x-3 w-full">
                         <div class="flex">
                             <a class="relative inline-block h-8 w-8 rounded-full" href="">
@@ -67,7 +67,7 @@
                             <div class="flex items-center justify-between pt-1">
                                 <p class="text-xs text-gray-500 dark:text-white/70 line-clamp-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                                         class="w-4 h-4 inline-flex mr-1">
+                                         class="w-4 h-4 text-green-500 inline-flex mr-1">
                                         <path fill-rule="evenodd"
                                               d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
                                               clip-rule="evenodd"/>

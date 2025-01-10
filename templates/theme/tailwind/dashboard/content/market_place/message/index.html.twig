@@ -5,76 +5,93 @@
 {% block title_content %}{{ _title_extend }}{% endblock %}
 
 {% block content %}
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-500 uppercase bg-info-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">{{ 'table.header.related'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.customer'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.answers'|trans }}</th>
-                <th class="text-center px-6 py-3" scope="col">{{ 'table.header.created_at'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.priority'|trans }}</th>
-                <th class="px-6 py-3" scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
+    <div class="relative">
+        <ul class="flex flex-col">
             {% for message in messages %}
-                <tr class="{{ message.read ? 'bg-green-100': 'bg-white' }} border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row"
-                        class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap max-w-xs xs:max-w-xl md:max-w-sm lg:max-w-xs truncate dark:text-white">
-                        {% if message.product is not null %}
-                            <a class="font-semibold text-gray-500 hover:text-gray-700 dark:hover:text-white"
-                               target="_blank"
-                               data-twe-toggle="tooltip"
-                               data-twe-placement="left"
-                               title="{{ message.product.short_name }}"
-                               href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}">
-                                <svg class="w-4 h-4 mb-1 inline-block text-gray-800 dark:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"></path>
+                <li class="list-item cursor-default">
+                    <div class="flex items-start">
+                        <div class="mt-1 me-2">
+                            {% if message.product is not null %}
+                                <a data-tooltip-target="tooltip-{{ message.id }}" target="_blank"
+                                   href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}"
+                                   class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">
+                                    {% if message.product.picture %}
+                                        {% set _picture = 'storage/product/' ~ message.product.id ~ '/' ~ message.product.picture %}
+                                        <picture>
+                                            <img src="{{ asset(_picture) }}" class="w-10 h-auto"
+                                                 alt="{{ message.product.short_name }}">
+                                        </picture>
+                                    {% else %}
+                                        <svg class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                                            <polyline points="21 15 16 10 5 21"/>
+                                        </svg>
+                                    {% endif %}
+                                </a>
+                                <div id="tooltip-{{ message.id }}" role="tooltip"
+                                     class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                    {{ message.product.short_name }}
+                                    <div class="tooltip-arrow" data-popper-arrow=""></div>
+                                </div>
+                            {% elseif message.order is not null %}
+                                <a data-tooltip-target="tooltip-{{ message.id }}" href="{{ path('app_dashboard_market_place_order_details_market', {store: message.store, number: message.order.number }) }}"
+                                   class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">
+                                    <svg class="h-10 w-10" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z"/>
+                                        <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>
+                                        <line x1="9" y1="7" x2="10" y2="7"/>
+                                        <line x1="9" y1="13" x2="15" y2="13"/>
+                                        <line x1="13" y1="17" x2="15" y2="17"/>
+                                    </svg>
+                                </a>
+                                <div id="tooltip-{{ message.id }}" role="tooltip"
+                                     class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                    #-{{ message.order.number }}
+                                    <div class="tooltip-arrow" data-popper-arrow=""></div>
+                                </div>
+                            {% else %}
+                                {{ 'store.message.question'|trans }}
+                            {% endif %}
+                        </div>
+                        <div class="flex-grow ps-3">
+                            <span class="block font-medium text-base text-balance capitalize">{{ message.customer.full_name }}</span>
+                            <span class="text-xs">{{ message.created|date(datetime_format) }}</span>
+                        </div>
+                        <div class="inline-flex pt-1 space-x-4">
+                            {% set priority = {low: 'green', medium: 'yellow', high: 'red'} %}
+                            <span class="hidden sm:block px-2">
+                                {{ 'table.header.answers'|trans }}<span
+                                        class="badge-purple ms-0.5">{{ message.answers }}</span>
+                            </span>
+                            <span class="hidden sm:inline-block">
+                                {{ 'table.header.priority'|trans }}<span
+                                        class="ms-1 w-16 bg-{{ priority[message.priority|lower] }}-100 text-{{ priority[message.priority|lower] }}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-{{ priority[message.priority|lower] }}-900 dark:text-{{ priority[message.priority|lower] }}-300 capitalize border border-green-400">{{ message.priority }}</span>
+                            </span>
+                            <a role="button"
+                               href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}"
+                               class="text-blue-500 dark:text-gray-100 hover:text-blue-700 dark:hover:bg-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                     class="w-5 h-5">
+                                    <path fill-rule="evenodd"
+                                          d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902.848.137 1.705.248 2.57.331v3.443a.75.75 0 0 0 1.28.53l3.58-3.579a.78.78 0 0 1 .527-.224 41.202 41.202 0 0 0 5.183-.5c1.437-.232 2.43-1.49 2.43-2.903V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM8 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                                          clip-rule="evenodd"/>
                                 </svg>
-                                {{ message.product.short_name }}
                             </a>
-                        {% elseif message.order is not null %}
-                            {{ message.order.number }}
-                        {% else %}
-                            {{ 'store.message.question'|trans }}
-                        {% endif %}
-                    </th>
-                    <td class="text-center px-6 py-3">
-                        {{ message.customer.full_name }}
-                    </td>
-                    <td class="text-center px-6 py-3">
-                        {{ message.answers }}
-                    </td>
-                    <td class="text-center px-6 py-3">
-                        {{ message.created|date(datetime_format) }}
-                    </td>
-                    <td class="text-center px-6 py-3">
-                        {% set priority = {low: 'green', medium: 'yellow', high: 'red'} %}
-                        <span class="text-center w-16 bg-{{ priority[message.priority|lower] }}-100 text-{{ priority[message.priority|lower] }}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-{{ priority[message.priority|lower] }}-900 dark:text-{{ priority[message.priority|lower] }}-300 capitalize">{{ message.priority }}</span>
-                    </td>
-                    <td class="px-6 py-3 flex justify-end">
-                        <a role="button"
-                           href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}"
-                           class="text-blue-500 dark:text-gray-100 hover:text-blue-700 dark:hover:bg-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902.848.137 1.705.248 2.57.331v3.443a.75.75 0 0 0 1.28.53l3.58-3.579a.78.78 0 0 1 .527-.224 41.202 41.202 0 0 0 5.183-.5c1.437-.232 2.43-1.49 2.43-2.903V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM8 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6"
-                        class="px-6 py-3 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                </tr>
+                        </div>
+                    </div>
+                </li>
             {% endfor %}
-            </tbody>
-        </table>
+        </ul>
+        {% if messages|length == 0 %}
+            <div class="no-results !mx-0">
+                <div>{{ 'table.footer.not_found'|trans }}</div>
+            </div>
+        {% endif %}
     </div>
     <div class="navigation mt-5 w-full mx-auto">
         {{ knp_pagination_render(messages) }}
