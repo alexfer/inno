@@ -11,7 +11,7 @@
     }
 
     .grid-loop-cols-4 {
-        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 rounded-md border-b gap-x-6 hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center rounded-md border-b gap-x-6 hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
     }
 
     .grid-loop-cols-5 {
@@ -132,5 +132,17 @@
 
     .btn-gray-strong {
         @apply inline-flex rounded-md bg-gray-500 hover:bg-gray-700 px-6 py-2.5 text-xs font-medium uppercase text-white shadow-md focus:outline-none dark:shadow-black/30 dark:hover:shadow-gray-950 dark:focus:shadow-gray-950 dark:active:shadow-gray-950
+    }
+
+    .box {
+        @apply relative flex flex-col bg-white dark:bg-gray-600 rounded-md border dark:border-gray-700;
+    }
+
+    .box-header {
+        @apply flex justify-between border-b bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:text-white;
+    }
+
+    .list-item {
+        @apply px-3 py-4 mt-0 border-dashed border-b border-gray-200 hover:bg-indigo-50/50 dark:hover:bg-gray-800/70 text-gray-800 dark:text-white dark:border-gray-500 last:border-0;
     }
 }

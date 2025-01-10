@@ -25,7 +25,8 @@ BEGIN
                             ELSE json_build_object(
                                     'id', sp.id,
                                     'slug', sp.slug,
-                                    'short_name', sp.short_name
+                                    'short_name', sp.short_name,
+                                    'picture', a.name
                                  ) END),
             'order', (CASE
                           WHEN mo.id IS NULL THEN NULL
@@ -37,6 +38,8 @@ BEGIN
     INTO get_messages
     FROM store_message sm
              LEFT JOIN store_product sp ON sp.id = sm.product_id
+             LEFT JOIN store_product_attach spa ON sp.id = spa.product_id
+             LEFT JOIN attach a ON a.id = spa.attach_id
              LEFT JOIN store_orders mo ON mo.id = sm.orders_id
              LEFT JOIN store_customer sc ON sc.id = sm.customer_id
     WHERE sm.store_id = get_messages.store_id
