@@ -12,11 +12,10 @@ const entry = document.getElementById('file-upload'),
     toastSuccess = document.getElementById('toast-success'),
     toastDanger = document.getElementById('toast-danger'),
     uploadedArea = document.querySelector('.uploaded-area'),
-    table = document.getElementById('import-table')
-        .getElementsByTagName('tbody')[0];
+    imports = document.getElementById('imports');
 
-let collection = table.getElementsByClassName('remove');
-let sync = table.getElementsByClassName('sync');
+let drops = imports.querySelectorAll('.remove');
+let sync = imports.querySelectorAll('.sync');
 let allowed = entry.getAttribute('accept').split(',');
 let xhr = new XMLHttpRequest();
 const formData = new FormData();
@@ -113,8 +112,8 @@ upload.addEventListener('click', () => {
     }
 });
 
-const prune = (collection) => {
-    [...collection].forEach((el) => {
+const prune = (drops) => {
+    [...drops].forEach((el) => {
         el.addEventListener('click', e => {
             e.preventDefault();
             Swal.fire({
@@ -130,7 +129,7 @@ const prune = (collection) => {
                     await fetch(el.dataset.url, {
                         method: 'POST',
                     }).then((res) => {
-                        el.closest('tr').remove();
+                        el.closest('li').remove();
                     });
                 }
             });
@@ -153,4 +152,4 @@ const displayPreview = file => {
     };
 }
 
-prune(collection);
+prune(drops);
