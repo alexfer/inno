@@ -5,7 +5,7 @@
 {% block title_content %}{{ _title_extend }}{% endblock %}
 
 {% block content %}
-    <div class="relative box">
+    <div class="box">
         <ul class="flex flex-col">
             {% for message in messages %}
                 <li class="list-item cursor-default">
@@ -36,7 +36,8 @@
                                     <div class="tooltip-arrow" data-popper-arrow=""></div>
                                 </div>
                             {% elseif message.order is not null %}
-                                <a data-tooltip-target="tooltip-{{ message.id }}" href="{{ path('app_dashboard_market_place_order_details_market', {store: message.store, number: message.order.number }) }}"
+                                <a data-tooltip-target="tooltip-{{ message.id }}"
+                                   href="{{ path('app_dashboard_market_place_order_details_market', {store: message.store, number: message.order.number }) }}"
                                    class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">
                                     <svg class="h-10 w-10" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                          stroke="currentColor" fill="none" stroke-linecap="round"
