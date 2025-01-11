@@ -38,6 +38,11 @@
             </div>
         </div>
     {% endfor %}
+        {% if stores|length == 0 %}
+            <div class="no-results !mx-0">
+                <div>{{ 'table.footer.not_found'|trans }}</div>
+            </div>
+        {% endif %}
     </div>
     <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
 {% endblock %}

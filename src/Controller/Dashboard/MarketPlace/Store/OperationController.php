@@ -101,6 +101,7 @@ class OperationController extends AbstractController
 
         return $this->render('dashboard/content/market_place/operation/export.html.twig', [
             'items' => $operation->fetch($store),
+            'products' => $store->getProducts()->count(),
             'store' => $store,
             'formats' => EnumOperation::cases(),
             'options' => $operation->metadata(),

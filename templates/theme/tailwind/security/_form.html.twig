@@ -23,7 +23,7 @@
         <input type="hidden" name="_target_path" value="{{ path('app_dashboard') }}"/>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         {{ form_widget(form.login, { label: 'form.action.login', attr: {
-            class: 'inline-block rounded bg-red-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30'
+            class: 'inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30'
         } }) }}
     </div>
     <div class="relative text-left pt-2">
@@ -44,7 +44,7 @@
 </div>
 <div class="block mx-auto w-48">
     <a role="button" href="{{ path('connect_google_start') }}"
-       class="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+       class="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition dark:border-gray-500 duration-150 dark:text-white dark:bg-gray-700">
         <img class="w-6 h-6" src="{{ asset('img/Google-color.svg') }}" loading="lazy" alt="google">
         <span class="text-nowrap">{{ 'login.with.google'|trans }}</span>
     </a>

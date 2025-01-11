@@ -3,7 +3,7 @@
 
                                     </svg>' %}
 
-<nav class="border-gray-200 px-4 lg:px-6 py-2.5 bg-red-600 dark:bg-black">
+<nav class="border-gray-200 px-4 lg:px-6 py-2.5 bg-red-600 dark:bg-gray-800">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <a href="{{ path('app_index') }}" class="flex items-center text-white">
             <svg class="h-8 mr-3 sm:h-12" xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@
                     </div>
                 </a>
                 <div id="account-dropdown" class="absolute z-10 hidden">
-                    <ul class="w-48 min-w-max list-none space-y-1 overflow-hidden p-2 rounded-md border-none bg-white bg-clip-padding text-left text-base shadow-xl data-[twe-dropdown-show]:block dark:bg-surface-dark"
+                    <ul class="w-48 min-w-max list-none space-y-1 overflow-hidden p-2 dark:bg-gray-700 rounded-md border-none bg-white bg-clip-padding text-left text-base shadow-xl data-[twe-dropdown-show]:block dark:bg-surface-dark"
                         aria-labelledby="account"
                         data-twe-dropdown-menu-ref>
                         {% if not app.user %}
