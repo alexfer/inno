@@ -143,6 +143,6 @@
     }
 
     .list-item {
-        @apply px-3 py-4 mt-0 border-dashed border-b border-gray-200 hover:bg-indigo-50/50 dark:hover:bg-gray-800/70 text-gray-800 dark:text-white dark:border-gray-500 last:border-0;
+        @apply px-3 py-4 mt-0 border-dashed border-b border-gray-200 opacity-75 z-10 transition-opacity duration-300 hover:opacity-100 text-gray-800 dark:text-white dark:border-gray-500 last:border-0 odd:bg-indigo-50 even:bg-slate-50 dark:odd:bg-gray-700 dark:even:bg-slate-700;
     }
 }
