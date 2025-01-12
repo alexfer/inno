@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const elements = {
-        uploadInput: document.querySelector('input[type="file"]'),
+        uploadInput: document.querySelector('input[id="picture"]'),
         confirmDelete: document.getElementsByClassName('confirm-delete'),
         confirmChange: document.getElementsByClassName('confirm-change'),
         toastSuccess: document.getElementById('toast-success'),

@@ -11,17 +11,17 @@
 {% block content %}
     {% set _message_seccess = app.flashes('success') %}
     {% set _message_danger = app.flashes('danger') %}
-    <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
+    <div class="form-box">
         {{ form_start(form, {attr: {autocomplete: 'off', novalidate: ''}}) }}
         <div class="block mb-3">
             {{ form_label(form.name, 'label.form.manufacturer_name', {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(form.name, {attr: {class: 'input-widget', placeholder: 'label.form.manufacturer_name'}}) }}
-            <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.name) }}</span>
+            <span class="input-wrong">{{ form_errors(form.name) }}</span>
         </div>
         <div class="block mb-3">
             {{ form_label(form.description, 'label.form.description', {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(form.description, {attr: {class: 'input-widget', rows: 4, placeholder: 'label.form.description'}}) }}
-            <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.description) }}</span>
+            <span class="input-wrong">{{ form_errors(form.description) }}</span>
         </div>
         <input type="hidden" name="flash-success" value="{{ _message_seccess[0]|default([]|json_encode) }}">
         <input type="hidden" name="flash-danger" value="{{ _message_danger[0]|default([]|json_encode) }}">

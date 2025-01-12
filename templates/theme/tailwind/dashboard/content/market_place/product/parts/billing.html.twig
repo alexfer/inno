@@ -1,26 +1,26 @@
-<div class="flex flex-col mt-4 px-4">
+<div class="flex flex-col mt-4">
     <div class="grid grid-cols-2 gap-4">
         <div class="relative mb-3">
             {{ form_label(form.quantity, 'label.form.quantity', {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(form.quantity, {attr: {class: 'input-widget', placeholder: '0'}}) }}
-            <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.quantity) }}</span>
+            <span class="input-wrong">{{ form_errors(form.quantity) }}</span>
         </div>
         <div class="relative mb-3">
             {{ form_label(form.cost, 'label.form.cost', {label_attr: {class: 'inline-block text-sm font-medium text-gray-900 dark:text-white'}}) }}
             {{ form_widget(form.cost, {attr: {class: 'input-widget', placeholder: '0.00'}}) }}
-            <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.cost) }}</span>
+            <span class="input-wrong">{{ form_errors(form.cost) }}</span>
         </div>
     </div>
     <div class="grid grid-cols-2 gap-4">
         <div class="relative mb-3">
             {{ form_label(form.pckg_quantity, 'label.form.pckg_quantity', {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(form.pckg_quantity, {attr: {class: 'input-widget', placeholder: '0'}}) }}
-            <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.pckg_quantity) }}</span>
+            <span class="input-wrong">{{ form_errors(form.pckg_quantity) }}</span>
         </div>
         <div class="relative mb-3">
             {{ form_label(form.sku, 'label.form.sku', {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(form.sku, {attr: {class: 'input-widget', placeholder: 'label.form.sku'}}) }}
-            <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.sku) }}</span>
+            <span class="input-wrong">{{ form_errors(form.sku) }}</span>
         </div>
     </div>
     <div class="grid grid-cols-2 gap-4">

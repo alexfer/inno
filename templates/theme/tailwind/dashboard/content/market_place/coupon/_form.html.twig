@@ -10,75 +10,68 @@
 
 {% block content %}
     {% set _message = app.flashes('success') %}
-    <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
-        {{ form_start(form, {attr: {class: 'group', novalidate: 'novalidate'}}) }}
+    <div class="form-box">
+        {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
         <div class="grid grid-cols-2 gap-4">
             <div class="block mb-3">
                 {{ form_label(form.name, 'label.form.coupon_name', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: 'label.form.coupon_name'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.name.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.name) }}</span>
+                {{ form_widget(form.name, {attr: {class: 'input-widget', placeholder: 'label.form.coupon_name'}}) }}
+                <span class="input-wrong">{{ form_errors(form.name) }}</span>
             </div>
             <div class="block mb-3">
                 {{ form_label(form.available, 'label.form.available', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.available, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.available.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500 ">{{ form_errors(form.available) }}</span>
+                {{ form_widget(form.available, {attr: {class: 'input-widget'}}) }}
+                <span class="input-wrong ">{{ form_errors(form.available) }}</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div class="block mb-3">
                 {{ form_label(form.promotionText, 'label.form.promotion_text', {label_attr: {class: 'form-label'}}) }}
                 {{ form_widget(form.promotionText, {attr: {class: 'input-widget', placeholder: 'label.form.promotion_text'}}) }}
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.promotionText) }}</span>
+                <span class="input-wrong">{{ form_errors(form.promotionText) }}</span>
             </div>
             <div class="block mb-3">
                 {{ form_label(form.type, 'label.form.type', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.type, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: 'label.form.type'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.order_limit.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.type) }}</span>
+                {{ form_widget(form.type, {attr: {class: 'input-widget', placeholder: 'label.form.type'}}) }}
+                <span class="input-wrong">{{ form_errors(form.type) }}</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <div class="block mb-3">
-                {{ form_label(form.maxUsage, 'label.form.max_usage', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.maxUsage, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: 'label.form.max_usage'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.max_usage.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.maxUsage) }}</span>
+            <div class="block mb-0">
+{#                {{ form_label(form.maxUsage, 'label.form.max_usage', {label_attr: {class: 'form-label'}}) }}#}
+                {{ form_widget(form.maxUsage, {attr: {class: 'input-widget', placeholder: 'label.form.max_usage'}}) }}
+                <span class="input-wrong">{{ form_errors(form.maxUsage) }}</span>
             </div>
-            <div class="block mb-3">
-                {{ form_label(form.orderLimit, 'label.form.order_limit', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.orderLimit, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: 'label.form.order_limit'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.order_limit.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.orderLimit) }}</span>
+            <div class="block mb-0">
+{#                {{ form_label(form.orderLimit, 'label.form.order_limit', {label_attr: {class: 'form-label'}}) }}#}
+                {{ form_widget(form.orderLimit, {attr: {class: 'input-widget', placeholder: 'label.form.order_limit'}}) }}
+                <span class="input-wrong">{{ form_errors(form.orderLimit) }}</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div class="block mb-3">
                 {{ form_label(form.startedAt, 'label.form.startedAt', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.startedAt, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: 'label.form.startedAt'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.date.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.startedAt) }}</span>
+                {{ form_widget(form.startedAt, {attr: {class: 'input-widget', placeholder: 'label.form.startedAt'}}) }}
+                <span class="input-wrong">{{ form_errors(form.startedAt) }}</span>
             </div>
             <div class="block mb-3">
                 {{ form_label(form.expiredAt, 'label.form.expiredAt', {label_attr: {class: 'form-label'}}) }}
-                {{ form_widget(form.expiredAt, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: 'label.form.expiredAt'}}) }}
-                <span class="mt-0.5 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.date.invalid'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.expiredAt) }}</span>
+                {{ form_widget(form.expiredAt, {attr: {class: 'input-widget', placeholder: 'label.form.expiredAt'}}) }}
+                <span class="input-wrong">{{ form_errors(form.expiredAt) }}</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <div class="flex mb-3 items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+            <div class="flex mb-3 items-center ps-4 border border-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
                 <input {% if form.discount.vars.data is not null %}checked{% endif %} id="coupon-discount" type="radio"
                        value="coupon[discount]" name="discount"
-                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600">
                 <label for="coupon-discount"
                        class="w-full cursor-pointer py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'label.form.discount'|trans }}</label>
             </div>
-            <div class="flex mb-3 items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+            <div class="flex mb-3 items-center ps-4 border border-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700  dark:border-gray-700">
                 <input {% if form.price.vars.data is not null %}checked{% endif %} id="coupon-price" type="radio"
                        value="coupon[price]" name="discount"
-                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:indigo-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600">
                 <label for="coupon-price"
                        class="w-full cursor-pointer py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'label.form.price.help'|trans }}</label>
             </div>
@@ -90,19 +83,19 @@
                 <div class="relative text-center">
                     <span class="px-1.5 py-1.5 bg-gray-200 rounded-md text-gray-500 discount-output mt-2 mb-5 font-light"></span>
                 </div>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.discount) }}</span>
+                <span class="input-wrong">{{ form_errors(form.discount) }}</span>
             </div>
             <div class="block mb-3">
-                {{ form_label(form.price, 'label.form.price', {label_attr: {class: 'inline-block text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                {{ form_widget(form.price, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer input-widget', placeholder: '0', disabled: form.price.vars.data is null ? 'disabled' : false}}) }}
+                {{ form_label(form.price, 'label.form.price', {label_attr: {class: 'form-label'}}) }}
+                {{ form_widget(form.price, {attr: {class: 'input-widget', placeholder: '0', disabled: form.price.vars.data is null ? 'disabled' : false}}) }}
                 <span class="text-xs text-gray-600 mt-0.5">{{ 'label.form.price.help'|trans }}</span>
-                <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.price) }}</span>
+                <span class="input-wrong">{{ form_errors(form.price) }}</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
             {% for field in form.event.children %}
-                <div class="flex mb-3 items-center ps-4 hover:bg-gray-50 checked:bg-gray-50 border border-gray-200 rounded dark:border-gray-700">
-                    {{ form_widget(field, {attr: {class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'}}) }}
+                <div class="flex mb-3 items-center ps-4 hover:bg-gray-50 dark:hover:bg-gray-700 checked:bg-gray-50 border border-gray-200 rounded-md dark:border-gray-700">
+                    {{ form_widget(field, {attr: {class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600'}}) }}
                     {{ form_label(field, field.vars.label, {label_attr: {class: 'w-full cursor-pointer py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'}}) }}
                 </div>
             {% endfor %}
@@ -117,13 +110,13 @@
         {{ form_end(form) }}
     </div>
     {% if form.vars.data.id %}
-        <h2 class="text-xl md:text-2xl pl-2 mt-4 text-red-400 font-semibold mb-2 dark:bg-gray-600">{{ 'title.dashboard.coupons'|trans }}</h2>
+        <h2 class="text-lg md:text-2xl pl-2 mt-4 text-red-400 font-medium mb-2 dark:bg-gray-600">{{ 'title.dashboard.coupons'|trans }}</h2>
         <div id="accordion-collapse"
              data-url="{{ path('app_dashboard_market_place_coupon_codes', {store: app.request.get('store'), id: form.vars.data.id,  type: form.vars.data.type}) }}"
              data-accordion="collapse">
             <h2 id="accordion-collapse-heading">
                 <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        class="flex items-center justify-between w-full p-5 font-medium text-gray-500 border border-gray-200 rounded-t-lg focus:ring-1 dark:bg-gray-700 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                         data-accordion-target="#accordion-collapse-body" aria-expanded="false"
                         aria-controls="accordion-collapse-body">
                     <span>{{ 'Available coupons'|trans }}</span>
@@ -135,7 +128,7 @@
                 </button>
             </h2>
             <div id="accordion-collapse-body" class="hidden" aria-labelledby="accordion-collapse-heading">
-                <div class="p-5 border border-gray-200 dark:border-gray-700">
+                <div class="p-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700">
                     <ul id="codes" class="w-full space-y-3 text-gray-500 dark:text-gray-400"></ul>
                 </div>
             </div>
@@ -162,7 +155,7 @@
                         if (data.codes && data.codes.length) {
                             [...data.codes].forEach((el) => {
                                 let li = document.createElement('li');
-                                li.classList.add('inline-block', 'w-36', 'h-12', 'shadow-md', 'bg-gray-50', 'border', 'border-gray-500', 'p-3', 'text-center', 'rounded-md', 'mx-2');
+                                li.classList.add('coupon-code-block');
                                 li.textContent = el.code
                                 ul.append(li);
                             });

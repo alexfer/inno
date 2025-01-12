@@ -13,13 +13,15 @@
         </div>
     {% endif %}
     <div class="relative">
-        <div class="check-all">
-            <label class="relative flex ps-0.5 pe-2.5 py-1.5 items-start rounded-full cursor-pointer" for="any">
-                <input type="checkbox"
-                       class="mt-1 checkbox-teal"
-                       id="any"/>
-                <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
-            </label>
+        <div class="flex flex-row">
+            <div class="check-all">
+                <label class="relative flex ps-0.5 pe-2.5 py-1.5 items-start rounded-full cursor-pointer" for="any">
+                    <input type="checkbox"
+                           class="mt-1 checkbox-teal"
+                           id="any"/>
+                    <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
+                </label>
+            </div>
         </div>
         <form id="products" name="products" method="post" autocomplete="off">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3">
@@ -137,48 +139,4 @@
             } %}
         </div>
     {% endif %}
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            // open
-            const burger = document.querySelectorAll('.navbar-burger');
-            const menu = document.querySelectorAll('.navbar-menu');
-
-            if (burger.length && menu.length) {
-                for (let i = 0; i < burger.length; i++) {
-                    burger[i].addEventListener('click', function () {
-                        for (let j = 0; j < menu.length; j++) {
-                            menu[j].classList.toggle('hidden');
-                        }
-                    });
-                }
-            }
-
-            // close
-            const close = document.querySelectorAll('.navbar-close');
-            const backdrop = document.querySelectorAll('.navbar-backdrop');
-
-            if (close.length) {
-                for (let i = 0; i < close.length; i++) {
-                    close[i].addEventListener('click', function () {
-                        for (let j = 0; j < menu.length; j++) {
-                            menu[j].classList.toggle('hidden');
-                        }
-                    });
-                }
-            }
-
-            if (backdrop.length) {
-                for (let i = 0; i < backdrop.length; i++) {
-                    backdrop[i].addEventListener('click', function () {
-                        for (let j = 0; j < menu.length; j++) {
-                            menu[j].classList.toggle('hidden');
-                        }
-                    });
-                }
-            }
-        });
-    </script>
 {% endblock %}

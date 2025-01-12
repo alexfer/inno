@@ -1,11 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+    --bg-body: #F0F1F7
+}
+
 body {
     font-size: 0.85rem;
     font-weight: 200;
     line-height: 1.5;
     font-family: "Montserrat", serif;
+    background-color: var(--bg-body);
+}
+
+.bg-body {
+    background-color: var(--bg-body);
 }
 
 .swal2-popup {

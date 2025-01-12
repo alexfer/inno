@@ -104,7 +104,7 @@
                 <img class="h-auto max-w-xs shadow-xl dark:shadow-gray-800 rounded"
                      src="{{ asset(_picture) | imagine_filter('user_thumb') }}" alt="...">
                 <div id="overlay"
-                     class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-red-700 bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-40"></div>
+                     class="overlay"></div>
                 <div class="absolute bottom-0 right-0 bg-opacity-60 bg-white block w-full justify-end"
                      data-id="{{ picture.id }}">
                     {% if app.user.attach is not null and app.user.attach.id != picture.id %}

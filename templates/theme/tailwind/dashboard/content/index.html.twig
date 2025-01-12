@@ -21,12 +21,12 @@
     <h4 class="my-5 ms-2 text-2xl text-gray-500 dark:text-gray-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
     {% if store %}
         {% if is_granted('ROLE_ADMIN') %}
-            <div class="grid grid-cols-1 gap-x-3 mb-5">
-                <div class="caption">
+            <div class="grid grid-cols-1 gap-x-3">
+                <div class="caption bg-body">
                     {{ 'table.header.stores'|trans }}
                     <p>{{ 'table.caption.shops'|trans({limit: limit}) }}</p>
                 </div>
-                <div class="block w-full px-2.5 py-2">
+                <div class="block w-full py-2">
                     {% for store in stores %}
                         <div id="el-{{ store.id }}" class="grid-loop-cols-4 {{ store.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
                             <div class="ps-2.5 p-0 md:py-1.5">
@@ -80,9 +80,10 @@
                 </div>
             </div>
         {% endif %}
-        <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-3">
+        <hr>
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
             <div class="relative">
-                <div class="caption">
+                <div class="caption bg-body">
                     {{ 'table.header.customers'|trans }}
                     <p>{{ 'table.caption.customers'|trans }}</p>
                 </div>
@@ -122,7 +123,7 @@
                 {% endfor %}
             </div>
             <div class="relative">
-                <div class="caption">
+                <div class="caption bg-body">
                     {{ 'table.header.products'|trans }}
                     <p>{{ 'table.caption.products'|trans({store: store.name, path: path('app_dashboard_market_place_market_product', {store: store.id})})|raw }}</p>
                 </div>
@@ -188,10 +189,10 @@
                 {% endfor %}
             </div>
         </div>
-        <hr class="h-px mx-3 my-4 bg-gray-100 border-0 dark:bg-gray-700">
+        <hr>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="relative">
-                <div class="caption">
+                <div class="caption bg-body">
                     {{ 'table.header.messages'|trans }}
                     <p>{{ 'table.caption.messages'|trans({path: '#'})|raw }}</p>
                 </div>
@@ -231,9 +232,9 @@
                 {% endfor %}
             </div>
             <div class="relative">
-                <div class="px-5 text-lg font-semibold text-gray-900 bg-white dark:text-white dark:bg-gray-600">
+                <div class="caption  bg-body">
                     {{ 'table.header.orders'|trans }}
-                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{ 'table.caption.orders'|trans({path: path('app_dashboard_market_place_order_store_current', {store: store.id})})|raw }}</p>
+                    <p>{{ 'table.caption.orders'|trans({path: path('app_dashboard_market_place_order_store_current', {store: store.id})})|raw }}</p>
                 </div>
                 {% for order in orders %}
                     <div class="grid-loop-cols-3">
@@ -353,11 +354,11 @@
                 </div>
             </div>
         {% endif %}
-        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+        <hr>
     {% endif %}
     <div class="grid grid-cols-1 gap-3">
         <div class="relative">
-            <div class="caption">
+            <div class="caption bg-body">
                 {{ 'title.blogs'|trans }}
                 <p>{{ 'table.caption.blogs'|trans({path: path('app_dashboard_blog'), create: path('app_dashboard_create_blog')})|raw }}</p>
             </div>

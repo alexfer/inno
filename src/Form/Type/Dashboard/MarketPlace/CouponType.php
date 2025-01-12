@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Inno\Form\Type\Dashboard\MarketPlace;
 
@@ -9,6 +9,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{ChoiceType,
     DateTimeType,
+    HiddenType,
     NumberType,
     RangeType,
     SubmitType,
@@ -88,7 +89,8 @@ class CouponType extends AbstractType
                     'coupon.choices.shipment' => StoreCoupon::COUPON_SHIPMENT,
                 ],
             ])
-            ->add('orderLimit', NumberType::class, [
+            ->add('orderLimit', HiddenType::class, [
+                /*
                 'label' => 'label.form.order_limit',
                 'html5' => true,
                 'constraints' => [
@@ -99,8 +101,11 @@ class CouponType extends AbstractType
                         'message' => 'form.limit.positive',
                     ]),
                 ],
+                */
+                'data' => 100,
             ])
-            ->add('maxUsage', NumberType::class, [
+            ->add('maxUsage', HiddenType::class, [
+                /*
                 'label' => 'label.form.max_usage',
                 'html5' => true,
                 'constraints' => [
@@ -111,6 +116,8 @@ class CouponType extends AbstractType
                         'message' => 'form.max_usage.positive',
                     ]),
                 ],
+                */
+                'data' => 100,
             ])
             ->add('available', NumberType::class, [
                 'label' => 'label.form.available',
