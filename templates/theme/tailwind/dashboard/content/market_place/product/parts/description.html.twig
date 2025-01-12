@@ -1,20 +1,17 @@
-<div class="flex flex-col mt-4 px-4">
+<div class="flex flex-col mt-4">
     <div class="mb-3">
         {{ form_label(form.short_name, 'label.form.product_short_name', {label_attr: {class: 'form-label'}}) }}
-        {{ form_widget(form.short_name, {attr: {class: 'input-widget', placeholder: 'label.form.product_short_name'}}) }}
-        <div class="text-xs text-gray-600 mt-0.5">{{ 'form.product_short_name.length'|trans }}:
-            <span id="chars">{{ form.short_name.vars.value|length }}</span>. {{ 'store.product.name.allowed'|trans({length: form.short_name.vars.attr.max}) }}
-        </div>
-        <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.short_name) }}</span>
+        {{ form_widget(form.short_name, {attr: {class: 'input-widget', 'data-showcounter': 'true', placeholder: 'label.form.product_short_name'}}) }}
+        <span class="input-wrong">{{ form_errors(form.short_name) }}</span>
     </div>
     <div class="mb-3">
         {{ form_label(form.name, 'label.form.product_name', {label_attr: {class: 'form-label'}}) }}
-        {{ form_widget(form.name, {attr: {class: 'input-widget', placeholder: 'label.form.product_name'}}) }}
-        <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.name) }}</span>
+        {{ form_widget(form.name, {attr: {class: 'input-widget', 'data-showcounter': 'true', placeholder: 'label.form.product_name'}}) }}
+        <span class="input-wrong">{{ form_errors(form.name) }}</span>
     </div>
     <div class="mb-3">
         {{ form_label(form.description, 'label.form.product_description', {label_attr: {class: 'form-label'}}) }}
         {{ form_widget(form.description, {attr: {class: 'input-widget', rows: 6, placeholder: 'label.form.product_description'}}) }}
-        <span class="mt-0.5 block text-sm text-red-500">{{ form_errors(form.description) }}</span>
+        <span class="input-wrong">{{ form_errors(form.description) }}</span>
     </div>
 </div>

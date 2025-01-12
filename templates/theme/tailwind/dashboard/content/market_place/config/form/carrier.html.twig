@@ -41,7 +41,7 @@
                 <div class="max-w-full mx-auto">
                     {{ form_label(carrierForm.logo, 'label.form.store_picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
                     {{ form_widget(carrierForm.logo, {attr: {'data-target': 'carrier', class: 'skip block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'}}) }}
-                    <span id="error-message" class="mt-0.5 block text-sm text-red-500"></span>
+                    <span id="error-message" class="input-wrong"></span>
                 </div>
                 <div class="pt-5">
                     <label for="{{ carrierForm.enabled.vars.id }}"

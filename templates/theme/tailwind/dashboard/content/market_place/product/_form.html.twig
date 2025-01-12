@@ -74,9 +74,9 @@
         </li>
     </ul>
     <div id="product-tab-content"
-         class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
+         class="form-box">
         {% if errors.count %}
-            <div class="flex items-center p-4 my-4 mx-5 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            <div class="alert-danger"
                  role="alert">
                 <div class="ms-3 text-sm font-medium">{{ errors.current.message }}</div>
             </div>
@@ -105,7 +105,7 @@
         <div id="attachments-tab"
              role="tabpanel"
              aria-labelledby="attachments-tab">
-            <div class="mt-4 p-2">
+            <div class="mt-4">
                 {% if app.request.get('id') %}
                     {% set _args = {store: product.store.id, id: product.id} %}
                     {% include 'dashboard/content/form/attachment.html.twig' with {
@@ -118,7 +118,7 @@
                         'filter': 'product_preview'
                     } %}
                 {% else %}
-                    <div class="bg-yellow-50 border border-yellow-300 shadow-sm shadow-yellow-500 rounded-lg max-w-2xl mx-auto text-yellow-900 py-5 mb-5">
+                    <div class="bg-yellow-50 border border-yellow-300 shadow-sm  rounded-lg max-w-2xl mx-auto text-yellow-900 py-5 mb-5">
                         <div class="text-center">{{ 'product.attachments.available'|trans }}</div>
                     </div>
                 {% endif %}
@@ -146,19 +146,14 @@
     {{ parent() }}
     <script src="{{ asset('suneditor/suneditor.min.js') }}"></script>
     <script type="text/javascript">
-        let short_name = document.getElementById('product_short_name');
-        let chars = document.getElementById('chars');
-
-        short_name.onkeyup = function () {
-            chars.innerHTML = short_name.value.length;
-        }
         const options = {
             height: '300',
+            width: '100%',
             plugins: ['undo', 'redo', 'formatBlock', 'paragraphStyle',
                 'blockquote', 'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
                 'fontColor', 'hiliteColor', 'textStyle', 'removeFormat', 'outdent', 'indent',
                 'align', 'horizontalRule', 'list', 'lineHeight', 'fullScreen', 'showBlocks', 'codeView',
-                'table', 'link', 'image', 'video', 'audio'],
+                'table', 'link'],
             buttonList: [
                 ['undo', 'redo'],
                 ['formatBlock'],
@@ -168,7 +163,7 @@
                 ['removeFormat'],
                 ['outdent', 'indent'],
                 ['align', 'horizontalRule', 'list', 'lineHeight'],
-                ['table', 'link', 'image', 'video', 'audio'],
+                ['table', 'link'],
                 /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
                 ['fullScreen', 'showBlocks', 'codeView'],
             ]

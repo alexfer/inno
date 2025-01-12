@@ -1,4 +1,4 @@
-<nav class="relative py-1.5 pe-1.5 rounded mb-2 flex justify-between items-start bg-gray-100 dark:bg-gray-600">
+<nav class="relative py-1.5 pe-1.5 lg:rounded-md lg:shadow-sm mb-2 flex justify-between items-start bg-transparent lg:bg-white dark:bg-gray-700 lg:dark:shadow-lg">
     <div class="lg:hidden">
         <button class="navbar-burger h-4 absolute end-0 w-full">
             <svg class="flex ml-auto h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +112,7 @@
                 </li>
                 {% if inject is defined %}
                     <li class="mb-1">
-                        <a class="nav-link-mobile"
+                        <a class="nav-link-mobile-extra"
                            href="{{ path }}">{{ name }}</a>
                     </li>
                 {% endif %}

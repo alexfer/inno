@@ -24,15 +24,15 @@
             {{ error }}
         </div>
     {% endif %}
-    <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
+    <div class="form-box">
         <div class="block mb-3">
             {{ form_label(form.title, 'label.form.title', {label_attr: {class: 'form-label'}}) }}
-            {{ form_widget(form.title, {attr: {class: 'input-widget', placeholder: 'label.form.title'}}) }}
+            {{ form_widget(form.title, {attr: {class: 'input-widget', 'data-showcounter': 'true', placeholder: 'label.form.title'}}) }}
             <small class="input-wrong">{{ error ? error : form_errors(form.title) }}</small>
         </div>
         <div class="block mb-3">
             {{ form_label(form.short_content, 'label.form.short_content', {label_attr: {class: 'form-label'}}) }}
-            {{ form_widget(form.short_content, {attr: {class: 'resize-none input-widget', rows: 3, placeholder: 'label.form.short_content'}}) }}
+            {{ form_widget(form.short_content, {attr: {class: 'resize-none input-widget', 'data-showcounter': 'true', rows: 3, placeholder: 'label.form.short_content'}}) }}
             <small class="input-wrong">{{ form_errors(form.short_content) }}</small>
         </div>
         {% include 'dashboard/content/form/category.html.twig' with {'categories': categories, 'collection': form.vars.data.entryCategories} %}
@@ -65,6 +65,7 @@
         </div>
     </div>
     {{ form_end(form) }}
+    {% include 'layouts/confirmation/delete.html.twig' %}
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -76,6 +77,7 @@
     <script type="text/javascript">
         const options = {
             height: '300',
+            width: '100%',
             plugins: ['undo', 'redo', 'formatBlock', 'paragraphStyle',
                 'blockquote', 'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
                 'fontColor', 'hiliteColor', 'textStyle', 'removeFormat', 'outdent', 'indent',

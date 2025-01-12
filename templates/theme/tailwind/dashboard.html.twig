@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-32x32.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 </head>
-<body class="dark:bg-gray-600 bg-gray-50">
+<body class="dark:bg-gray-600 bg-body">
 <div class="h-screen" id="key" data-id="{{ app.user.id }}" data-hash="{{ app.user.email|crypto|base64encode }}">
     {{ include('dashboard/sidebar.html.twig') }}
     <div class="lg:ml-64">
@@ -73,9 +73,9 @@
             {% block body %}{% endblock %}
         </div>
     </div>
-    <footer class="h-12 sticky z-10 top-[100vh] w-full dark:bg-gray-900 border-t-2 border-gray-200 dark:border-gray-800">
+    <footer class="h-12 sticky z-10 top-[100vh] w-full bg-white dark:bg-gray-900 border-t shadow-sm border-gray-200 dark:border-gray-800">
         <div class="container mx-auto text-gray-800 dark:text-white pt-1">
-            <div class="text-center py-3">
+            <div class="text-center py-3 text-xs md:text-sm">
                 {% set year =  'now' | date('Y') %}
                 {% set build_year = '2023' %}
                 <span>&copy; {{ year == build_year ? build_year : build_year ~ '-' ~ year }} {{ 'site.title'|trans }} - {{ 'text.all_right_reserved'|trans }}</span>

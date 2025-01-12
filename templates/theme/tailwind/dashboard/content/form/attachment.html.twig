@@ -18,14 +18,13 @@
                 {% for key, picture in attachments|reverse|slice(0, 16) %}
                     {% set _picture = 'storage/'~ storage ~'/' ~ id ~ '/' ~ picture.attach.name %}
                     <li class="relative my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
-                        <img class="h-auto max-w-xs shadow-xl dark:shadow-gray-800 rounded"
+                        <img class="h-auto w-full md:max-w-xs rounded-lg bg-white"
                              src="{{ asset(_picture) | imagine_filter(filter) }}" alt="...">
-                        <div id="overlay"
-                             class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-red-700 bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-40"></div>
-                        <div class="absolute bottom-0 right-0 bg-opacity-60 bg-white block w-full justify-end"
+                        <div id="overlay" class="overlay"></div>
+                        <div class="absolute bottom-0 right-0 bg-opacity-60 bg-white dark:bg-gray-700 block w-full justify-end"
                              data-id="{{ picture.attach.id }}">
                             <a href="{{ remove }}"
-                               class="mr-1 my-1 text-indigo-700 hover:text-black/40 confirm-delete float-end">
+                               class="mr-1 my-1 text-red-700 hover:text-red-900/70 hover:animate-bounce confirm-delete float-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                                     <path fill-rule="evenodd" d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z" clip-rule="evenodd" />
                                 </svg>
@@ -36,7 +35,7 @@
                 <li class="relative template my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
                     <img class="h-auto max-w-xs shadow-xl dark:shadow-gray-800 rounded" src="" alt=""/>
                     <div id="overlay"
-                         class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-red-700 bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-40"></div>
+                         class="overlay"></div>
                 </li>
             </ul>
         {% endif %}
