@@ -2,6 +2,8 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store,
     StoreCarrier,
     StoreCarrierStore,
@@ -11,8 +13,6 @@ use Inno\Entity\MarketPlace\{Store,
     StoreSocial};
 use Inno\Form\Type\Dashboard\MarketPlace\StoreType;
 use Inno\Service\FileUploader;
-use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use phpDocumentor\Reflection\DocBlock\Tags\Throws;
@@ -53,7 +53,7 @@ class StoreController extends AbstractController
         $page = $request->query->getInt('page', 1);
 
         if ($page) {
-            $this->offset = self::LIMIT * ($page - 1);
+            $this->offset = (self::LIMIT - 1) * ($page - 1);
         }
 
         $pagination = [];
@@ -64,7 +64,7 @@ class StoreController extends AbstractController
             $pagination = $paginator->paginate(
                 $stores['result'],
                 $page,
-                self::LIMIT
+                self::LIMIT - 1
             );
         }
 
@@ -76,7 +76,6 @@ class StoreController extends AbstractController
     /**
      * @param Request $request
      * @param EntityManagerInterface $em
-     * @param UserInterface $user
      * @return JsonResponse
      * @throws Exception
      */
@@ -84,7 +83,6 @@ class StoreController extends AbstractController
     public function search(
         Request                $request,
         EntityManagerInterface $em,
-        UserInterface          $user,
     ): JsonResponse
     {
         $repository = $em->getRepository(Store::class);
@@ -92,7 +90,7 @@ class StoreController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) {
             $stores = $repository->search($request->get('query'));
         } else {
-            $stores = $repository->searchByOwner($request->get('query'), $user);
+            $stores = $repository->searchByOwner($request->get('query'), $this->getUser());
         }
 
         $result = [];

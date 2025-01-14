@@ -2,16 +2,15 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store, StoreMessage};
 use Inno\Service\MarketPlace\Dashboard\Store\Interface\ServeStoreInterface as StoreInterface;
 use Inno\Service\MarketPlace\Store\Message\Interface\MessageServiceInterface;
 use Inno\Service\MarketPlace\StoreTrait;
-use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/dashboard/market-place/message')]
 class MessageController extends AbstractController
@@ -19,23 +18,19 @@ class MessageController extends AbstractController
     use StoreTrait;
 
     /**
-     * @param UserInterface $user
-     * @param Request $request
      * @param EntityManagerInterface $manager
      * @return Response
      * @throws Exception
      */
     #[Route('', name: 'app_dashboard_market_place_message_stores')]
     public function index(
-        UserInterface          $user,
-        Request                $request,
         EntityManagerInterface $manager,
     ): Response
     {
-        $stores = $manager->getRepository(Store::class)->stores($user);
+        $stores = $manager->getRepository(Store::class)->stores($this->getUser());
         $messages = null;
 
-        if($stores['result']) {
+        if ($stores['result']) {
             $ids = array_column($stores['result'], 'id');
             $messages = $manager->getRepository(StoreMessage::class)->findBy(['store' => $ids, 'owner' => null], ['created_at' => 'DESC'], self::LIMIT, 0);
         }
@@ -48,7 +43,6 @@ class MessageController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param StoreInterface $serveStore
      * @return Response
@@ -57,12 +51,11 @@ class MessageController extends AbstractController
     #[Route('/{store}', name: 'app_dashboard_market_place_message_current')]
     public function current(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         StoreInterface         $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $messages = $em->getRepository(StoreMessage::class)->fetchAll($store, 'low', 0, 20);
 
         $pagination = $this->paginator->paginate(
@@ -78,7 +71,6 @@ class MessageController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreInterface $serveStore
      * @param MessageServiceInterface $processor
      * @param EntityManagerInterface $em
@@ -87,12 +79,12 @@ class MessageController extends AbstractController
     #[Route('/{store}/{id}', name: 'app_dashboard_market_place_message_conversation', methods: ['GET', 'POST'])]
     public function conversation(
         Request                 $request,
-        UserInterface           $user,
         StoreInterface          $serveStore,
         MessageServiceInterface $processor,
         EntityManagerInterface  $em,
     ): Response
     {
+        $user = $this->getUser();
         $store = $this->store($serveStore, $user);
         $repository = $em->getRepository(StoreMessage::class);
 

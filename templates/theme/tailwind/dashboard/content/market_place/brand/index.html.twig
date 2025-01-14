@@ -27,7 +27,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3">
             {% for key, brand in brands %}
                 <div id="el-{{ brand.id }}"
-                     class="p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-gray-950 dark:border-gray-700">
+                     class="p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-75 hover:shadow hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-gray-950 dark:border-gray-700">
                     <div class="absolute end-2">
                         <a href="{{ path('app_dashboard_market_place_edit_brand', {store: brand.store.id, id: brand.id}) }}"
                            class="inline-flex">
@@ -55,7 +55,7 @@
                         <span class="text-xs ms-3 text-nowrap text-gray-500 dark:text-white">{{ brand.storeProductBrands.count ? 'text.cant.delete'|trans : 'text.notused'|trans }}</span>
                     </label>
                     <div class="my-1.5 flex justify-between items-center">
-                        <div class="font-medium text-lg text-indigo-700 dark:text-indigo-300 line-clamp-1">{{ brand.name }}</div>
+                        <a href="{{ path('app_dashboard_market_place_edit_brand', {store: brand.store.id, id: brand.id}) }}" class="font-medium text-lg text-indigo-700 dark:text-indigo-300 line-clamp-1">{{ brand.name }}</a>
                         {% if brand.url %}
                             <a href="{{ brand.url }}" target="_blank" class="text-blue-500 font-medium hover:underline underline-offset-4 line-clamp-1">{{ brand.url }}</a>
                         {% endif %}

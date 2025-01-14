@@ -180,7 +180,6 @@ class ConfigurationController extends AbstractController
         $service = $configuration->take($target);
         $carrier = $media = $paymentGateway = null;
 
-
         if (in_array($target, ['carrier', 'payment_gateway'])) {
             $inputs = $inputs[$target];
         }

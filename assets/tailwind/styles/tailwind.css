@@ -4,7 +4,7 @@
 
 @layer components {
     hr {
-        @apply h-px my-4 mx-28 bg-gray-200 border-0 dark:bg-gray-700;
+        @apply h-px my-2 mx-28 bg-gray-300 border-0 dark:bg-gray-500;
     }
 
     h3 {
@@ -52,7 +52,7 @@
     }
 
     .caption {
-        @apply px-5 mx-3.5 text-lg font-medium text-gray-900 bg-white dark:text-white dark:bg-gray-600;
+        @apply mx-3.5 text-lg font-medium text-gray-900 bg-white dark:text-white dark:bg-gray-600;
     }
 
     .caption p {
@@ -104,7 +104,7 @@
     }
 
     .nav-link-mobile-extra {
-        @apply  block text-xs font-medium bg-indigo-100 hover:bg-indigo-600 hover:text-indigo-50 dark:text-gray-300 dark:hover:text-gray-800 p-3 rounded
+        @apply block text-xs font-medium bg-indigo-100 hover:bg-indigo-600 hover:text-indigo-50 dark:text-gray-300 dark:hover:text-gray-800 p-3 rounded
     }
 
     .check-all {
