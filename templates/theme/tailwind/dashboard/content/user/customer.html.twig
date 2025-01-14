@@ -1,213 +1,230 @@
 {% extends 'dashboard/index.html.twig' %}
 
-{% block title_content %}{{ customer.firstName }} {{ customer.lastName }}{% endblock %}
+{% block title_content %}{{ customer.firstName|capitalize }} {{ customer.lastName|capitalize }}{% endblock %}
 
 {% block content %}
-    <div class="w-full max-w-sm bg-white mx-auto border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="dropdownButton" data-dropdown-toggle="dropdown"
-                    class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <span class="sr-only">{{ 'alert.confirm.delete'|trans }}</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                     viewBox="0 0 16 3">
-                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"></path>
-                </svg>
-            </button>
-            <div id="dropdown"
-                 class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2" aria-labelledby="dropdownButton">
-                    {% if user.deletedAt is null %}
-                        <li>
-                            <a href="{{ path('app_dashboard_secure_user', {id: user.id, tab: app.request.get('tab'), part: 'customer', action: 'lock'}) }}"
-                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ 'user.lock'|trans }}</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{{ path('app_dashboard_secure_user', {id: user.id, tab: app.request.get('tab'), part: 'customer', action: 'unlock'}) }}"
-                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ 'user.unlock'|trans }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img src="{{ asset('img/200x200.png') }}" class="w-24 h-24 mb-3 rounded-full shadow-lg"/>
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ customer.firstName }} {{ customer.lastName }}</h5>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{ customer.email }}</span>
-        </div>
-    </div>
-    <div class="flex flex-col mt-5">
+    <div class="box p-1 md:p-3 lg:p-4 dark:bg-gray-700">
         {% set _tab = app.request.get('tab') %}
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center justify-stretch border-b-1 items-stretch"
-            data-tabs-toggle="#user-tab-content"
-            data-tabs-active-classes="text-gray-950 hover:text-red-600 dark:text-gray-500 dark:hover:text-gray-500 border-red-600 dark:border-red-500"
-            data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
-            role="tablist">
-            <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                        id="summary-tab"
-                        data-tabs-target="#summary"
-                        type="button"
-                        role="tab"
-                        aria-controls="summary"
-                        aria-selected="{{ _tab == 'summary' ? 'true' : 'false' }}">{{ 'user.tab.summary'|trans }}</button>
-            </li>
-            <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                        id="location-tab"
-                        data-tabs-target="#location"
-                        type="button"
-                        role="tab"
-                        aria-controls="location"
-                        aria-selected="{{ _tab == 'location' ? 'true' : 'false' }}">{{ 'user.tab.location'|trans }}</button>
-            </li>
-            <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                        id="security-tab"
-                        data-tabs-target="#security"
-                        type="button"
-                        role="tab"
-                        aria-controls="security"
-                        aria-selected="{{ _tab == 'security' ? 'true' : 'false' }}">{{ 'user.tab.security'|trans }}</button>
-            </li>
-            <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                        id="address-tab"
-                        data-tabs-target="#address"
-                        type="button"
-                        role="tab"
-                        aria-controls="address"
-                        aria-selected="{{ _tab == 'address' ? 'true' : 'false' }}">{{ 'user.tab.address'|trans }}</button>
-            </li>
-        </ul>
-        <div class="pb-5 shadow-lg border border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3"
-             id="user-tab-content">
-            <div id="summary" role="tabpanel" aria-labelledby="summary-tab">
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        {{ 'user.info.first_name'|trans }}
-                    </div>
-                    <div class="w-auto text-gray-600">
-                        {{ customer.firstName }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        {{ 'user.info.last_name'|trans }}
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.lastName }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.phone_number'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.phone|default('n/a') }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.registered'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.createdAt|date(datetime_format) }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.last_login'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.member.lastLoginAt|date(datetime_format) }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.ip_address'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.member.ip|default('0.0.0.0') }}
-                    </div>
-                </div>
-                {% if user.deletedAt is not null %}
-                    <div class="flex flex-row px-4 py-3">
-                        <div class="w-48 font-semibold text-gray-400">
-                            <label>{{ 'user.locked'|trans }}</label>
+        <div class="md:flex">
+            <ul data-tabs-toggle="#user-tab-content"
+                data-tabs-active-classes="tab-list-active-indigo"
+                data-tabs-inactive-classes="tab-list-inactive-indigo"
+                class="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0"
+                role="tablist">
+                <li role="presentation">
+                    <button
+                            id="summary-tab"
+                            data-tabs-target="#summary"
+                            type="button"
+                            role="tab"
+                            aria-controls="summary"
+                            aria-selected="{{ _tab == 'summary' ? 'true' : 'false' }}"
+                            class="tab-list-item-indigo">
+                        {{ 'user.tab.summary'|trans }}</button>
+                </li>
+                <li role="presentation">
+                    <button
+                            id="location-tab"
+                            data-tabs-target="#location"
+                            type="button"
+                            role="tab"
+                            aria-controls="location"
+                            aria-selected="{{ _tab == 'location' ? 'true' : 'false' }}"
+                            class="tab-list-item-indigo">
+                        {{ 'user.tab.location'|trans }}
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button
+                            id="security-tab"
+                            data-tabs-target="#security"
+                            type="button"
+                            role="tab"
+                            aria-controls="security"
+                            aria-selected="{{ _tab == 'security' ? 'true' : 'false' }}"
+                            class="tab-list-item-indigo">
+                        {{ 'user.tab.security'|trans }}
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button
+                            id="address-tab"
+                            data-tabs-target="#address"
+                            type="button"
+                            role="tab"
+                            aria-controls="address"
+                            aria-selected="{{ _tab == 'address' ? 'true' : 'false' }}"
+                            class="tab-list-item-indigo">
+                        {{ 'user.tab.address'|trans }}
+                    </button>
+                </li>
+            </ul>
+            <div id="user-tab-content"
+                 class="flex-grow p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+                <div id="summary" role="tabpanel" aria-labelledby="summary-tab">
+                    <h3>{{ 'user.tab.summary'|trans }}</h3>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            {{ 'user.info.first_name'|trans }}
                         </div>
-                        <div class="w-auto text-gray-500">
-                            {{ user.deletedAt|date(datetime_format) }}
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.firstName }}
                         </div>
                     </div>
-                {% endif %}
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            {{ 'user.info.last_name'|trans }}
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.lastName }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.phone_number'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.phone|default('n/a') }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.registered'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.createdAt|date(datetime_format) }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.last_login'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.member.lastLoginAt|date(datetime_format) }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.ip_address'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.member.ip|default('0.0.0.0') }}
+                        </div>
+                    </div>
+                    {% if user.deletedAt is not null %}
+                        <div class="flex flex-row py-3">
+                            <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                                <label>{{ 'user.locked'|trans }}</label>
+                            </div>
+                            <div class="w-auto text-gray-700 dark:text-gray-200">
+                                {{ user.deletedAt|date(datetime_format) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div id="location" role="tabpanel" aria-labelledby="location-tab">
+                    <h3>{{ 'user.tab.location'|trans }}</h3>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.country'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ country|default('n/a') }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.city'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.storeAddress.city }}
+                        </div>
+                    </div>
+                </div>
+                <div id="security" role="tabpanel" aria-labelledby="security-tab">
+                    <h3>{{ 'user.tab.security'|trans }}</h3>
+                    {% include 'dashboard/content/user/_form.html.twig' %}
+                </div>
+                <div id="address" role="tabpanel" aria-labelledby="address-tab">
+                    <h3>{{ 'user.tab.address'|trans }}</h3>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.country'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ country|default('n/a') }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'user.info.city'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.storeAddress.city }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'label.form.address_line_1'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.storeAddress.line1 }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'label.form.address_line_2'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.storeAddress.line2 }}
+                        </div>
+                    </div>
+                    <div class="flex flex-row py-3">
+                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <label>{{ 'label.form.zip'|trans }}</label>
+                        </div>
+                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                            {{ customer.storeAddress.postal }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="location" role="tabpanel" aria-labelledby="location-tab">
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.country'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ country|default('n/a') }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.city'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.storeAddress.city }}
-                    </div>
-                </div>
-            </div>
-            <div id="security" role="tabpanel" aria-labelledby="security-tab" class="p-5">
-                {% include 'dashboard/content/user/_form.html.twig' %}
-            </div>
-            <div id="address" role="tabpanel" class="text-gray-600 dark:text-gray-100 p-4"
-                 aria-labelledby="address-tab">
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.country'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ country|default('n/a') }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'user.info.city'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.storeAddress.city }}
+            <div class="p-1 md:p-3 lg:p-5">
+                <div class="flex justify-end px-4 pt-4">
+                    <button id="dropdownButton" data-dropdown-toggle="dropdown"
+                            class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-0 focus:outline-none rounded-lg text-sm p-1.5"
+                            type="button">
+                        <span class="sr-only">{{ 'alert.confirm.delete'|trans }}</span>
+                        <svg class="w-4 h-4 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             fill="currentColor"
+                             viewBox="0 0 16 3">
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"></path>
+                        </svg>
+                    </button>
+                    <div id="dropdown"
+                         class="z-10 hidden rounded-lg shadow-lg w-36 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
+                        <ul class="py-1 text-xs md:text-sm font-medium text-indigo-700 dark:text-gray-200"
+                            aria-labelledby="dropdownButton">
+                            {% if user.deletedAt is null %}
+                                <li>
+                                    <a href="{{ path('app_dashboard_secure_user', {id: user.id, tab: app.request.get('tab'), part: 'customer', action: 'lock'}) }}"
+                                       class="d-drop-hover !mx-1">{{ 'user.lock'|trans }}</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{{ path('app_dashboard_secure_user', {id: user.id, tab: app.request.get('tab'), part: 'customer', action: 'unlock'}) }}"
+                                       class="d-drop-hover !mx-1">{{ 'user.unlock'|trans }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
                     </div>
                 </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'label.form.address_line_1'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.storeAddress.line1 }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'label.form.address_line_2'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.storeAddress.line2 }}
-                    </div>
-                </div>
-                <div class="flex flex-row px-4 py-3">
-                    <div class="w-48 font-semibold text-gray-400">
-                        <label>{{ 'label.form.zip'|trans }}</label>
-                    </div>
-                    <div class="w-auto text-gray-500">
-                        {{ customer.storeAddress.postal }}
-                    </div>
+                <div class="flex flex-col items-center pb-10">
+                    <img src="{{ asset('img/200x200.png') }}" class="w-24 h-24 mb-3 rounded-full shadow-lg" alt="">
+                    <h5 class="mb-1 text-xl text-center font-medium text-gray-900 dark:text-white">{{ customer.firstName|capitalize }} {{ customer.lastName|capitalize }}</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ customer.email }}</span>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

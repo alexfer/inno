@@ -6,6 +6,7 @@ use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\User;
 use Inno\Form\Type\User\ChangePasswordProfileType;
 use Doctrine\ORM\EntityManagerInterface;
+use Inno\Service\MarketPlace\StoreTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{Request, Response,};
 use Symfony\Component\Intl\{Countries, Locale,};
@@ -19,6 +20,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserController extends AbstractController
 {
 
+    use StoreTrait;
+
     /**
      * @param Request $request
      * @param EntityManagerInterface $em
@@ -31,10 +34,12 @@ class UserController extends AbstractController
     ): Response
     {
         $query = $request->query->get('search');
-        $users = $em->getRepository(User::class)->fetch($query);
+        $users = $em->getRepository(User::class)->fetch($query, self::LIMIT, $this->offset);
         return $this->render('dashboard/content/user/index.html.twig', [
             'users' => $users['results'],
             'rows' => reset($users['rows'][0]),
+            'pages' => ceil(reset($users['rows'][0]) / self::LIMIT),
+
         ]);
     }
 

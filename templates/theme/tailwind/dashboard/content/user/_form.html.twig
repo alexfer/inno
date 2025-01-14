@@ -4,19 +4,19 @@
 {% if _role == 'customer' %}
     {% set _path = 'app_dashboard_customer_user' %}
 {% endif %}
-{{ form_start(form, {attr: {class: 'm-3 w-2/3 mx-auto', action: path(_path, {id: user.id, tab: 'security'}), novalidate: 'novalidate'}}) }}
-<div class="flex mb-3">
+{{ form_start(form, {attr: {class: 'm-3 w-full lg:w-2/3 mx-auto', action: path(_path, {id: user.id, tab: 'security'}), novalidate: 'novalidate'}}) }}
+<div class="flex flex-col md:flex-row mb-3">
     {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inlin-block w-32 mr-2 pt-3 align-baseline mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-    <div class="w-1/2">
+    <div class="w-full md:w-1/2">
         {{ form_widget(form.plainPassword.children.first, {attr: {class: 'input-widget', placeholder: 'label.form.new_password', autocomplete: 'off'}}) }}
-        <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.first) }}</span>
+        <span class="input-wrong">{{ form_errors(form.plainPassword.children.first) }}</span>
     </div>
 </div>
-<div class="flex mb-3">
+<div class="flex flex-col md:flex-row mb-3">
     {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inlin-block mr-2 pt-3 w-32 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-    <div class="w-1/2">
+    <div class="w-full md:w-1/2">
         {{ form_widget(form.plainPassword.children.second, {attr: {class: 'input-widget', placeholder: 'label.form.repeat_password', autocomplete: 'off'}}) }}
-        <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.second) }}</span>
+        <span class="input-wrong">{{ form_errors(form.plainPassword.children.second) }}</span>
     </div>
 </div>
 <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
