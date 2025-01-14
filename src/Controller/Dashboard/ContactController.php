@@ -71,7 +71,6 @@ class ContactController extends AbstractController
      * @param HandleInterface $handle
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
-     * @param UserInterface $user
      * @return Response
      */
     #[Route('/review/{id}', name: 'app_dashboard_review_contact', methods: ['GET', 'POST'])]
@@ -81,7 +80,6 @@ class ContactController extends AbstractController
         HandleInterface        $handle,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
-        UserInterface          $user,
     ): Response
     {
         if ($request->getMethod() == 'POST') {
@@ -93,7 +91,7 @@ class ContactController extends AbstractController
                 $this->addFlash('error', $error);
             } else {
                 $this->addFlash('success', json_encode(['message' => $translator->trans('message.success.text')]));
-                $handle->answer($contact, $user, $message);
+                $handle->answer($contact, $this->getUser(), $message);
             }
 
             return $this->redirectToRoute('app_dashboard_review_contact', ['id' => $contact->getId()]);

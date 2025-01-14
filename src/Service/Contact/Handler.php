@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment as Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -95,12 +96,12 @@ class Handler implements HandleInterface
         $this->emailNotification->send($args['contact'], $template);
     }
 
-    public function answer(Contact $contact, User $user, string $message): void
+    public function answer(Contact $contact, UserInterface $user, string $message): void
     {
         $answers = $contact->getAnswers();
         $answer = new Answer();
         $answer->setContact($contact)
-            ->setUser($user)
+            ->setUser($this->em->getRepository(User::class)->findOneBy(['id' => $user]))
             ->setMessage($message);
         $answer->getContact()->setAnswers($answers + 1);
         $this->em->persist($answer);

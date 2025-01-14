@@ -2,15 +2,14 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\ORM\{EntityManagerInterface, NonUniqueResultException};
 use Inno\Entity\MarketPlace\StoreManufacturer;
 use Inno\Form\Type\Dashboard\MarketPlace\ManufacturerType;
 use Inno\Service\MarketPlace\Dashboard\Store\Interface\ServeStoreInterface;
 use Inno\Service\MarketPlace\StoreTrait;
-use Doctrine\ORM\{EntityManagerInterface, NonUniqueResultException};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/dashboard/market-place/manufacturer')]
@@ -20,7 +19,6 @@ class ManufacturerController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
      * @return Response
@@ -28,18 +26,17 @@ class ManufacturerController extends AbstractController
     #[Route('/{store}', name: 'app_dashboard_market_place_store_manufacturer')]
     public function index(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $manufacturers = $em->getRepository(StoreManufacturer::class)->manufacturers($store, $request->query->get('search'));
 
         $pagination = $this->paginator->paginate(
             $manufacturers,
             $request->query->getInt('page', 1),
-            self::LIMIT
+            self::LIMIT - 1
         );
 
         return $this->render('dashboard/content/market_place/manufacturer/index.html.twig', [
@@ -50,7 +47,6 @@ class ManufacturerController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @param ServeStoreInterface $serveStore
@@ -60,13 +56,12 @@ class ManufacturerController extends AbstractController
     #[Route('/create/{store}', name: 'app_dashboard_market_place_create_manufacturer', methods: ['GET', 'POST'])]
     public function create(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $manufacturer = new StoreManufacturer();
 
         $form = $this->createForm(ManufacturerType::class, $manufacturer);
@@ -99,7 +94,6 @@ class ManufacturerController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreManufacturer $manufacturer
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
@@ -109,14 +103,13 @@ class ManufacturerController extends AbstractController
     #[Route('/edit/{store}/{id}', name: 'app_dashboard_market_place_edit_manufacturer', methods: ['GET', 'POST'])]
     public function edit(
         Request                $request,
-        UserInterface          $user,
         StoreManufacturer      $manufacturer,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
 
         $form = $this->createForm(ManufacturerType::class, $manufacturer);
         $form->handleRequest($request);
@@ -140,7 +133,6 @@ class ManufacturerController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreManufacturer $manufacturer
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
@@ -149,13 +141,12 @@ class ManufacturerController extends AbstractController
     #[Route('/delete/{store}/{id}', name: 'app_dashboard_delete_manufacturer', methods: ['POST'])]
     public function delete(
         Request                $request,
-        UserInterface          $user,
         StoreManufacturer      $manufacturer,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $token = $request->get('_token');
 
         if (!$token) {
@@ -173,7 +164,6 @@ class ManufacturerController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
      * @param TranslatorInterface $translator
@@ -182,13 +172,12 @@ class ManufacturerController extends AbstractController
     #[Route('/xhr_create/{store}', name: 'app_dashboard_market_place_xhr_create_manufacturer', methods: ['POST'])]
     public function xshCreate(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
         TranslatorInterface    $translator,
     ): JsonResponse
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $requestGetPost = $request->get('manufacturer');
         $responseJson = [];
 

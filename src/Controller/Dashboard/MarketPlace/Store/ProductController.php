@@ -2,6 +2,7 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\{Attach, User};
 use Inno\Entity\MarketPlace\{StoreCoupon, StoreProduct, StoreProductAttach};
 use Inno\Form\Type\Dashboard\MarketPlace\ProductType;
@@ -12,7 +13,6 @@ use Inno\Service\MarketPlace\Dashboard\Product\Interface\ServeProductInterface;
 use Inno\Service\MarketPlace\Dashboard\Store\Interface\ServeStoreInterface;
 use Inno\Service\MarketPlace\StoreTrait;
 use Inno\Service\Validator\Interface\ImageValidatorInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -48,17 +48,17 @@ class ProductController extends AbstractController
         $page = is_numeric($page) ? (int)$page : 1;
 
         if ($page) {
-            $this->offset = self::LIMIT * ($page - 1);
+            $this->offset = (self::LIMIT - 1) * ($page - 1);
         }
 
         $store = $this->store($serveStore, $user);
-        $products = $product->index($store, $request->query->get('search'), $this->offset, self::LIMIT);
+        $products = $product->index($store, $request->query->get('search'), $this->offset, self::LIMIT - 1);
 
         return $this->render('dashboard/content/market_place/product/index.html.twig', [
             'store' => $store,
             'currency' => $serveStore->currency(),
             'rows' => $products['rows'],
-            'pages' => ceil($products['rows'] / self::LIMIT),
+            'pages' => ceil($products['rows'] / (self::LIMIT - 1)),
             'products' => $products['result'],
             'coupons' => $product->coupon($store, StoreCoupon::COUPON_PRODUCT),
         ]);
@@ -90,7 +90,6 @@ class ProductController extends AbstractController
     /**
      * @param Request $request
      * @param StoreProduct $product
-     * @param UserInterface $user
      * @param TranslatorInterface $translator
      * @param ServeProductInterface $serveProduct
      * @param ServeStoreInterface $serveStore
@@ -101,13 +100,12 @@ class ProductController extends AbstractController
     public function edit(
         Request               $request,
         StoreProduct          $product,
-        UserInterface         $user,
         TranslatorInterface   $translator,
         ServeProductInterface $serveProduct,
         ServeStoreInterface   $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $form = $this->createForm(ProductType::class, $product);
         $handle = $serveProduct->supports($form);
 
@@ -132,7 +130,6 @@ class ProductController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param TranslatorInterface $translator
      * @param ServeProductInterface $serveProduct
      * @param ServeStoreInterface $serveStore
@@ -141,12 +138,12 @@ class ProductController extends AbstractController
     #[Route('/create/{store}/{tab}', name: 'app_dashboard_market_place_create_product', methods: ['GET', 'POST'])]
     public function create(
         Request               $request,
-        UserInterface         $user,
         TranslatorInterface   $translator,
         ServeProductInterface $serveProduct,
         ServeStoreInterface   $serveStore,
     ): Response
     {
+        $user = $this->getUser();
         $store = $this->store($serveStore, $user);
         $product = new StoreProduct();
         $requestStore = $request->get('store');
@@ -176,7 +173,6 @@ class ProductController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreProduct $product
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
@@ -186,13 +182,12 @@ class ProductController extends AbstractController
     #[Route('/delete/{store}/{id}', name: 'app_dashboard_delete_product', methods: ['POST'])]
     public function delete(
         Request                $request,
-        UserInterface          $user,
         StoreProduct           $product,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $token = $request->get('_token');
 
         if (!$token) {
@@ -221,13 +216,12 @@ class ProductController extends AbstractController
     #[Route('/restore/{store}/{id}', name: 'app_dashboard_restore_product')]
     public function restore(
         Request                $request,
-        UserInterface          $user,
         StoreProduct           $product,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $product->setDeletedAt(null);
         $em->persist($product);
         $em->flush();

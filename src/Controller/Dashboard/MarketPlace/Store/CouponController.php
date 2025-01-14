@@ -2,12 +2,12 @@
 
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
+use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store, StoreCoupon, StoreCouponCode, StoreProduct};
 use Inno\Form\Type\Dashboard\MarketPlace\CouponType;
 use Inno\Service\MarketPlace\Dashboard\Store\Interface\ServeStoreInterface;
 use Inno\Service\MarketPlace\StoreTrait;
-use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,7 +21,6 @@ class CouponController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @param ServeStoreInterface $serveStore
@@ -31,13 +30,12 @@ class CouponController extends AbstractController
     #[Route('/{store}', name: 'app_dashboard_market_place_product_coupon', methods: ['GET'])]
     public function index(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $limit = $request->query->getInt('limit', 10);
         $offset = $request->query->getInt('offset', 0);
 
@@ -92,7 +90,7 @@ class CouponController extends AbstractController
         $pagination = $this->paginator->paginate(
             $result,
             $request->query->getInt('page', 1),
-            self::LIMIT
+            self::LIMIT - 1
         );
 
         return $this->render('dashboard/content/market_place/coupon/index.html.twig', [
@@ -121,7 +119,7 @@ class CouponController extends AbstractController
 
         foreach ($payload['products'] as $product) {
 
-            if($item = $em->getRepository(StoreProduct::class)->find((int)$product)) {
+            if ($item = $em->getRepository(StoreProduct::class)->find((int)$product)) {
                 $coupon->addProduct($item)->setStore($store);
                 $em->persist($coupon);
             }
@@ -137,7 +135,6 @@ class CouponController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @param ServeStoreInterface $serveStore
@@ -146,13 +143,12 @@ class CouponController extends AbstractController
     #[Route('/create/{store}', name: 'app_dashboard_market_place_create_coupon', methods: ['GET', 'POST'])]
     public function create(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $coupon = new StoreCoupon();
 
         $form = $this->createForm(CouponType::class, $coupon);
@@ -188,7 +184,6 @@ class CouponController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreCoupon $coupon
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
@@ -198,14 +193,13 @@ class CouponController extends AbstractController
     #[Route('/edit/{store}/{id}', name: 'app_dashboard_market_place_edit_coupon', methods: ['GET', 'POST'])]
     public function edit(
         Request                $request,
-        UserInterface          $user,
         StoreCoupon            $coupon,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $form = $this->createForm(CouponType::class, $coupon);
         $form->handleRequest($request);
 

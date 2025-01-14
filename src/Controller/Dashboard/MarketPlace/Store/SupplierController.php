@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locale;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/dashboard/market-place/supplier')]
@@ -22,7 +21,6 @@ class SupplierController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
      * @return Response
@@ -30,18 +28,17 @@ class SupplierController extends AbstractController
     #[Route('/{store}', name: 'app_dashboard_market_place_store_supplier')]
     public function index(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $suppliers = $em->getRepository(StoreSupplier::class)->suppliers($store, $request->query->get('search'));
 
         $pagination = $this->paginator->paginate(
             $suppliers,
             $request->query->getInt('page', 1),
-            self::LIMIT
+            self::LIMIT - 1
         );
 
         return $this->render('dashboard/content/market_place/supplier/index.html.twig', [
@@ -53,7 +50,6 @@ class SupplierController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
      * @param ServeStoreInterface $serveStore
@@ -63,13 +59,12 @@ class SupplierController extends AbstractController
     #[Route('/create/{store}', name: 'app_dashboard_market_place_create_supplier', methods: ['GET', 'POST'])]
     public function create(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $supplier = new StoreSupplier();
 
         $form = $this->createForm(SupplerType::class, $supplier);
@@ -103,7 +98,6 @@ class SupplierController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreSupplier $supplier
      * @param EntityManagerInterface $em
      * @param TranslatorInterface $translator
@@ -113,14 +107,13 @@ class SupplierController extends AbstractController
     #[Route('/edit/{store}/{id}', name: 'app_dashboard_market_place_edit_supplier', methods: ['GET', 'POST'])]
     public function edit(
         Request                $request,
-        UserInterface          $user,
         StoreSupplier          $supplier,
         EntityManagerInterface $em,
         TranslatorInterface    $translator,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
 
         $form = $this->createForm(SupplerType::class, $supplier);
         $form->handleRequest($request);
@@ -144,7 +137,6 @@ class SupplierController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreSupplier $supplier
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
@@ -153,13 +145,12 @@ class SupplierController extends AbstractController
     #[Route('/delete/{store}/{id}', name: 'app_dashboard_delete_supplier', methods: ['POST'])]
     public function delete(
         Request                $request,
-        UserInterface          $user,
         StoreSupplier          $supplier,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
     ): Response
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $token = $request->get('_token');
 
         if (!$token) {
@@ -177,7 +168,6 @@ class SupplierController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
      * @param TranslatorInterface $translator
@@ -186,13 +176,12 @@ class SupplierController extends AbstractController
     #[Route('/xhr-create/{store}', name: 'app_dashboard_market_place_xhr_create_supplier', methods: ['POST'])]
     public function xhrCreate(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         ServeStoreInterface    $serveStore,
         TranslatorInterface    $translator,
     ): JsonResponse
     {
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $requestGetPost = $request->request->all();
         $responseJson = [];
 
@@ -235,19 +224,17 @@ class SupplierController extends AbstractController
     }
 
     /**
-     * @param UserInterface $user
      * @param ServeStoreInterface $serveStore
      * @return JsonResponse
      */
     #[Route('/xhr-load-countries/{store}', name: 'app_dashboard_market_place_xhr_load_countries', methods: ['GET'])]
     public function xhrLoadCounties(
-        UserInterface       $user,
         ServeStoreInterface $serveStore,
     ): JsonResponse
     {
 
         $countries = [
-            'store' => $this->store($serveStore, $user)->getName(),
+            'store' => $this->store($serveStore, $this->getUser())->getName(),
             'countries' => Countries::getNames(Locale::getDefault())
         ];
 
