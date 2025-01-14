@@ -5,38 +5,21 @@
 {% block title_content %}{{ _title_extend }}{% endblock %}
 
 {% block content %}
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-500 uppercase bg-info-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">{{ 'table.header.name'|trans }}</th>
-                <th scope="col" class="px-6 py-3">{{ 'table.header.subject'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.answers'|trans }}</th>
-                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.status'|trans }}</th>
-                <th scope="col" class="px-6 py-3"></th>
-            </tr>
-            </thead>
-            <tbody>
+    <div class="relative">
+        <ul class="flex flex-col">
             {% for entry in entries %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row"
-                        class="px-6 py-3 w-2/5 font-medium text-md-start text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ entry.name }}
-                    </th>
-                    <td class="px-6 py-3">
-                        {% if entry.status == constant('Inno\\Entity\\Contact::STATUS')['trashed'] %}
-                            <del class="text-gray-500">{{ entry.subject }}</del>
-                        {% else %}
-                            <a href="{{ path('app_dashboard_review_contact', {id: entry.id}) }}"
-                               class="text-blue-700 hover:underline dark:text-gray-100">{{ entry.subject }}</a>
-                        {% endif %}
-                    </td>
-                    <td class="px-6 py-3 text-center text-gray-500 dark:text-white">{{ entry.answers }}</td>
-                    <td class="px-6 py-3 text-center">
-                        <a class="text-gray-500 hover:text-green-400"
-                           href="{{ path('app_dashboard_review_contact', {id: entry.id}) }}">{{ entry.status }}</a>
-                    </td>
-                    <td class="px-6 py-3 flex justify-end">
+            <li id="el-{{ entry.id }}" class="list-item cursor-default">
+                <div class="flex items-start">
+                    <a href="{{ path('app_dashboard_review_contact', {id: entry.id}) }}"
+                       class="mt-1 mx-2 capitalize line-clamp-1 font-medium text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300{% if entry.status == constant('Inno\\Entity\\Contact::STATUS')['trashed'] %} line-through{% endif %}">{{ entry.subject }}</a>
+                    <div class="flex-auto">
+                        <div class="flex flex-row mx-auto justify-between items-start max-w-md">
+                            <span class="flex-0 text-xs md:text-sm mx-1 pt-1 md:mx-3 text-nowrap">{{ entry.name }}</span>
+                            <span class="badge-yellow-border">{{ entry.answers }}</span>
+                            <span class="badge-green">{{ entry.status }}</span>
+                        </div>
+                    </div>
+                    <div class="inline-flex mx-1 pt-0.5 md:mx-3 md:pt-1 items-center justify-end">
                         {% if entry.status == constant('Inno\\Entity\\Contact::STATUS')['trashed'] %}
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-white">
                                 <path d="M8.5 4.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 13c.552 0 1.01-.452.9-.994a5.002 5.002 0 0 0-9.802 0c-.109.542.35.994.902.994h8ZM10.75 5.25a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z" />
@@ -50,15 +33,64 @@
                                 </svg>
                             </a>
                         {% endif %}
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5"
-                        class="px-6 py-3 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-            </tbody>
-        </table>
+        </ul>
+{#        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">#}
+{#            <thead class="text-xs text-gray-500 uppercase bg-info-50 dark:bg-gray-700 dark:text-gray-400">#}
+{#            <tr>#}
+{#                <th scope="col" class="px-6 py-3">{{ 'table.header.name'|trans }}</th>#}
+{#                <th scope="col" class="px-6 py-3">{{ 'table.header.subject'|trans }}</th>#}
+{#                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.answers'|trans }}</th>#}
+{#                <th scope="col" class="px-6 py-3 text-center">{{ 'table.header.status'|trans }}</th>#}
+{#                <th scope="col" class="px-6 py-3"></th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for entry in entries %}#}
+{#                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">#}
+{#                    <th scope="row"#}
+{#                        class="px-6 py-3 w-2/5 font-medium text-md-start text-gray-900 whitespace-nowrap dark:text-white">#}
+{#                        {{ entry.name }}#}
+{#                    </th>#}
+{#                    <td class="px-6 py-3">#}
+{#                        {% if entry.status == constant('Inno\\Entity\\Contact::STATUS')['trashed'] %}#}
+{#                            <del class="text-gray-500">{{ entry.subject }}</del>#}
+{#                        {% else %}#}
+{#                            <a href="{{ path('app_dashboard_review_contact', {id: entry.id}) }}"#}
+{#                               class="text-blue-700 hover:underline dark:text-gray-100">{{ entry.subject }}</a>#}
+{#                        {% endif %}#}
+{#                    </td>#}
+{#                    <td class="px-6 py-3 text-center text-gray-500 dark:text-white">{{ entry.answers }}</td>#}
+{#                    <td class="px-6 py-3 text-center">#}
+{#                        <a class="text-gray-500 hover:text-green-400"#}
+{#                           href="{{ path('app_dashboard_review_contact', {id: entry.id}) }}">{{ entry.status }}</a>#}
+{#                    </td>#}
+{#                    <td class="px-6 py-3 flex justify-end">#}
+{#                        {% if entry.status == constant('Inno\\Entity\\Contact::STATUS')['trashed'] %}#}
+{#                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-white">#}
+{#                                <path d="M8.5 4.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 13c.552 0 1.01-.452.9-.994a5.002 5.002 0 0 0-9.802 0c-.109.542.35.994.902.994h8ZM10.75 5.25a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z" />#}
+{#                            </svg>#}
+{#                        {% else %}#}
+{#                            <a role="button" class="text-red-500 hover:text-red-700 delete-entry dark:text-white"#}
+{#                               data-token="{{ csrf_token('delete') }}"#}
+{#                               data-url="{{ url('app_dashboard_delete_contact', {id: entry.id}) }}">#}
+{#                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">#}
+{#                                    <path fill-rule="evenodd" d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z" clip-rule="evenodd" />#}
+{#                                </svg>#}
+{#                            </a>#}
+{#                        {% endif %}#}
+{#                    </td>#}
+{#                </tr>#}
+{#            {% else %}#}
+{#                <tr>#}
+{#                    <td colspan="5"#}
+{#                        class="px-6 py-3 text-center text-gray-700 bg-gray-100 dark:bg-gray-500 dark:text-white">{{ 'table.footer.not_found'|trans }}</td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
     </div>
 {% endblock %}

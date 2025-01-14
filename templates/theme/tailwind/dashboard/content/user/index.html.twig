@@ -6,11 +6,12 @@
 
 {% block content %}
     <div class="box p-1 md:p-3 lg:p-4">
-        <div class="flex items-center justify-between w-full">
+    <div class="flex items-center justify-between w-full">
         <span class="lg:block">
             {% include 'dashboard/content/market_place/navbar/search.html.twig' %}
         </span>
-        <div class="hidden sm:inline-flex text-gray-600 dark:text-gray-100">{{ 'title.dashboard.users'|trans }}: {{ rows }}</div>
+        <div class="hidden sm:inline-flex text-gray-600 dark:text-gray-100">{{ 'title.dashboard.users'|trans }}
+            : {{ rows }}</div>
     </div>
     <div class="relative mt-3">
         <ul class="flex flex-col">
@@ -22,7 +23,8 @@
                 {% endif %}
                 <li class="list-item cursor-default">
                     <div class="flex items-start">
-                        <a class="{{ user.deleted_at is null ? null : 'line-through' }} mt-1 mx-2 capitalize flex-1 line-clamp-1 font-medium text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300" href="{{ path(_path, {id: user.id, tab: 'summary'}) }}">
+                        <a class="{{ user.deleted_at is null ? null : 'line-through' }} mt-1 mx-2 capitalize flex-1 line-clamp-1 font-medium text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300"
+                           href="{{ path(_path, {id: user.id, tab: 'summary'}) }}">
                             {% if user.member_first_name %}
                                 {{ user.member_first_name }} {{ user.member_last_name }}
                             {% elseif user.customer_first_name %}
@@ -30,17 +32,20 @@
                             {% endif %}
                         </a>
                         <div class="flex-grow">
-                            <div class="flex mx-auto justify-between items-start max-w-sm">
-                            <span class="">{{ _role|capitalize }}</span>
-                            <span class="text-xs md:text-sm md:me-3 text-nowrap">{{ user.created_at|date(date_format) }}</span>
+                            <div class="flex mx-auto justify-between items-start max-w-md">
+                                <span class="badge-yellow-border">{{ _role|capitalize }}</span>
+                                <span class="text-xs md:text-sm md:me-3 text-nowrap">{{ user.created_at|date(date_format) }}</span>
                             </div>
                         </div>
                         <div class="inline-flex ms-3 items-center justify-end">
                             <a role="button"
                                class="text-indigo-500 hover:text-indigo-700 dark:text-white hover:bg-gray-100 dark:hover:bg-transparent"
                                href="{{ path(_path, {id: user.id, tab: 'summary'}) }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-5 h-5">
-                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                     class="w-5 h-5">
+                                    <path fill-rule="evenodd"
+                                          d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z"
+                                          clip-rule="evenodd"/>
                                 </svg>
                             </a>
                         </div>

@@ -40,7 +40,7 @@ readonly class EmailNotification implements EmailNotificationInterface
             ))
             ->to(new Address(
                     isset($args['to']) ? (string)$args['to'] : $this->params->get('app.notifications.email_recipient'),
-                    isset($args['toName']) ?: $this->params->get('app.notifications.email_sender_name'))
+                    isset($args['toName']) ? $args['toName'] : $args['subject'])
             )
             ->subject(
                 $args['subject'] ?: $this->params->get('app.notifications.subject')
