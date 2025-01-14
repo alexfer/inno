@@ -13,8 +13,8 @@
                     <a href="{{ path('app_dashboard_edit_blog', {id: entry.id}) }}" class="mt-1 me-2">
                         {% if entry.entryAttachments.count %}
                             {% set _picture = 'storage/entry/picture/' ~ entry.entryDetails.id ~ '/' ~ entry.entryAttachments.first.attach.name %}
-                            <picture class="rounded-lg">
-                                <img src="{{ asset(_picture) }}" class="w-16 h-auto rounded-lg border"
+                            <picture class="block bg-white dark:bg-gray-600">
+                                <img src="{{ asset(_picture) }}" class="block w-16 h-auto border rounded-lg p-3"
                                      alt="{{ entry.entryDetails.title }}">
                             </picture>
                         {% else %}

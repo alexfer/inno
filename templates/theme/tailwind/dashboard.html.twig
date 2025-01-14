@@ -18,9 +18,9 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 </head>
 <body class="dark:bg-gray-600 bg-body">
-<div class="h-screen" id="key" data-id="{{ app.user.id }}" data-hash="{{ app.user.email|crypto|base64encode }}">
+<div class="flex flex-col h-screen" id="key" data-id="{{ app.user.id }}" data-hash="{{ app.user.email|crypto|base64encode }}">
     {{ include('dashboard/sidebar.html.twig') }}
-    <div class="lg:ml-64">
+    <div class="lg:ml-64 flex-grow">
         <div class="grid grid-cols-1 md:grid-cols-2 relative border-b dark:border-gray-600 w-full p-2 justify-between items-center dark:bg-gray-700">
             <form class="inline-flex items-center max-w-2xl group" autocomplete="off">
                 <label for="dashboard-search" class="sr-only">{{ 'title.search'|trans }}</label>
@@ -73,7 +73,7 @@
             {% block body %}{% endblock %}
         </div>
     </div>
-    <footer class="h-12 sticky z-10 top-[100vh] w-full bg-white dark:bg-gray-900 border-t shadow-sm border-gray-200 dark:border-gray-800">
+    <footer class="h-12 sticky bottom-0 z-10 top-[100vh] w-full bg-white dark:bg-gray-900 border-t shadow-sm border-gray-200 dark:border-gray-800">
         <div class="container mx-auto text-gray-800 dark:text-white pt-1">
             <div class="text-center py-3 text-xs md:text-sm">
                 {% set year =  'now' | date('Y') %}

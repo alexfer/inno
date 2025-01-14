@@ -7,6 +7,10 @@
         @apply h-px my-4 mx-28 bg-gray-200 border-0 dark:bg-gray-700;
     }
 
+    h3 {
+        @apply leading-tight text-lg font-bold text-gray-900 dark:text-white mb-2;
+    }
+
     .grid-loop-cols-2 {
         @apply grid grid-cols-1 md:grid-cols-2 rounded-md border-b gap-x-6 relative hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
     }
@@ -127,6 +131,18 @@
         @apply inline-block p-4 border-b-2 hover:text-gray-600 hover:border-red-600 dark:hover:text-gray-300;
     }
 
+    .tab-list-item-indigo {
+        @apply inline-flex items-center px-4 py-3 rounded-lg w-full;
+    }
+
+    .tab-list-active-indigo {
+        @apply text-white bg-indigo-700 active dark:bg-indigo-600;
+    }
+
+    .tab-list-inactive-indigo {
+        @apply hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-600 dark:hover:text-white;
+    }
+
     .input-widget {
         @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-400 focus:ring-0 focus:border-gray-400 block w-full p-1.5 md:p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500;
     }
@@ -156,7 +172,7 @@
     }
 
     .list-item {
-        @apply px-3 py-4 mt-0 border-dashed border-b border-gray-200 opacity-75 z-10 transition-opacity duration-300 hover:opacity-100 text-gray-800 dark:text-white dark:border-gray-500 last:border-0 odd:bg-indigo-50 even:bg-slate-50 dark:odd:bg-gray-700 dark:even:bg-slate-700;
+        @apply p-1.5 mt-0 border-dashed border-b border-gray-200 opacity-75 z-10 transition-opacity duration-300 hover:opacity-100 text-gray-800 dark:text-white dark:border-gray-500 last:border-0 odd:bg-indigo-50 even:bg-slate-50 dark:odd:bg-gray-700 dark:even:bg-slate-700;
     }
 
     .list-grid-item {
