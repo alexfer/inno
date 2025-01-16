@@ -12,6 +12,7 @@ parameters:
     default_timezone: 'Europe/Kyiv'
     app.theme: '%env(APP_THEME)%' # theme dir
     user_storage_dir: '%kernel.project_dir%/public/storage/user'
+    image_storage_dir: '%kernel.project_dir%/public/storage/images'
     entry_storage_dir: '%kernel.project_dir%/public/storage/entry'
     carrier_storage_dir: '%kernel.project_dir%/public/storage/carrier'
     payment_gateway_storage_dir: '%kernel.project_dir%/public/storage/payment_gateway'

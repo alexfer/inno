@@ -105,7 +105,7 @@
         <div id="attachments-tab"
              role="tabpanel"
              aria-labelledby="attachments-tab">
-            <div class="mt-4">
+            <div>
                 {% if app.request.get('id') %}
                     {% set _args = {store: product.store.id, id: product.id} %}
                     {% include 'dashboard/content/form/attachment.html.twig' with {

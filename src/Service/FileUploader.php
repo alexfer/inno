@@ -2,12 +2,12 @@
 
 namespace Inno\Service;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Inno\Entity\Attach;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreProductAttach;
 use Inno\Entity\UserDetails;
-use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

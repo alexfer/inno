@@ -16,6 +16,10 @@ liip_imagine:
             filters:
                 relative_resize:
                     heighten: 20
+        image_thumb:
+            filters:
+                relative_resize:
+                    heighten: 270
         gateway_icon:
             filters:
                 relative_resize:

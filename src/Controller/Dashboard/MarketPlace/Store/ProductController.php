@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -31,7 +30,6 @@ class ProductController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param ServeProductInterface $product
      * @param ServeStoreInterface $serveStore
      * @return Response
@@ -39,7 +37,6 @@ class ProductController extends AbstractController
     #[Route('/{store}/{search}', name: 'app_dashboard_market_place_market_product', defaults: ['search' => null])]
     public function index(
         Request               $request,
-        UserInterface         $user,
         ServeProductInterface $product,
         ServeStoreInterface   $serveStore,
     ): Response
@@ -51,7 +48,7 @@ class ProductController extends AbstractController
             $this->offset = (self::LIMIT - 1) * ($page - 1);
         }
 
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $products = $product->index($store, $request->query->get('search'), $this->offset, self::LIMIT - 1);
 
         return $this->render('dashboard/content/market_place/product/index.html.twig', [
@@ -207,7 +204,6 @@ class ProductController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreProduct $product
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
