@@ -111,6 +111,7 @@
                     {% include 'dashboard/content/form/attachment.html.twig' with {
                         'attachments': product.storeProductAttaches,
                         'storage': 'product',
+                        'target': 'product',
                         'id': product.id,
                         'set_use': null,
                         'remove': path('app_dashboard_product_attach_remove', _args),

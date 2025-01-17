@@ -73,7 +73,10 @@ BEGIN
                                   LEFT JOIN store_payment_gateway g ON g.id = spg.gateway_id
                          WHERE spg.store_id = p.store_id),
             'currency', (SELECT s.currency FROM store s WHERE s.id = p.store_id LIMIT 1),
-            'attachment', (SELECT a.name
+            'attachment', (SELECT json_build_object(
+                                          'name', a.name,
+                                          'path', a.path
+                                  )
                            FROM store_product_attach spa
                                     LEFT JOIN attach a on a.id = spa.attach_id
                            WHERE spa.product_id = p.id

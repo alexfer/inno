@@ -1,13 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Inno\Repository;
 
-use Inno\Entity\{Attach, Category, Entry, EntryAttachment, EntryCategory, EntryDetails, User, UserDetails, UserSocial};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\{Attach, Category, Entry, EntryAttachment, EntryCategory, EntryDetails, User, UserDetails, UserSocial};
 
 /**
  * @extends ServiceEntityRepository<Entry>
@@ -19,7 +19,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class EntryRepository extends ServiceEntityRepository
 {
-
     /**
      *
      * @param ManagerRegistry $registry
@@ -52,11 +51,12 @@ class EntryRepository extends ServiceEntityRepository
                 'e.comments',
                 'd.short_content',
                 'a.name as attachment',
+                'a.path as attachment_path',
             ])
             ->join(EntryDetails::class, 'd', Expr\Join::WITH, 'e.id = d.entry')
             ->join(EntryCategory::class, 'ec', Expr\Join::WITH, 'ec.entry = e.id')
             ->join(Category::class, 'c', Expr\Join::WITH, 'c.id = ec.category')
-            ->join(EntryAttachment::class, 'ea', Expr\Join::WITH, 'd.id = ea.details')
+            ->join(EntryAttachment::class, 'ea', Expr\Join::WITH, 'd.id = ea.entry')
             ->join(Attach::class, 'a', Expr\Join::WITH, 'a.id = ea.attach')
             ->join(UserDetails::class, 'ud', Expr\Join::WITH, 'ud.user = e.user')
             ->join(UserSocial::class, 'us', Expr\Join::WITH, 'us.details = ud.id')
@@ -96,6 +96,7 @@ class EntryRepository extends ServiceEntityRepository
                 'e.created_at',
                 'ed.title',
                 'a.name as attach',
+                'a.path as attachment_path',
                 'ud.first_name',
                 'us.facebook_profile',
                 'us.twitter_profile',
@@ -107,7 +108,7 @@ class EntryRepository extends ServiceEntityRepository
             ->join(UserDetails::class, 'ud', Expr\Join::WITH, 'e.user = ud.user')
             ->join(UserSocial::class, 'us', Expr\Join::WITH, 'ud.id = us.details')
             ->join(EntryDetails::class, 'ed', Expr\Join::WITH, 'e.id = ed.entry')
-            ->leftJoin(EntryAttachment::class, 'ea', Expr\Join::WITH, 'ea.details = ed.entry and ea.in_use = 1')
+            ->leftJoin(EntryAttachment::class, 'ea', Expr\Join::WITH, 'ea.entry = ed.entry and ea.in_use = 1')
             ->leftJoin(Attach::class, 'a', Expr\Join::WITH, 'a.id = ea.attach');
 
         if ($slug) {
@@ -155,6 +156,7 @@ class EntryRepository extends ServiceEntityRepository
                 'us.twitter_profile',
                 'us.instagram_profile',
                 'a.name as attachment',
+                'a.path as attachment_path',
             ])
             ->join(EntryDetails::class, 'ed', Expr\Join::WITH, 'e.id = ed.entry')
             ->leftJoin(User::class, 'u', Expr\Join::WITH, 'e.user = u.id')

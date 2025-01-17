@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StoreOrdersRepository::class)]
 #[ORM\Index(name: 'session_index', columns: ['session'])]
-#[ORM\Index(name: 'number_idx', columns: ['number'])]
+#[ORM\Index(name: 'order_number_idx', columns: ['number'])]
 class StoreOrders
 {
     #[ORM\Id]

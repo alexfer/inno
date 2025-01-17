@@ -3,7 +3,7 @@
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Inno\Entity\{Attach, User};
+use Inno\Entity\{Attach, FileManager, User};
 use Inno\Entity\MarketPlace\{StoreCoupon, StoreProduct, StoreProductAttach};
 use Inno\Form\Type\Dashboard\MarketPlace\ProductType;
 use Inno\Security\Voter\ProductVoter;
@@ -199,7 +199,6 @@ class ProductController extends AbstractController
             $em->flush();
         }
         return $this->json(['message' => 'success', 'redirect' => $request->headers->get('referer')]);
-        //return $this->redirect($request->headers->get('referer'));
     }
 
     /**
@@ -317,20 +316,23 @@ class ProductController extends AbstractController
         $fs = new Filesystem();
         $oldFile = $this->getTargetDir($product->getId(), $params) . '/' . $attach->getName();
 
-        foreach (['product_preview', 'product_view'] as $filter) {
-            if ($cacheManager->isStored($oldFile, $filter)) {
-                $cacheManager->remove($oldFile, $filter);
-            }
-        }
+        $exists = $em->getRepository(FileManager::class)->findOneBy(['file' => $attach, 'owner' => $this->getUser()]);
 
-        if ($fs->exists($oldFile)) {
-            $fs->remove($oldFile);
+        if(!$exists) {
+            foreach (['product_preview', 'product_view'] as $filter) {
+                if ($cacheManager->isStored($oldFile, $filter)) {
+                    $cacheManager->remove($oldFile, $filter);
+                }
+            }
+
+            if ($fs->exists($oldFile)) {
+                $fs->remove($oldFile);
+            }
+            $em->remove($attach);
         }
 
         $productAttach->setAttach(null)->setProduct(null);
-
         $em->remove($productAttach);
-        $em->remove($attach);
         $em->flush();
 
         return $this->json(['message' => $translator->trans('user.picture.delete'), 'file' => $attach->getName()]);

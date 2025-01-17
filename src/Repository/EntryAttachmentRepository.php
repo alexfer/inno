@@ -1,15 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Inno\Repository;
 
-use Inno\Entity\Attach;
-use Inno\Entity\Entry;
-use Inno\Entity\EntryAttachment;
-use Inno\Entity\EntryDetails;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\Attach;
+use Inno\Entity\Entry;
+use Inno\Entity\EntryAttachment;
+use Inno\Entity\EntryDetails;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 
 /**
@@ -43,8 +43,8 @@ class EntryAttachmentRepository extends ServiceEntityRepository
                 'a.created_at',
             ])
             ->leftJoin(Attach::class, 'a', Expr\Join::WITH, 'ea.id = a.id')
-            ->where('ea.details = :details')
-            ->setParameter('details', $entry->getEntryDetails())
+            ->where('ea.entry = :entry')
+            ->setParameter('entry', $entry)
             ->orderBy('a.id', 'desc')
             ->setMaxResults(8)
             ->getQuery()
@@ -67,16 +67,16 @@ class EntryAttachmentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param EntryDetails $details
+     * @param Entry $entry
      * @return void
      */
-    public function resetStatus(EntryDetails $details): void
+    public function resetStatus(Entry $entry): void
     {
         $this->createQueryBuilder('ea')
             ->update()
             ->set('ea.in_use', 0)
-            ->where('ea.details = :details')
-            ->setParameter('details', $details->getEntry())
+            ->where('ea.entry = :entry')
+            ->setParameter('entry', $entry)
             ->getQuery()
             ->execute();
     }

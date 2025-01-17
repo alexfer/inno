@@ -8,7 +8,8 @@ BEGIN
     WITH attachments AS (
         SELECT DISTINCT jsonb_build_object(
                                 'id', a.id,
-                                'name', a.name
+                                'name', a.name,
+                                'path', a.path
                         ) AS attachment
         FROM store_product p
                  LEFT JOIN store_product_attach spa ON spa.product_id = p.id

@@ -115,6 +115,10 @@
         @apply w-3 sm:w-4 h-3 sm:h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600;
     }
 
+    .pictures {
+        @apply relative border p-5 rounded-lg align-bottom bg-white transition-all duration-300 filter grayscale-0 hover:grayscale hover:shadow shadow-inner;
+    }
+
     .tab-list {
         @apply flex flex-row flex-wrap text-sm font-medium space-x-4 text-center justify-stretch border-b-0 items-stretch;
     }

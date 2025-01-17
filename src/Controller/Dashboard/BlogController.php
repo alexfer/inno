@@ -2,21 +2,18 @@
 
 namespace Inno\Controller\Dashboard;
 
-use Inno\Entity\{Attach, Category, Entry, EntryAttachment, EntryCategory, EntryDetails};
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Inno\Entity\{Attach, Category, Entry, EntryAttachment, EntryCategory, EntryDetails, FileManager};
 use Inno\Form\Type\Dashboard\EntryDetailsType;
 use Inno\Service\FileUploader;
 use Inno\Service\Validator\Interface\ImageValidatorInterface;
-use Inno\Service\Validator\Interface\OperationFileValidatorInterface;
-use DateTime;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -45,17 +42,13 @@ class BlogController extends AbstractController
 
     /**
      * @param EntityManagerInterface $em
-     * @param UserInterface $user
      * @return Response
      */
     #[Route('', name: self::CHILDREN['blog']['menu.dashboard.overview.blog'])]
-    public function index(
-        EntityManagerInterface $em,
-        UserInterface          $user,
-    ): Response
+    public function index(EntityManagerInterface $em): Response
     {
         $entries = $em->getRepository(Entry::class)
-            ->findBy(['user' => $user, 'type' => Entry::TYPE['Blog']], ['id' => 'desc']);
+            ->findBy(['user' => $this->getUser(), 'type' => Entry::TYPE['Blog']], ['id' => 'desc']);
 
         return $this->render('dashboard/content/blog/index.html.twig', [
             'entries' => $entries,
@@ -64,7 +57,6 @@ class BlogController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @param SluggerInterface $slugger
      * @param TranslatorInterface $translator
@@ -73,7 +65,6 @@ class BlogController extends AbstractController
     #[Route('/create', name: self::CHILDREN['blog']['menu.dashboard.create.blog'])]
     public function create(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
         SluggerInterface       $slugger,
         TranslatorInterface    $translator,
@@ -108,7 +99,7 @@ class BlogController extends AbstractController
 
             $entry->setType(Entry::TYPE['Blog'])
                 ->setSlug($slug)
-                ->setUser($user)
+                ->setUser($this->getUser())
                 ->setEntryDetails($details);
 
             $em->persist($entry);
@@ -168,7 +159,7 @@ class BlogController extends AbstractController
                 $entry->setType('blog')->setSlug($slugger->slug($title)->lower());
                 $em->persist($entry);
                 $em->flush();
-            } catch (UniqueConstraintViolationException $e) {
+            } catch (\Exception $e) {
                 $error = $translator->trans('slug.unique', [
                     '%name%' => $translator->trans('label.form.title'),
                     '%value%' => $title,
@@ -243,7 +234,7 @@ class BlogController extends AbstractController
     {
         $file = $request->files->get('file');
 
-        $detailsId = $entry->getEntryDetails()->getId();
+        $entryId = $entry->getId();
 
         if ($file) {
             $validate = $imageValidator->validate($file, $translator);
@@ -255,7 +246,7 @@ class BlogController extends AbstractController
                 ]);
             }
 
-            $fileUploader = new FileUploader($this->getTargetDir($detailsId, $params), $slugger, $em);
+            $fileUploader = new FileUploader($this->getTargetDir($entryId, $params), $slugger, $em);
 
             try {
                 $attach = $fileUploader->upload($file)->handle();
@@ -274,10 +265,10 @@ class BlogController extends AbstractController
             }
             unset($attachment);
 
-            $em->getRepository(EntryAttachment::class)->resetStatus($entry->getEntryDetails());
+            $em->getRepository(EntryAttachment::class)->resetStatus($entry);
 
             $entryAttachment = new EntryAttachment();
-            $entryAttachment->setDetails($entry)
+            $entryAttachment->setEntry($entry)
                 ->setAttach($attach)
                 ->setInUse(1);
 
@@ -287,7 +278,7 @@ class BlogController extends AbstractController
 
         $storage = $params->get('entry_storage_picture');
 
-        $url = "{$storage}/{$detailsId}/{$attach->getName()}";
+        $url = "{$storage}/{$entryId}/{$attach->getName()}";
         $picture = $cacheManager->getBrowserPath(parse_url($url, PHP_URL_PATH), 'entry_preview');
 
         return $this->json([
@@ -317,32 +308,37 @@ class BlogController extends AbstractController
 
         $parameters = json_decode($request->getContent(), true);
 
-        $details = $em->getRepository(EntryDetails::class)->find($request->get('entry'));
+        $entry = $em->getRepository(Entry::class)->find($request->get('entry'));
         $attach = $em->getRepository(Attach::class)->find($parameters['id']);
 
         $attachment = $em->getRepository(EntryAttachment::class)->findOneBy([
             'attach' => $attach,
-            'details' => $details,
+            'entry' => $entry,
         ]);
 
         $fs = new Filesystem();
         $attach = $attachment->getAttach();
 
-        $oldFile = $this->getTargetDir($details->getId(), $params) . '/' . $attach->getName();
+        $exists = $em->getRepository(FileManager::class)->findOneBy(['file' => $attach, 'owner' => $this->getUser()]);
 
-        if ($cacheManager->isStored($oldFile, 'entry_preview')) {
-            $cacheManager->remove($oldFile, 'entry_preview');
+        if (!$exists) {
+            $oldFile = $this->getTargetDir($entry->getId(), $params) . '/' . $attach->getName();
+
+            if ($cacheManager->isStored($oldFile, 'entry_preview')) {
+                $cacheManager->remove($oldFile, 'entry_preview');
+            }
+
+            if ($cacheManager->isStored($oldFile, 'entry_view')) {
+                $cacheManager->remove($oldFile, 'entry_view');
+            }
+
+            if ($fs->exists($oldFile)) {
+                $fs->remove($oldFile);
+            }
+
+            $em->remove($attach);
         }
 
-        if ($cacheManager->isStored($oldFile, 'entry_view')) {
-            $cacheManager->remove($oldFile, 'entry_view');
-        }
-
-        if ($fs->exists($oldFile)) {
-            $fs->remove($oldFile);
-        }
-
-        $em->remove($attach);
         $em->remove($attachment);
         $em->flush();
 

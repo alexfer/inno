@@ -24,6 +24,7 @@ BEGIN
                                               'short_name', p.short_name,
                                               'quantity', p.quantity,
                                               'attach_name', a.name,
+                                              'attach_path', a.path,
                                               'category_name', c.name,
                                               'category_slug', c.slug,
                                               'parent_category_name', cc.name,
@@ -38,7 +39,7 @@ BEGIN
                                JOIN store_category_product cp ON p.id = cp.product_id
                                JOIN store_category c ON c.id = cp.category_id
                                JOIN store_category cc ON c.parent_id = cc.id
-                               LEFT JOIN (SELECT DISTINCT ON (pa.product_id) pa.product_id, a.name
+                               LEFT JOIN (SELECT DISTINCT ON (pa.product_id) pa.product_id, a.name, a.path
                                           FROM store_product_attach pa
                                                    LEFT JOIN attach a ON pa.attach_id = a.id
                                           ORDER BY pa.product_id) a ON a.product_id = p.id

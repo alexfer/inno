@@ -16,7 +16,7 @@
             </svg>
             <div class="inline-flex me-3">
                 <a href="{{ path('app_market_place_index') }}"
-                   class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                   class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-red-600 dark:text-gray-400 dark:hover:text-white">
                     {{ 'title.market_places'|trans }}
                 </a>
             </div>
@@ -28,7 +28,7 @@
                 </svg>
                 <div class="inline-flex me-3">
                     <a href="{{ path('app_market_place_category') }}"
-                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-red-600 dark:text-gray-400 dark:hover:text-white">
                         {{ 'search.form.categories'|trans }}
                     </a>
                 </div>
@@ -41,7 +41,7 @@
                 </svg>
                 <div class="inline-flex me-3">
                     <a href="{{ path('app_market_place_parent_category', {parent: app.request.get('parent')}) }}"
-                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-red-600 dark:text-gray-400 dark:hover:text-white">
                         {{ parent_name }}
                     </a>
                 </div>
@@ -54,7 +54,7 @@
                 </svg>
                 <div class="inline-flex me-3">
                     <a href="{{ path('app_market_place_child_category', {parent: app.request.get('parent'), child: app.request.get('child')}) }}"
-                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-red-600 dark:text-gray-400 dark:hover:text-white">
                         {{ child_name }}
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                     data-dropdown-offset-distance="10"
                     data-dropdown-offset-skidding="30"
                     data-dropdown-placement="bottom"
-                    class="inline-flex relative mb-1 w-52 px-3 py-2 text-sm font-normal text-center text-gray-900 hover:text-blue-600 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white dark:focus:ring-gray-700"
+                    class="inline-flex relative mb-1 w-52 px-3 py-2 text-sm font-normal text-center text-gray-900 hover:text-red-600 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white dark:focus:ring-gray-700"
                     type="button">{{ 'option.category.choice_category'|trans }}
                 <svg class="w-2.5 h-2.5 absolute end-0 me-3 mt-1 text-gray-700 hover:text-gray-700" aria-hidden="true"
                      xmlns="http://www.w3.org/2000/svg" fill="none"

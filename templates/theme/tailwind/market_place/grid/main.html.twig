@@ -1,9 +1,9 @@
-<div class="max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <div class="relative overflow-hidden h-250 rounded-t-lg">
+<div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="relative overflow-hidden h-250 rounded-t-md">
         <a title="{{ product.name }}"
            href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
             {% if product.attach_name %}
-                {% set _picture = 'storage/product/' ~ product.id ~ '/' ~ product.attach_name %}
+                {% set _picture = product.attach_path ~ '/' ~ product.attach_name %}
                 <img loading="lazy" src="{{ asset(_picture)|imagine_filter('product_preview') }}"
                      class="object-contain h-auto max-w-full mx-auto transition duration-700 ease-in-out hover:scale-105"
                      alt="{{ product.name }}">

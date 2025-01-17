@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="lg:max-w-full flex">
-                {% set _picture = 'storage/entry/picture/' ~ primary.id ~ '/' ~ primary.attachment %}
+                {% set _picture = primary.attachment_path ~ '/' ~ primary.attachment %}
                 <img src="{{ asset(_picture) | imagine_filter('entry_view') }}"
                      class="w-full h-100 object-cover rounded-lg sm:h-72 sm:col-span-2 lg:col-span-full"
                      alt="{{ primary.title }}" loading="lazy"/>
@@ -105,7 +105,7 @@
                                             <p>{{ author.short_content }}</p>
                                         </blockquote>
                                         <figcaption class="flex items-center space-x-4">
-                                            {% set _picture = 'storage/user/picture/' ~ author.user_id ~ '/' ~ author.attachment %}
+                                            {% set _picture = author.attachment_path ~ '/' ~ author.attachment %}
                                             <img src="{{ asset(_picture) | imagine_filter('user_thumb') }}" alt=""
                                                  class="flex-none w-14 h-14 rounded-full object-cover" loading="lazy"
                                                  decoding="async">

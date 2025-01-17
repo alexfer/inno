@@ -28,9 +28,6 @@ class Attach
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $size;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    protected DateTime $created_at;
-
     #[ORM\OneToMany(targetEntity: EntryAttachment::class, mappedBy: 'attach')]
     private Collection $entryAttachments;
 
@@ -45,6 +42,12 @@ class Attach
 
     #[ORM\OneToOne(mappedBy: 'attach', cascade: ['persist', 'remove'])]
     private ?Store $store = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $path = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    protected DateTime $created_at;
 
     public function __construct()
     {
@@ -273,6 +276,25 @@ class Attach
         }
 
         $this->store = $store;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string|null $path
+     * @return $this
+     */
+    public function setPath(?string $path): static
+    {
+        $this->path = $path;
 
         return $this;
     }

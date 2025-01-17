@@ -30,7 +30,7 @@
         {% if app.request.get('id') %}
             <ul id="attachments" class="flex list-none flex-wrap items-left justify-start">
                 {% for key, picture in attachments|reverse|slice(0, 16) %}
-                    {% set _picture = 'storage/'~ storage ~'/' ~ id ~ '/' ~ picture.attach.name %}
+                    {% set _picture = picture.attach.path ~ '/' ~ picture.attach.name %}
                     <li class="relative my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
                         <img class="h-auto w-full md:max-w-xs rounded-lg bg-white"
                              src="{{ asset(_picture) | imagine_filter(filter) }}" alt="...">
@@ -107,8 +107,8 @@
             </div>
             <div class="flex justify-between items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
                 <div class="flex items-center space-x-2">
-                    <button type="button" class="btn-red">{{ 'form.action.insert'|trans }}</button>
-                    <button data-modal-hide="image-manager" type="button"
+                    <button type="button" id="inject" data-url="{{ path('dashboard.image-manager.inject') }}" class="btn-red">{{ 'form.action.insert'|trans }}</button>
+                    <button id="close" data-modal-hide="image-manager" type="button"
                             class="hidden md:block btn-gray-strong">{{ 'form.action.close'|trans }}</button>
                 </div>
                 <a href="" id="load-more"
@@ -128,7 +128,7 @@
                               data-original="currentColor" fill="currentColor"/>
                     </svg>{{ 'table.header.upload'|trans }}
                     <input type="file" id="image" data-url="{{ path('dashboard.image-manager.attach') }}"
-                           name="images[]" class="sr-only" accept='image/*' multiple>
+                           name="images[]" class="sr-only" accept="image/png, image/jpeg, image/webp" multiple>
                 </label>
             </div>
         </div>
@@ -142,6 +142,9 @@
             const url = btn.getAttribute('data-url');
             const loadMore = document.getElementById('load-more');
             const manageContent = document.getElementById('image-manager-content');
+            const injectBtn = document.getElementById('inject');
+            const attachments = document.getElementById('attachments');
+            let pictures = NodeList, ids = [];
 
             const loadContent = async (url) => {
                 const response = await fetch(url);
@@ -164,6 +167,45 @@
             btn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 await loadContent(url);
+                pictures = await document.querySelectorAll('.pictures');
+            });
+
+            injectBtn.addEventListener('click', async () => {
+                [...pictures].forEach((picture) => {
+                    if(picture.children[1].children[0].checked) {
+                        ids.push(parseInt(picture.children[1].children[0].value));
+                    }
+                });
+                if(ids.length > 0) {
+                    const response = await fetch(injectBtn.getAttribute('data-url'), {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            ids: ids,
+                            filter: '{{ filter }}',
+                            id: '{{ id }}',
+                            target: '{{ target }}',
+                        }),
+                        headers: new Headers({'Content-Type': 'application/json'}),
+                    });
+
+                    const data = await response.json();
+                    if(Object.keys(data.pictures).length > 0) {
+                        for(const [key, value] of Object.entries(data.pictures)) {
+                            const li = document.createElement('li');
+                            const img = document.createElement('img');
+                            const div = document.createElement('div');
+                            li.classList.add('relative', 'my-1', 'mx-0.5', 'overflow-hidden', 'bg-cover', 'bg-no-repeat');
+                            img.classList.add('h-auto', 'w-full', 'md:max-w-xs', 'rounded-lg', 'bg-white');
+                            img.setAttribute('src', value);
+                            div.classList.add('overlay');
+                            div.setAttribute('id', 'overlay');
+                            li.appendChild(img);
+                            li.appendChild(div);
+                            attachments.appendChild(li);
+                        }
+                        document.getElementById('close').click();
+                    }
+                }
             });
 
             images.addEventListener('change', async (e) => {

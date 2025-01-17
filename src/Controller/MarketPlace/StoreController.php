@@ -33,11 +33,11 @@ class StoreController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/redirect/{website}', name: 'app_market_place_market_redirect')]
+    #[Route('/redirect/{slug}', name: 'app_market_place_market_redirect', methods: ['GET'])]
     public function redirectTo(Request $request): Response
     {
-        $store = $this->em->getRepository(Store::class)->findOneBy(['website' => $request->get('website')]);
-        return $this->redirect($store->getUrl());
+        $store = $this->em->getRepository(Store::class)->findOneBy(['slug' => $request->get('slug')]);
+        return $this->redirect($store->getUrl(), 301);
     }
 
     /**

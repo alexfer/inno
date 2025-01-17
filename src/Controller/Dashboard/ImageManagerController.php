@@ -3,10 +3,17 @@
 namespace Inno\Controller\Dashboard;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Inno\Entity\Attach;
+use Inno\Entity\Entry;
+use Inno\Entity\EntryAttachment;
+use Inno\Entity\EntryDetails;
 use Inno\Entity\Enum\EnumAttachment;
 use Inno\Entity\FileManager;
+use Inno\Entity\MarketPlace\StoreProduct;
+use Inno\Entity\MarketPlace\StoreProductAttach;
 use Inno\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +24,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/dashboard/image-manager')]
 class ImageManagerController extends AbstractController
 {
-    final const int LIMIT = 16;
+    final const int LIMIT = 24;
 
     /**
      * @param Request $request
@@ -45,6 +52,13 @@ class ImageManagerController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param ParameterBagInterface $params
+     * @param SluggerInterface $slugger
+     * @return JsonResponse
+     */
     #[Route('', name: 'dashboard.image-manager.attach', methods: ['POST'])]
     public function attach(
         Request                $request,
@@ -77,6 +91,54 @@ class ImageManagerController extends AbstractController
         return $this->json([
             'success' => true,
             'url' => $this->generateUrl('dashboard.image-manager'),
+        ]);
+    }
+
+    #[Route('/inject', name: 'dashboard.image-manager.inject', methods: ['POST'])]
+    public function inject(
+        Request $request,
+        EntityManagerInterface $manager,
+        CacheManager           $cacheManager,
+    ): JsonResponse
+    {
+        $payload = $request->getPayload()->all();
+        $product = $entry = null;
+        $pictures = [];
+
+        if (isset($payload['ids']) && count($payload['ids'])) {
+            if ($payload['target'] == 'entry') {
+                $entry = $manager->getRepository(Entry::class)->find($payload['id']);
+            }
+
+            if ($payload['target'] == 'product') {
+                $product = $manager->getRepository(StoreProduct::class)->find($payload['id']);
+            }
+
+            foreach ($payload['ids'] as $id) {
+                $attach = $manager->getRepository(Attach::class)->find($id);
+                if ($payload['target'] == 'entry') {
+                    $attachment = new EntryAttachment();
+                    $attachment->setAttach($attach)->setEntry($entry)->setInUse(0);
+                    $manager->persist($attachment);
+                }
+
+                if ($payload['target'] == 'product') {
+                    $attachment = new StoreProductAttach();
+                    $attachment->setAttach($attach)->setProduct($product);
+                    $manager->persist($attachment);
+                }
+
+                $path = "{$attach->getPath()}/{$attach->getName()}";
+                $pictures[$id] = $cacheManager->getBrowserPath(parse_url($path, PHP_URL_PATH), 'image_thumb');
+
+            }
+
+            $manager->flush();
+        }
+
+        return $this->json([
+            'pictures' => $pictures,
+            'success' => true,
         ]);
     }
 }

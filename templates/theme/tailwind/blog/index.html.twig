@@ -44,9 +44,9 @@
             <div class="min-h-full flex-col justify-between">
                 <div class="min-h-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div class="lg:max-w-xl relative overflow-hidden bg-cover bg-no-repeat rounded-t-lg">
-                        {% set _picture = 'storage/entry/picture/' ~ entry.id ~ '/' ~ entry.attach %}
                         <a href="{{ path('app_blog_view', {slug: entry.slug}) }}">
                             {% if entry.attach %}
+                                {% set _picture = entry.attachment_path ~ '/' ~ entry.attach %}
                                 <img loading="lazy" src="{{ asset(_picture)|imagine_filter('entry_preview') }}"
                                      class="object-cover w-full transition duration-300 ease-linear hover:scale-125 rounded-t-lg"
                                      width="415" alt="{{ entry.title }}"/>

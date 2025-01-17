@@ -24,7 +24,10 @@ BEGIN
                                               'category_slug', c.slug,
                                               'parent_category_name', cc.name,
                                               'parent_category_slug', cc.slug,
-                                              'attachment', (SELECT a.name
+                                              'attachment', (SELECT json_build_object(
+                                                                            'name', a.name,
+                                                                            'path', a.path
+                                                                    )
                                                              FROM store_product_attach spa
                                                                       LEFT JOIN attach a on a.id = spa.attach_id
                                                              WHERE spa.product_id = p.id
