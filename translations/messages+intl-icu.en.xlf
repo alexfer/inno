@@ -813,7 +813,7 @@
             </trans-unit>
             <trans-unit id="label.form.product_name">
                 <source>label.form.product_name</source>
-                <target>Product Name</target>
+                <target>Product name</target>
             </trans-unit>
             <trans-unit id="label.form.product_short_name">
                 <source>label.form.product_short_name</source>
@@ -1042,7 +1042,7 @@
             </trans-unit>
             <trans-unit id="label.form.product_description">
                 <source>label.form.product_description</source>
-                <target>Description of Product</target>
+                <target>Description of product</target>
             </trans-unit>
             <trans-unit id="label.form.description">
                 <source>label.form.description</source>
@@ -2040,6 +2040,14 @@
             <trans-unit id="form.action.close">
                 <source>form.action.close</source>
                 <target>Close</target>
+            </trans-unit>
+            <trans-unit id="text.image.manager">
+                <source>text.image.manager</source>
+                <target>Image manager</target>
+            </trans-unit>
+            <trans-unit id="form.action.insert">
+                <source>form.action.insert</source>
+                <target>Insert</target>
             </trans-unit>
             <trans-unit id="form.header.message">
                 <source>form.header.message</source>

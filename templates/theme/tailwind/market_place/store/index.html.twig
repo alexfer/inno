@@ -29,15 +29,13 @@
                     <div class="text-white">
                         <h2 class="mb-4 text-4xl font-semibold">{{ store.name }}</h2>
                         {% if store.description is not null %}
-                            <div class="mb-6 text-sm font-normal mx-auto max-w-lg">{{ store.description|striptags|raw|slice(0, 280) }}
+                            <div class="mb-6 bg-gray-950 bg-opacity-75 text-sm font-normal p-3 rounded-md mx-auto max-w-lg">{{ store.description|striptags|raw|slice(0, 280) }}
                                 ...
                             </div>
                         {% endif %}
                         <a href="{{ path('app_market_place_market', {slug: store.slug}) }}"
                            role="button"
-                           class="rounded-lg hover:rounded-xl hover:animate-pulse border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                           data-twe-ripple-init
-                           data-twe-ripple-color="light">{{ 'menu.dashboard.overview'|trans }}</a>
+                           class="rounded-lg hover:rounded-md hover:animate-pulse border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">{{ 'menu.dashboard.overview'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -79,10 +77,10 @@
             <div class="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {% for product in products %}
                     <div class="min-h-full">
-                        <div class="max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="relative overflow-hidden h-250 rounded-t-lg">
                                 {% if product.attachment %}
-                                    {% set _picture = 'storage/product/' ~ product.id ~ '/' ~ product.attachment %}
+                                    {% set _picture = product.attachment.path ~ '/' ~ product.attachment.name %}
                                     <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
                                         <img loading="lazy"
                                              src="{{ asset(_picture)|imagine_filter('product_preview') }}"

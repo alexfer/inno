@@ -2,14 +2,14 @@
 
 namespace Inno\Entity;
 
-use Inno\Entity\MarketPlace\Store;
-use Inno\Entity\MarketPlace\StoreMessage;
-use Inno\Repository\UserRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Entity\MarketPlace\Store;
+use Inno\Entity\MarketPlace\StoreMessage;
+use Inno\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -60,6 +60,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: StoreMessage::class, mappedBy: 'owner')]
     private Collection $storeMessages;
 
+    /**
+     * @var Collection<int, FileManager>
+     */
+    #[ORM\OneToMany(targetEntity: FileManager::class, mappedBy: 'owner')]
+    private Collection $fileManagers;
+
     final public const string ROLE_USER = 'ROLE_USER';
     final public const string ROLE_ADMIN = 'ROLE_ADMIN';
     final public const string ROLE_CUSTOMER = 'ROLE_CUSTOMER';
@@ -69,6 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->created_at = new DateTime();
         $this->stores = new ArrayCollection();
         $this->storeMessages = new ArrayCollection();
+        $this->fileManagers = new ArrayCollection();
     }
 
     /**
@@ -382,6 +389,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($storeMessage->getOwner() === $this) {
                 $storeMessage->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FileManager>
+     */
+    public function getFileManagers(): Collection
+    {
+        return $this->fileManagers;
+    }
+
+    /**
+     * @param FileManager $fileManager
+     * @return $this
+     */
+    public function addFileManager(FileManager $fileManager): static
+    {
+        if (!$this->fileManagers->contains($fileManager)) {
+            $this->fileManagers->add($fileManager);
+            $fileManager->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param FileManager $fileManager
+     * @return $this
+     */
+    public function removeFileManager(FileManager $fileManager): static
+    {
+        if ($this->fileManagers->removeElement($fileManager)) {
+            // set the owning side to null (unless already changed)
+            if ($fileManager->getOwner() === $this) {
+                $fileManager->setOwner(null);
             }
         }
 

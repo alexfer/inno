@@ -2,11 +2,11 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\EntryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\EntryRepository;
 
 #[ORM\Entity(repositoryClass: EntryRepository::class)]
 #[ORM\Index(name: 'idx', columns: ['status', 'type'])]
@@ -52,7 +52,7 @@ class Entry
     #[ORM\Column]
     private ?int $comments;
 
-    #[ORM\OneToMany(targetEntity: EntryAttachment::class, mappedBy: 'details')]
+    #[ORM\OneToMany(targetEntity: EntryAttachment::class, mappedBy: 'entry')]
     #[ORM\OrderBy(['id' => 'desc'])]
     private Collection $entryAttachments;
 
@@ -262,7 +262,7 @@ class Entry
     {
         if (!$this->entryAttachments->contains($entryAttachment)) {
             $this->entryAttachments->add($entryAttachment);
-            $entryAttachment->setDetails($this);
+            $entryAttachment->setEntry($this);
         }
 
         return $this;
@@ -272,8 +272,8 @@ class Entry
     {
         if ($this->entryAttachments->removeElement($entryAttachment)) {
             // set the owning side to null (unless already changed)
-            if ($entryAttachment->getDetails() === $this) {
-                $entryAttachment->setDetails(null);
+            if ($entryAttachment->getEntry() === $this) {
+                $entryAttachment->setEntry(null);
             }
         }
 

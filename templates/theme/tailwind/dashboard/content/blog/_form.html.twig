@@ -50,10 +50,11 @@
             {% include 'dashboard/content/form/attachment.html.twig' with {
                 'attachments': entry.entryAttachments,
                 'storage': 'entry/picture',
+                'target': 'entry',
                 'data_url': path('app_dashboard_blog_attach', {id: app.request.get('id')}),
                 'set_use': path('app_dashboard_blog_attach_set_use', {entry: entry.id}),
                 'remove': path('app_dashboard_blog_attach_remove', {entry: entry.id}),
-                'id': entry.entryDetails.id,
+                'id': entry.id,
                 'filter': 'entry_preview'
             } %}
         {% endif %}

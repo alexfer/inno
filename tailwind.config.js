@@ -11,6 +11,7 @@ module.exports = {
         fontFamily: {
             'oswald': ['Oswald'],
             'montserrat': ['Montserrat'],
+            'poppins': ['Poppins'],
             'sans': ['Helvetica', 'Arial', 'sans-serif'],
         },
         extend: {
@@ -29,6 +30,8 @@ module.exports = {
                 '250': '250px',
                 '300': '300px',
                 '400': '400px',
+                '500': '500px',
+                '600': '600px',
             },
             width: {
                 '100': '100px',

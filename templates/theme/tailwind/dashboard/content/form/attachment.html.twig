@@ -1,5 +1,19 @@
 <div class="flex flex-col px-3">
-    <h5 class="text-lg text-gray-600 font-medium px-1">{{ 'entry.form.attachments'|trans }}</h5>
+    <div class="flex justify-between items-center">
+        <h5 class="text-lg text-gray-600 font-medium px-1">{{ 'entry.form.attachments'|trans }}</h5>
+        <button id="images" data-url="{{ path('dashboard.image-manager') }}" type="button"
+                data-modal-target="image-manager" data-modal-toggle="image-manager"
+                class="btn-indigo">
+            <svg class="inline-flex h-5 w-5 md:me-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <span class="hidden sm:inline-block">{{ 'text.image.manager'|trans }}</span>
+        </button>
+    </div>
     <div class="text-center">
         <div role="status" class="hidden">
             <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -16,7 +30,7 @@
         {% if app.request.get('id') %}
             <ul id="attachments" class="flex list-none flex-wrap items-left justify-start">
                 {% for key, picture in attachments|reverse|slice(0, 16) %}
-                    {% set _picture = 'storage/'~ storage ~'/' ~ id ~ '/' ~ picture.attach.name %}
+                    {% set _picture = picture.attach.path ~ '/' ~ picture.attach.name %}
                     <li class="relative my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
                         <img class="h-auto w-full md:max-w-xs rounded-lg bg-white"
                              src="{{ asset(_picture) | imagine_filter(filter) }}" alt="...">
@@ -25,8 +39,11 @@
                              data-id="{{ picture.attach.id }}">
                             <a href="{{ remove }}"
                                class="mr-1 my-1 text-red-700 hover:text-red-900/70 hover:animate-bounce confirm-delete float-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
-                                    <path fill-rule="evenodd" d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z" clip-rule="evenodd" />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                     class="h-4 w-4">
+                                    <path fill-rule="evenodd"
+                                          d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z"
+                                          clip-rule="evenodd"/>
                                 </svg>
                             </a>
                         </div>
@@ -55,3 +72,168 @@
                aria-describedby="picture">
     </div>
 </div>
+<div id="image-manager" tabindex="-1"
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-7xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3>{{ 'text.image.manager'|trans }}</h3>
+                <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="image-manager">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">{{ 'form.action.close'|trans }}</span>
+                </button>
+            </div>
+            <div class="p-4 md:p-5 space-y-4 h-[500px] overflow-y-auto scrollbar-hide bg-body dark:bg-gray-800"
+                 id="image-manager-content">
+                <div class="text-center">
+                    <div role="status" class="py-[50px]">
+                        <svg aria-hidden="true"
+                             class="inline w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                             viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                  fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                  fill="currentFill"/>
+                        </svg>
+                        <span class="sr-only">{{ 'text.loading'|trans }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-between items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+                <div class="flex items-center space-x-2">
+                    <button type="button" id="inject" data-url="{{ path('dashboard.image-manager.inject') }}" class="btn-red">{{ 'form.action.insert'|trans }}</button>
+                    <button id="close" data-modal-hide="image-manager" type="button"
+                            class="hidden md:block btn-gray-strong">{{ 'form.action.close'|trans }}</button>
+                </div>
+                <a href="" id="load-more"
+                   class="ml-auto text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1 dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="h-8 w-8" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z"/>
+                        <path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5"/>
+                    </svg>
+                </a>
+                <label for="image"
+                       class="flex btn-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 fill-white inline" viewBox="0 0 32 32">
+                        <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                              data-original="currentColor" fill="currentColor"/>
+                        <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                              data-original="currentColor" fill="currentColor"/>
+                    </svg>{{ 'table.header.upload'|trans }}
+                    <input type="file" id="image" data-url="{{ path('dashboard.image-manager.attach') }}"
+                           name="images[]" class="sr-only" accept="image/png, image/jpeg, image/webp" multiple>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+{% block javascripts %}
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            const images = document.getElementById('image');
+            const btn = document.getElementById('images');
+            const url = btn.getAttribute('data-url');
+            const loadMore = document.getElementById('load-more');
+            const manageContent = document.getElementById('image-manager-content');
+            const injectBtn = document.getElementById('inject');
+            const attachments = document.getElementById('attachments');
+            let pictures = NodeList, ids = [];
+
+            const loadContent = async (url) => {
+                const response = await fetch(url);
+                const data = await response.json();
+                manageContent.innerHTML = data.html;
+                loadMore.setAttribute('href', `${data.url}/?page=${data.nextPage}`);
+            }
+
+            loadMore.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const response = await fetch(loadMore.getAttribute('href'));
+                const data = await response.json();
+                manageContent.insertAdjacentHTML('beforeend', data.html);
+                if (data.nextPage > data.pages) {
+                    loadMore.classList.add('pointer-events-none');
+                }
+                loadMore.setAttribute('href', `${data.url}/?page=${data.nextPage}`);
+            });
+
+            btn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                await loadContent(url);
+                pictures = await document.querySelectorAll('.pictures');
+            });
+
+            injectBtn.addEventListener('click', async () => {
+                [...pictures].forEach((picture) => {
+                    if(picture.children[1].children[0].checked) {
+                        ids.push(parseInt(picture.children[1].children[0].value));
+                    }
+                });
+                if(ids.length > 0) {
+                    const response = await fetch(injectBtn.getAttribute('data-url'), {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            ids: ids,
+                            filter: '{{ filter }}',
+                            id: '{{ id }}',
+                            target: '{{ target }}',
+                        }),
+                        headers: new Headers({'Content-Type': 'application/json'}),
+                    });
+
+                    const data = await response.json();
+                    if(Object.keys(data.pictures).length > 0) {
+                        for(const [key, value] of Object.entries(data.pictures)) {
+                            const li = document.createElement('li');
+                            const img = document.createElement('img');
+                            const div = document.createElement('div');
+                            li.classList.add('relative', 'my-1', 'mx-0.5', 'overflow-hidden', 'bg-cover', 'bg-no-repeat');
+                            img.classList.add('h-auto', 'w-full', 'md:max-w-xs', 'rounded-lg', 'bg-white');
+                            img.setAttribute('src', value);
+                            div.classList.add('overlay');
+                            div.setAttribute('id', 'overlay');
+                            li.appendChild(img);
+                            li.appendChild(div);
+                            attachments.appendChild(li);
+                        }
+                        document.getElementById('close').click();
+                    }
+                }
+            });
+
+            images.addEventListener('change', async (e) => {
+                e.preventDefault();
+                const selectedFiles = images.files;
+
+                if (selectedFiles.length === 0) {
+                    return;
+                }
+
+                const formData = new FormData();
+
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    formData.append("images[]", selectedFiles[i]);
+                }
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    await loadContent(data.url);
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -5,8 +5,7 @@
     <div class="text-gray-500 mb-5 dark:text-gray-50">{{ 'search.results.term'|trans }}: <span
                 class="text-primary-600 dark:text-gray-50">{{ app.request.query.get('query')|e }}</span></div>
     {% if products|length %}
-        <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-3">
-        <div class="grid w-full gap-3 lg:grid-cols-3 md:grid-cols-2">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
             {% for product in products %}
                 {% include 'market_place/grid/main.html.twig' %}
             {% endfor %}

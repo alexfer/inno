@@ -3,7 +3,7 @@
         <div class="flex flex-row w-auto space-x-1">
             {% if first is defined and current != first %}
                 <a href="{{ path(route, query|merge({(pageParameterName): first})) }}"
-                   class="bg-white text-gray-600 px-2 border rounded-md py-1 text-sm font-medium hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900">
+                   class="bg-white text-gray-600 px-2 border rounded-md py-1 text-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                         <path fill-rule="evenodd"
                               d="M3.22 7.595a.75.75 0 0 0 0 1.06l3.25 3.25a.75.75 0 0 0 1.06-1.06l-2.72-2.72 2.72-2.72a.75.75 0 0 0-1.06-1.06l-3.25 3.25Zm8.25-3.25-3.25 3.25a.75.75 0 0 0 0 1.06l3.25 3.25a.75.75 0 1 0 1.06-1.06l-2.72-2.72 2.72-2.72a.75.75 0 0 0-1.06-1.06Z"
@@ -41,7 +41,7 @@
             {% endif %}
 
             {% if last is defined and current != last %}
-                <a class="flex hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm font-medium" href="{{ path(route, query|merge({(pageParameterName): last})) }}">
+                <a class="hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm" href="{{ path(route, query|merge({(pageParameterName): last})) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                         <path fill-rule="evenodd"
                               d="M12.78 7.595a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06l2.72-2.72-2.72-2.72a.75.75 0 0 1 1.06-1.06l3.25 3.25Zm-8.25-3.25 3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06l2.72-2.72-2.72-2.72a.75.75 0 0 1 1.06-1.06Z"

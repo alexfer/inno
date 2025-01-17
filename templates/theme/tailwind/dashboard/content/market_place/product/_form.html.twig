@@ -105,12 +105,13 @@
         <div id="attachments-tab"
              role="tabpanel"
              aria-labelledby="attachments-tab">
-            <div class="mt-4">
+            <div>
                 {% if app.request.get('id') %}
                     {% set _args = {store: product.store.id, id: product.id} %}
                     {% include 'dashboard/content/form/attachment.html.twig' with {
                         'attachments': product.storeProductAttaches,
                         'storage': 'product',
+                        'target': 'product',
                         'id': product.id,
                         'set_use': null,
                         'remove': path('app_dashboard_product_attach_remove', _args),

@@ -3,7 +3,7 @@
 namespace Inno\Controller\Dashboard\MarketPlace\Store;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Inno\Entity\{Attach, User};
+use Inno\Entity\{Attach, FileManager, User};
 use Inno\Entity\MarketPlace\{StoreCoupon, StoreProduct, StoreProductAttach};
 use Inno\Form\Type\Dashboard\MarketPlace\ProductType;
 use Inno\Security\Voter\ProductVoter;
@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\{Request, Response};
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -31,7 +30,6 @@ class ProductController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param ServeProductInterface $product
      * @param ServeStoreInterface $serveStore
      * @return Response
@@ -39,7 +37,6 @@ class ProductController extends AbstractController
     #[Route('/{store}/{search}', name: 'app_dashboard_market_place_market_product', defaults: ['search' => null])]
     public function index(
         Request               $request,
-        UserInterface         $user,
         ServeProductInterface $product,
         ServeStoreInterface   $serveStore,
     ): Response
@@ -51,7 +48,7 @@ class ProductController extends AbstractController
             $this->offset = (self::LIMIT - 1) * ($page - 1);
         }
 
-        $store = $this->store($serveStore, $user);
+        $store = $this->store($serveStore, $this->getUser());
         $products = $product->index($store, $request->query->get('search'), $this->offset, self::LIMIT - 1);
 
         return $this->render('dashboard/content/market_place/product/index.html.twig', [
@@ -202,12 +199,10 @@ class ProductController extends AbstractController
             $em->flush();
         }
         return $this->json(['message' => 'success', 'redirect' => $request->headers->get('referer')]);
-        //return $this->redirect($request->headers->get('referer'));
     }
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param StoreProduct $product
      * @param EntityManagerInterface $em
      * @param ServeStoreInterface $serveStore
@@ -321,20 +316,23 @@ class ProductController extends AbstractController
         $fs = new Filesystem();
         $oldFile = $this->getTargetDir($product->getId(), $params) . '/' . $attach->getName();
 
-        foreach (['product_preview', 'product_view'] as $filter) {
-            if ($cacheManager->isStored($oldFile, $filter)) {
-                $cacheManager->remove($oldFile, $filter);
-            }
-        }
+        $exists = $em->getRepository(FileManager::class)->findOneBy(['file' => $attach, 'owner' => $this->getUser()]);
 
-        if ($fs->exists($oldFile)) {
-            $fs->remove($oldFile);
+        if(!$exists) {
+            foreach (['product_preview', 'product_view'] as $filter) {
+                if ($cacheManager->isStored($oldFile, $filter)) {
+                    $cacheManager->remove($oldFile, $filter);
+                }
+            }
+
+            if ($fs->exists($oldFile)) {
+                $fs->remove($oldFile);
+            }
+            $em->remove($attach);
         }
 
         $productAttach->setAttach(null)->setProduct(null);
-
         $em->remove($productAttach);
-        $em->remove($attach);
         $em->flush();
 
         return $this->json(['message' => $translator->trans('user.picture.delete'), 'file' => $attach->getName()]);

@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-32x32.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 </head>
-<body class="dark:bg-gray-900">
+<body class="dark:bg-gray-900 bg-white">
 {% set _route = app.request.get('_route') %}
 <div class="flex flex-col h-screen justify-between bg-transparent" id="key"
      data-id="{{ app.user ? app.user.id : null }}">

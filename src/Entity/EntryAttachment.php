@@ -17,7 +17,7 @@ class EntryAttachment
     private ?Attach $attach = null;
 
     #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'entryAttachments')]
-    private ?Entry $details = null;
+    private ?Entry $entry = null;
 
     #[ORM\Column(type: Types::INTEGER, length: 1, nullable: true)]
     private ?int $in_use;
@@ -44,14 +44,14 @@ class EntryAttachment
         return $this;
     }
 
-    public function getDetails(): ?Entry
+    public function getEntry(): ?Entry
     {
-        return $this->details;
+        return $this->entry;
     }
 
-    public function setDetails(?Entry $details): static
+    public function setEntry(?Entry $entry): static
     {
-        $this->details = $details;
+        $this->entry = $entry;
 
         return $this;
     }

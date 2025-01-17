@@ -2,12 +2,12 @@
 
 namespace Inno\Service;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Inno\Entity\Attach;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreProductAttach;
 use Inno\Entity\UserDetails;
-use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -69,7 +69,7 @@ class FileUploader
         $this->fileName = sprintf("%s-%s.%s", $safeFilename, uniqid(), $file->guessExtension());
 
         try {
-            $target = $file->move($this->getTargetDirectory(), $this->fileName);
+            $target = $file->move($this->targetDirectory, $this->fileName);
         } catch (UploadException $e) {
             throw new UploadException($e->getMessage());
         }
@@ -101,20 +101,12 @@ class FileUploader
 
         $attach->setName($this->fileName)
             ->setSize($this->getSize())
+            ->setPath($this->targetDirectory)
             ->setMime($this->getMimeType());
 
         $this->em->persist($attach);
         $this->em->flush();
         return $attach;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getTargetDirectory(): string
-    {
-        return $this->targetDirectory;
     }
 
     public function __destruct()

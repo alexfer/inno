@@ -17,7 +17,7 @@
             <div class="check-all">
                 <label class="relative flex ps-0.5 pe-2.5 py-1.5 items-start rounded-full cursor-pointer" for="any">
                     <input type="checkbox"
-                           class="mt-1 checkbox-teal"
+                           class="mt-1 checkbox-indigo"
                            id="any"/>
                     <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
                 </label>
@@ -75,7 +75,7 @@
                         </div>
                         <label class="inline-flex rounded-full cursor-pointer" for="i-{{ key }}">
                             <input type="checkbox" {{ disabled }} name="product[{{ key }}]" value="{{ product.id }}"
-                                   class="{{ disabled is null ? 'checks' : '' }}  checkbox-teal"
+                                   class="{{ disabled is null ? 'checks' : '' }}  checkbox-indigo"
                                    id="i-{{ key }}"/>
                             <span class="text-xs ms-3 text-nowrap text-gray-500 dark:text-white">{{ product.created|date(date_format) }}</span>
                         </label>
