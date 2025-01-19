@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\Attach;
 use Inno\Entity\Entry;
 use Inno\Entity\EntryAttachment;
-use Inno\Entity\EntryDetails;
 use Inno\Entity\Enum\EnumAttachment;
 use Inno\Entity\FileManager;
 use Inno\Entity\MarketPlace\StoreProduct;
@@ -47,6 +46,7 @@ class ImageManagerController extends AbstractController
             'total' => $pagination->getTotalItemCount(),
             'nextPage' => $pagination->getCurrentPageNumber() + 1,
             'pages' => ceil($pagination->getTotalItemCount() / (self::LIMIT - 1)),
+            'limit' => self::LIMIT,
             'url' => $this->generateUrl('dashboard.image-manager'),
             'html' => $this->renderView('dashboard/content/image-manager/index.html.twig', ['images' => $pagination]),
         ]);

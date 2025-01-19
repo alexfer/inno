@@ -218,7 +218,6 @@
     /*
         Front part
      */
-
     .badge-red {
         @apply bg-red-700 bg-opacity-75 text-white text-xs md:text-sm me-2 px-2.5 py-1 rounded-md dark:bg-red-900 dark:text-white;
     }
