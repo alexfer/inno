@@ -2,10 +2,10 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreBrandRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreBrandRepository;
 
 #[ORM\Entity(repositoryClass: StoreBrandRepository::class)]
 class StoreBrand

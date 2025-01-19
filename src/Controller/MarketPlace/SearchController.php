@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Inno\Controller\MarketPlace;
 
-use Inno\Entity\MarketPlace\StoreCategory;
-use Inno\Entity\MarketPlace\StoreCustomer;
-use Inno\Entity\MarketPlace\StoreProduct;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastic\Elasticsearch\Client;
@@ -14,6 +11,9 @@ use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Inno\Entity\MarketPlace\StoreCategory;
+use Inno\Entity\MarketPlace\StoreCustomer;
+use Inno\Entity\MarketPlace\StoreProduct;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

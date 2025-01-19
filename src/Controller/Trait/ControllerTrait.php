@@ -2,8 +2,8 @@
 
 namespace Inno\Controller\Trait;
 
-use Inno\Entity\MarketPlace\StoreCustomer;
 use Doctrine\ORM\EntityManagerInterface;
+use Inno\Entity\MarketPlace\StoreCustomer;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 trait ControllerTrait

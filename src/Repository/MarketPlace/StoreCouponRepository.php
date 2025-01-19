@@ -2,12 +2,12 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\Store;
-use Inno\Entity\MarketPlace\StoreCoupon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Statement;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\Store;
+use Inno\Entity\MarketPlace\StoreCoupon;
 
 /**
  * @extends ServiceEntityRepository<StoreCoupon>

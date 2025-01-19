@@ -2,9 +2,9 @@
 
 namespace Inno\Service\MarketPlace\Dashboard\Category\Interface;
 
+use Doctrine\ORM\EntityRepository;
 use Inno\Entity\MarketPlace\StoreCategoryProduct;
 use Inno\Repository\MarketPlace\StoreCategoryRepository;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormInterface;
 
 interface ServeInterface

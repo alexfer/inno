@@ -82,7 +82,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-span-12 md:col-span-4">
+        <div class="col-span-12 md:col-span-4 relative">
             <a href="{{ path('app_market_place_market', {slug:  product.store.slug}) }}"
                class="mb-1 w-75 block truncate">
                 <h5 class="text-lg font-medium hover:text-gray-700 tracking-tight truncate text-gray-500 dark:text-white">
@@ -92,7 +92,7 @@
                     </svg>{{ product.store.name }}
                 </h5>
             </a>
-            <div class="grow">
+            <div class="flex justify-between items-center">
                 <form class="shopping-cart" method="post"
                       action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
                     {% if product.reduce.unit is not empty %}
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    <div class="flex-nowrap mb-10 block w-72">
+                    <div class="flex-nowrap mb-2 md:mb-10 block w-72">
                         {% if product.reduce.unit is not empty %}
                             <span class="font-medium text-2xl text-success pr-2">
                                 {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
@@ -114,7 +114,7 @@
                         {% endif %}
                     </div>
                     {% if product.attributes|length %}
-                        <div id="attributes" class="block mt-xl-5 w-full">
+                        <div id="attributes" class="block w-full">
                             {% for attribute in product.attributes %}
                                 <input type="hidden" name="color" value="">
                                 <input type="hidden" name="size" value="">
@@ -151,7 +151,7 @@
                     {% endif %}
                     <button type="submit"
                             id="order"
-                            class="rounded bg-blue-600 md:bg-blu-600 px-3 pb-2 pt-2.5 mt-5 text-xs font-medium uppercase text-white cursor-pointer shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-blue-300 focus:outline-none"
+                            class="rounded bg-blue-600 md:bg-blu-600 px-3 pb-2 pt-2.5 mt-1 md:mt-5 text-xs font-medium uppercase text-white cursor-pointer shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-blue-300 focus:outline-none"
                             {% if product.quantity == 0 or (app.user and ('ROLE_USER' in app.user.roles or 'ROLE_ADMIN' in app.user.roles)) %}disabled{% endif %}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                              class="inline-flex w-4 h-4 me-2">
@@ -163,108 +163,101 @@
                         {{ 'store.product.add_cart'|trans }}
                     </button>
                 </form>
+                <span class="absolute end-0 top-16 md:top-28 pt-3">
+                    <div class="flex items-center w-full">
+                        <button class="bg-gray-100 text-gray-600 border-spacing-1.5 p-2 mr-2 rounded-md hover:bg-gray-300 hover:text-gray-500"
+                                title="{{ 'store.product.compare'|trans }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                 class="w-4 h-4">
+                                <path fill-rule="evenodd"
+                                      d="M8 3.5c-.771 0-1.537.022-2.297.066a1.124 1.124 0 0 0-1.058 1.028l-.018.214a.75.75 0 1 1-1.495-.12l.018-.221a2.624 2.624 0 0 1 2.467-2.399 41.628 41.628 0 0 1 4.766 0 2.624 2.624 0 0 1 2.467 2.399c.056.662.097 1.329.122 2l.748-.748a.75.75 0 1 1 1.06 1.06l-2 2.001a.75.75 0 0 1-1.061 0l-2-1.999a.75.75 0 0 1 1.061-1.06l.689.688a39.89 39.89 0 0 0-.114-1.815 1.124 1.124 0 0 0-1.058-1.028A40.138 40.138 0 0 0 8 3.5ZM3.22 7.22a.75.75 0 0 1 1.061 0l2 2a.75.75 0 1 1-1.06 1.06l-.69-.69c.025.61.062 1.214.114 1.816.048.56.496.996 1.058 1.028a40.112 40.112 0 0 0 4.594 0 1.124 1.124 0 0 0 1.058-1.028 39.2 39.2 0 0 0 .018-.219.75.75 0 1 1 1.495.12l-.018.226a2.624 2.624 0 0 1-2.467 2.399 41.648 41.648 0 0 1-4.766 0 2.624 2.624 0 0 1-2.467-2.399 41.395 41.395 0 0 1-.122-2l-.748.748A.75.75 0 1 1 1.22 9.22l2-2Z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                        <form class="add-wishlist inline" name="wishlist"
+                              action="{{ path('app_market_place_add_wishlist', {slug: product.slug}) }}">
+                            <input name="store" type="hidden" value="{{ product.store.id }}">
+                            {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
+                        </form>
+                    </div>
+                </span>
             </div>
-            <div class="flex mt-5 justify-start items-start">
-                <button class="bg-gray-100 text-gray-600 border-spacing-1.5 p-2 mr-2 rounded-md hover:bg-gray-300 hover:text-gray-500"
-                        data-twe-toggle="tooltip" title="{{ 'store.product.compare'|trans }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
-                        <path fill-rule="evenodd"
-                              d="M8 3.5c-.771 0-1.537.022-2.297.066a1.124 1.124 0 0 0-1.058 1.028l-.018.214a.75.75 0 1 1-1.495-.12l.018-.221a2.624 2.624 0 0 1 2.467-2.399 41.628 41.628 0 0 1 4.766 0 2.624 2.624 0 0 1 2.467 2.399c.056.662.097 1.329.122 2l.748-.748a.75.75 0 1 1 1.06 1.06l-2 2.001a.75.75 0 0 1-1.061 0l-2-1.999a.75.75 0 0 1 1.061-1.06l.689.688a39.89 39.89 0 0 0-.114-1.815 1.124 1.124 0 0 0-1.058-1.028A40.138 40.138 0 0 0 8 3.5ZM3.22 7.22a.75.75 0 0 1 1.061 0l2 2a.75.75 0 1 1-1.06 1.06l-.69-.69c.025.61.062 1.214.114 1.816.048.56.496.996 1.058 1.028a40.112 40.112 0 0 0 4.594 0 1.124 1.124 0 0 0 1.058-1.028 39.2 39.2 0 0 0 .018-.219.75.75 0 1 1 1.495.12l-.018.226a2.624 2.624 0 0 1-2.467 2.399 41.648 41.648 0 0 1-4.766 0 2.624 2.624 0 0 1-2.467-2.399 41.395 41.395 0 0 1-.122-2l-.748.748A.75.75 0 1 1 1.22 9.22l2-2Z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                </button>
-                <form class="add-wishlist inline" name="wishlist"
-                      action="{{ path('app_market_place_add_wishlist', {slug: product.slug}) }}">
-                    <input name="store" type="hidden" value="{{ product.store.id }}">
-                    {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
-                </form>
-            </div>
-            <div class="relative mt-5 overflow-x-auto rounded-t-lg sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-3 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ 'store.product.code'|trans }}</td>
-                        <td class="py-3">{{ 'store.product.code_prefix'|trans }}{{ product.code }}</td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-3 ps-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ 'store.product.availability'|trans }}</td>
-                        <td class="py-3">{% if product.quantity == 0 %}{{ 'store.product.out_stock'|trans }}{% else %}{{ 'store.product.in_stock'|trans }}{% endif %}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="info-table mt-2">
+                <tbody>
+                <tr>
+                    <td class="font-medium whitespace-nowrap">{{ 'store.product.code'|trans }}</td>
+                    <td>{{ 'store.product.code_prefix'|trans }}{{ product.code }}</td>
+                </tr>
+                <tr>
+                    <td class="font-medium whitespace-nowrap">{{ 'store.product.availability'|trans }}</td>
+                    <td>{% if product.quantity == 0 %}{{ 'store.product.out_stock'|trans }}{% else %}{{ 'store.product.in_stock'|trans }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     {% set _tab = app.request.get('tab') %}
-    <ul id="product-ifo-ref" class="mt-5 flex list-none flex-row flex-wrap border-b-0 ps-0"
+    <ul id="product-ifo-ref" class="tab-list-info"
         data-tabs-toggle="#productTabContent" role="tablist"
-        data-tabs-active-classes="bg-gray-100 text-blue-500 hover:text-blue-700 border-blue-600"
-        data-tabs-inactive-classes="text-gray-500 hover:text-blue-600 border-b border-gray-100 hover:border-gray-300">
+        data-tabs-active-classes="tab-list-info-active"
+        data-tabs-inactive-classes="tab-list-info-inactive">
         <li role="presentation">
-            <a
-                    href="#about"
-                    class="my-2 block border-x-0 border-b-2 border-t-0 px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-blue-600 hover:bg-neutral-100 focus:isolate focus:border-blue-600 dark:text-white/50 dark:hover:bg-neutral-700/60"
-                    data-tabs-target="#about"
-                    role="tab"
-                    aria-controls="about"
-                    aria-selected="{% if _tab == 'about' %}true{% else %}false{% endif %}">{{ 'product.details'|trans }}</a>
+            <a href="#about"
+               data-tabs-target="#about"
+               role="tab"
+               aria-controls="about"
+               aria-selected="{% if _tab == 'about' %}true{% else %}false{% endif %}">{{ 'product.details'|trans }}</a>
         </li>
         <li role="presentation">
-            <a
-                    href="#product-info"
-                    class="my-2 block border-x-0 border-b-2 border-t-0 px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-blue-600 hover:bg-neutral-100 focus:isolate focus:border-blue-600 dark:text-white/50 dark:hover:bg-neutral-700/60"
-                    data-tabs-target="#product-info"
-                    role="tab"
-                    aria-controls="product-info"
-                    aria-selected="{% if _tab == 'product-info' %}true{% else %}false{% endif %}">{{ 'product.information'|trans }}</a>
+            <a href="#product-info"
+               data-tabs-target="#product-info"
+               role="tab"
+               aria-controls="product-info"
+               aria-selected="{% if _tab == 'product-info' %}true{% else %}false{% endif %}">{{ 'product.information'|trans }}</a>
         </li>
         <li role="presentation">
-            <a
-                    href="#seller-info"
-                    class="my-2 block border-x-0 border-b-2 border-t-0 px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:border-blue-600 hover:isolate hover:bg-neutral-100 focus:isolate focus:border-blue-600 dark:text-white/50 dark:hover:bg-neutral-700/60"
-                    data-tabs-target="#seller-info"
-                    role="tab"
-                    aria-controls="seller-info"
-                    aria-selected="{% if _tab == 'seller-info' %}true{% else %}false{% endif %}">{{ 'product.seller.info'|trans }}</a>
+            <a href="#seller-info"
+               data-tabs-target="#seller-info"
+               role="tab"
+               aria-controls="seller-info"
+               aria-selected="{% if _tab == 'seller-info' %}true{% else %}false{% endif %}">{{ 'product.seller.info'|trans }}</a>
         </li>
         <li role="presentation">
-            <a
-                    href="#seller-contact"
-                    class="my-2 block border-x-0 border-b-2 border-t-0 px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-blue-600 hover:bg-neutral-100 focus:isolate focus:border-blue-600 dark:text-white/50 dark:hover:bg-neutral-700/60"
-                    data-tabs-target="#seller-contact"
-                    role="tab"
-                    aria-controls="tabs-contact"
-                    aria-selected="{% if _tab == 'tabs-contact' %}true{% else %}false{% endif %}">{{ 'product.seller.contact'|trans }}</a>
+            <a href="#seller-contact"
+               data-tabs-target="#seller-contact"
+               role="tab"
+               aria-controls="tabs-contact"
+               aria-selected="{% if _tab == 'tabs-contact' %}true{% else %}false{% endif %}">{{ 'product.seller.contact'|trans }}</a>
         </li>
     </ul>
     <div id="productTabContent" class="mb-6">
-        <div class="hidden transition-opacity duration-150 ease-linear data-[twe-tab-active]:block p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+        <div class="hidden tab-content-info"
              id="about"
              role="tabpanel"
              aria-labelledby="about-tab">
             <h5 class="block text-lg font-medium text-gray-600 py-3">{{ product.short_name }}</h5>
             <div class="text-sm font-light text-gray-500 dark:text-gray-400">{{ product.description|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
         </div>
-        <div class="hidden transition-opacity duration-150 ease-linear rounded-lg bg-gray-50 dark:bg-gray-800"
+        <div class="hidden tab-content-info"
              id="product-info"
              role="tabpanel"
              aria-labelledby="product-info-tab">
             <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table class="info-table">
                     <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="py-3 px-5 min-w-10 max-w-10">{{ 'label.form.sku'|trans }}</th>
-                        <td class="p-3 text-gray-500">{{ product.sku }}</td>
+                    <tr>
+                        <th>{{ 'label.form.sku'|trans }}</th>
+                        <td>{{ product.sku }}</td>
                     </tr>
                     {% if product.pckg %}
-                        <tr class="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th class="py-3 px-5">{{ 'label.form.pckg_quantity'|trans }}</th>
-                            <td class="p-3 text-gray-500">{{ product.pckg }}</td>
+                        <tr>
+                            <th>{{ 'label.form.pckg_quantity'|trans }}</th>
+                            <td>{{ product.pckg }}</td>
                         </tr>
                     {% endif %}
-                    <tr class="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th class="py-3 px-5">{{ 'label.form.quantity'|trans }}</th>
-                        <td class="p-3 text-gray-500">
+                    <tr>
+                        <th>{{ 'label.form.quantity'|trans }}</th>
+                        <td>
                             {% if product.quantity == 0 %}
                                 {{ 'store.product.out_stock'|trans }}
                             {% else %}
@@ -272,37 +265,37 @@
                             {% endif %}
                         </td>
                     </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="py-3 px-5">{{ 'store.brand'|trans }}</th>
-                        <td class="p-3 text-gray-500">{{ product.brand|default('N/a') }}</td>
+                    <tr>
+                        <th>{{ 'store.brand'|trans }}</th>
+                        <td>{{ product.brand|default('N/a') }}</td>
                     </tr>
-                    <tr class="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th class="py-3 px-5">{{ 'store.supplier'|trans }}</th>
-                        <td class="p-3 text-gray-500">{{ product.supplier|default('N/a') }}</td>
+                    <tr>
+                        <th>{{ 'store.supplier'|trans }}</th>
+                        <td>{{ product.supplier|default('N/a') }}</td>
                     </tr>
-                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="py-3 px-5">{{ 'store.manufacturer'|trans }}</th>
-                        <td class="p-3 text-gray-500">{{ product.manufacturer|default('N/a') }}</td>
+                    <tr>
+                        <th>{{ 'store.manufacturer'|trans }}</th>
+                        <td>{{ product.manufacturer|default('N/a') }}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="hidden transition-opacity duration-150 ease-linear p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+        <div class="hidden tab-content-info"
              id="seller-info"
              role="tabpanel"
              aria-labelledby="seller-info-tab">
             <h5 class="block text-lg font-medium text-gray-600 py-3">{{ product.store.name }}</h5>
             <div class="text-sm font-light text-gray-500 dark:text-gray-400">{{ product.store.description|default('info.no_content'|trans)|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
         </div>
-        <div class="hidden transition-opacity duration-150 ease-linear p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+        <div class="hidden tab-content-info"
              id="seller-contact"
              role="tabpanel"
              aria-labelledby="seller-contact-tab">
             <h5 class="block text-lg font-medium text-gray-600 py-3">{{ 'product.seller.contact'|trans }}</h5>
-            <div class="grid grid-cols-12 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {% if product.store.phone is not null or product.store.email is not null or product.store.website is not null %}
-                    <div class="col-span-4">
+                    <div>
                         <form class="group" id="form-message" action="{{ path('market_place_obtain_message') }}"
                               method="post" autocomplete="off" novalidate="">
                             <div class="relative">
@@ -333,15 +326,16 @@
                             {% endif %}
                         </form>
                     </div>
-                    <div class="col-span-8">
-                        <ul class="list-none ms-2">
+                    <div>
+                        <ul class="ms-2">
                             {% if product.store.phone %}
                                 <li class="mb-1">
                                     <a class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
                                        href="tel:{{ product.store.phone }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 inline-flex me-3">
-                                            <path d="m4.922 6.752-1.067.534a7.52 7.52 0 0 0 4.859 4.86l.534-1.068a1 1 0 0 1 1.046-.542l2.858.44a1 1 0 0 1 .848.988V13a1 1 0 0 1-1 1h-2c-.709 0-1.4-.082-2.062-.238a9.012 9.012 0 0 1-6.7-6.7A9.024 9.024 0 0 1 2 5V3a1 1 0 0 1 1-1h1.036a1 1 0 0 1 .988.848l.44 2.858a1 1 0 0 1-.542 1.046Z" />
-                                            <path d="M9.22 5.72a.75.75 0 0 0 1.06 1.06l2.22-2.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69L9.22 5.72Z" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                             class="w-4 h-4 inline-flex me-3">
+                                            <path d="m4.922 6.752-1.067.534a7.52 7.52 0 0 0 4.859 4.86l.534-1.068a1 1 0 0 1 1.046-.542l2.858.44a1 1 0 0 1 .848.988V13a1 1 0 0 1-1 1h-2c-.709 0-1.4-.082-2.062-.238a9.012 9.012 0 0 1-6.7-6.7A9.024 9.024 0 0 1 2 5V3a1 1 0 0 1 1-1h1.036a1 1 0 0 1 .988.848l.44 2.858a1 1 0 0 1-.542 1.046Z"/>
+                                            <path d="M9.22 5.72a.75.75 0 0 0 1.06 1.06l2.22-2.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69L9.22 5.72Z"/>
                                         </svg>{{ product.store.phone }}
                                     </a>
                                 </li>
@@ -350,8 +344,11 @@
                                 <li class="mb-1">
                                     <a class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
                                        href="mailto:{{ product.store.email }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 inline-flex me-3">
-                                            <path fill-rule="evenodd" d="M1.756 4.568A1.5 1.5 0 0 0 1 5.871V12.5A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5V5.87a1.5 1.5 0 0 0-.756-1.302l-5.5-3.143a1.5 1.5 0 0 0-1.488 0l-5.5 3.143Zm1.82 2.963a.75.75 0 0 0-.653 1.35l4.1 1.98a2.25 2.25 0 0 0 1.955 0l4.1-1.98a.75.75 0 1 0-.653-1.35L8.326 9.51a.75.75 0 0 1-.652 0L3.575 7.53Z" clip-rule="evenodd" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                             class="w-4 h-4 inline-flex me-3">
+                                            <path fill-rule="evenodd"
+                                                  d="M1.756 4.568A1.5 1.5 0 0 0 1 5.871V12.5A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5V5.87a1.5 1.5 0 0 0-.756-1.302l-5.5-3.143a1.5 1.5 0 0 0-1.488 0l-5.5 3.143Zm1.82 2.963a.75.75 0 0 0-.653 1.35l4.1 1.98a2.25 2.25 0 0 0 1.955 0l4.1-1.98a.75.75 0 1 0-.653-1.35L8.326 9.51a.75.75 0 0 1-.652 0L3.575 7.53Z"
+                                                  clip-rule="evenodd"/>
                                         </svg>{{ product.store.email }}
                                     </a>
                                 </li>
@@ -361,8 +358,11 @@
                                     <a target="_blank" rel="noreferrer"
                                        class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
                                        href="{{ path('app_market_place_market_redirect', {slug: product.store.slug}) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 inline-flex me-3">
-                                            <path fill-rule="evenodd" d="M3.757 4.5c.18.217.376.42.586.608.153-.61.354-1.175.596-1.678A5.53 5.53 0 0 0 3.757 4.5ZM8 1a6.994 6.994 0 0 0-7 7 7 7 0 1 0 7-7Zm0 1.5c-.476 0-1.091.386-1.633 1.427-.293.564-.531 1.267-.683 2.063A5.48 5.48 0 0 0 8 6.5a5.48 5.48 0 0 0 2.316-.51c-.152-.796-.39-1.499-.683-2.063C9.09 2.886 8.476 2.5 8 2.5Zm3.657 2.608a8.823 8.823 0 0 0-.596-1.678c.444.298.842.659 1.182 1.07-.18.217-.376.42-.586.608Zm-1.166 2.436A6.983 6.983 0 0 1 8 8a6.983 6.983 0 0 1-2.49-.456 10.703 10.703 0 0 0 .202 2.6c.72.231 1.49.356 2.288.356.798 0 1.568-.125 2.29-.356a10.705 10.705 0 0 0 .2-2.6Zm1.433 1.85a12.652 12.652 0 0 0 .018-2.609c.405-.276.78-.594 1.117-.947a5.48 5.48 0 0 1 .44 2.262 7.536 7.536 0 0 1-1.575 1.293Zm-2.172 2.435a9.046 9.046 0 0 1-3.504 0c.039.084.078.166.12.244C6.907 13.114 7.523 13.5 8 13.5s1.091-.386 1.633-1.427c.04-.078.08-.16.12-.244Zm1.31.74a8.5 8.5 0 0 0 .492-1.298c.457-.197.893-.43 1.307-.696a5.526 5.526 0 0 1-1.8 1.995Zm-6.123 0a8.507 8.507 0 0 1-.493-1.298 8.985 8.985 0 0 1-1.307-.696 5.526 5.526 0 0 0 1.8 1.995ZM2.5 8.1c.463.5.993.935 1.575 1.293a12.652 12.652 0 0 1-.018-2.608 7.037 7.037 0 0 1-1.117-.947 5.48 5.48 0 0 0-.44 2.262Z" clip-rule="evenodd" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                             class="w-4 h-4 inline-flex me-3">
+                                            <path fill-rule="evenodd"
+                                                  d="M3.757 4.5c.18.217.376.42.586.608.153-.61.354-1.175.596-1.678A5.53 5.53 0 0 0 3.757 4.5ZM8 1a6.994 6.994 0 0 0-7 7 7 7 0 1 0 7-7Zm0 1.5c-.476 0-1.091.386-1.633 1.427-.293.564-.531 1.267-.683 2.063A5.48 5.48 0 0 0 8 6.5a5.48 5.48 0 0 0 2.316-.51c-.152-.796-.39-1.499-.683-2.063C9.09 2.886 8.476 2.5 8 2.5Zm3.657 2.608a8.823 8.823 0 0 0-.596-1.678c.444.298.842.659 1.182 1.07-.18.217-.376.42-.586.608Zm-1.166 2.436A6.983 6.983 0 0 1 8 8a6.983 6.983 0 0 1-2.49-.456 10.703 10.703 0 0 0 .202 2.6c.72.231 1.49.356 2.288.356.798 0 1.568-.125 2.29-.356a10.705 10.705 0 0 0 .2-2.6Zm1.433 1.85a12.652 12.652 0 0 0 .018-2.609c.405-.276.78-.594 1.117-.947a5.48 5.48 0 0 1 .44 2.262 7.536 7.536 0 0 1-1.575 1.293Zm-2.172 2.435a9.046 9.046 0 0 1-3.504 0c.039.084.078.166.12.244C6.907 13.114 7.523 13.5 8 13.5s1.091-.386 1.633-1.427c.04-.078.08-.16.12-.244Zm1.31.74a8.5 8.5 0 0 0 .492-1.298c.457-.197.893-.43 1.307-.696a5.526 5.526 0 0 1-1.8 1.995Zm-6.123 0a8.507 8.507 0 0 1-.493-1.298 8.985 8.985 0 0 1-1.307-.696 5.526 5.526 0 0 0 1.8 1.995ZM2.5 8.1c.463.5.993.935 1.575 1.293a12.652 12.652 0 0 1-.018-2.608 7.037 7.037 0 0 1-1.117-.947 5.48 5.48 0 0 0-.44 2.262Z"
+                                                  clip-rule="evenodd"/>
                                         </svg>{{ product.store.website }}
                                     </a>
                                 </li>
@@ -371,8 +371,12 @@
                                 <li class="mb-1">
                                     <a class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
                                        href="#">
-                                        <svg class="w-4 h-4 inline-flex me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"/>
+                                        <svg class="w-4 h-4 inline-flex me-3" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                             viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                  stroke-width="2"
+                                                  d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"/>
                                         </svg>{{ product.store.country }} {% if product.store.address %}, {{ product.store.address }}{% endif %}
                                     </a>
                                 </li>

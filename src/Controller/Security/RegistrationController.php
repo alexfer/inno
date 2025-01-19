@@ -2,6 +2,7 @@
 
 namespace Inno\Controller\Security;
 
+use Doctrine\DBAL\Exception;
 use Inno\Entity\{MarketPlace\StoreCustomer, User};
 use Inno\Form\Type\MarketPlace\CustomerRegistrationType;
 use Inno\Form\Type\User\DetailsType;
@@ -9,7 +10,6 @@ use Inno\Repository\{UserDetailsRepository, UserRepository};
 use Inno\Repository\MarketPlace\{StoreAddressRepository, StoreCustomerRepository};
 use Inno\Service\MarketPlace\Store\Order\Interface\OrderServiceInterface;
 use Inno\Service\Validator\Interface\CustomerRegistrationValidatorInterface;
-use Doctrine\DBAL\Exception;
 use Psr\Container\{ContainerExceptionInterface, NotFoundExceptionInterface};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;

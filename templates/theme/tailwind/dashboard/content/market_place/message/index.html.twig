@@ -16,9 +16,10 @@
                                    href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}"
                                    class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">
                                     {% if message.product.picture %}
-                                        {% set _picture = 'storage/product/' ~ message.product.id ~ '/' ~ message.product.picture %}
+                                        {% set _picture = message.product.path ~ '/' ~ message.product.picture %}
                                         <picture class="block bg-white dark:bg-gray-600">
-                                            <img src="{{ asset(_picture) }}" class="block w-16 h-auto border rounded-lg p-3"
+                                            <img src="{{ asset(_picture) }}"
+                                                 class="block w-16 h-auto border rounded-lg p-3"
                                                  alt="{{ message.product.short_name }}">
                                         </picture>
                                     {% else %}

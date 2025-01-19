@@ -9,7 +9,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Inno\Entity\Attach;
 use Inno\Entity\Entry;
 use Inno\Entity\EntryAttachment;
-use Inno\Entity\EntryDetails;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 
 /**

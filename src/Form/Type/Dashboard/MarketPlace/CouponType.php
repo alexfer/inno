@@ -2,9 +2,9 @@
 
 namespace Inno\Form\Type\Dashboard\MarketPlace;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreCoupon;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{ChoiceType,

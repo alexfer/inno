@@ -35,7 +35,8 @@
                     </svg>
                     <span class="ms-3">{{ 'menu.dashboard'|trans }}</span>
                     {% set count_messages = msg.dashboard(app.user.id) %}
-                    <div id="hub" class="absolute inline-flex items-center{{ count_messages > 0 ? ' animate-bounce' : '' }} justify-center w-7 h-7 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ count_messages }}</div>
+                    <div id="hub"
+                         class="absolute inline-flex items-center{{ count_messages > 0 ? ' animate-bounce' : '' }} justify-center w-7 h-7 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ count_messages }}</div>
                 </a>
             </li>
             <li>

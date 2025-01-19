@@ -2,8 +2,8 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StorePaymentGatewayStoreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StorePaymentGatewayStoreRepository;
 
 #[ORM\Entity(repositoryClass: StorePaymentGatewayStoreRepository::class)]
 class StorePaymentGatewayStore

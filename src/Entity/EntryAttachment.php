@@ -2,9 +2,9 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\EntryAttachmentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\EntryAttachmentRepository;
 
 #[ORM\Entity(repositoryClass: EntryAttachmentRepository::class)]
 class EntryAttachment

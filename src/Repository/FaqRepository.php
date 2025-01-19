@@ -2,9 +2,9 @@
 
 namespace Inno\Repository;
 
-use Inno\Entity\Faq;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\Faq;
 
 /**
  * @extends ServiceEntityRepository<Faq>

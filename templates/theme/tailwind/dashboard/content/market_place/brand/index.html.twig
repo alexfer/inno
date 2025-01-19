@@ -55,9 +55,11 @@
                         <span class="text-xs ms-3 text-nowrap text-gray-500 dark:text-white">{{ brand.storeProductBrands.count ? 'text.cant.delete'|trans : 'text.notused'|trans }}</span>
                     </label>
                     <div class="my-1.5 flex justify-between items-center">
-                        <a href="{{ path('app_dashboard_market_place_edit_brand', {store: brand.store.id, id: brand.id}) }}" class="font-medium text-lg text-indigo-700 dark:text-indigo-300 line-clamp-1">{{ brand.name }}</a>
+                        <a href="{{ path('app_dashboard_market_place_edit_brand', {store: brand.store.id, id: brand.id}) }}"
+                           class="font-medium text-lg text-indigo-700 dark:text-indigo-300 line-clamp-1">{{ brand.name }}</a>
                         {% if brand.url %}
-                            <a href="{{ brand.url }}" target="_blank" class="text-blue-500 font-medium hover:underline underline-offset-4 line-clamp-1">{{ brand.url }}</a>
+                            <a href="{{ brand.url }}" target="_blank"
+                               class="text-blue-500 font-medium hover:underline underline-offset-4 line-clamp-1">{{ brand.url }}</a>
                         {% endif %}
                     </div>
                 </div>

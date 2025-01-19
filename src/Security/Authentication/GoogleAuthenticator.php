@@ -2,10 +2,10 @@
 
 namespace Inno\Security\Authentication;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreAddress;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
 use League\OAuth2\Client\Provider\GoogleUser;

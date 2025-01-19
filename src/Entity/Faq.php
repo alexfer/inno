@@ -2,9 +2,9 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\FaqRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\FaqRepository;
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
 class Faq

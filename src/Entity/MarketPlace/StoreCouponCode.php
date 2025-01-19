@@ -2,10 +2,10 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreCouponCodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreCouponCodeRepository;
 
 #[ORM\Entity(repositoryClass: StoreCouponCodeRepository::class)]
 class StoreCouponCode

@@ -1,6 +1,6 @@
 create function backdrop_products(store_id integer, query text DEFAULT NULL::text, start integer DEFAULT 0,
                                   row_count integer DEFAULT 25) returns json
-    language plpgsql
+    language 'plpgsql'
 as
 $$
 DECLARE
@@ -40,7 +40,7 @@ BEGIN
                                                             AND sc.type = 'product')
                                       ) AS product
                       FROM store_product p
-                      WHERE LOWER(p.short_name) LIKE LOWER('%' || query::text || '%')
+                      WHERE LOWER(p.short_name) LIKE LOWER('%' || backdrop_products.query::text || '%')
                         AND p.store_id = backdrop_products.store_id
                       ORDER BY product DESC
                       OFFSET start LIMIT row_count)
@@ -51,7 +51,7 @@ BEGIN
     SELECT COUNT(*)
     INTO rows_count
     FROM store_product p
-    WHERE LOWER(p.short_name) LIKE LOWER('%' || query::text || '%')
+    WHERE LOWER(p.short_name) LIKE LOWER('%' || backdrop_products.query::text || '%')
       AND p.store_id = backdrop_products.store_id;
 
     RETURN json_build_object(

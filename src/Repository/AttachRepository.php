@@ -2,11 +2,11 @@
 
 namespace Inno\Repository;
 
-use Inno\Entity\Attach;
-use Inno\Entity\UserDetails;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\Attach;
+use Inno\Entity\UserDetails;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 
 /**

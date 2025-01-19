@@ -2,12 +2,12 @@
 
 namespace Inno\Service\MarketPlace\Store\Order;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Inno\Entity\MarketPlace\{Store, StoreCustomer, StoreCustomerOrders, StoreOrders, StoreOrdersProduct};
 use Inno\Service\MarketPlace\Store\Order\Interface\ProductServiceInterface;
 use Inno\Storage\MarketPlace\FrontSessionHandler;
 use Inno\Storage\MarketPlace\FrontSessionInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProductService implements ProductServiceInterface

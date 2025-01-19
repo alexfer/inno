@@ -2,11 +2,11 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreInvoiceRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreInvoiceRepository;
 
 #[ORM\Entity(repositoryClass: StoreInvoiceRepository::class)]
 #[ORM\Index(name: 'invoice_number_idx', columns: ['number'])]

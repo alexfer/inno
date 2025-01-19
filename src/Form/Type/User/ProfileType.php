@@ -71,13 +71,13 @@ class ProfileType extends AbstractType
             ->add('picture', FileType::class, [
                 'mapped' => false,
                 'attr' => [
-                    'accept' => 'image/png, image/jpeg, image/webp',
+                    'accept' => 'image/png, image/jpeg, image/webp, image/svg+xml',
                     'max' => 52428800
                 ],
                 'constraints' => [
                     new Image([
                         'maxSize' => ini_get('post_max_size'),
-                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'],
                         'mimeTypesMessage' => 'form.picture.not_valid_type',
                     ]),
                 ],

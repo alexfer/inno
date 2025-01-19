@@ -2,12 +2,12 @@
 
 namespace Inno\Command;
 
-use Inno\Command\Elastic\ElasticServiceInterface;
-use Inno\Entity\MarketPlace\StoreProduct;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
+use Inno\Command\Elastic\ElasticServiceInterface;
+use Inno\Entity\MarketPlace\StoreProduct;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

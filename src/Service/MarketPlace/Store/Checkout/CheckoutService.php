@@ -2,6 +2,8 @@
 
 namespace Inno\Service\MarketPlace\Store\Checkout;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Enum\EnumStoreOrderStatus,
     StoreCarrier,
     StoreCustomer,
@@ -14,8 +16,6 @@ use Inno\Helper\MarketPlace\MarketPlaceHelper;
 use Inno\Service\MarketPlace\Store\Checkout\Interface\CheckoutServiceInterface;
 use Inno\Storage\MarketPlace\FrontSessionHandler;
 use Inno\Storage\MarketPlace\FrontSessionInterface;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\{RequestStack, Response};
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;

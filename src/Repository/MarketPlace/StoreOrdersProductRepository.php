@@ -2,12 +2,12 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\Store;
-use Inno\Entity\MarketPlace\StoreOrders;
-use Inno\Entity\MarketPlace\StoreOrdersProduct;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\Store;
+use Inno\Entity\MarketPlace\StoreOrders;
+use Inno\Entity\MarketPlace\StoreOrdersProduct;
 
 /**
  * @extends ServiceEntityRepository<StoreOrdersProduct>

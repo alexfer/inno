@@ -2,8 +2,8 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\UserSocialRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\UserSocialRepository;
 
 #[ORM\Entity(repositoryClass: UserSocialRepository::class)]
 class UserSocial

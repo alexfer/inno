@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Inno\Controller\MarketPlace;
 
-use Inno\Entity\MarketPlace\{StoreCategory, StoreCustomer, StoreProduct};
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Inno\Entity\MarketPlace\{StoreCategory, StoreCustomer, StoreProduct};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{Request, RequestStack, Response};
 use Symfony\Component\Routing\Attribute\Route;

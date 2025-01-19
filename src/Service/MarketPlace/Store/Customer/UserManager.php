@@ -2,10 +2,10 @@
 
 namespace Inno\Service\MarketPlace\Store\Customer;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\User;
 use Inno\Service\MarketPlace\Store\Customer\Interface\UserManagerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 readonly class UserManager implements UserManagerInterface

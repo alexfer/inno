@@ -2,8 +2,8 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreProductAttributeValueRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreProductAttributeValueRepository;
 
 #[ORM\Entity(repositoryClass: StoreProductAttributeValueRepository::class)]
 class StoreProductAttributeValue

@@ -2,10 +2,10 @@
 
 namespace Inno\Service\MarketPlace\Store\Coupon;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store, StoreCoupon, StoreCouponCode, StoreCouponUsage, StoreCustomer};
 use Inno\Service\MarketPlace\Currency;
 use Inno\Service\MarketPlace\Store\Coupon\Interface\CouponServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 readonly class CouponService implements CouponServiceInterface

@@ -2,6 +2,7 @@
 
 namespace Inno\Service\MarketPlace\Dashboard\Configuration;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\Attach;
 use Inno\Entity\MarketPlace\StoreCarrier;
 use Inno\Entity\MarketPlace\StorePaymentGateway;
@@ -9,7 +10,6 @@ use Inno\Service\FileUploader;
 use Inno\Service\Validator\Interface\CarrierValidatorInterface;
 use Inno\Service\Validator\Interface\ImageValidatorInterface;
 use Inno\Service\Validator\Interface\PaymentGatewayValidatorInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

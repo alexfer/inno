@@ -2,11 +2,11 @@
 
 namespace Inno\Service\MarketPlace\Store\Order;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreOrders;
 use Inno\Entity\MarketPlace\StoreOrdersProduct;
 use Inno\Helper\MarketPlace\MarketPlaceHelper;
 use Inno\Service\MarketPlace\Store\Order\Interface\ComputeInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 class Compute implements ComputeInterface
 {

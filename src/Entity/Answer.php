@@ -2,10 +2,10 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\AnswerRepository;
 use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\AnswerRepository;
 
 #[ORM\Entity(repositoryClass: AnswerRepository::class)]
 class Answer

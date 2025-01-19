@@ -2,14 +2,14 @@
 
 namespace Inno\Entity;
 
-use Inno\Entity\MarketPlace\Store;
-use Inno\Entity\MarketPlace\StoreProductAttach;
-use Inno\Repository\AttachRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Entity\MarketPlace\Store;
+use Inno\Entity\MarketPlace\StoreProductAttach;
+use Inno\Repository\AttachRepository;
 
 #[ORM\Entity(repositoryClass: AttachRepository::class)]
 class Attach

@@ -2,10 +2,10 @@
 
 namespace Inno\Service\MarketPlace\Store\Customer;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{StoreAddress, StoreCustomer, StoreCustomerOrders, StoreOrders};
 use Inno\Entity\User;
 use Inno\Service\MarketPlace\Store\Customer\Interface\CustomerServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

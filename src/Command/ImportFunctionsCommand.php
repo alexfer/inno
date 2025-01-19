@@ -62,10 +62,13 @@ class ImportFunctionsCommand extends Command
 
         foreach ($files as $file) {
             try {
+                $this->connection->beginTransaction();
                 $this->connection->prepare($file->getContents())->executeStatement();
+                $this->connection->commit();
                 $io->text('Importing ' . $file->getFilename());
             } catch (Exception $e) {
-                $io->error('Error: ' . $e->getMessage());
+                $io->error('Error: ' . $e->getMessage() . '. File: ' . $file->getFilename());
+                $this->connection->rollback();
             }
 
         }

@@ -2,11 +2,11 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\Attach;
-use Inno\Entity\MarketPlace\StorePaymentGateway;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\Attach;
+use Inno\Entity\MarketPlace\StorePaymentGateway;
 
 /**
  * @extends ServiceEntityRepository<StorePaymentGateway>

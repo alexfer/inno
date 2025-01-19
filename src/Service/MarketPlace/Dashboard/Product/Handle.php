@@ -2,6 +2,7 @@
 
 namespace Inno\Service\MarketPlace\Dashboard\Product;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{StoreBrand,
     StoreManufacturer,
     StoreProduct,
@@ -12,7 +13,6 @@ use Inno\Entity\MarketPlace\{StoreBrand,
     StoreProductSupplier,
     StoreSupplier};
 use Inno\Helper\MarketPlace\StoreAttributeValues;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\{Request, RequestStack};
 
 abstract class Handle

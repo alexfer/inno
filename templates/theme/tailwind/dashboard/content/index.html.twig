@@ -28,7 +28,8 @@
                 </div>
                 <div class="block w-full py-2">
                     {% for store in stores %}
-                        <div id="el-{{ store.id }}" class="grid-loop-cols-4 {{ store.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
+                        <div id="el-{{ store.id }}"
+                             class="grid-loop-cols-4 {{ store.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
                             <div class="ps-2.5 p-0 md:py-1.5">
                                 <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
                                    href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
@@ -99,7 +100,8 @@
                             <p class="text-sm font-medium text-gray-800 dark:text-white">{{ countries[customer.country] }}</p>
                         </div>
                         <div class="ps-2.5 pt-3 flex-1">
-                            <p class="text-sm text-gray-500 dark:text-white">{{ 'table.header.orders'|trans }}<span class="badge-yellow ms-1.5">{{ customer.orders }}</span>
+                            <p class="text-sm text-gray-500 dark:text-white">{{ 'table.header.orders'|trans }}<span
+                                        class="badge-yellow ms-1.5">{{ customer.orders }}</span>
                             </p>
                         </div>
                         <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">

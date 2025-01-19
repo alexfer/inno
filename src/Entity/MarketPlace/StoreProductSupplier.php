@@ -2,8 +2,8 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreProductSupplierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreProductSupplierRepository;
 
 #[ORM\Entity(repositoryClass: StoreProductSupplierRepository::class)]
 class StoreProductSupplier

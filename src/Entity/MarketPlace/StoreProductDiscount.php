@@ -2,9 +2,9 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreProductDiscountRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreProductDiscountRepository;
 
 #[ORM\Entity(repositoryClass: StoreProductDiscountRepository::class)]
 class StoreProductDiscount

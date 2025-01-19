@@ -2,9 +2,9 @@
 
 namespace Inno\Entity\MarketPlace;
 
+use Doctrine\ORM\Mapping as ORM;
 use Inno\Entity\MarketPlace\Enum\EnumOperation;
 use Inno\Repository\MarketPlace\StoreOperationRepository;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StoreOperationRepository::class)]
 #[ORM\Index(name: 'revision_idx', columns: ['revision'])]

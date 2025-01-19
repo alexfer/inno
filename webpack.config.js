@@ -20,6 +20,7 @@ Encore
     .addEntry('message-js', `./assets/tailwind/js/message.js`)
     .addEntry('market-js', `./assets/tailwind/js/market.js`)
     .addEntry('operation-js', `./assets/tailwind/js/dashboard/operation.js`)
+    .addEntry('image-manager-js', `./assets/tailwind/js/dashboard/image-manager.js`)
     .addEntry('dashboard-js', `./assets/tailwind/js/dashboard/index.js`)
     .addEntry('checkout-js', `./assets/tailwind/js/checkout.js`)
     .addEntry('configuration-js', `./assets/tailwind/js/dashboard/configuration.js`)

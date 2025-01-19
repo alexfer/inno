@@ -2,11 +2,11 @@
 
 namespace Inno\Repository;
 
-use Inno\Entity\User;
-use Inno\Entity\UserDetails;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\User;
+use Inno\Entity\UserDetails;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**

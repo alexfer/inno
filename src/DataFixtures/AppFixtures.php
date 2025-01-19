@@ -2,11 +2,11 @@
 
 namespace Inno\DataFixtures;
 
-use Inno\DataFixtures\MarketPlace\Fixtures;
-use Inno\Entity\{Category, Faq, User, UserDetails, UserSocial};
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Inno\DataFixtures\MarketPlace\Fixtures;
+use Inno\Entity\{Category, Faq, User, UserDetails, UserSocial};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
