@@ -2,6 +2,8 @@
 
 namespace Inno\Controller\Dashboard;
 
+use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\Entry;
 use Inno\Entity\MarketPlace\Enum\EnumStoreOrderStatus;
 use Inno\Entity\MarketPlace\Store;
@@ -11,8 +13,6 @@ use Inno\Entity\MarketPlace\StoreMessage;
 use Inno\Entity\MarketPlace\StoreOrders;
 use Inno\Entity\MarketPlace\StoreProduct;
 use Inno\Entity\User;
-use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

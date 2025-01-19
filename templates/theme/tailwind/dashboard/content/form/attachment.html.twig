@@ -107,7 +107,9 @@
             </div>
             <div class="flex justify-between items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
                 <div class="flex items-center space-x-2">
-                    <button type="button" id="inject" data-id="{{ id }}" data-target="{{ target }}" data-url="{{ path('dashboard.image-manager.inject') }}" class="btn-red">{{ 'form.action.insert'|trans }}</button>
+                    <button type="button" id="inject" data-id="{{ id }}" data-target="{{ target }}"
+                            data-url="{{ path('dashboard.image-manager.inject') }}"
+                            class="btn-red">{{ 'form.action.insert'|trans }}</button>
                     <button id="close" data-modal-hide="image-manager" type="button"
                             class="hidden md:block btn-gray-strong">{{ 'form.action.close'|trans }}</button>
                 </div>
@@ -128,10 +130,13 @@
                               data-original="currentColor" fill="currentColor"/>
                     </svg>{{ 'table.header.upload'|trans }}
                     <input type="file" id="image" data-url="{{ path('dashboard.image-manager.attach') }}"
-                           name="images[]" class="sr-only" accept="image/png, image/jpeg, image/webp" multiple>
+                           name="images[]" class="sr-only" accept="image/png, image/jpeg, image/webp, image/svg+xml"
+                           max="52428800" multiple>
                 </label>
             </div>
         </div>
+        <div class="absolute hidden max-w-md z-10 bottom-5 end-4 p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+             role="alert"></div>
     </div>
 </div>
 {% block javascripts %}

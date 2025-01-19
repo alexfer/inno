@@ -2,8 +2,8 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreWishlistRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreWishlistRepository;
 
 #[ORM\Entity(repositoryClass: StoreWishlistRepository::class)]
 class StoreWishlist

@@ -318,7 +318,7 @@ class ProductController extends AbstractController
 
         $exists = $em->getRepository(FileManager::class)->findOneBy(['file' => $attach, 'owner' => $this->getUser()]);
 
-        if(!$exists) {
+        if (!$exists) {
             foreach (['product_preview', 'product_view'] as $filter) {
                 if ($cacheManager->isStored($oldFile, $filter)) {
                     $cacheManager->remove($oldFile, $filter);

@@ -2,10 +2,10 @@
 
 namespace Inno\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreProduct;
 use Inno\Service\MarketPlace\Dashboard\Operation\Interface\OperationInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

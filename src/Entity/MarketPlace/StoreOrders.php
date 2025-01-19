@@ -2,14 +2,14 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Entity\MarketPlace\Enum\EnumStoreOrderStatus;
-use Inno\Repository\MarketPlace\StoreOrdersRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Entity\MarketPlace\Enum\EnumStoreOrderStatus;
+use Inno\Repository\MarketPlace\StoreOrdersRepository;
 
 #[ORM\Entity(repositoryClass: StoreOrdersRepository::class)]
 #[ORM\Index(name: 'session_index', columns: ['session'])]

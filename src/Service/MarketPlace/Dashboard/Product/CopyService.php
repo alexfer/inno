@@ -2,12 +2,12 @@
 
 namespace Inno\Service\MarketPlace\Dashboard\Product;
 
-use Inno\Entity\MarketPlace\StoreProduct;
-use Inno\Helper\MarketPlace\MarketPlaceHelper;
-use Inno\Service\MarketPlace\Dashboard\Product\Interface\CopyServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
+use Inno\Entity\MarketPlace\StoreProduct;
+use Inno\Helper\MarketPlace\MarketPlaceHelper;
+use Inno\Service\MarketPlace\Dashboard\Product\Interface\CopyServiceInterface;
 
 class CopyService implements CopyServiceInterface
 {

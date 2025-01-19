@@ -2394,6 +2394,10 @@
                 <source>constraint.formats</source>
                 <target>{ formats } up to { size }</target>
             </trans-unit>
+            <trans-unit id="text.images.uploaded">
+                <source>text.images.uploaded</source>
+                <target>Image(s) uploaded successfully.</target>
+            </trans-unit>
             <trans-unit id="text.file.uploaded">
                 <source>text.file.uploaded</source>
                 <target>The file has been uploaded successfully.</target>

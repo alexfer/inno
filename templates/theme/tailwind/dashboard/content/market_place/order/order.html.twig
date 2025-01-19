@@ -19,17 +19,21 @@
         </div>
         <div>
             <div class="grid grid-cols-2 gap-4">
-                <div class="font-semibold mb-2 dark:text-gray-400 text-end">{{ 'table.header.requested_at'|trans }}:</div>
+                <div class="font-semibold mb-2 dark:text-gray-400 text-end">{{ 'table.header.requested_at'|trans }}:
+                </div>
                 <div class="text-gray-500 dark:text-white">{{ order.createdAt|date(datetime_format) }}</div>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <div class="font-semibold mb-2 dark:text-gray-400 text-end">{{ 'table.header.planned_delivery_at'|trans }}:</div>
+                <div class="font-semibold mb-2 dark:text-gray-400 text-end">{{ 'table.header.planned_delivery_at'|trans }}
+                    :
+                </div>
                 <div class="text-gray-500 dark:text-white">-</div>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="font-semibold mb-2 dark:text-gray-400 text-end">{{ 'table.header.tracking'|trans }}:</div>
                 <div class="text-gray-500 dark:text-white">
-                    <a href="#" class="text-xs text-white px-2.5 py-1 rounded bg-blue-600 shadow">{{ 'text.check'|trans }}</a>
+                    <a href="#"
+                       class="text-xs text-white px-2.5 py-1 rounded bg-blue-600 shadow">{{ 'text.check'|trans }}</a>
                 </div>
             </div>
         </div>
@@ -112,7 +116,8 @@
                 <td class="px-6 py-3 border border-slate-100 text-end">{{ orderProduct.product.fee|amount_format }}{{ order.store.currency|currency }}</td>
                 <td class="px-6 py-3 border border-slate-100 text-end">{{ orderProduct.quantity }}</td>
                 <td class="px-6 py-3 border border-slate-100 text-end">
-                    {{ orderProduct.product.storeProductDiscount.value|amount_format }}<small>{{ orderProduct.product.storeProductDiscount.unit|convert(order.store.currency|currency) }}
+                    {{ orderProduct.product.storeProductDiscount.value|amount_format }}
+                    <small>{{ orderProduct.product.storeProductDiscount.unit|convert(order.store.currency|currency) }}
                 </td>
                 <td class="px-6 py-3 border border-slate-100 text-end">
                     {{ (amount * orderProduct.quantity)|amount_format }}{{ order.store.currency|currency }}

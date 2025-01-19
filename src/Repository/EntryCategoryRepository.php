@@ -2,9 +2,9 @@
 
 namespace Inno\Repository;
 
-use Inno\Entity\EntryCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\EntryCategory;
 
 /**
  * @extends ServiceEntityRepository<EntryCategory>

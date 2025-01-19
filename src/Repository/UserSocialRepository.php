@@ -2,9 +2,9 @@
 
 namespace Inno\Repository;
 
-use Inno\Entity\UserSocial;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\UserSocial;
 
 /**
  * @extends ServiceEntityRepository<UserSocial>

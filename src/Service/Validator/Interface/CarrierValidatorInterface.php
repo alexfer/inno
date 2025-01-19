@@ -4,7 +4,6 @@ namespace Inno\Service\Validator\Interface;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 interface CarrierValidatorInterface
 {

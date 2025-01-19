@@ -2,10 +2,10 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\{Store, StoreBrand};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\{Store, StoreBrand};
 
 /**
  * @extends ServiceEntityRepository<StoreBrand>

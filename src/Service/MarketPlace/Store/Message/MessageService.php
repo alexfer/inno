@@ -2,6 +2,7 @@
 
 namespace Inno\Service\MarketPlace\Store\Message;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\MarketPlace\StoreMessage;
@@ -9,7 +10,6 @@ use Inno\Entity\MarketPlace\StoreOrders;
 use Inno\Entity\MarketPlace\StoreProduct;
 use Inno\Entity\UserDetails;
 use Inno\Service\MarketPlace\Store\Message\Interface\MessageServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mercure\HubInterface;

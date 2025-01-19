@@ -2,10 +2,10 @@
 
 namespace Inno\Controller\Dashboard;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\User;
 use Inno\Form\Type\User\ChangePasswordProfileType;
-use Doctrine\ORM\EntityManagerInterface;
 use Inno\Service\MarketPlace\StoreTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{Request, Response,};

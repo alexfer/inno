@@ -2,8 +2,8 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreSocialRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreSocialRepository;
 
 #[ORM\Entity(repositoryClass: StoreSocialRepository::class)]
 class StoreSocial

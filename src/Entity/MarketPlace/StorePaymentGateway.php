@@ -2,13 +2,13 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Entity\Attach;
-use Inno\Repository\MarketPlace\StorePaymentGatewayRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Entity\Attach;
+use Inno\Repository\MarketPlace\StorePaymentGatewayRepository;
 
 #[ORM\Entity(repositoryClass: StorePaymentGatewayRepository::class)]
 class StorePaymentGateway

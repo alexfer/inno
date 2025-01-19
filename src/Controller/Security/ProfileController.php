@@ -2,6 +2,8 @@
 
 namespace Inno\Controller\Security;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Inno\Entity\Attach;
 use Inno\Entity\User;
 use Inno\Form\Type\User\ProfileType;
@@ -10,8 +12,6 @@ use Inno\Repository\UserDetailsRepository;
 use Inno\Repository\UserRepository;
 use Inno\Service\FileUploader;
 use Inno\Service\Validator\Interface\ImageValidatorInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;

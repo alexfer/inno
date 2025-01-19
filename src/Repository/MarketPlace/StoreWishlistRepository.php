@@ -2,9 +2,9 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\StoreWishlist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\StoreWishlist;
 
 /**
  * @extends ServiceEntityRepository<StoreWishlist>

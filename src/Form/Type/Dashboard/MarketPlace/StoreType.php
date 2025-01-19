@@ -2,9 +2,9 @@
 
 namespace Inno\Form\Type\Dashboard\MarketPlace;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store, StoreCarrier, StorePaymentGateway};
 use Inno\Service\MarketPlace\Currency;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{ChoiceType,
     EmailType,

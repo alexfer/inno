@@ -2,13 +2,13 @@
 
 namespace Inno\Service\MarketPlace\Dashboard\Operation;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\Enum\EnumOperation;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreOperation;
 use Inno\Service\MarketPlace\Dashboard\Operation\FactoryHandler\XlsxFactory;
 use Inno\Service\MarketPlace\Dashboard\Operation\FactoryHandler\XmlFactory;
 use Inno\Service\MarketPlace\Dashboard\Operation\Interface\HandleFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;

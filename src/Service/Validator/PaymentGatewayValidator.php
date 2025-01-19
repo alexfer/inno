@@ -3,7 +3,6 @@
 namespace Inno\Service\Validator;
 
 use Inno\Service\Validator\Interface\PaymentGatewayValidatorInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;

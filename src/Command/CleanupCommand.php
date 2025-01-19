@@ -2,8 +2,8 @@
 
 namespace Inno\Command;
 
-use Inno\Entity\MarketPlace\StoreOperation;
 use Doctrine\ORM\EntityManagerInterface;
+use Inno\Entity\MarketPlace\StoreOperation;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

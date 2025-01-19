@@ -2,6 +2,8 @@
 
 namespace Inno\DataFixtures\MarketPlace;
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreCarrier;
 use Inno\Entity\MarketPlace\StoreCarrierStore;
@@ -10,8 +12,6 @@ use Inno\Entity\MarketPlace\StorePaymentGateway;
 use Inno\Entity\MarketPlace\StorePaymentGatewayStore;
 use Inno\Entity\MarketPlace\StoreSocial;
 use Inno\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class StoreFixtures extends Fixture

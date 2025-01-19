@@ -1,8 +1,9 @@
 <div class="grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4">
     {% for key, image in images %}
-        {% set picture = 'storage/images/' ~ app.user.id ~ '/' ~ image.attachment.name  %}
+        {% set picture = 'storage/images/' ~ app.user.id ~ '/' ~ image.attachment.name %}
         <a href="#" class="pictures">
-            <img loading="lazy" class="h-auto max-w-full rounded-lg" src="{{ asset(picture)|imagine_filter('image_thumb') }}" alt="...">
+            <img loading="lazy" class="h-auto max-w-full rounded-lg"
+                 src="{{ asset(picture)|imagine_filter('image_thumb') }}" alt="...">
             <label class="absolute top-1 start-2 cursor-pointer w-full" for="i-{{ key }}">
                 <input type="checkbox" name="item[{{ image.attachment.id }}]" value="{{ image.attachment.id }}"
                        class="checkbox-indigo"

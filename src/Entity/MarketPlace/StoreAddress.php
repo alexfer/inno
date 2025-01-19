@@ -2,9 +2,9 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreAddressRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreAddressRepository;
 
 #[ORM\Entity(repositoryClass: StoreAddressRepository::class)]
 class StoreAddress

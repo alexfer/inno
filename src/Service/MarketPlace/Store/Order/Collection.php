@@ -2,12 +2,12 @@
 
 namespace Inno\Service\MarketPlace\Store\Order;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{StoreCustomer, StoreOrders};
 use Inno\Helper\MarketPlace\MarketPlaceHelper;
 use Inno\Service\MarketPlace\Store\Order\Interface\CollectionInterface;
 use Inno\Storage\MarketPlace\FrontSessionHandler;
 use Inno\Storage\MarketPlace\FrontSessionInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\{RequestStack};
 
 final class Collection implements CollectionInterface

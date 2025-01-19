@@ -2,11 +2,11 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\Attach;
-use Inno\Entity\MarketPlace\StoreCarrier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\Attach;
+use Inno\Entity\MarketPlace\StoreCarrier;
 
 /**
  * @extends ServiceEntityRepository<StoreCarrier>

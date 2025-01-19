@@ -2,10 +2,10 @@
 
 namespace Inno\Service\MarketPlace\Store\Order;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store, StoreCustomer, StoreCustomerOrders, StoreOrders, StoreOrdersProduct, StoreProduct};
 use Inno\Helper\MarketPlace\MarketPlaceHelper;
 use Inno\Service\MarketPlace\Store\Order\Interface\OrderServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\{RequestStack};
 use Symfony\Component\Uid\Uuid;
 

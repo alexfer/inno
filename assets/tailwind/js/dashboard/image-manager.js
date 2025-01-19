@@ -6,6 +6,7 @@ window.addEventListener('load', function () {
     const manageContent = document.getElementById('image-manager-content');
     const injectBtn = document.getElementById('inject');
     const attachments = document.getElementById('attachments');
+    const message = document.querySelector('[role="alert"]');
     let pictures = NodeList, ids = [];
 
     const loadContent = async (url) => {
@@ -13,6 +14,9 @@ window.addEventListener('load', function () {
         const data = await response.json();
         manageContent.innerHTML = data.html;
         loadMore.setAttribute('href', `${data.url}/?page=${data.nextPage}`);
+        if(data.total < data.limit) {
+            loadMore.classList.add('pointer-events-none', 'opacity-50');
+        }
     }
 
     loadMore.addEventListener('click', async (e) => {
@@ -21,7 +25,7 @@ window.addEventListener('load', function () {
         const data = await response.json();
         manageContent.insertAdjacentHTML('beforeend', data.html);
         if (data.nextPage > data.pages) {
-            loadMore.classList.add('pointer-events-none');
+            loadMore.classList.add('pointer-events-none', 'opacity-50');
         }
         loadMore.setAttribute('href', `${data.url}/?page=${data.nextPage}`);
     });
@@ -50,6 +54,7 @@ window.addEventListener('load', function () {
             });
 
             const data = await response.json();
+
             if (Object.keys(data.pictures).length > 0) {
                 for (const [key, value] of Object.entries(data.pictures)) {
                     const li = document.createElement('li');
@@ -57,7 +62,7 @@ window.addEventListener('load', function () {
                     const div = document.createElement('div');
                     li.classList.add('relative', 'my-1', 'mx-0.5', 'overflow-hidden', 'bg-cover', 'bg-no-repeat');
                     img.classList.add('h-auto', 'w-full', 'md:max-w-xs', 'rounded-lg', 'bg-white');
-                    img.setAttribute('src', value);
+                    img.setAttribute('src', value.toString());
                     div.classList.add('overlay');
                     div.setAttribute('id', 'overlay');
                     li.appendChild(img);
@@ -90,8 +95,21 @@ window.addEventListener('load', function () {
 
         const data = await response.json();
 
+        if (data.success === false) {
+            message.classList.remove('hidden');
+            message.innerHTML = data.message;
+            return;
+        }
+
         if (data.success) {
             await loadContent(data.url);
+            message.classList.remove('hidden');
+            message.innerHTML = data.message;
         }
+
+        setTimeout(() => {
+            message.innerHTML = '';
+            message.classList.add('hidden');
+        }, 3000);
     });
 });

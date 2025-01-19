@@ -2,9 +2,9 @@
 
 namespace Inno\Controller;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Inno\Controller\Trait\ControllerTrait;
 use Inno\Entity\{Category, Entry};
-use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{Request, Response};
 use Symfony\Component\Routing\Attribute\Route;

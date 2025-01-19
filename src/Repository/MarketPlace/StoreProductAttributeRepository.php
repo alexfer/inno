@@ -2,9 +2,9 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\StoreProductAttribute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\StoreProductAttribute;
 
 /**
  * @extends ServiceEntityRepository<StoreProductAttribute>

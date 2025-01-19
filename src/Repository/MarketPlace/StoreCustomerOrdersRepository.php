@@ -2,11 +2,11 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\{StoreCustomer, StoreCustomerOrders};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\{Connection, Exception};
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\{StoreCustomer, StoreCustomerOrders};
 
 /**
  * @extends ServiceEntityRepository<StoreCustomerOrders>

@@ -2,10 +2,10 @@
 
 namespace Inno\DataFixtures\MarketPlace;
 
-use Inno\Entity\MarketPlace\StoreCategory;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Inno\Entity\MarketPlace\StoreCategory;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoryFixtures extends Fixture

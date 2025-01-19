@@ -2,10 +2,10 @@
 
 namespace Inno\Controller\Dashboard;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\Answer;
 use Inno\Entity\Contact;
 use Inno\Service\Contact\Interface\HandleInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

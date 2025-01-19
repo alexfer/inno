@@ -2,15 +2,15 @@
 
 namespace Inno\Command\Elastic;
 
-use Inno\Entity\MarketPlace\Store;
-use Inno\Entity\MarketPlace\StoreCategory;
-use Inno\Entity\MarketPlace\StoreCategoryProduct;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Inno\Entity\MarketPlace\Store;
+use Inno\Entity\MarketPlace\StoreCategory;
+use Inno\Entity\MarketPlace\StoreCategoryProduct;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ElasticService implements ElasticServiceInterface

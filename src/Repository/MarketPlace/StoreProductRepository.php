@@ -2,10 +2,10 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\{Store, StoreProduct};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\{Connection, Exception, Statement};
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\{Store, StoreProduct};
 
 /**
  * @extends ServiceEntityRepository<StoreProduct>

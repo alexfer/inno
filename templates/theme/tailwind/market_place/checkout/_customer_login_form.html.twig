@@ -1,8 +1,11 @@
 {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
 <div class="flex flex-col border w-full px-16 mb-5 pt-3 rounded-md shadow-sm">
     <h2 class="text-xl text-center mt-5 pb-4 font-extrabold text-gray-600 dark:text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 inline-flex me-3">
-            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+             class="w-5 h-5 inline-flex me-3">
+            <path fill-rule="evenodd"
+                  d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"
+                  clip-rule="evenodd"/>
         </svg>
         {{ 'text.login'|trans }}</h2>
     {% if error %}
@@ -28,8 +31,11 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <div class="flex flex-row justify-between items-center">
             <a href="{{ path('app_forgot_password_request') }}">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 inline-flex me-1">
-                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-6 3.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7.293 5.293a1 1 0 1 1 .99 1.667c-.459.134-1.033.566-1.033 1.29v.25a.75.75 0 1 0 1.5 0v-.115a2.5 2.5 0 1 0-2.518-4.153.75.75 0 1 0 1.061 1.06Z" clip-rule="evenodd" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                     class="w-4 h-4 inline-flex me-1">
+                    <path fill-rule="evenodd"
+                          d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-6 3.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7.293 5.293a1 1 0 1 1 .99 1.667c-.459.134-1.033.566-1.033 1.29v.25a.75.75 0 1 0 1.5 0v-.115a2.5 2.5 0 1 0-2.518-4.153.75.75 0 1 0 1.061 1.06Z"
+                          clip-rule="evenodd"/>
                 </svg>
                 {{ 'text.forgot_password'|trans }}</a>
             {{ form_widget(form.login, { label: 'form.action.login', attr: {

@@ -2,9 +2,9 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\EntryDetailsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\EntryDetailsRepository;
 
 #[ORM\Entity(repositoryClass: EntryDetailsRepository::class)]
 class EntryDetails

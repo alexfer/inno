@@ -2,10 +2,10 @@
 
 namespace Inno\Service;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\MarketPlace\StoreMessage;
 use Inno\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 
 final readonly class MessageCounter
 {

@@ -2,12 +2,12 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\{StoreCoupon, StoreCouponCode, StoreCouponUsage};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\{StoreCoupon, StoreCouponCode, StoreCouponUsage};
 
 /**
  * @extends ServiceEntityRepository<StoreCouponCode>

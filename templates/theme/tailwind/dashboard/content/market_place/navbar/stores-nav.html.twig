@@ -5,13 +5,15 @@
                 data-url="{{ path('app_dashboard_market_place_search_store') }}"
                 class="relative text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-1 w-60 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 m-2 text-center inline-flex items-center dark:text-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-800"
                 type="button">{{ 'title.search'|trans }}
-            <svg class="w-2.5 h-2.5 absolute end-0 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <svg class="w-2.5 h-2.5 absolute end-0 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
                  viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="m1 1 4 4 4-4"></path>
             </svg>
         </button>
-        <div id="stores" class="z-10 hidden rounded-lg shadow-lg w-60 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
+        <div id="stores"
+             class="z-10 hidden rounded-lg shadow-lg w-60 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
             {% if stores|length > 1 %}
                 <div class="p-1.5">
                     <label for="input-store-search" class="sr-only">{{ 'title.search'|trans }}</label>

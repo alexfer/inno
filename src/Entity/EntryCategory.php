@@ -2,8 +2,8 @@
 
 namespace Inno\Entity;
 
-use Inno\Repository\EntryCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\EntryCategoryRepository;
 
 #[ORM\Entity(repositoryClass: EntryCategoryRepository::class)]
 class EntryCategory

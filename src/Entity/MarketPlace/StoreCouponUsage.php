@@ -2,8 +2,8 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Repository\MarketPlace\StoreCouponUsageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Repository\MarketPlace\StoreCouponUsageRepository;
 
 #[ORM\Entity(repositoryClass: StoreCouponUsageRepository::class)]
 class StoreCouponUsage

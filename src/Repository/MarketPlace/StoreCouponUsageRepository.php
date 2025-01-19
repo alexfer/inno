@@ -2,9 +2,9 @@
 
 namespace Inno\Repository\MarketPlace;
 
-use Inno\Entity\MarketPlace\{StoreCouponUsage, StoreCustomer};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inno\Entity\MarketPlace\{StoreCouponUsage, StoreCustomer};
 
 /**
  * @extends ServiceEntityRepository<StoreCouponUsage>

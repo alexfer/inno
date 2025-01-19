@@ -38,12 +38,12 @@
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div class="block mb-0">
-{#                {{ form_label(form.maxUsage, 'label.form.max_usage', {label_attr: {class: 'form-label'}}) }}#}
+                {#                {{ form_label(form.maxUsage, 'label.form.max_usage', {label_attr: {class: 'form-label'}}) }} #}
                 {{ form_widget(form.maxUsage, {attr: {class: 'input-widget', placeholder: 'label.form.max_usage'}}) }}
                 <span class="input-wrong">{{ form_errors(form.maxUsage) }}</span>
             </div>
             <div class="block mb-0">
-{#                {{ form_label(form.orderLimit, 'label.form.order_limit', {label_attr: {class: 'form-label'}}) }}#}
+                {#                {{ form_label(form.orderLimit, 'label.form.order_limit', {label_attr: {class: 'form-label'}}) }} #}
                 {{ form_widget(form.orderLimit, {attr: {class: 'input-widget', placeholder: 'label.form.order_limit'}}) }}
                 <span class="input-wrong">{{ form_errors(form.orderLimit) }}</span>
             </div>

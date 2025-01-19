@@ -2,9 +2,9 @@
 
 namespace Inno\Entity\MarketPlace;
 
+use Doctrine\ORM\Mapping as ORM;
 use Inno\Entity\Attach;
 use Inno\Repository\MarketPlace\StoreProductAttachRepository;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StoreProductAttachRepository::class)]
 class StoreProductAttach

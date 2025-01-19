@@ -2,15 +2,15 @@
 
 namespace Inno\Entity\MarketPlace;
 
-use Inno\Entity\Attach;
-use Inno\Entity\User;
-use Inno\Repository\MarketPlace\StoreRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Inno\Entity\Attach;
+use Inno\Entity\User;
+use Inno\Repository\MarketPlace\StoreRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: StoreRepository::class)]
