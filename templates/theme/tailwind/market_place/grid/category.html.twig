@@ -22,7 +22,7 @@
                     </a>
                 </span>
                 {% if product.reduce.unit is not empty %}
-                    <span class="bg-red-700 bg-opacity-75 text-white text-sm font-normal me-2 px-2.5 py-1 rounded-xl dark:bg-red-900 dark:text-white">{{ product.reduce.value }}{{ product.reduce.unit|convert(product.currency|currency) }} {{ 'store.product.off'|trans }}</span>
+                    <span class="badge-red">{{ product.reduce.value }}{{ product.reduce.unit|convert(product.currency|currency) }} {{ 'store.product.off'|trans }}</span>
                 {% endif %}
             </div>
         </div>
@@ -49,13 +49,13 @@
     {% if product.parent_category_name is not null %}
         <a title="{{ product.name }}" class="mt-3"
            href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
-            <h5 class="mx-3 mb-2 text-lg font-bold hover:text-gray-700 tracking-tight truncate text-gray-500 dark:text-white">
+            <h5 class="mx-3 mb-2 text-lg font-medium hover:text-gray-700 tracking-tight line-clamp-1 text-gray-500 dark:text-white">
                 {{ product.short_name }}
             </h5>
         </a>
     {% else %}
         <a href="{{ path('app_market_place_parent_category', {parent:  product.parent_category_slug}) }}"
-           class="hover:underline truncate ml-2 text-gray-500 w-full block">
+           class="hover:underline line-clamp-1 ml-2 text-gray-500 w-full block">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="inline-flex w-4 h-4 me-2">
                 <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>{{ product.parent_category_name }}
@@ -66,14 +66,14 @@
             parent: product.parent_category_slug,
             child:  product.category_slug
         }) }}" title="{{ product.category_name }}"
-           class="hover:underline hover:w-full truncate block w-auto ml-2 mr-3 text-gray-500">
+           class="hover:underline hover:w-full line-clamp-1 block w-auto ml-2 mr-3 text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="inline-flex w-4 h-4 me-2">
                 <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>{{ product.category_name }}
         </a>
     {% else %}
         <a href="{{ path('app_market_place_parent_category', {parent:  product.parent_category_slug}) }}"
-           class="hover:underline truncate ml-2 text-gray-500 w-full block">
+           class="hover:underline line-clamp-1 ml-2 text-gray-500 w-full block">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="inline-flex w-4 h-4 me-2">
                 <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>{{ product.parent_category_name }}
@@ -82,7 +82,7 @@
             parent: product.parent_category_slug,
             child:  product.category_slug
         }) }}" title="{{ product.category_name }}"
-           class="hover:underline hover:w-full truncate block w-auto ml-2 mr-3 text-gray-500">
+           class="hover:underline hover:w-full line-clamp-1 block w-auto ml-2 mr-3 text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="inline-flex w-4 h-4 me-2">
                 <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>{{ product.category_name }}
@@ -98,7 +98,7 @@
             </a>
         </li>
         <li class="pb-0 flex">
-            <a class="truncate inline-block w-64 hover:fill-sky-600 hover:animate-pulse"
+            <a class="line-clamp-1 inline-block w-64 hover:fill-sky-600 hover:animate-pulse"
                href="{{ path('app_market_place_market', {slug:  product.store_slug}) }}">
                 <svg class="w-4 h-4 mx-2 fill-red-700 inline-block"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

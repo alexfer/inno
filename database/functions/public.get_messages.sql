@@ -26,7 +26,8 @@ BEGIN
                                     'id', sp.id,
                                     'slug', sp.slug,
                                     'short_name', sp.short_name,
-                                    'picture', a.name
+                                    'picture', a.name,
+                                    'path', a.path
                                  ) END),
             'order', (CASE
                           WHEN mo.id IS NULL THEN NULL

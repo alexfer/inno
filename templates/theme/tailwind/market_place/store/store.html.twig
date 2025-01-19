@@ -14,9 +14,9 @@
                  style="background-color: rgba(0, 0, 0, 0.2)">
                 <div class="flex h-full items-center justify-center">
                     <div class="text-white">
-                        <h2 class="mb-4 text-4xl font-semibold">{{ store.name }}</h2>
+                        <h2 class="mb-4 text-2xl md:text-4xl font-semibold">{{ store.name }}</h2>
                         {% if store.description is not null %}
-                            <div class="mb-6 text-sm font-normal mx-auto max-w-lg">{{ store.description|striptags|raw|slice(0, 280) }}
+                            <div class="mb-6 xs:px-1 text-xs md:text-sm font-normal mx-auto max-w-lg bg-gray-950 bg-opacity-75 p-3 rounded-md">{{ store.description|striptags|raw|slice(0, 280) }}
                                 ...
                             </div>
                         {% endif %}
@@ -29,7 +29,7 @@
     <div class="mt-3">
         <div class="h-full">
             <div class="grid grid-cols-12">
-                <div class="col-span-3 mb-5 hidden px-5 lg:block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="col-span-3 mb-5 hidden px-5 lg:block bg-white border rounded-md dark:bg-gray-800 dark:border-gray-700">
                     <div class="p-2">
                         {% if store.description is not null %}
                             <h6 class="text-base font-medium font-sans text-cyan-700 my-2">{{ 'store.about'|trans }}</h6>
@@ -99,8 +99,7 @@
                             <input type="hidden" name="store" value="{{ store.id }}">
                             <input type="hidden" name="order" value="">
                             <input type="hidden" name="_token" value="{{ csrf_token('obtain') }}">
-                            <button
-                                    class="inline-block mt-3 w-full rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong group-invalid:pointer-events-none group-invalid:opacity-30"
+                            <button class="inline-block mt-3 w-full rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong group-invalid:pointer-events-none group-invalid:opacity-30"
                                     type="submit"{% if not app.user %} disabled{% endif %}>{{ 'form.action.send'|trans }}</button>
                             {% if not app.user %}
                                 <p id="helper-text-explanation"
@@ -113,7 +112,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-span-12 mb-5 lg:col-span-9 pt-2 px-4 lg:-mt-16">
+                <div class="col-span-12 mb-5 lg:col-span-9 pt-2 px-1 md:px-4 lg:-mt-16">
                     <h4 class="text-center font-oswald hidden lg:block text-2xl py-3 border-b-1 shadow-sm text-gray-600 font-semibold mb-3">{{ 'store.products'|trans }}
                         <span class="text-gray-500 font-medium ml-2">{{ store.products_count }}</span>
                     </h4>
@@ -152,7 +151,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    <div class="grid w-full gap-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1">
+                    <div class="grid gap-x-2.5 gap-y-2 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
                         {% for product in store.products %}
                             <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700">
                                 <div class="relative overflow-hidden h-200 rounded-t-lg">
@@ -164,7 +163,7 @@
                                                  alt="{{ product.name }}">
                                         </a>
                                     {% else %}
-                                        <img class="h-200 transition opacity-50"
+                                        <img class="h-200 transition w-full opacity-50"
                                              src="{{ asset('img/600x400.png') }}"
                                              alt="{{ product.name }}">
                                     {% endif %}
@@ -177,7 +176,7 @@
                                                 </a>
                                             </span>
                                             {% if product.reduce.unit is not empty %}
-                                                <span class="bg-red-700 bg-opacity-75 text-white text-sm font-normal me-2 px-2.5 py-1 rounded-xl dark:bg-red-900 dark:text-white">{{ product.reduce.value }}{{ product.reduce.unit|convert(store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
+                                                <span class="badge-red">{{ product.reduce.value }}{{ product.reduce.unit|convert(store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -188,7 +187,7 @@
                                         child:  product.category_slug
                                     }) }}"
                                        title="{{ product.category_name }}"
-                                       class="hover:underline truncate block w-auto mt-3 mr-3 text-gray-500">
+                                       class="hover:underline line-clamp-1 block w-auto mt-3 mr-3 text-gray-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="inline-flex w-4 h-4 mx-1 text-green-400">
                                             <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
                                         </svg>{{ product.category_name }}
@@ -196,7 +195,7 @@
                                 </div>
                                 <a title="{{ product.name }}" class="mt-3"
                                    href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
-                                    <h5 class="mx-2 text-md-start font-bold hover:text-gray-700 tracking-tight truncate text-gray-500 dark:text-white">
+                                    <h5 class="mx-2 text-md-start font-medium hover:text-gray-700 tracking-tight line-clamp-1 text-gray-500 dark:text-white">
                                         {{ product.short_name }}
                                     </h5>
                                 </a>

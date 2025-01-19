@@ -12,9 +12,9 @@
                 <div class="flex items-start">
                     <a href="{{ path('app_dashboard_edit_blog', {id: entry.id}) }}" class="mt-1 me-2">
                         {% if entry.entryAttachments.count %}
-                            {% set _picture = 'storage/entry/picture/' ~ entry.entryDetails.id ~ '/' ~ entry.entryAttachments.first.attach.name %}
+                            {% set _picture = entry.entryAttachments.first.attach.path ~ '/' ~ entry.entryAttachments.first.attach.name %}
                             <picture class="block bg-white dark:bg-gray-600">
-                                <img src="{{ asset(_picture) }}" class="block w-16 h-auto border rounded-lg p-3"
+                                <img src="{{ asset(_picture) | imagine_filter('entry_preview') }}" class="block w-16 h-auto border rounded-lg p-3"
                                      alt="{{ entry.entryDetails.title }}">
                             </picture>
                         {% else %}

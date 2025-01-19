@@ -214,4 +214,48 @@
     .alert-danger {
         @apply flex items-center p-4 my-4 text-red-800 rounded-md bg-red-50 dark:bg-red-100 dark:text-red-400;
     }
+
+    /*
+        Front part
+     */
+
+    .badge-red {
+        @apply bg-red-700 bg-opacity-75 text-white text-xs md:text-sm me-2 px-2.5 py-1 rounded-md dark:bg-red-900 dark:text-white;
+    }
+
+    .info-table {
+        @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+    }
+
+    .info-table tr {
+        @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900;
+    }
+
+    .info-table th {
+        @apply py-3 px-5 font-normal whitespace-nowrap min-w-10 max-w-28  cursor-default;
+    }
+
+    .info-table td {
+        @apply p-3 text-gray-600 whitespace-nowrap dark:text-gray-200 cursor-default;
+    }
+
+    .tab-list-info {
+        @apply mt-5 md:flex list-none md:flex-row md:flex-wrap border-b-0 ps-0;
+    }
+
+    .tab-list-info-active {
+        @apply bg-gray-100 dark:bg-gray-800 hover:text-blue-700 border-blue-600;
+    }
+
+    .tab-list-info-inactive {
+        @apply text-gray-500 hover:text-blue-600 border-b border-gray-100 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-500;
+    }
+
+    .tab-list-info a {
+        @apply my-2 block border-x-0 border-b-2 border-t-0 px-7 pb-3.5 pt-4 text-sm font-light uppercase leading-tight text-neutral-500 hover:isolate hover:border-blue-600 hover:bg-neutral-100 focus:isolate focus:border-blue-600 dark:text-white/50 dark:hover:bg-neutral-700/60;
+    }
+
+    .tab-content-info {
+        @apply transition-opacity duration-150 ease-linear p-4 rounded-b-lg bg-gray-50 bg-opacity-10 dark:bg-gray-800;
+    }
 }

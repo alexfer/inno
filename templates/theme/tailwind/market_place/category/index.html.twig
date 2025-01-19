@@ -47,7 +47,7 @@
                 </div>
             {% endif %}
             {% if app.request.get('child') is not null %}
-                <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1 inline-flex me-3" aria-hidden="true"
+                <svg class="rotate-180 w-3 h-3 text-gray-400 mx-1 inline-flex me-3" aria-hidden="true"
                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="m1 9 4-4-4-4"></path>
@@ -117,7 +117,7 @@
             {{ 'search.form.categories'|trans }}
         {% endif %}
     </h2>
-    <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-3">
+    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
         {% for product in products %}
             {% include 'market_place/grid/category.html.twig' %}
         {% endfor %}
