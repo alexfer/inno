@@ -4,26 +4,26 @@
 {% block class %}{% endblock %}
 
 {% block body %}
-    <div class="max-w-xl flex mx-auto bg-gray-50/40 rounded-xl shadow-xl my-8 lg:my-16 py-4 lg:py-8 dark:bg-gray-600">
-        {{ form_start(requestForm, {attr: {class: 'w-full group', novalidate: ''}}) }}
-        <h2 class="text-2xl py-1.5 ps-5 font-extrabold text-primary-700 dark:text-white">{{ 'text.reset_password'|trans }}</h2>
+    <div class="max-w-xl flex mx-auto bg-white rounded-xl shadow-xl px-1 md:px-8 my-8 md:my-16 py-4 md:py-8 dark:bg-gray-600">
+        {{ form_start(requestForm, {attr: {class: 'w-full group px-4', novalidate: ''}}) }}
+        <h2 class="mx-3">{{ 'text.reset_password'|trans }}</h2>
         {% for flash_error in app.flashes('reset_password_error') %}
-            <div class="items-center p-4 mx-5 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            <div class="items-center p-4 mx-2 mb-4 text-red-800 rounded-md bg-red-50 dark:bg-gray-800 dark:text-red-400"
                  role="alert">
                 <div class="ms-3 text-sm font-medium">{{ flash_error }}</div>
             </div>
         {% else %}
-            <div class="items-center p-4 mx-5 text-info-800 rounded-lg bg-info-50 dark:bg-gray-800 dark:text-info-400"
+            <div class="items-center p-4 mx-2 text-blue-800 rounded-md bg-blue-50 dark:bg-blue-800 dark:text-yellow-400"
                  role="alert">
-                <div class="ms-3 text-sm font-medium">{{ 'form.email.info'|trans }}</div>
+                <div class="ms-3 text-xs font-medium">{{ 'form.email.info'|trans }}</div>
             </div>
         {% endfor %}
-        <div class="col-md-12 pt-2 mx-3">
-            {{ form_label(requestForm.email, 'label.form.email', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(requestForm.email, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email'}}) }}
+        <div class="relative pt-2 mx-3">
+            {{ form_label(requestForm.email, 'label.form.email', {label_attr: {class: 'block mb-1 mt-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+            {{ form_widget(requestForm.email, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email'}}) }}
             <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.email.invalid'|trans }}</span>
         </div>
-        <div class="flex-row text-center mt-4">
+        <div class="flex justify-center items-center mt-4">
             <button class="inline-block rounded bg-red-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30 group-invalid:pointer-events-none group-invalid:opacity-30">{{ 'button.reset_password'|trans }}</button>
         </div>
         {{ form_end(requestForm) }}

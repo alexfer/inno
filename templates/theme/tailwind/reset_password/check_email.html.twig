@@ -5,7 +5,7 @@
 {% block body %}
     <div class="max-w-screen-md mx-auto px-4 py-8 lg:py-16 lg:px-2">
         <div class="rounded-lg bg-white p-6 shadow-4 dark:bg-surface-dark">
-            <h2 class="text-2xl pb-4 font-extrabold text-primary-700 dark:text-white">{{ 'text.reset_password'|trans }}</h2>
+            <h2>{{ 'text.reset_password'|trans }}</h2>
             {% for flash_error in app.flashes('reset_password_error') %}
                 <div class="items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                      role="alert">

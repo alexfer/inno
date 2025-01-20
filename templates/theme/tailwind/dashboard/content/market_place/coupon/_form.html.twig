@@ -110,11 +110,11 @@
         {{ form_end(form) }}
     </div>
     {% if form.vars.data.id %}
-        <h2 class="text-lg md:text-2xl pl-2 mt-4 text-red-400 font-medium mb-2 dark:bg-gray-600">{{ 'title.dashboard.coupons'|trans }}</h2>
+        <h2>{{ 'title.dashboard.coupons'|trans }}</h2>
         <div id="accordion-collapse"
              data-url="{{ path('app_dashboard_market_place_coupon_codes', {store: app.request.get('store'), id: form.vars.data.id,  type: form.vars.data.type}) }}"
              data-accordion="collapse">
-            <h2 id="accordion-collapse-heading">
+            <h3 id="accordion-collapse-heading">
                 <button type="button"
                         class="flex items-center justify-between w-full p-5 font-medium text-gray-500 border border-gray-200 rounded-t-lg focus:ring-1 dark:bg-gray-700 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                         data-accordion-target="#accordion-collapse-body" aria-expanded="false"
@@ -126,7 +126,7 @@
                               d="M9 5 5 1 1 5"></path>
                     </svg>
                 </button>
-            </h2>
+            </h3>
             <div id="accordion-collapse-body" class="hidden" aria-labelledby="accordion-collapse-heading">
                 <div class="p-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700">
                     <ul id="codes" class="w-full space-y-3 text-gray-500 dark:text-gray-400"></ul>

@@ -6,7 +6,7 @@
 {% block offest %}pt-4 py-4 lg:py-8 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
-    <h2 class="text-2xl font-oswald relative mb-4 font-extrabold text-primary-700 dark:text-white text-ellipsis overflow-hidden">{{ 'store.best.sellers'|trans }}
+    <h2 class="block line-clamp-1">{{ 'store.best.sellers'|trans }}
         {% if store.cc is not null and store.cc|length %}
             <div class="absolute top-0 right-0">
                 <ul class="list-none flex mx-auto space-x-2 justify-between items-center mt-2 me-2">
@@ -27,7 +27,7 @@
                  style="background-color: rgba(0, 0, 0, 0.2)">
                 <div class="flex h-full items-center justify-center">
                     <div class="text-white">
-                        <h2 class="mb-4 text-4xl font-semibold">{{ store.name }}</h2>
+                        <h2>{{ store.name }}</h2>
                         {% if store.description is not null %}
                             <div class="mb-6 xs:px-1 text-xs md:text-sm font-normal mx-auto max-w-lg bg-gray-950 bg-opacity-75 p-3 rounded-md">{{ store.description|striptags|raw|slice(0, 280) }}
                                 ...
@@ -73,7 +73,7 @@
 {% block extra %}
     <div class="max-w-screen-xl flex mx-auto py-2 lg:px-2 mb-5">
         <div class="mx-auto w-full bg-white px-1 md:px-6 rounded-md shadow-4 dark:bg-gray-700">
-            <h2 class="text-2xl font-oswald mb-4 font-extrabold text-primary-700 dark:text-white text-ellipsis overflow-hidden">{{ 'store.best.products'|trans }}</h2>
+            <h2 class="block line-clamp-1">{{ 'store.best.products'|trans }}</h2>
             <div class="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {% for product in products %}
                     <div class="min-h-full">

@@ -4,7 +4,7 @@
 {% block class %}{% endblock %}
 {% block body %}
     <div class="max-w-xl flex mx-auto bg-gray-50/40 rounded-xl shadow-xl my-8 lg:my-16 py-4 lg:py-8 dark:bg-gray-600">
-        <h2 class="text-2xl pb-4 font-extrabold text-primary-700 dark:text-white">{{ 'http_error_500.description'|trans }}</h2>
+        <h2>{{ 'http_error_500.description'|trans }}</h2>
         <div class="text-red-600 my-5 text-center text-lg dark:text-red-50">{{ error }}</div>
     </div>
 {% endblock %}

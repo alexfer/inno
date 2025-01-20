@@ -5,7 +5,7 @@
 {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
-    <h2 class="text-2xl pb-4 font-oswald font-extrabold text-primary-700 dark:text-white text-ellipsis overflow-hidden">{{ 'order.cart'|trans }}</h2>
+    <h2 class="block line-clamp-1">{{ 'order.cart'|trans }}</h2>
     <div class="grid lg:grid-cols-12 md:grid-cols-9 sm:grid-cols-1 gap-x-5">
         <div class="lg:col-span-9 md:col-span-7">
             <form id="order-summary" name="order[]" action="{{ path('app_market_place_order_update') }}" method="post">

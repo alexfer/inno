@@ -3,7 +3,7 @@
 {% block title %}{{ entry.entryDetails.title }}{% endblock %}
 {% block description %}{{ entry.entryDetails.shortContent }}{% endblock %}
 {% block body %}
-    <h2 class="lg:text-2xl sm:text-xl pb-4 font-extrabold text-primary-700 dark:text-white">{{ entry.entryDetails.title }}</h2>
+    <h2>{{ entry.entryDetails.title }}</h2>
     <div class="flex flex-row">
         {% for categories in entry.entryCategories %}
             <a class="text-gray-500 hover:text-gray-500 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-500 dark:focus:ring-gray-800 inline-flex items-center justify-center"

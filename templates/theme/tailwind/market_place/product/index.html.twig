@@ -5,7 +5,7 @@
 {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
-    <h2 class="text-2xl pb-4 font-extrabold text-primary-700 dark:text-white text-ellipsis overflow-hidden">{{ product.short_name }}</h2>
+    <h2 class="block line-clamp-1">{{ product.short_name }}</h2>
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 md:col-span-8">
             <div id="indicators-carousel" class="relative w-full" data-carousel="static">
@@ -70,7 +70,7 @@
                             class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                             data-carousel-next>
                             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                <svg class="w-4 h-4 text-white dark:text-gray-800"
                                      aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -108,9 +108,9 @@
                                 {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
                                 {{ price|amount_format }}<small>{{ product.store.currency|currency }}</small>
                             </span>
-                            <span class="line-through text-lg font-medium text-gray-400">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
+                            <span class="line-through text-lg font-medium text-gray-400 dark:text-white">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
                         {% else %}
-                            <span class="font-medium text-2xl text-surface-dark">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
+                            <span class="font-medium text-2xl text-surface-dark dark:text-white">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
                         {% endif %}
                     </div>
                     {% if product.attributes|length %}
@@ -151,7 +151,7 @@
                     {% endif %}
                     <button type="submit"
                             id="order"
-                            class="rounded bg-blue-600 md:bg-blu-600 px-3 pb-2 pt-2.5 mt-1 md:mt-5 text-xs font-medium uppercase text-white cursor-pointer shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-blue-300 focus:outline-none"
+                            class="rounded bg-blue-600 dark:bg-blue-950 hover:bg-blue-500 dark:hover:bg-blue-700 px-3 pb-2 pt-2.5 mt-1 md:mt-5 text-xs font-medium uppercase text-white cursor-pointer shadow-md transition-all duration-150 ease-in-out focus:outline-none"
                             {% if product.quantity == 0 or (app.user and ('ROLE_USER' in app.user.roles or 'ROLE_ADMIN' in app.user.roles)) %}disabled{% endif %}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                              class="inline-flex w-4 h-4 me-2">
@@ -235,8 +235,8 @@
              id="about"
              role="tabpanel"
              aria-labelledby="about-tab">
-            <h5 class="block text-lg font-medium text-gray-600 py-3">{{ product.short_name }}</h5>
-            <div class="text-sm font-light text-gray-500 dark:text-gray-400">{{ product.description|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
+            <h5 class="block text-lg font-medium text-gray-600 py-3 dark:text-gray-300">{{ product.short_name }}</h5>
+            <div class="text-sm font-light text-gray-500 dark:text-gray-100">{{ product.description|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
         </div>
         <div class="hidden tab-content-info"
              id="product-info"
@@ -285,14 +285,14 @@
              id="seller-info"
              role="tabpanel"
              aria-labelledby="seller-info-tab">
-            <h5 class="block text-lg font-medium text-gray-600 py-3">{{ product.store.name }}</h5>
-            <div class="text-sm font-light text-gray-500 dark:text-gray-400">{{ product.store.description|default('info.no_content'|trans)|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
+            <h5 class="block text-lg font-medium text-gray-600 dark:text-gray-300 py-3">{{ product.store.name }}</h5>
+            <div class="text-sm font-light text-gray-500 dark:text-gray-100">{{ product.store.description|default('info.no_content'|trans)|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
         </div>
         <div class="hidden tab-content-info"
              id="seller-contact"
              role="tabpanel"
              aria-labelledby="seller-contact-tab">
-            <h5 class="block text-lg font-medium text-gray-600 py-3">{{ 'product.seller.contact'|trans }}</h5>
+            <h5 class="block text-lg font-medium text-gray-600 dark:text-gray-300 py-3">{{ 'product.seller.contact'|trans }}</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {% if product.store.phone is not null or product.store.email is not null or product.store.website is not null %}
                     <div>
@@ -330,7 +330,7 @@
                         <ul class="ms-2">
                             {% if product.store.phone %}
                                 <li class="mb-1">
-                                    <a class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
+                                    <a class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
                                        href="tel:{{ product.store.phone }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                              class="w-4 h-4 inline-flex me-3">
@@ -342,7 +342,7 @@
                             {% endif %}
                             {% if product.store.email %}
                                 <li class="mb-1">
-                                    <a class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
+                                    <a class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
                                        href="mailto:{{ product.store.email }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                              class="w-4 h-4 inline-flex me-3">
@@ -356,7 +356,7 @@
                             {% if product.store.website %}
                                 <li class="mb-1">
                                     <a target="_blank" rel="noreferrer"
-                                       class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
+                                       class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
                                        href="{{ path('app_market_place_market_redirect', {slug: product.store.slug}) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                              class="w-4 h-4 inline-flex me-3">
@@ -369,7 +369,7 @@
                             {% endif %}
                             {% if product.store.address %}
                                 <li class="mb-1">
-                                    <a class="text-gray-700 hover:text-gray-900 hover:animate-pulse"
+                                    <a class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
                                        href="#">
                                         <svg class="w-4 h-4 inline-flex me-3" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"

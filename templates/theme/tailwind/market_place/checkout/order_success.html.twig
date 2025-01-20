@@ -6,7 +6,7 @@
 {% block childen %}{% endblock %}
 {% block content_body %}
     {% if temp_password %}
-        <h2 class="block truncate text-2xl pb-4 font-extrabold text-primary-700 dark:text-white text-ellipsis overflow-hidden">{{ 'order.checkout.completed'|trans }}</h2>
+        <h2 class="block line-clamp-1">{{ 'order.checkout.completed'|trans }}</h2>
         <p class="text-center p-5 text-md-start text-red-400 font-normal">{{ 'customer.temporary.password'|trans }}
             <span class="inline-block bg-gray-300 rounded-sm text-gray-500 mx-1 w-25 px-2 pt-1 pb-0.5">{{ temp_password }}</span>
         </p>

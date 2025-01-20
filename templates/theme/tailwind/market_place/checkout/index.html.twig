@@ -5,7 +5,7 @@
 {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
-    <h2 class="block truncate text-2xl font-oswald pb-4 font-thin text-primary-700 dark:text-white text-ellipsis overflow-hidden">{{ 'order.checkout'|trans }}
+    <h2 class="block line-clamp-1">{{ 'order.checkout'|trans }}
         - {{ order.store.name }}</h2>
     <div class="grid grid-cols-4 gap-0">
         <div class="col-span-3 pb-4 mb-3">

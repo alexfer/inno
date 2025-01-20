@@ -1,7 +1,7 @@
 {% extends 'market_place/index.html.twig' %}
 
 {% block content_body %}
-    <h2 class="text-2xl pb-4 font-oswald font-extrabold text-primary-700 dark:text-white">{{ 'search.results'|trans }}</h2>
+    <h2>{{ 'search.results'|trans }}</h2>
     <div class="text-gray-500 mb-5 dark:text-gray-50">{{ 'search.results.term'|trans }}: <span
                 class="text-primary-600 dark:text-gray-50">{{ app.request.query.get('query')|e }}</span></div>
     {% if products|length %}

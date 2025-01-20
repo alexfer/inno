@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="relative flex flex-1 flex-col">
-        <h2 class="text-lg md:text-2xl pl-2 text-indigo-700 font-oswald mb-2 dark:text-gray-100">{% block title_content %}{{ 'text.dashboard'|trans }}{% endblock %}</h2>
+    <div class="relative flex flex-col">
+        <h2 class="ps-2">{% block title_content %}{{ 'text.dashboard'|trans }}{% endblock %}</h2>
         <div class="absolute right-2 top-2">{% block action %}{% endblock %}</div>
         {% block content %}
             {% include 'dashboard/content/index.html.twig' %}
