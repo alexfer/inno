@@ -146,8 +146,7 @@
                                 {% for product in order.products %}
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row" class="px-6 py-4 text-gray-900 truncate dark:text-white">
-                                            <a data-twe-toggle="tooltip"
-                                               title="{{ product.product.name }}"
+                                            <a title="{{ product.product.name }}"
                                                target="_blank"
                                                class="font-semibold text-gray-600 dark:text-gray-50"
                                                href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">
@@ -166,8 +165,7 @@
                                         </td>
                                         <td class="px-6 py-4 text-right cursor-pointer">
                                             {% set price = discount(product.product.cost, product.product.reduce.value, product.product.fee, 1, product.product.reduce.unit) %}
-                                            <abbr data-twe-toggle="tooltip"
-                                                  title="{{ (product.product.cost + product.product.fee) }}{{ order.store.currency|currency }}">{{ price|amount_format }}</abbr><small
+                                            <abbr title="{{ (product.product.cost + product.product.fee) }}{{ order.store.currency|currency }}">{{ price|amount_format }}</abbr><small
                                                     class="ms-1">{{ order.store.currency|currency }}</small>
                                         </td>
                                         <td class="px-6 py-4 text-right font-medium">

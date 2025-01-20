@@ -67,15 +67,12 @@
                                         </div>
                                         <div class="py-1 whitespace-nowrap text-gray-600">
                                             {% if product.color %}
-                                                <div class="py-1 mb-1">{{ 'label.color'|trans }}: <span
-                                                            data-twe-toggle="tooltip" title="{{ product.color_title }}"
+                                                <div class="py-1 mb-1">{{ 'label.color'|trans }}: <span title="{{ product.color_title }}"
                                                             class="rounded-full shadow-lg cursor-pointer ms-2 px-2.5 py-0.5 border-2 border-spacing-2 border-gray-200"
                                                             style="background-color: {{ product.color }};"></span></div>
                                             {% endif %}
                                             {% if product.size %}
-                                                <div class="py-1">{{ 'label.size'|trans }}: <span
-                                                            data-twe-toggle="tooltip" title="{{ product.size_title }}"
-                                                            class="rounded-md shadow-sm cursor-pointer ms-2 px-2.5 pt-2 pb-1 border-2 border-spacing-2 border-gray-200">{{ product.size }}</span>
+                                                <div class="py-1">{{ 'label.size'|trans }}: <span class="rounded-md shadow-sm cursor-pointer ms-2 px-2.5 pt-2 pb-1 border-2 border-spacing-2 border-gray-200">{{ product.size }}</span>
                                                 </div>
                                             {% endif %}
                                         </div>
