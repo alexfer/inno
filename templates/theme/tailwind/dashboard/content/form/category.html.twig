@@ -1,12 +1,12 @@
 <div class="block mb-3">
     <div id="accordion-collapse" class="w-full block" data-accordion="collapse">
-        <h2 id="category-heading">
+        <h3 id="category-heading">
             <a class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                data-accordion-target="#category-body"
                aria-expanded="true"
                role="button"
                aria-controls="categories">{{ 'entry.form.categories'|trans }}</a>
-        </h2>
+        </h3>
     </div>
     {% set cat = app.request.get('category')|keys %}
     <div class="hidden" id="category-body" aria-labelledby="category-heading">

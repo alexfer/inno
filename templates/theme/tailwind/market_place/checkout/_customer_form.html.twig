@@ -5,7 +5,7 @@
     </div>
 {% endfor %}
 <div class="flex justify-between mx-auto">
-    <h2 class="text-2xl font-medium text-gray-600 mr-2">{{ 'product.billing'|trans }}</h2>
+    <h2>{{ 'product.billing'|trans }}</h2>
     {% if app.user is null %}
         <div class="group pe-10">
             <button data-modal-target="sign-in" data-modal-toggle="sign-in" type="button"
@@ -82,7 +82,7 @@
         <div class="rounded-t-lg rounded-bl-lg rounded-br-lg shadow-md border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark"
              data-accordion="collapse" data-active-classes="bg-neutral-300">
             {% for key, carrier in order.store.storeCarrierStores.toArray %}
-                <h2 class="mb-0 border-b" id="heading-carrier-{{ key }}">
+                <h3 class="mb-0 border-b" id="heading-carrier-{{ key }}">
                     <button class="group relative font-semibold flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white"
                             type="button"
                             data-accordion-target="#collapse-carrier-{{ key }}"
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                     </button>
-                </h2>
+                </h3>
                 <div id="collapse-carrier-{{ key }}"
                      class="hidden"
                      aria-labelledby="heading-carrier-{{ key }}">
@@ -133,7 +133,7 @@
         <div class="rounded-t-lg rounded-bl-lg rounded-br-lg shadow-md border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark"
              data-accordion="collapse" data-active-classes="bg-neutral-300">
             {% for key, gateway in order.store.storePaymentGatewaystores.toArray %}
-                <h2 class="mb-0 border-b" id="heading-{{ key }}">
+                <h3 class="mb-0 border-b" id="heading-{{ key }}">
                     <button class="group relative font-semibold flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white"
                             type="button"
                             data-accordion-target="#collapse-{{ key }}"
@@ -166,7 +166,7 @@
                               </svg>
                         </span>
                     </button>
-                </h2>
+                </h3>
                 <div id="collapse-{{ key }}"
                      class="hidden"
                      aria-labelledby="heading-{{ key }}">

@@ -3,10 +3,10 @@
 {% block title %}{{ 'text.faq.header'|trans }}{% endblock %}
 
 {% block body %}
-    <h2 class="text-2xl pb-4 font-oswald font-extrabold text-primary-700 dark:text-white">{{ 'title.questions'|trans }}</h2>
+    <h2>{{ 'title.questions'|trans }}</h2>
     <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-transparent">
         {% for key, entry in entries %}
-            <h2 id="faq-flush-heading-{{ key }}">
+            <h3 id="faq-flush-heading-{{ key }}">
                 <button type="button"
                         class="group relative flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
                         data-accordion-target="#faq-body-{{ key }}"
@@ -27,7 +27,7 @@
                               stroke-width="2" d="M9 5 5 1 1 5"></path>
                     </svg>
                 </button>
-            </h2>
+            </h3>
             <div id="faq-body-{{ key }}" class="hidden border-0"
                  aria-labelledby="faq-flush-heading-{{ key }}">
                 <div class="font-sans py-5 border-b border-gray-200 dark:border-gray-700">

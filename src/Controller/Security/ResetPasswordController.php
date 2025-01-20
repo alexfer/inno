@@ -2,6 +2,7 @@
 
 namespace Inno\Controller\Security;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Inno\Controller\Trait\ControllerTrait;
 use Inno\Entity\User;
 use Inno\Form\Type\User\ChangePasswordFormType;
@@ -43,6 +44,7 @@ class ResetPasswordController extends AbstractController
     public function request(
         Request                    $request,
         EmailNotificationInterface $emailNotification,
+        EntityManagerInterface     $manager,
         ParameterBagInterface      $params,
         TranslatorInterface        $translator,
     ): Response
@@ -55,6 +57,7 @@ class ResetPasswordController extends AbstractController
                 $form->get('email')->getData(),
                 $translator,
                 $emailNotification,
+                $manager,
                 $params
             );
         }
@@ -87,6 +90,7 @@ class ResetPasswordController extends AbstractController
      * @param Request $request
      * @param UserPasswordHasherInterface $passwordHasher
      * @param TranslatorInterface $translator
+     * @param EntityManagerInterface $manager
      * @param string|null $token
      * @return Response
      */
@@ -95,6 +99,7 @@ class ResetPasswordController extends AbstractController
         Request                     $request,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $translator,
+        EntityManagerInterface     $manager,
         string                      $token = null,
     ): Response
     {
@@ -134,7 +139,7 @@ class ResetPasswordController extends AbstractController
             $encodedPassword = $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
 
             $user->setPassword($encodedPassword);
-            $this->em->flush();
+            $manager->flush();
 
             $this->cleanSessionAfterReset();
 
@@ -150,6 +155,7 @@ class ResetPasswordController extends AbstractController
      * @param string $emailFormData
      * @param TranslatorInterface $translator
      * @param EmailNotificationInterface $emailNotification
+     * @param EntityManagerInterface $manager
      * @param ParameterBagInterface $params
      * @return RedirectResponse
      */
@@ -157,10 +163,11 @@ class ResetPasswordController extends AbstractController
         string                     $emailFormData,
         TranslatorInterface        $translator,
         EmailNotificationInterface $emailNotification,
+        EntityManagerInterface     $manager,
         ParameterBagInterface      $params,
     ): RedirectResponse
     {
-        $user = $this->entityManager->getRepository(User::class)->findOneBy([
+        $user = $manager->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
 

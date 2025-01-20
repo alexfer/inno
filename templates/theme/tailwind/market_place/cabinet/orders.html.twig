@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2 class="text-2xl pb-4 relative font-extrabold text-primary-700 dark:text-white">{{ 'customer.cabinet'|trans }}
+    <h2>{{ 'customer.cabinet'|trans }}
         <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
     </h2>
 <div class="grid grid-cols-8 gap-4">
@@ -30,7 +30,7 @@
             <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white">
                 {% for key, order in orders %}
                     {% set discount = 0 %}
-                    <h2 id="order-flush-heading-{{ key }}">
+                    <h3 id="order-flush-heading-{{ key }}">
                         <button type="button"
                                 class="flex rounded-t-lg border-s border-e border-t items-center pl-5 justify-between w-full py-5 font-medium bg-gray-50 text-gray-500 dark:border-gray-700 dark:text-gray-400 gap-3"
                                 data-accordion-target="#order-body-{{ key }}"
@@ -55,7 +55,7 @@
                             {% endif %}
                             <span class="float-end text-lg mr-5">{{ ((order.total + (order.total * order.tax)/100) - discount)|amount_format(2) }}<small>{{ order.store.currency|currency }}</small></span>
                         </button>
-                    </h2>
+                    </h3>
                     <div id="order-body-{{ key }}"
                          class="hidden"
                          aria-labelledby="order-flush-heading-{{ key }}">

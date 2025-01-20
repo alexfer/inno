@@ -78,13 +78,13 @@
             </div>
         </div>
     {% else %}
-        <h2 class="text-2xl pb-4 font-oswald text-primary-700 dark:text-white">{{ 'title.blogs'|trans }}</h2>
+        <h2>{{ 'title.blogs'|trans }}</h2>
         {% include 'pages/blank-grid.html.twig' %}
     {% endif %}
     <section class="bg-white dark:bg-gray-900">
         <div class="max-w-screen-xl flex mx-auto pt-4 py-8 lg:py-16 lg:px-2">
             <div class="mx-auto w-full dark:bg-surface-dark">
-                <h2 class="text-2xl pb-4 font-oswald text-primary-700 dark:text-white">{{ 'text.blog.desc'|trans|raw }}</h2>
+                <h2>{{ 'text.blog.desc'|trans|raw }}</h2>
                 {% if timeline|length == 0 %}
                     {{ 'text.asap'|trans }}
                 {% endif %}
