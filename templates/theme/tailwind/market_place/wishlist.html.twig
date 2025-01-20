@@ -10,12 +10,10 @@
 {% endif %}
 <span class="flex"
       {% if customer is null %}
-          tabindex="0" data-twe-toggle="popover" data-twe-trigger="hover focus" data-twe-ripple-init
-    data-twe-title="{{ 'title.service.message'|trans }}" data-twe-content="{{ 'store.unauthorized'|trans }}" data-twe-ripple-color="light"
+          tabindex="0" title="{{ 'title.service.message'|trans }} {{ 'store.unauthorized'|trans }}"
       {% endif %}>
     <button class="bg-gray-100 text-gray-600 border-spacing-1.5 p-2 mr-2 cursor-pointer rounded-md hover:bg-gray-300 hover:text-rose-500 {{ extra }}"
             {% if customer is not null %}
-                data-twe-toggle="tooltip"
                 title="{{ 'store.product.wishlist'|trans }}"
             {% endif %}
             role="button" type="submit"

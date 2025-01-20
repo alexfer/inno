@@ -27,8 +27,6 @@
                                     <th scope="row" class="p-3 truncate mx-w-16">
                                         {% if message.product is not null %}
                                             <a class="font-semibold hover:text-gray-700 dark:hover:text-white"
-                                               data-twe-toggle="tooltip"
-                                               data-twe-placement="left"
                                                title="{{ message.product.short_name }}"
                                                target="_blank"
                                                href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}">
@@ -42,9 +40,7 @@
                                                 </svg>
                                             </a>
                                         {% elseif message.order is not null %}
-                                            <abb data-twe-toggle="tooltip" class="cursor-pointer"
-                                                 data-twe-placement="left"
-                                                 title="{{ message.order.number }}">
+                                            <abb title="{{ message.order.number }}">
                                                 {{ message.order.number }}
                                             </abb>
                                         {% else %}

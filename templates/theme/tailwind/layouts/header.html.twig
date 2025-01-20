@@ -55,56 +55,47 @@
                 </a>
                 <div id="account-dropdown" class="absolute z-20 hidden">
                     <ul class="w-48 min-w-max list-none space-y-1 text-xs md:text-sm font-medium overflow-hidden p-1 md:p-2 dark:bg-gray-700 rounded-md border-none bg-white bg-clip-padding shadow-xl"
-                        aria-labelledby="account"
-                        data-twe-dropdown-menu-ref>
+                        aria-labelledby="account">
                         {% if not app.user %}
                             <li>
                                 <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                   href="{{ path('app_login') }}"
-                                   data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'title.user.login'|trans }}</a>
+                                   href="{{ path('app_login') }}">{{ _arrow_right|raw }}{{ 'title.user.login'|trans }}</a>
                             </li>
                             <li>
                                 <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                   href="{{ path('app_customer_register') }}"
-                                   data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'title.user.register'|trans }}
+                                   href="{{ path('app_customer_register') }}">{{ _arrow_right|raw }}{{ 'title.user.register'|trans }}
                                 </a>
                             </li>
                             <li>
                                 <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                   href="{{ path('app_forgot_password_request') }}"
-                                   data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'text.forgot_password'|trans }}</a>
+                                   href="{{ path('app_forgot_password_request') }}">{{ _arrow_right|raw }}{{ 'text.forgot_password'|trans }}</a>
                             </li>
                         {% else %}
                             {% if 'ROLE_USER' in app.user.roles or 'ROLE_ADMIN' in app.user.roles %}
                                 <li>
                                     <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                       href="{{ path('app_dashboard') }}"
-                                       data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'text.dashboard'|trans }}
+                                       href="{{ path('app_dashboard') }}">{{ _arrow_right|raw }}{{ 'text.dashboard'|trans }}
                                     </a>
                                 </li>
                                 <li>
                                     <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                       href="{{ path('app_profile') }}"
-                                       data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'text.profile'|trans }}</a>
+                                       href="{{ path('app_profile') }}">{{ _arrow_right|raw }}{{ 'text.profile'|trans }}</a>
                                 </li>
                                 <li>
                                     <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                       href="{{ path('app_logout') }}"
-                                       data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'title.user.logoff'|trans }}
+                                       href="{{ path('app_logout') }}">{{ _arrow_right|raw }}{{ 'title.user.logoff'|trans }}
                                     </a>
                                 </li>
                             {% endif %}
                             {% if 'ROLE_CUSTOMER' in app.user.roles and 'ROLE_ADMIN' not in app.user.roles and 'ROLE_USER' not in app.user.roles %}
                                 <li>
                                     <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                       href="{{ path('app_cabinet') }}"
-                                       data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'title.customer.cabinet'|trans }}
+                                       href="{{ path('app_cabinet') }}">{{ _arrow_right|raw }}{{ 'title.customer.cabinet'|trans }}
                                     </a>
                                 </li>
                                 <li>
                                     <a class="block px-4 py-2 mt-2 bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
-                                       href="{{ path('app_logout') }}"
-                                       data-twe-dropdown-item-ref>{{ _arrow_right|raw }}{{ 'title.user.logoff'|trans }}
+                                       href="{{ path('app_logout') }}">{{ _arrow_right|raw }}{{ 'title.user.logoff'|trans }}
                                     </a>
                                 </li>
                             {% endif %}
