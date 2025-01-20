@@ -1,10 +1,10 @@
 <div class="mx-auto text-white pt-5 pb-3 px-3">
-    <div class="max-w-screen-xl mx-auto md:grid md:grid-cols-3 sm:grid-cols-2 gap-3">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-x-3">
         <div class="block col-span-2">
             <ul class="inline-flex my-4 w-full space-x-5">
                 <li>
                     <a href="{{ path('about') }}"
-                       class="text-sm text-gray-400 hover:text-white">{{ 'title.about_us'|trans }}</a>
+                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.about_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('faq') }}"
@@ -12,15 +12,15 @@
                 </li>
                 <li>
                     <a href="{{ path('contact') }}"
-                       class="text-sm text-gray-400 hover:text-white">{{ 'title.contact_us'|trans }}</a>
+                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.contact_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_blog') }}"
-                       class="text-sm text-gray-400 hover:text-white">{{ 'title.blogs'|trans }}</a>
+                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.blogs'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_market_place_index') }}"
-                       class="text-sm text-gray-400 hover:text-white">{{ 'title.market_places'|trans }}</a>
+                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.market_places'|trans }}</a>
                 </li>
             </ul>
             <a class="flex" href="{{ path('app_index') }}">
@@ -37,7 +37,7 @@
                 <span class="font-medium text-gray-300 uppercase">{{ 'site.title'|trans }}
             </a>
         </div>
-        <div class="grid grid-cols-1 gap-6 sm:gap-4 sm:grid-cols-2">
+        <div class="hidden md:grid grid-cols-1 gap-6 sm:gap-4 sm:grid-cols-2">
             <div>
                 <h2 class="mb-4 text-sm font-oswald text-gray-100 uppercase dark:text-white">{{ 'title.resources'|trans }}</h2>
                 <ul class="text-gray-500 dark:text-gray-400 font-medium">
@@ -71,12 +71,12 @@
 </div>
 <div class="bg-gray-900 p-3 text-gray-200 mt-3 border-t border-gray-700">
     <div class="max-w-screen-xl mx-auto flex justify-between items-center">
-        <div class="text-sm">
+        <div class="text-xs md:text-sm">
             {% set year =  'now' | date('Y') %}
             {% set build_year = '2023' %}
             <span>&copy; {{ year == build_year ? build_year : build_year ~ '-' ~ year }} {{ 'site.title'|trans }} - {{ 'text.all_right_reserved'|trans }}</span>
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-end space-x-2 md:space-x-5">
             <a href="https://www.facebook.com/AlexanderShtyher/"
                class="text-gray-400 hover:text-gray-100 dark:hover:text-white">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -87,7 +87,7 @@
                 </svg>
                 <span class="sr-only">Facebook page</span>
             </a>
-            <a href="https://github.com/alexfer" class="text-gray-400 hover:text-gray-100 dark:hover:text-white ms-5">
+            <a href="https://github.com/alexfer" class="text-gray-400 hover:text-gray-100 dark:hover:text-white">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                      viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
@@ -97,7 +97,7 @@
                 <span class="sr-only">GitHub</span>
             </a>
             <a href="https://www.linkedin.com/in/alexander-shtykher-4822b339/"
-               class="text-gray-400 hover:text-gray-100 dark:hover:text-white ms-5">
+               class="text-gray-400 hover:text-gray-100 dark:hover:text-white">
                 <svg width="64px" height="64px" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <g stroke-width="0"></g>

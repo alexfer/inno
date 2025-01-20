@@ -18,15 +18,15 @@
             </svg>
             <span class="self-center text-2xl font-oswald whitespace-nowrap text-black dark:text-white uppercase">{{ 'site.title'|trans }}</span>
         </a>
-        <div class="flex items-center align-bottom lg:order-2">
+        <div class="flex items-center align-bottom lg:order-2 space-x-2">
             <button type="button" id="show-cart"
                     data-drawer-target="shopping-cart"
                     data-drawer-show="shopping-cart"
                     aria-controls="shopping-cart" data-drawer-placement="right" data-drawer-body-scrolling="true"
                     data-url="{{ path('app_market_place_product_order_cart') }}"
-                    class="relative text-white dark:text-white block uppercase hover:bg-gray-50 hover:text-red-900 border-inherit focus:ring-gray-100 font-medium rounded-md text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                    class="relative text-white dark:text-white block uppercase bg-red-500 dark:bg-slate-900 hover:bg-gray-50 hover:text-red-900 border-inherit focus:ring-gray-100 font-medium rounded-md text-sm px-3 lg:px-5 py-2 mr-0 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                     class="h-4 w-4 inline-flex me-2">
+                     class="h-4 w-4 inline-flex">
                     <path d="M1 1.75A.75.75 0 0 1 1.75 1h1.628a1.75 1.75 0 0 1 1.734 1.51L5.18 3a65.25 65.25 0 0 1 13.36 1.412.75.75 0 0 1 .58.875 48.645 48.645 0 0 1-1.618 6.2.75.75 0 0 1-.712.513H6a2.503 2.503 0 0 0-2.292 1.5H17.25a.75.75 0 0 1 0 1.5H2.76a.75.75 0 0 1-.748-.807 4.002 4.002 0 0 1 2.716-3.486L3.626 2.716a.25.25 0 0 0-.248-.216H1.75A.75.75 0 0 1 1 1.75ZM6 17.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM15.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>
                 </svg>
                 <span class="hidden md:inline-flex">{{ 'store.product.cart'|trans }}</span>
@@ -41,9 +41,9 @@
                    data-dropdown-toggle="account-dropdown"
                    id="account"
                    role="button"
-                   class="relative text-white dark:text-white block uppercase hover:bg-gray-50 hover:text-red-900 focus:ring-1 focus:ring-gray-100 font-medium rounded-md text-sm px-4 lg:px-5 py-2 lg:py-2.5 ml-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                   class="relative text-white dark:text-white block uppercase bg-red-500 dark:bg-slate-900 hover:bg-gray-50 hover:text-red-900 focus:ring-1 focus:ring-gray-100 font-medium rounded-md text-sm px-2.5 lg:px-5 py-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                         class="h-5 w-5 md:h-4 md:w-4 inline-flex md:me-2">
+                         class="h-5 w-5 md:h-4 md:w-4 inline-flex">
                         <path fill-rule="evenodd"
                               d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z"
                               clip-rule="evenodd"/>
@@ -113,10 +113,10 @@
                 </div>
             </div>
             <button data-collapse-toggle="mobile-menu" type="button"
-                    class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    class="lg:hidden items-center text-white dark:text-white bg-red-500 dark:bg-slate-900 hover:bg-gray-50 hover:text-red-900 focus:ring-1 focus:ring-gray-100 font-medium rounded-md px-2 py-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
                     aria-controls="mobile-menu" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                           d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
