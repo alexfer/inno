@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Inno\Form\Type\User;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\{CheckboxType, EmailType, HiddenType, PasswordType, SubmitType};
+use Symfony\Component\Form\Extension\Core\Type\{CheckboxType, EmailType, PasswordType, SubmitType};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,9 +26,6 @@ class LoginType extends AbstractType
                 ],
             ])
             ->add('_remember_me', CheckboxType::class, [
-                'mapped' => false,
-            ])
-            ->add('order', HiddenType::class, [
                 'mapped' => false,
             ])
             ->add('login', SubmitType::class, [

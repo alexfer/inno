@@ -27,6 +27,7 @@ BEGIN
                             'number', o.number,
                             'created', o.created_at,
                             'completed', o.completed_at,
+                            'status', o.status,
                             'tax', o.tax,
                             'total_quantity',
                             (SELECT SUM(op.quantity) FROM store_orders_product op WHERE op.orders_id = o.id LIMIT 1),

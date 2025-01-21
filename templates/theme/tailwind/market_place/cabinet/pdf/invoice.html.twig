@@ -155,7 +155,7 @@
         </tr>
         <tr class="details">
             <td>{{ invoice.paymentGateway.name }}</td>
-            <td>{{ customer.phone }}</td>
+            <td>{{ invoice.payedAt is not null ? 'Paid' : 'Not paid' }}</td>
         </tr>
         <tr class="heading">
             <td>{{ 'store.products'|trans }}</td>
