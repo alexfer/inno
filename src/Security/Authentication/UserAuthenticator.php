@@ -60,11 +60,11 @@ class UserAuthenticator extends AbstractAuthenticator
     public function authenticate(Request $request): Passport
     {
 
-        $cookies = $request->cookies;
+        $cookies = $request->cookies->get(FrontSessionHandler::NAME);
         $orders = null;
 
-        if ($this->frontSession->has($cookies->get(FrontSessionHandler::NAME))) {
-            $orders = $this->frontSession->get($cookies->get(FrontSessionHandler::NAME));
+        if ($cookies && $this->frontSession->has($cookies)) {
+            $orders = $this->frontSession->get($cookies);
             $orders = unserialize($orders);
             foreach ($orders as $key => $order) {
                 $orders[$key] = $key;
