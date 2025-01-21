@@ -125,11 +125,12 @@ class ImageManagerController extends AbstractController
                 $product = $manager->getRepository(StoreProduct::class)->find($payload['id']);
             }
 
-            foreach ($payload['ids'] as $id) {
+            foreach ($payload['ids'] as $key => $id) {
                 $attach = $manager->getRepository(Attach::class)->find($id);
                 if ($payload['target'] == 'entry') {
+                    $manager->getRepository(EntryAttachment::class)->resetStatus($entry);
                     $attachment = new EntryAttachment();
-                    $attachment->setAttach($attach)->setEntry($entry)->setInUse(0);
+                    $attachment->setAttach($attach)->setEntry($entry)->setInUse(!$key ? 1 : 0);
                     $manager->persist($attachment);
                 }
 

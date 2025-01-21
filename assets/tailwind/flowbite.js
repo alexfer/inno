@@ -18,7 +18,7 @@ if (toast !== undefined) {
     });
 }
 
-let clipboardEmail, tooltipEmail, clipboardPhone, tooltipPhone = undefined;
+let clipboardEmail, tooltipEmail, clipboardPhone, tooltipPhone, clipBoardImage = undefined;
 
 if (document.getElementById('email') !== null) {
     clipboardEmail = window.FlowbiteInstances.getInstance('CopyClipboard', 'email');

@@ -30,11 +30,10 @@ class EntryRepository extends ServiceEntityRepository
 
     /**
      * @param string $type
-     * @param bool $rand
+     * @param int $attach
      * @return array|null
-     * @throws NonUniqueResultException
      */
-    public function primary(string $type, bool $rand = false): ?array
+    public function primary(string $type, int $attach = 0): ?array
     {
         $qb = $this->createQueryBuilder('e')
             ->select([
@@ -54,18 +53,20 @@ class EntryRepository extends ServiceEntityRepository
                 'a.path as attachment_path',
             ])
             ->join(EntryDetails::class, 'd', Expr\Join::WITH, 'e.id = d.entry')
-            ->join(EntryCategory::class, 'ec', Expr\Join::WITH, 'ec.entry = e.id')
-            ->join(Category::class, 'c', Expr\Join::WITH, 'c.id = ec.category')
-            ->join(EntryAttachment::class, 'ea', Expr\Join::WITH, 'd.id = ea.entry')
-            ->join(Attach::class, 'a', Expr\Join::WITH, 'a.id = ea.attach')
-            ->join(UserDetails::class, 'ud', Expr\Join::WITH, 'ud.user = e.user')
-            ->join(UserSocial::class, 'us', Expr\Join::WITH, 'us.details = ud.id')
+            ->leftJoin(EntryCategory::class, 'ec', Expr\Join::WITH, 'ec.entry = e.id')
+            ->leftJoin(Category::class, 'c', Expr\Join::WITH, 'c.id = ec.category')
+            ->leftJoin(EntryAttachment::class, 'ea', Expr\Join::WITH, 'd.id = ea.entry')
+            ->leftJoin(Attach::class, 'a', Expr\Join::WITH, 'a.id = ea.attach')
+            ->leftJoin(UserDetails::class, 'ud', Expr\Join::WITH, 'ud.user = e.user')
+            ->leftJoin(UserSocial::class, 'us', Expr\Join::WITH, 'us.details = ud.id')
             ->where('e.status = :status')
             ->andWhere('e.type = :type')
-            ->andWhere('ea.in_use = 1')
+            ->andWhere('ea.in_use = :attach')
+            ->setParameter('attach', $attach)
             ->setParameter('status', Entry::STATUS['entry.info.published'])
             ->setParameter('type', $type)
             ->orderBy('e.created_at', 'DESC')
+            ->setFirstResult(0)
             ->setMaxResults(1)
             ->getQuery();
 

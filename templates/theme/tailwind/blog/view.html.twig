@@ -31,7 +31,7 @@
             </div>
             {% for key, picture in entry.entryAttachments %}
                 {% if picture.inUse %}
-                    {% set _picture = 'storage/entry/picture/' ~ entry.entryDetails.id ~ '/' ~ picture.attach.name %}
+                    {% set _picture = picture.attach.path ~ '/' ~ picture.attach.name %}
                     <div class="relative mb-4">
                         <div class="block w-full absolute px-4 py-5 bg-white opacity-50 z-10 rounded-t-lg">
                             <h3 class="text-xl text-black font-semibold opacity-100 z-20">{{ entry.entryDetails.title }}</h3>
