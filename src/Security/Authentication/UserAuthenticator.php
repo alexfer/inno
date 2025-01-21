@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\User;
 use Inno\Service\MarketPlace\Store\Order\Interface\OrderServiceInterface;
+use Inno\Storage\MarketPlace\FrontSessionHandler;
+use Inno\Storage\MarketPlace\FrontSessionInterface;
 use Symfony\Component\HttpFoundation\{JsonResponse, RedirectResponse, Request, Response};
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -23,14 +25,15 @@ class UserAuthenticator extends AbstractAuthenticator
      * @param RouterInterface $router
      * @param EntityManagerInterface $em
      * @param OrderServiceInterface $processor
+     * @param FrontSessionInterface $frontSession
      */
     public function __construct(
         private readonly RouterInterface        $router,
         private readonly EntityManagerInterface $em,
         private readonly OrderServiceInterface  $processor,
+        private readonly FrontSessionInterface  $frontSession,
     )
     {
-
     }
 
     /**
@@ -44,7 +47,9 @@ class UserAuthenticator extends AbstractAuthenticator
     public function supports(Request $request): ?bool
     {
         return (
-            ($request->getPathInfo() === '/web/login' || $request->getPathInfo() === '/market-place/checkout/order-success/login') && $request->isMethod('POST')
+            ($request->getPathInfo() === '/web/login' ||
+                $request->getPathInfo() === '/market-place/checkout/order-success/login') &&
+            $request->isMethod('POST')
         );
     }
 
@@ -54,10 +59,20 @@ class UserAuthenticator extends AbstractAuthenticator
      */
     public function authenticate(Request $request): Passport
     {
-        $order = null;
+
+        $cookies = $request->cookies;
+        $orders = null;
+
+        if ($this->frontSession->has($cookies->get(FrontSessionHandler::NAME))) {
+            $orders = $this->frontSession->get($cookies->get(FrontSessionHandler::NAME));
+            $orders = unserialize($orders);
+            foreach ($orders as $key => $order) {
+                $orders[$key] = $key;
+            }
+        }
+
         if ('json' == $request->getContentTypeFormat()) {
             $payload = $request->getPayload()->all();
-            $order = $payload['order'];
             $token = $payload['_csrf_token'];
         } else {
             $payload = $request->request->all()['login'];
@@ -65,7 +80,7 @@ class UserAuthenticator extends AbstractAuthenticator
         }
 
         return new Passport(
-            new UserBadge($payload['email'], function ($userIdentifier) use ($request, $order) {
+            new UserBadge($payload['email'], function ($userIdentifier) use ($request, $orders) {
                 // optionally pass a callback to load the User manually
                 $user = $this->em->getRepository(User::class)->loadUserByIdentifier($userIdentifier);
 
@@ -73,9 +88,9 @@ class UserAuthenticator extends AbstractAuthenticator
                     throw new UserNotFoundException('User not found.');
                 }
 
-                if ($order && 'json' == $request->getContentTypeFormat()) {
+                if ($orders) {
                     $customer = $this->em->getRepository(StoreCustomer::class)->findOneBy(['member' => $user]);
-                    $this->processor->updateAfterAuthenticate((int)$order, $customer->getId());
+                    $this->processor->updateAfterAuthenticate($orders, $customer);
                 }
 
                 $user->setIp($request->getClientIp())

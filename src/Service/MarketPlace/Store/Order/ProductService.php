@@ -44,7 +44,7 @@ final class ProductService implements ProductServiceInterface
         if (count($products) == 1) {
             $customerOrder = $this->getCustomerOrder($customer);
 
-            if ($customer->getId() !== null) {
+            if ($customerOrder !== null) {
                 $this->getOrder()->removeStoreCustomerOrder($customerOrder);
             }
 

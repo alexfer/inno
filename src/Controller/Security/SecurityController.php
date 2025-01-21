@@ -64,7 +64,6 @@ class SecurityController extends AbstractController
 
         return $this->render('security/_xhr_form.html.twig', [
             'form' => $form->createView(),
-            'order' => $request->query->get('order'),
         ]);
     }
 

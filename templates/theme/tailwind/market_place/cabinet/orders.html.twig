@@ -30,7 +30,7 @@
             <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white">
                 {% for key, order in orders %}
                     {% set discount = 0 %}
-                    <h3 id="order-flush-heading-{{ key }}">
+                    <h3 id="order-flush-heading-{{ key }}" class="mb-0">
                         <button type="button"
                                 class="flex rounded-t-lg border-s border-e border-t items-center pl-5 justify-between w-full py-5 font-medium bg-gray-50 text-gray-500 dark:border-gray-700 dark:text-gray-400 gap-3"
                                 data-accordion-target="#order-body-{{ key }}"
@@ -86,12 +86,12 @@
                                 </div>
                             </div>
                             <div class="text-right text-sm font-medium relative">
-                                {% if order.completed is null %}
+                                {% if order.status == 'confirmed' %}
                                     <a id="invoice-action-{{ key }}"
                                        role="button"
-                                       data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="hover"
+                                       data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="click"
                                        aria-expanded="false"
-                                       class="bg-indigo-500 hover:bg-indigo-800 rounded px-2.5 py-1.5 text-white dark:text-gray-100 font-normal">{{ 'customer.cabinet.invoice'|trans }}</a>
+                                       class="bg-indigo-500 hover:bg-indigo-800 text-sm rounded px-2.5 py-1.5 text-white dark:text-gray-100 font-normal">{{ 'customer.cabinet.invoice'|trans }}</a>
                                     <div id="invoice-status-{{ key }}" class="z-10 hidden">
                                         <ul class="w-48 min-w-max list-none overflow-hidden p-2 text-xs shadow-lg rounded-md border-none bg-white bg-clip-padding text-left data-[twe-dropdown-show]:block"
                                             aria-labelledby="dropdown-invoice-{{ key }}">
@@ -106,7 +106,7 @@
                                         </ul>
                                     </div>
                                 {% else %}
-
+                                    <span class="bg-indigo-300 pointer-events-none cursor-default rounded px-2.5 py-1.5 text-white dark:text-gray-100 font-normal">{{ 'customer.cabinet.invoice'|trans }}</span>
                                 {% endif %}
                             </div>
                         </div>

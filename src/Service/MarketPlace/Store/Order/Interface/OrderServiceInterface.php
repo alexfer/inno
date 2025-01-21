@@ -32,9 +32,9 @@ interface OrderServiceInterface
     public function getSessionId(): string;
 
     /**
-     * @param int $orderId
-     * @param int $customerId
+     * @param array $orders
+     * @param StoreCustomer $customer
      * @return void
      */
-    public function updateAfterAuthenticate(int $orderId, int $customerId): void;
+    public function updateAfterAuthenticate(array $orders, StoreCustomer $customer): void;
 }

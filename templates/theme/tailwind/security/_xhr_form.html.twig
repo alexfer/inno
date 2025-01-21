@@ -29,9 +29,7 @@
             {{ 'text.forgot_password'|trans }}
         </a>
     </div>
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    {#    <input type="hidden" name="order" value="{{ order }}"> #}
-    {{ form_widget(form.order, {attr: {value: order}}) }}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('csrf_token_id') }}">
     <div class="flex justify-center">
         {{ form_widget(form.login, { label: 'form.action.login', attr: {
             class: 'w-full rounded bg-red-600 mt-2 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30'
