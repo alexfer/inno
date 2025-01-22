@@ -28,6 +28,33 @@ class ImageManagerController extends AbstractController
     final const int LIMIT = 24;
 
     /**
+     * @param CacheManager $cacheManager
+     * @param EntityManagerInterface $manager
+     * @return JsonResponse
+     */
+    #[Route('/json', name: 'dashboard.image-manager,json', methods: ['GET'])]
+    public function imagesList(
+        CacheManager           $cacheManager,
+        EntityManagerInterface $manager
+    ): JsonResponse
+    {
+        $images = $manager->getRepository(FileManager::class)->fetch($this->getUser(), EnumAttachment::Image);
+        $json = [];
+
+        foreach ($images as $image) {
+            $path = $image['attachment']['path'] . '/' . $image['attachment']['name'];
+            $json[] = [
+                'src' => $cacheManager->getBrowserPath(parse_url($path, PHP_URL_PATH), 'image_preview'),
+                'thumb' => $cacheManager->getBrowserPath(parse_url($path, PHP_URL_PATH), 'image_thumb'),
+            ];
+        }
+
+        return $this->json([
+            'result' => $json,
+        ]);
+    }
+
+    /**
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param PaginatorInterface $paginator

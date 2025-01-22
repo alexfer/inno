@@ -16,6 +16,10 @@ liip_imagine:
             filters:
                 relative_resize:
                     heighten: 20
+        image_preview:
+            filters:
+                relative_resize:
+                    heighten: 800
         image_thumb:
             filters:
                 relative_resize:
