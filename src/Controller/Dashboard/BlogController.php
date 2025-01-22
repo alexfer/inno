@@ -321,8 +321,10 @@ class BlogController extends AbstractController
 
         $exists = $em->getRepository(FileManager::class)->findOneBy(['file' => $attach, 'owner' => $this->getUser()]);
 
-        if (!$exists) {
+        if ($exists === null) {
             $oldFile = $this->getTargetDir($entry->getId(), $params) . '/' . $attach->getName();
+
+            $em->remove($attach);
 
             if ($cacheManager->isStored($oldFile, 'entry_preview')) {
                 $cacheManager->remove($oldFile, 'entry_preview');
@@ -335,8 +337,6 @@ class BlogController extends AbstractController
             if ($fs->exists($oldFile)) {
                 $fs->remove($oldFile);
             }
-
-            $em->remove($attach);
         }
 
         $em->remove($attachment);

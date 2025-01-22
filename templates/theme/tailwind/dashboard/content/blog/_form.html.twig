@@ -79,6 +79,8 @@
         const options = {
             height: '300',
             width: '100%',
+            imageFileInput: false,
+            imageGalleryUrl: '{{ path('dashboard.image-manager,json') }}',
             plugins: ['undo', 'redo', 'formatBlock', 'paragraphStyle',
                 'blockquote', 'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
                 'fontColor', 'hiliteColor', 'textStyle', 'removeFormat', 'outdent', 'indent',
@@ -94,7 +96,7 @@
                 ['outdent', 'indent'],
                 ['align', 'horizontalRule', 'list', 'lineHeight'],
                 ['table', 'link', 'image', 'video', 'audio'],
-                /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+                ['imageGallery'],
                 ['fullScreen', 'showBlocks', 'codeView'],
             ]
         };

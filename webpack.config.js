@@ -14,7 +14,6 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addEntry('app', `./assets/tailwind/app.js`)
-    //.enableStimulusBridge(`./assets/tailwind/controllers.json`)
     .addEntry('coupon-js', `./assets/tailwind/js/order/coupon.js`)
     .addEntry('summary-js', `./assets/tailwind/js/order/summary.js`)
     .addEntry('message-js', `./assets/tailwind/js/message.js`)

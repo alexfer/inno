@@ -19,6 +19,27 @@ if (toast !== undefined) {
 }
 
 let clipboardEmail, tooltipEmail, clipboardPhone, tooltipPhone = undefined;
+const btnBox = document.querySelectorAll('.copy-picture');
+
+if (btnBox.length > 0) {
+    [...btnBox].forEach(element => {
+        element.addEventListener('click', (e) => {
+            e.preventDefault();
+            const text = element.getAttribute('data-clipboard-text');
+            const tooltip = element.nextElementSibling;
+            const input = document.createElement('input');
+            input.setAttribute('value', text);
+            document.body.appendChild(input);
+            input.select();
+            try {
+                let copy = document.execCommand('copy');
+                document.body.removeChild(input);
+            } catch (e) {
+                console.error(e);
+            }
+        });
+    });
+}
 
 if (document.getElementById('email') !== null) {
     clipboardEmail = window.FlowbiteInstances.getInstance('CopyClipboard', 'email');

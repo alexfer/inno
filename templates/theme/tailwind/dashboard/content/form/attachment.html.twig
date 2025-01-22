@@ -37,8 +37,23 @@
                         <div id="overlay" class="overlay"></div>
                         <div class="absolute bottom-0 right-0 bg-opacity-60 bg-white dark:bg-gray-700 block w-full justify-end"
                              data-id="{{ picture.attach.id }}">
+                            <button class="copy-picture mr-1 mt-0.5 text-indigo-700 hover:text-indigo-900/70 float-end cursor-pointer" data-clipboard-text="{{ absolute_url(asset(_picture)) }}">
+                                <span class="mr-1 my-1 float-end">
+                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                         fill="currentColor"
+                                         viewBox="0 0 18 20">
+                                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"></path>
+                                    </svg>
+                                </span>
+                            </button>
+                            <div role="tooltip"
+                                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                <span class="default-tooltip-message-picture">{{ 'text.copy'|trans }}</span>
+                                <span class="success-tooltip-message-picture" class="hidden">{{ 'text.copied'|trans }}</span>
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                             <a href="{{ remove }}"
-                               class="mr-1 my-1 text-red-700 hover:text-red-900/70 hover:animate-bounce confirm-delete float-end">
+                               class="mr-1 my-1 text-red-700 hover:text-red-900/70 confirm-delete float-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                      class="h-4 w-4">
                                     <path fill-rule="evenodd"

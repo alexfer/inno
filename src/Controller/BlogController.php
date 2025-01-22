@@ -22,7 +22,7 @@ class BlogController extends AbstractController
     #[Route('', name: 'app_blog')]
     public function index(): Response
     {
-        $primary = $this->em->getRepository(Entry::class)->primary(Entry::TYPE['Blog']);
+        $primary = $this->em->getRepository(Entry::class)->primary(Entry::TYPE['Blog'], 1);
         $timeline = $this->em->getRepository(Entry::class)->timeline('blog');
         $authors = $this->em->getRepository(Entry::class)->findEntriesByAuthors('blog', 4);
         shuffle($authors);
@@ -47,7 +47,7 @@ class BlogController extends AbstractController
         $slug = $request->get('slug');
         $date = $request->get('date');
         $categoryRepository = $this->em->getRepository(Category::class);
-        $entries = $this->em->getRepository(Entry::class)->findEntriesByCondition($slug, $date, 'blog', 12);
+        $entries = $this->em->getRepository(Entry::class)->findEntriesByCondition($slug, $date, 'blog');
         $category = $categoryRepository->findOneBy(['slug' => $slug]);
         $categories = $categoryRepository->findBy([], ['slug' => 'asc']);
 
