@@ -7,6 +7,7 @@ window.addEventListener('load', function () {
     const injectBtn = document.getElementById('inject');
     const attachments = document.getElementById('attachments');
     const message = document.querySelector('[role="alert"]');
+    const list = document.querySelectorAll('.pictures');
     let pictures = NodeList, ids = [];
 
     const loadContent = async (url) => {
@@ -14,7 +15,7 @@ window.addEventListener('load', function () {
         const data = await response.json();
         manageContent.innerHTML = data.html;
         loadMore.setAttribute('href', `${data.url}/?page=${data.nextPage}`);
-        if(data.total < data.limit) {
+        if (data.total < data.limit) {
             loadMore.classList.add('pointer-events-none', 'opacity-50');
         }
     }
@@ -34,6 +35,20 @@ window.addEventListener('load', function () {
         e.preventDefault();
         await loadContent(url);
         pictures = await document.querySelectorAll('.pictures');
+
+        if (pictures.length > 0) {
+            [...pictures].forEach((item) => {
+                item.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    if (checkbox.hasAttribute('checked')) {
+                        checkbox.removeAttribute('checked');
+                    } else {
+                        checkbox.setAttribute('checked', 'checked');
+                    }
+                });
+            });
+        }
     });
 
     injectBtn.addEventListener('click', async () => {
@@ -112,4 +127,6 @@ window.addEventListener('load', function () {
             message.classList.add('hidden');
         }, 3000);
     });
+
+
 });

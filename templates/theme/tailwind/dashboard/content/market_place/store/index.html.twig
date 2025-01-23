@@ -13,7 +13,7 @@
             <div class="grid-loop-cols-3 last:border-0">
                 <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
                     <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
-                       href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
+                       href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}">{{ store.name }}</a>
                     <p class="mt-1 hidden md:block dark:text-white">
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="mailto:{{ store.owner.email }}"
