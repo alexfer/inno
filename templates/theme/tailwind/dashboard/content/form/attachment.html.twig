@@ -26,39 +26,38 @@
             <span class="sr-only">{{ 'text.loading'|trans }}</span>
         </div>
     </div>
-    <div class="grid grid-cols-1 mb-3">
+    <div class="grid grid-cols-1 my-5">
         {% if app.request.get('id') %}
-            <ul id="attachments" class="flex list-none flex-wrap items-left justify-start">
+            <ul id="attachments" class="flex flex-wrap items-left justify-start gap-4">
                 {% for key, picture in attachments|reverse|slice(0, 16) %}
                     {% set _picture = picture.attach.path ~ '/' ~ picture.attach.name %}
-                    <li class="relative my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
-                        <img class="h-auto w-full md:max-w-xs rounded-lg bg-white"
+                    <li class="relative m-0.5 bg-cover bg-no-repeat">
+                        <img class="h-200 object-contain w-full rounded-lg md:max-w-xs cursor-pointer bg-body dark:bg-gray-900 hover:scale-105 transition-shadow hover:shadow-lg ease-in"
                              src="{{ asset(_picture) | imagine_filter(filter) }}" alt="...">
-                        <div id="overlay" class="overlay"></div>
-                        <div class="absolute bottom-0 right-0 bg-opacity-60 bg-white dark:bg-gray-700 block w-full justify-end"
+                        <div class="absolute -top-2 -right-1 z-20 w-full justify-end"
                              data-id="{{ picture.attach.id }}">
-                            <button class="copy-picture mr-1 mt-0.5 text-indigo-700 hover:text-indigo-900/70 float-end cursor-pointer" data-clipboard-text="{{ absolute_url(asset(_picture)) }}">
-                                <span class="mr-1 my-1 float-end">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            {% if target == 'entry' %}
+                                <button class="copy-picture text-gray-50 p-1 md:p-1.5 ml-1 bg-indigo-500 hover:bg-indigo-700 rounded-full float-end cursor-pointer"
+                                        data-clipboard-text="{{ absolute_url(asset(_picture)) }}">
+                                    <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                          fill="currentColor"
                                          viewBox="0 0 18 20">
                                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"></path>
                                     </svg>
-                                </span>
-                            </button>
-                            <div role="tooltip"
-                                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                <span class="default-tooltip-message-picture">{{ 'text.copy'|trans }}</span>
-                                <span class="success-tooltip-message-picture" class="hidden">{{ 'text.copied'|trans }}</span>
-                                <div class="tooltip-arrow" data-popper-arrow></div>
-                            </div>
+                                </button>
+                                <div role="tooltip"
+                                     class="absolute z-10 invisible left-7 -top-10 inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <span>{{ 'text.copied'|trans }}</span>
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            {% endif %}
                             <a href="{{ remove }}"
-                               class="mr-1 my-1 text-red-700 hover:text-red-900/70 confirm-delete float-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                                     class="h-4 w-4">
-                                    <path fill-rule="evenodd"
-                                          d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z"
-                                          clip-rule="evenodd"/>
+                               class="p-1 md:p-1.5 text-gray-50 bg-red-500 hover:bg-red-700 rounded-full confirm-delete float-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" data-lucide="x" class="h-4 w-4 stroke-[1.3]">
+                                    <path d="M18 6 6 18"></path>
+                                    <path d="m6 6 12 12"></path>
                                 </svg>
                             </a>
                         </div>

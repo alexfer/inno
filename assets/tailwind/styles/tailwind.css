@@ -120,7 +120,7 @@
     }
 
     .pictures {
-        @apply relative border p-5 rounded-lg align-bottom bg-white transition-all duration-300 filter grayscale-0 hover:grayscale hover:shadow shadow-inner;
+        @apply relative bg-cover bg-no-repeat;
     }
 
     .tab-list {
@@ -193,10 +193,6 @@
 
     .list-grid-item {
         @apply p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-gray-950 dark:border-gray-700;
-    }
-
-    .overlay {
-        @apply absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden rounded-lg bg-indigo-700 bg-fixed opacity-0 transition-opacity duration-300 ease-in hover:opacity-40;
     }
 
     .form-box {

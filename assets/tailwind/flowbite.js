@@ -31,9 +31,14 @@ if (btnBox.length > 0) {
             input.setAttribute('value', text);
             document.body.appendChild(input);
             input.select();
+
             try {
+                tooltip.classList.remove('invisible', 'opacity-0');
                 let copy = document.execCommand('copy');
                 document.body.removeChild(input);
+                setTimeout(() => {
+                    tooltip.classList.add('invisible', 'opacity-0');
+                }, 1500);
             } catch (e) {
                 console.error(e);
             }

@@ -1,15 +1,22 @@
-<div class="grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
     {% for key, image in images %}
         {% set picture = 'storage/images/' ~ app.user.id ~ '/' ~ image.attachment.name %}
-        <a href="#" class="pictures">
-            <img loading="lazy" class="h-auto max-w-full rounded-lg"
+        {% if key % 3 != 0 %}
+            <div class="grid gap-4">
+        {% endif %}
+        <a href="javascript:;" class="pictures object-fit-scale">
+            <img loading="lazy"
+                 class="h-100 object-contain w-full md:max-w-xs rounded-lg cursor-pointer  bg-white dark:bg-gray-800 hover:shadow-lg"
                  src="{{ asset(picture)|imagine_filter('image_thumb') }}" alt="...">
-            <label class="absolute top-1 start-2 cursor-pointer w-full" for="i-{{ key }}">
+            <label class="absolute -top-1 -left-1 cursor-pointer" for="i-{{ key }}">
                 <input type="checkbox" name="item[{{ image.attachment.id }}]" value="{{ image.attachment.id }}"
                        class="checkbox-indigo"
                        id="i-{{ key }}"/>
                 <span class="sr-only">{{ image.attachment.name }}</span>
             </label>
         </a>
+        {% if key % 3 != 0 %}
+            </div>
+        {% endif %}
     {% endfor %}
 </div>
