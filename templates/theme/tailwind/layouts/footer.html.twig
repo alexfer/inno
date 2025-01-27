@@ -1,14 +1,14 @@
 <div class="mx-auto text-white pt-5 pb-3 px-3">
     <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-x-3">
-        <div class="block col-span-2">
-            <ul class="inline-flex my-4 w-full space-x-5">
+        <div class="md:col-span-2">
+            <ul class="inline-block md:inline-flex my-4 w-full space-y-4 md:space-y-0 md:space-x-10">
                 <li>
                     <a href="{{ path('about') }}"
                        class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.about_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('faq') }}"
-                       class="text-sm text-gray-400 hover:text-white">{{ 'title.questions'|trans }}</a>
+                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.questions'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('contact') }}"
@@ -37,39 +37,39 @@
                 <span class="font-medium text-gray-300 uppercase">{{ 'site.title'|trans }}
             </a>
         </div>
-        <div class="hidden md:grid grid-cols-1 gap-6 sm:gap-4 sm:grid-cols-2">
+        <div class="flex justify-between items-center">
             <div>
-                <h2>{{ 'title.resources'|trans }}</h2>
-                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                <h2 class="text-slate-300">{{ 'title.resources'|trans }}</h2>
+                <ul class="text-slate-400 text-xs md:text-sm font-medium">
                     <li class="mb-2">
-                        <a href="https://symfony.com/" class="hover:underline">Symfony</a>
+                        <a href="https://symfony.com/" class="hover:text-slate-50">Symfony</a>
                     </li>
                     <li class="mb-2">
-                        <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                        <a href="https://tailwindcss.com/" class="hover:text-slate-50">Tailwind CSS</a>
                     </li>
                     <li>
-                        <a href="https://www.postgresql.org/" class="hover:underline">PostgresSQL</a>
+                        <a href="https://www.postgresql.org/" class="hover:text-slate-50">PostgresSQL</a>
                     </li>
                 </ul>
             </div>
             <div>
-                <h2>{{ 'title.legal'|trans }}</h2>
-                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                <h2 class="text-slate-300">{{ 'title.legal'|trans }}</h2>
+                <ul class="text-slate-400 text-xs md:text-sm font-medium">
                     <li class="mb-2">
-                        <a href="{{ path('policy') }}" class="hover:underline">{{ 'title.privacy_policy'|trans }}</a>
+                        <a href="{{ path('policy') }}" class="hover:text-slate-50">{{ 'title.privacy_policy'|trans }}</a>
                     </li>
                     <li class="mb-2">
-                        <a href="{{ path('terms') }}" class="hover:underline">{{ 'title.terms'|trans|raw }}</a>
+                        <a href="{{ path('terms') }}" class="hover:text-slate-50">{{ 'title.terms'|trans|raw }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('cookie') }}" class="hover:underline">{{ 'title.cookie_policy'|trans }}</a>
+                        <a href="{{ path('cookie') }}" class="hover:text-slate-50">{{ 'title.cookie_policy'|trans }}</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<div class="bg-gray-900 p-3 text-gray-200 mt-3 border-t border-gray-700">
+<div class="bg-slate-900 p-3 text-gray-200 mt-3 border-t border-slate-700">
     <div class="max-w-screen-xl mx-auto flex justify-between items-center">
         <div class="text-xs md:text-sm">
             {% set year =  'now' | date('Y') %}

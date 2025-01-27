@@ -77,7 +77,7 @@
             <div class="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {% for product in products %}
                     <div class="min-h-full">
-                        <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700 group">
                             <div class="relative overflow-hidden h-250 rounded-t-md">
                                 {% if product.attachment %}
                                     {% set _picture = product.attachment.path ~ '/' ~ product.attachment.name %}
@@ -92,16 +92,16 @@
                                          class="object-cover h-full max-w-full rounded-t-lg"
                                          alt="{{ product.name }}">
                                 {% endif %}
-                                <div class="absolute top-5 w-full">
+                                <div class="absolute top-5 w-full opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
                                     <div class="flex justify-between">
-                                        <div class="ml-2 bg-gray-600 bg-opacity-90 text-gray-500 text-sm shadow-xl font-medium px-2.5 pt-2 rounded-md dark:bg-gray-900 dark:text-gray-300">
+                                        <div class="ml-2 bg-gray-600 bg-opacity-90 text-gray-500 text-xs shadow-xl font-medium px-2.5 pt-2 rounded-md dark:bg-gray-900 dark:text-gray-300">
                                             <a title="{{ product.name }}"
                                                href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
-                                               class="text-white hover:text-neutral-100 hover:animate-pulse">{{ 'store.product.details'|trans }}
+                                               class="text-white hover:text-neutral-100">{{ 'store.product.details'|trans }}
                                             </a>
                                         </div>
                                         {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
-                                        <span class="text-2xl pr-2 font-medium {% if product.reduce.unit is not empty %}text-rose-500{% else %}text-gray-900{% endif %} dark:text-white">{{ price }}<small>{{ product.currency|currency }}</small></span>
+                                        <span class="badge-red {% if product.reduce.unit is not empty %}text-rose-500{% else %}text-gray-900{% endif %} dark:text-white">{{ price }}<small>{{ product.currency|currency }}</small></span>
                                     </div>
                                 </div>
                             </div>

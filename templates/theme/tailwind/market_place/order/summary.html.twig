@@ -1,28 +1,28 @@
 {% extends 'market_place/index.html.twig' %}
 
-{% block title %}{{ 'order.your.ordres'|trans }}{% endblock %}
-{% block description %}{{ 'order.your.ordres'|trans }}{% endblock %}
+{% block title %}{{ 'order.your.orders'|trans }}{% endblock %}
+{% block description %}{{ 'order.your.orders'|trans }}{% endblock %}
 {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
     <h2 class="block line-clamp-1">{{ 'order.cart'|trans }}</h2>
-    <div class="grid lg:grid-cols-12 md:grid-cols-9 sm:grid-cols-1 gap-x-5">
+    <div class="grid lg:grid-cols-12 md:grid-cols-9 grid-cols-1 gap-x-5">
         <div class="lg:col-span-9 md:col-span-7">
             <form id="order-summary" name="order[]" action="{{ path('app_market_place_order_update') }}" method="post">
                 <div class="mt-2">
                     {% for order in orders %}
-                        <div class="bg-gray-50 pt-2 rounded-md shadow-sm">
-                            <div class="truncate h-9 mx-3 text-xl font-oswald font-thin text-ellipsis text-blue-800 dark:text-white">{{ order.store.name }}</div>
+                        <div class="pt-2 border-b border-gray-200 dark:border-gray-600">
+                            <div class="line-clamp-1 h-9 mx-3 text-xl font-oswald font-thin text-ellipsis text-blue-800 dark:text-white">{{ order.store.name }}</div>
                         </div>
                         <div class="root mb-5" data-order-id="{{ order.session }}">
                             <input type="hidden" name="store[]" value="{{ order.store.id }}">
                             {% for key, product in order.products %}
                                 <input type="hidden" name="order[]" value="{{ order.id }}">
                                 <div data-product-id="{{ product.product.id }}"
-                                     class="flex flex-row parent my-3 hover:bg-gray-50 rounded-lg bg-white pt-3 text-surface shadow-lg dark:bg-neutral-700 dark:text-white dark:shadow-black/30">
-                                    <div class="basis-1/4 flex flex-row p-2">
+                                     class="flex flex-row parent my-3 border rounded-md bg-white text-surface hover:shadow dark:bg-gray-700 dark:text-white">
+                                    <div class="basis-1/4 flex flex-row">
                                         {% if product.product.attachment %}
-                                            {% set _picture = 'storage/product/' ~ product.product.id ~ '/' ~ product.product.attachment %}
+                                            {% set _picture = product.product.attachment.path ~ '/' ~ product.product.attachment.name %}
                                             <img src="{{ asset(_picture)|imagine_filter('product_preview') }}"
                                                  class="object-cover md:h-auto md:w-auto rounded-l-lg"
                                                  alt="{{ product.product.name }}">
@@ -32,11 +32,14 @@
                                                  class="object-cover md:h-auto md:w-auto rounded-l-lg">
                                         {% endif %}
                                     </div>
-                                    <div class="basis-10/12 px-5 pb-5 relative">
+                                    <div class="basis-10/12 px-3 pb-5 relative">
+                                        {% if product.product.reduce.unit is not empty %}
+                                            <span class="absolute top-1/2 md:top-3 end-3 text-xs text-white opacity-85 bg-red-600 px-1.5 py-1 rounded-lg">{{ product.product.reduce.value }}{{ product.product.reduce.unit|convert(order.store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
+                                        {% endif %}
                                         <a class="text-gray-600 font-semibold pb-3"
                                            href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}"
                                            title="{{ product.product.name }}">
-                                            <h5 class="text-xl truncate max-w-sm pb-3">
+                                            <h5 class="text-xl line-clamp-1 max-w-sm py-3">
                                                 {{ product.product.short_name }}
                                             </h5>
                                         </a>
@@ -46,20 +49,19 @@
                                                       id="discount">{{ product.coupon.price|amount_format }}<small>{{ order.store.currency|currency }}</small></span>{{ 'store.product.off'|trans }}
                                             </span>
                                         {% endif %}
-                                        <div class="flex justify-between">
+                                        <div class="flex justify-between items-center">
                                             {% set price = 0 %}
                                             {% if product.product.reduce.unit is not empty %}
-                                                <div class="font-medium whitespace-nowrap text-xl">
-                                                    <span class="inline-block text-xs text-white opacity-85 bg-red-600 px-2 pt-1 pb-0.5 rounded-md">{{ product.product.reduce.value }}{{ product.product.reduce.unit|convert(order.store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
+                                                <div class="font-medium whitespace-nowrap text-lg text-gray-600 dark:text-gray-300">
                                                     {% set price = discount(product.product.cost, product.product.reduce.value, product.product.fee, 1, product.product.reduce.unit) %}
-                                                    {{ price|amount_format }}
-                                                    <small>{{ order.store.currency|currency }}</small>
+                                                    {{ price|amount_format }}<small>{{ order.store.currency|currency }}</small>
+                                                    <span class="text-gray-300 ml-2 line-through dark:text-gray-300">{{ (product.product.cost + product.product.fee) }}<small>{{ order.store.currency|currency }}</small></span>
                                                 </div>
                                             {% else %}
-                                                {% set price = ((product.product.cost) + product.product.fee) %}
-                                                <span class="font-sm whitespace-nowrap text-xl">{{ price|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
+                                                {% set price = (product.product.cost + product.product.fee) %}
+                                                <span class="whitespace-nowrap text-xl">{{ price|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
                                             {% endif %}
-                                            <div class="text-base font-light">
+                                            <div class="font-medium whitespace-nowrap text-lg text-gray-600 dark:text-gray-300">
                                                 <span class="amount-{{ product.id }}"
                                                       data-price="{{ price }}"
                                                       data-amount="{{ (price * product.quantity) }}">{{ (price * product.quantity)|amount_format }}</span><small>{{ order.store.currency|currency }}</small>
@@ -67,16 +69,19 @@
                                         </div>
                                         <div class="py-1 whitespace-nowrap text-gray-600">
                                             {% if product.color %}
-                                                <div class="py-1 mb-1">{{ 'label.color'|trans }}: <span title="{{ product.color_title }}"
+                                                <div class="py-1 mb-1">{{ 'label.color'|trans }}: <span
+                                                            title="{{ product.color_title }}"
                                                             class="rounded-full shadow-lg cursor-pointer ms-2 px-2.5 py-0.5 border-2 border-spacing-2 border-gray-200"
-                                                            style="background-color: {{ product.color }};"></span></div>
+                                                            style="background-color: {{ product.color }};"></span>
+                                                </div>
                                             {% endif %}
                                             {% if product.size %}
-                                                <div class="py-1">{{ 'label.size'|trans }}: <span class="rounded-md shadow-sm cursor-pointer ms-2 px-2.5 pt-2 pb-1 border-2 border-spacing-2 border-gray-200">{{ product.size }}</span>
+                                                <div class="py-1">{{ 'label.size'|trans }}: <span
+                                                            class="rounded-md shadow-sm cursor-pointer ms-2 px-2.5 pt-2 pb-1 border-2 border-spacing-2 border-gray-200">{{ product.size }}</span>
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        <div class="text-xs text-gray-400">{{ 'label.form.sku'|trans }}
+                                        <div class="text-xs text-gray-500 dark:text-gray-100">{{ 'label.form.sku'|trans }}
                                             : {{ product.product.sku }}</div>
                                         {% if product.coupon and product.coupon.hasUsed is null and product.coupon.valid %}
                                             {% if app.user and 'ROLE_CUSTOMER' in app.user.roles %}
@@ -96,24 +101,23 @@
                                                 </div>
                                             {% endif %}
                                         {% endif %}
-                                        <hr class="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10"/>
-                                        <div class="inline-flex w-full justify-between mx-auto items-end">
+                                        <hr class="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-gray-400 dark:text-neutral-400"/>
+                                        <div class="flex w-full justify-between mx-auto items-center">
                                             <a href="#"
-                                               class="drops rounded-md bg-gray-100 hover:bg-gray-200 hover:shadow-md hover:border-gray-300 hover:text-gray-500 text-gray-800 text-xs font-semibold me-2 px-2 py-1.5 dark:bg-gray-700 dark:text-white border border-gray-200 inline-flex"
+                                               class="drops rounded-md bg-red-500 hover:bg-red-700 hover:text-gray-100 text-white px-2 py-1.5 dark:bg-red-400 dark:hover:bg-red-600"
                                                data-order="{{ order.session }}"
                                                data-store="{{ order.store.id }}"
                                                data-url="{{ path('app_market_place_order_remove_product') }}"
                                                data-id="{{ product.id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                                      fill="currentColor"
-                                                     class="w-4 h-4 text-red-500 mr-2 pb-1 inline-flex">
+                                                     class="w-3 h-3">
                                                     <path fill-rule="evenodd"
                                                           d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z"
                                                           clip-rule="evenodd"/>
                                                 </svg>
-                                                <span class="text-gray-500">{{ 'store.product.remove'|trans }}</span>
                                             </a>
-                                            <label class="align-top pb-3" for="product-quantity-{{ product.id }}">
+                                            <label class="align-top" for="product-quantity-{{ product.id }}">
                                                 <div class="relative flex items-center">
                                                     <button type="button" id="decrement-{{ product.id }}"
                                                             data-input-counter-decrement="product-quantity-{{ product.id }}"
@@ -161,7 +165,7 @@
                             {{ 'order.continue.shopping'|trans }}
                         </a>
                         <button type="submit"
-                                class="hidden lg:block rounded bg-gray-950 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-200 hover:text-white shadow-gray-700 transition duration-150 ease-in-out hover:bg-gray-700 focus:outline-none focus:ring-0 motion-reduce:transition-none">
+                                class="rounded bg-gray-950 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-200 hover:text-white shadow-gray-700 transition duration-150 ease-in-out hover:bg-gray-700 focus:outline-none focus:ring-0 motion-reduce:transition-none">
                             {{ 'order.update.cart'|trans }}
                         </button>
                     </div>
@@ -173,23 +177,23 @@
                 {% for order in summary %}
                     <div id="store-{{ order.store_id }}" class="h-auto">
                         <h5 class="truncate mt-5 mb-1 mx-3 text-xl font-oswald font-thin text-ellipsis text-blue-800 dark:text-white">{{ order.store_name }}</h5>
-                        <div class="block max-w-xl sm:max-w-2xl mb-3 p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <div class="block max-w-xl sm:max-w-2xl mb-3 p-4 bg-white border border-gray-200 rounded-lg hover:shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="flex flex-col">
                                 <h6 class="text-lg font-semibold text-gray-600 mb-1">{{ 'order.summary'|trans }}</h6>
                                 <div class="stores-summary mb-2">
                                     <div class="flex justify-between items-start">
                                         <div class="me-auto">{{ 'order.item.subtotal'|trans }}</div>
-                                        <span id="item-subtotal-{{ order.store_id }}">{{ order.total|amount_format }}<small>{{ order.currency }}</small></span>
+                                        <span class="font-medium text-gray-700 dark:text-gray-100" id="item-subtotal-{{ order.store_id }}">{{ order.total|amount_format }}<small>{{ order.currency }}</small></span>
                                     </div>
                                     <div class="flex justify-between items-start">
                                         <div class="me-auto">{{ 'order.service.tax'|trans }}</div>
-                                        <span id="tax-{{ order.store_id }}">{{ order.tax }}<small>%</small></span>
+                                        <span class="font-medium text-gray-700 dark:text-gray-100" id="tax-{{ order.store_id }}">{{ order.tax }}<small>%</small></span>
                                     </div>
                                     <div class="flex justify-between items-start">
                                         <div class="me-auto">{{ 'order.subtotal'|trans }}</div>
                                         {% set tax = order.tax %}
                                         {% set total = (order.total + (order.total * tax)/100) %}
-                                        <span id="total-{{ order.store_id }}">{{ total|amount_format(2) }}<small>{{ order.currency }}</small></span>
+                                        <span class="font-medium text-gray-700 dark:text-gray-100" id="total-{{ order.store_id }}">{{ total|amount_format(2) }}<small>{{ order.currency }}</small></span>
                                     </div>
                                 </div>
                                 {% if order.cc is not null and order.cc|length %}
@@ -197,14 +201,14 @@
                                         {% for cc in order.cc %}
                                             <li class="inline-flex mx-auto ps-0.5">
                                                 <img class="object-cover w-7 h-auto"
-                                                     src="{{ asset('img/cc/' ~ cc ~ '.svg') }}">
+                                                     src="{{ asset('img/cc/' ~ cc ~ '.svg') }}" alt="{{ cc|capitalize }}">
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                                 <div class=" mt-2 text-center">
                                     <a href="{{ path('app_market_place_order_checkout', {order: order.number, tab: 'customer-info'}) }}"
-                                       class="flex rounded bg-red-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-red-200 hover:text-white shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-rd-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30 mb-2 justify-between items-center"
+                                       class="flex rounded bg-red-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-red-100 hover:text-white shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-rd-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30 mb-2 justify-between items-center"
                                        type="submit">
                                         {{ 'order.checkout'|trans }}
                                         <span id="checkout-{{ order.store_id }}"
