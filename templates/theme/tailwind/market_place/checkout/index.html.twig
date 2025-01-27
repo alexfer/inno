@@ -5,16 +5,15 @@
 {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
-    <h2 class="block line-clamp-1">{{ 'order.checkout'|trans }}
-        - {{ order.store.name }}</h2>
-    <div class="grid grid-cols-4 gap-0">
-        <div class="col-span-3 pb-4 mb-3">
+    <h1 class="block py-1.5 mb-2 text-2xl font-oswald bg-gray-50 dark:text-white line-clamp-1 text-center">{{ 'order.checkout'|trans }} - {{ order.store.name }}</h1>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
+        <div class="col-span-1 md:col-span-3 pb-4 mb-3">
             {% include 'market_place/checkout/_customer_form.html.twig' with {
                 'order': order,
                 'form': form
             } %}
         </div>
-        <div class="relative border rounded-md bg-gray-50">
+        <div class="relative border rounded-md">
             <div class="px-3 pb-3 h-full">
                 <div class="px-2 pb-2 mb-3">
                     <h4 class="font-medium font-oswald text-gray-600 text-xl mt-5 mb-4 text-center">{{ 'order.summary'|trans }}</h4>
@@ -25,7 +24,7 @@
                             <a class="block shrink-0 mr-2"
                                href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">
                                 {% if product.product.storeProductAttaches.count %}
-                                    {% set _picture = 'storage/product/' ~ product.product.id ~ '/' ~ product.product.storeProductAttaches.first.attach.name %}
+                                    {% set _picture = product.product.storeProductAttaches.first.attach.path ~ '/' ~ product.product.storeProductAttaches.first.attach.name %}
                                     <img src="{{ asset(_picture)|imagine_filter('product_thumb') }}"
                                          class="rounded-md" width="90"
                                          alt="{{ product.product.name }}">
@@ -34,9 +33,9 @@
                                          width="64" alt="{{ product.product.shortName }}">
                                 {% endif %}
                             </a>
-                            <div class="pl-1 w-36">
-                                <h5 class="font-bold truncate">
-                                    <a class="text-lg" title="{{ product.product.name }}"
+                            <div class="pl-1">
+                                <h5 class="font-medium line-clamp-1">
+                                    <a class="text-lg hover:text-red-600" title="{{ product.product.name }}"
                                        href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">{{ product.product.shortName }}
                                     </a>
                                 </h5>
@@ -47,23 +46,23 @@
                         </div>
                     {% endfor %}
                     <div class="pt-3 pb-2 border-b mt-2">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold me-2">{{ 'order.item.subtotal'|trans }}:</span>
-                            <span class="text-end text-primary-emphasis">{{ itemSubtotal|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
+                        <div class="flex justify-between items-center mb-2 text-gray-600 dark:text-gray-200">
+                            <span class="me-2">{{ 'order.item.subtotal'|trans }}:</span>
+                            <span class="text-end font-medium text-gray-700">{{ itemSubtotal|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
                         </div>
-                        <div class="flex hidden justify-between items-center mb-2">
-                            <span class="font-semibold me-2">{{ 'order.service.coupon'|trans }}:</span>
-                            <span class="text-end text-primary-emphasis">{{ 'store.product.off'|trans }}</span>
+                        <div class="hidden justify-between items-center mb-2 text-gray-600 dark:text-gray-200">
+                            <span class="fme-2">{{ 'order.service.coupon'|trans }}:</span>
+                            <span class="text-end font-medium text-gray-700">{{ 'store.product.off'|trans }}</span>
                         </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold me-2">{{ 'order.service.tax'|trans }}:</span>
-                            <span class="text-end text-primary-emphasis">{{ tax|round(2) }}<small>%</small></span>
+                        <div class="flex justify-between items-center mb-2 text-gray-600 dark:text-gray-200">
+                            <span class="me-2">{{ 'order.service.tax'|trans }}:</span>
+                            <span class="text-end font-medium text-gray-700">{{ tax|round(2) }}<small>%</small></span>
                         </div>
                     </div>
                     <span class="{{ hasUsed == false or coupon == 0 ? 'hidden' : null }} absolute -rotate-45 inline-table top-100 bg-red-700 mt-5 start-4 opacity-70 px-2.5 text-white rounded-md pt-1 end-0 text-sm"><span
                                 class="pe-1"
                                 id="discount">{{ discount }}</span>{{ 'store.product.off'|trans }}</span>
-                    <h3 class="font-light relative text-2xl text-red-700 text-center mt-4 mb-2">
+                    <h3 class="font-medium relative text-xl text-red-600 text-center my-3">
                         {% set total = (total + (total * tax)/100) %}
                         {{ total|amount_format(2) }}<small>{{ order.store.currency|currency }}</small>
                     </h3>
@@ -80,7 +79,7 @@
                 </div>
                 {% if app.request.get('session') == null %}
                     <a href="{{ path('app_market_place_order_summary') }}"
-                       class="text-center lg:block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-200 hover:text-white shadow-black-3 transition duration-150 ease-in-out hover:bg-black-accent-300 hover:shadow-black-2 focus:bg-black-accent-300 focus:shadow-black-2 focus:outline-none focus:ring-0 active:bg-black-600 active:shadow-black-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">{{ 'form.action.back_order'|trans }}</a>
+                       class="text-center block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-200 hover:text-white shadow-black-3 transition duration-150 ease-in-out hover:bg-black-accent-300 hover:shadow-black-2 focus:bg-black-accent-300 focus:shadow-black-2 focus:outline-none focus:ring-0 active:bg-black-600 active:shadow-black-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">{{ 'form.action.back_order'|trans }}</a>
                 {% endif %}
             </div>
         </div>

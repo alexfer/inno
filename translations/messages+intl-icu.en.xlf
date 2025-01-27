@@ -1202,7 +1202,7 @@
             </trans-unit>
             <trans-unit id="dashboard.title.markets">
                 <source>dashboard.title.markets</source>
-                <target>Your Markets</target>
+                <target>Your markets</target>
             </trans-unit>
             <trans-unit id="dashboard.markets">
                 <source>dashboard.markets</source>
@@ -1677,7 +1677,7 @@
             </trans-unit>
             <trans-unit id="label.form.name">
                 <source>label.form.name</source>
-                <target>Your Name</target>
+                <target>Your name</target>
             </trans-unit>
             <trans-unit id="label.form.short_name">
                 <source>label.form.short_name</source>
@@ -1713,15 +1713,15 @@
             </trans-unit>
             <trans-unit id="label.form.first_name">
                 <source>label.form.first_name</source>
-                <target>Your First Name</target>
+                <target>Your first name</target>
             </trans-unit>
             <trans-unit id="label.form.last_name">
                 <source>label.form.last_name</source>
-                <target>Your Last Name</target>
+                <target>Your last name</target>
             </trans-unit>
             <trans-unit id="label.form.country">
                 <source>label.form.country</source>
-                <target>Your Country</target>
+                <target>Your country</target>
             </trans-unit>
             <trans-unit id="label.form.address_country">
                 <source>label.form.address_country</source>
@@ -1766,7 +1766,7 @@
             <trans-unit id="form.agree_terms.help">
                 <source>form.agree_terms.help</source>
                 <target>
-                    <![CDATA[More about our <a class="text-gray-900 underline hover:no-underline dark:text-white" target="_blank" href="{ policy }">Privacy Policy</a> and <a class="text-gray-900 underline hover:no-underline dark:text-white" target="_blank" href="{ terms }">Terms &amp; Conditions</a>.]]>
+                    <![CDATA[More about our <a class="text-red-500 underline hover:no-underline dark:text-white" target="_blank" href="{ policy }">Privacy Policy</a> and <a class="text-red-500 underline hover:no-underline dark:text-white" target="_blank" href="{ terms }">Terms &amp; Conditions</a>.]]>
                 </target>
             </trans-unit>
             <trans-unit id="form.first_name.help">
@@ -1791,7 +1791,7 @@
             </trans-unit>
             <trans-unit id="label.form.email">
                 <source>label.form.email</source>
-                <target>Your Email address</target>
+                <target>Your email address</target>
             </trans-unit>
             <trans-unit id="label.form.phone">
                 <source>label.form.phone</source>
@@ -2188,9 +2188,9 @@
                 <source>order.cart</source>
                 <target>Order Cart</target>
             </trans-unit>
-            <trans-unit id="order.your.ordres">
-                <source>order.your.ordres</source>
-                <target>Your Orders</target>
+            <trans-unit id="order.your.orders">
+                <source>order.your.orders</source>
+                <target>Your orders</target>
             </trans-unit>
             <trans-unit id="product.details">
                 <source>product.details</source>
@@ -2267,7 +2267,7 @@
             <trans-unit id="store.policy">
                 <source>store.policy</source>
                 <target>
-                    <![CDATA[By placing your order, you agree to be bound by the <strong>{ store_name }</strong> <a href="{ link_to_tou }" class="text-success">Terms of Service</a> and <a href="{ link_to_pp }" class="text-success">Privacy Policy.</a>]]>
+                    <![CDATA[By placing your order, you agree to be bound by the <strong>{ store_name }</strong> <a href="{ link_to_tou }" class="text-red-500 hover:text-red-700 hover:underline">Terms of Service</a> and <a href="{ link_to_pp }" class="text-red-500 hover:text-red-700 hover:underline">Privacy Policy.</a>]]>
                 </target>
             </trans-unit>
             <trans-unit id="store.about">

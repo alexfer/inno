@@ -68,7 +68,10 @@ BEGIN
                                                       'fee', p.fee,
                                                       'slug', p.slug,
                                                       'quantity', p.quantity,
-                                                      'attachment', (SELECT a.name
+                                                      'attachment', (SELECT json_build_object(
+                                                                                    'name', a.name,
+                                                                                    'path', a.path
+                                                                            )
                                                                      FROM store_product_attach spa
                                                                               LEFT JOIN attach a ON a.id = spa.attach_id
                                                                      WHERE spa.product_id = p.id

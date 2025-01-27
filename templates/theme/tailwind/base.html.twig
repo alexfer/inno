@@ -31,8 +31,8 @@
     <header>
         {% include 'layouts/header.html.twig' %}
     </header>
-    <main class="mb-auto shadow-inner" id="key" data-hash="{{ app.user ? app.user.email|crypto|base64encode : null }}">
-        <section class="bg-white dark:bg-gray-900">
+    <main class="mb-auto" id="key" data-hash="{{ app.user ? app.user.email|crypto|base64encode : null }}">
+        <section class="bg-white dark:bg-gray-900 shadow-inner">
             {% block search %}{% endblock %}
             {% block extra_search %}{% endblock %}
             <div class="max-w-screen-xl flex mx-auto {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}">

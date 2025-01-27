@@ -1,13 +1,13 @@
 {% for message in app.flashes('danger') %}
-    <div class="flex items-center p-4 mb-4 text-red-900 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+    <div class="flex items-center p-4 mb-4 text-red-700 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">{{ message }}</div>
     </div>
 {% endfor %}
 <div class="flex justify-between mx-auto">
-    <h2>{{ 'product.billing'|trans }}</h2>
+    <h2 class="text-gray-500 dark:text-gray-100">{{ 'product.billing'|trans }}</h2>
     {% if app.user is null %}
-        <div class="group pe-10">
+        <div class="group md:pe-5">
             <button data-modal-target="sign-in" data-modal-toggle="sign-in" type="button"
                     class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-2 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded text-xs uppercase leading-normal px-5 py-2 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-0.5 mb-2">{{ 'title.user.login'|trans }}</button>
             <button id="modal-register" data-modal-target="register" data-modal-toggle="register" type="button"
@@ -16,34 +16,55 @@
     {% endif %}
 </div>
 {% set _tab = app.request.get('tab') %}
-<ul class="flex list-none flex-row flex-wrap border-b-0 ps-0" data-tabs-toggle="#customerTabContent"
-    data-tabs-active-classes="bg-gray-100 text-red-600 hover:text-red-600 border-red-600"
-    data-tabs-inactive-classes="text-gray-500 hover:text-red-600 border-b border-gray-100 hover:border-gray-300"
+<ul class="flex list-none flex-row flex-nowrap border-b-0 ps-0" data-tabs-toggle="#customerTabContent"
+    data-tabs-active-classes="text-red-600 border-b-2 border-red-500 hover:border-red-700"
+    data-tabs-inactive-classes="text-gray-500 border-b-2 hover:border-red-500 hover:text-red-700"
     role="tablist">
     <li role="presentation">
         <a href="#"
-           class="my-2 block border-x-0 border-b-2 border-red-600 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent dark:text-white/50 dark:hover:bg-neutral-700/60"
+           class="my-2 inline-flex px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 focus:isolate focus:border-red-500 dark:text-white/50 dark:hover:bg-neutral-700/60"
            data-tabs-target="#customer-info"
            role="tab"
            aria-controls="customer-info"
-           aria-selected="false{{ _tab == 'customer-info' ? 'true' : 'false' }}">{{ 'customer.cabinet.personal_information'|trans }}</a>
+           aria-selected="false{{ _tab == 'customer-info' ? 'true' : 'false' }}">
+            <span class="hidden md:inline-flex mr-1">{{ 'customer.cabinet.personal_information'|trans }}</span>
+            <svg class="h-4 w-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z"/>
+                <rect x="3" y="4" width="18" height="16" rx="3"/>
+                <circle cx="9" cy="10" r="2"/>
+                <line x1="15" y1="8" x2="17" y2="8"/>
+                <line x1="15" y1="12" x2="17" y2="12"/>
+                <line x1="7" y1="16" x2="17" y2="16"/>
+            </svg>
+        </a>
     </li>
     <li role="presentation">
         <a href="#"
-           class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent dark:text-white/50 dark:hover:bg-neutral-700/60"
+           class="my-2 inline-flex px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 focus:isolate focus:border-red-500 dark:text-white/50 dark:hover:bg-neutral-700/60"
            data-tabs-target="#address-info"
            role="tab"
            aria-controls="address-info"
-           aria-selected="{{ _tab == 'address-info' ? 'true' : 'false' }}">{{ 'customer.cabinet.delivery_address'|trans }}</a>
+           aria-selected="{{ _tab == 'address-info' ? 'true' : 'false' }}">
+            <span class="hidden md:inline-flex mr-1">{{ 'customer.cabinet.delivery_address'|trans }}</span>
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"/>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+        </a>
     </li>
 </ul>
-<div id="checkout-req" class="pt-2 mr-5">
-    {% if errors.count %}
-        <div class="flex items-center p-4 mb-4 mr-5 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
-             role="alert">
-            <div class="ms-3 text-sm font-medium">{{ errors.current.message }}</div>
-        </div>
-    {% endif %}
+{% if errors.count %}
+    <div class="flex items-center p-4 mb-1 md:mr-5 text-yellow-800 border border-yellow-400 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+         role="alert">
+        <div class="ms-3 text-xs font-medium">{{ errors.current.message }}</div>
+    </div>
+{% endif %}
+<div id="checkout-req" class="pt-2 md:mr-5">
+
     {{ form_start(form, {attr: {novalidate: '', action: path('app_market_place_order_checkout', {order: order.number, session: app.request.get('session'), tab: app.request.get('tab')})}}) }}
     <div class="tab-content" id="customerTabContent">
         <div class="hidden p-4 shadow-md rounded-md dark:bg-gray-800 transition-opacity duration-150 ease-linear"
@@ -140,7 +161,7 @@
                             aria-expanded="true"
                             aria-controls="collapse-{{ key }}">
                         {% if gateway.gateway.attach is not null %}
-                            {% set icon = 'storage/payment_gateway/' ~ gateway.gateway.attach.name %}
+                            {% set icon = gateway.gateway.attach.path ~ gateway.gateway.attach.name %}
                             {% if gateway.gateway.attach.mime != 'image/svg+xml' %}
                                 <img class="h-5" alt="{{ gateway.gateway.name }}"
                                      src="{{ asset(icon)|imagine_filter('gateway_icon') }}">

@@ -162,7 +162,7 @@
                     {% endif %}
                     <div class="grid gap-x-2.5 gap-y-2 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
                         {% for product in store.products %}
-                            <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700">
+                            <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700 group">
                                 <div class="relative overflow-hidden h-200 rounded-t-lg">
                                     {% if product.attachment is not null %}
                                         {% set _picture= product.attachment.path ~ '/' ~ product.attachment.name %}
@@ -176,7 +176,7 @@
                                              src="{{ asset('img/600x400.png') }}"
                                              alt="{{ product.name }}">
                                     {% endif %}
-                                    <div class="absolute z-10 opacity-100 top-5 w-full">
+                                    <div class="absolute z-10 top-4 w-full opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
                                         <div class="flex justify-between">
                                             <span class="ml-2 bg-gray-600 bg-opacity-90 text-gray-500 text-md shadow-xl px-2.5 pt-1 pb-0.5 rounded-md dark:bg-gray-900 dark:text-gray-300">
                                                 <a title="{{ product.name }}"
@@ -188,6 +188,13 @@
                                                 <span class="badge-red">{{ product.reduce.value }}{{ product.reduce.unit|convert(store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
                                             {% endif %}
                                         </div>
+                                    </div>
+                                    <div class="absolute bottom-4 end-4 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
+                                        <form class="add-wishlist" name="wishlist"
+                                              action="{{ path('app_market_place_add_wishlist', {slug: product.slug}) }}">
+                                            <input name="store" type="hidden" value="{{ store.id }}">
+                                            {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-start pb-2">
@@ -223,26 +230,6 @@
                                     <div class="mr-3 mt-5">
                                         {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
                                         <span class="text-2xl font-medium {% if product.reduce.unit is not empty %}text-rose-500{% else %}text-gray-900{% endif %} dark:text-white">{{ price }}<small>{{ store.currency|currency }}</small></span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center border-t mt-3 pt-1 bg-gray-50 bg-opacity-75 pb-2 px-3 justify-between">
-                                    <div>
-                                        <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
-                                           class="hover:text-red-700 font-medium  hover:text-decoration-underline">{{ 'store.product.details'|trans }}
-                                            <svg class="w-[16px] h-[16px] inline ml-3 hover:scale-110"
-                                                 viewBox="0 0 512 512"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <form class="add-wishlist" name="wishlist"
-                                              action="{{ path('app_market_place_add_wishlist', {slug: product.slug}) }}">
-                                            <input name="store" type="hidden"
-                                                   value="{{ store.id }}">
-                                            {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
-                                        </form>
                                     </div>
                                 </div>
                             </div>

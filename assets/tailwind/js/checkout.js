@@ -1,7 +1,7 @@
 import './phone-number-placeholder';
 
-const loginForm = document.querySelector('#login-xhr');
-const registerForm = document.querySelector('#register-xhr');
+const loginForm = document.getElementById('login-xhr');
+const registerForm = document.getElementById('register-xhr');
 const phone = document.getElementById('phone');
 const createAccount = document.getElementById('create-account');
 
@@ -12,7 +12,7 @@ if (createAccount !== null) {
         document.getElementById('modal-register').click();
     })
 }
-
+console.log(loginForm);
 if (loginForm !== null) {
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -22,7 +22,6 @@ if (loginForm !== null) {
             body: JSON.stringify({
                 email: loginForm.querySelector('input[name="login[email]"]').value,
                 password: loginForm.querySelector('input[name="login[password]"]').value,
-                order: loginForm.querySelector('input[name="login[order]"]').value,
                 _csrf_token: loginForm.querySelector('input[name="_csrf_token"]').value
             })
         });

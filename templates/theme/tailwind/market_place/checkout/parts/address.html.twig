@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
     <div class="relative">
         {{ form_label(form.line1, 'label.form.address_line_1', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
         {{ form_widget(form.line1, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_line_1'|trans}}) }}
@@ -10,7 +10,7 @@
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.line2) }}</span>
     </div>
 </div>
-<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
     <div class="relative">
         {{ form_label(form.region, 'label.form.region', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
         {{ form_widget(form.region, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.region'|trans}}) }}
@@ -22,7 +22,7 @@
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.city) }}</span>
     </div>
 </div>
-<div class="grid grid-cols-2 gap-4 mb-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
     <div class="relative">
         {{ form_label(form.postal, 'label.form.postal', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
         {{ form_widget(form.postal, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.postal'|trans}}) }}

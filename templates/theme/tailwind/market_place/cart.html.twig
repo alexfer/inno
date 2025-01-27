@@ -1,5 +1,5 @@
 {% for order in orders %}
-    <h5 class="mb-1 text-xl font-oswald truncate">
+    <h5 class="mb-1 text-xl font-oswald line-clamp-1">
         <a href="{{ path('app_market_place_market', {slug: order.store.slug}) }}"
            class="text-red-800">{{ order.store.name }}</a>
     </h5>
@@ -12,7 +12,7 @@
                             <a class="mb-2"
                                href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
                                 {% if product.attach %}
-                                    {% set _picture = 'storage/product/' ~ product.id ~ '/' ~  product.attach %}
+                                    {% set _picture = product.attach.path ~ '/' ~  product.attach.name %}
                                     <img loading="lazy" src="{{ asset(_picture)|imagine_filter('product_thumb') }}"
                                          class="object-scale-down h-auto rounded-md"
                                          alt="{{ product.name }}">
