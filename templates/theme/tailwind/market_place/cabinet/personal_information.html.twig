@@ -4,13 +4,9 @@
     <h2>{{ 'customer.cabinet'|trans }}
         <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
     </h2>
-    <div class="grid grid-cols-8 gap-4">
-        <aside class="col-span-2 h-screen transition-transform -translate-x-full sm:translate-x-0">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg">
-                {% include 'market_place/cabinet/aside.html.twig' %}
-            </div>
-        </aside>
-        <section class="col-span-6">
+    <div class="cabinet-container">
+        {% include 'market_place/cabinet/aside.html.twig' %}
+        <section class="w-full md:flex-grow">
             <div class="pt-2 px-4">
                 <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center text-sm-start">{{ 'customer.cabinet.personal_information'|trans }}</h4>
                 {% if errors.count %}
@@ -24,7 +20,7 @@
                 {% include 'market_place/checkout/parts/customer.html.twig' %}
                 <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
                 <div class="text-center mt-5">
-                    <button class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-danger-3 transition duration-150 ease-in-out hover:bg-danger-accent-300 hover:shadow-danger-2 focus:bg-danger-accent-300 focus:shadow-danger-2 focus:outline-none focus:ring-0 active:bg-danger-600 active:shadow-danger-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong group-invalid:pointer-events-none group-invalid:opacity-30"
+                    <button class="inline-block btn-red"
                             type="submit">{{ 'form.action.change'|trans }}</button>
                 </div>
                 {{ form_end(form) }}

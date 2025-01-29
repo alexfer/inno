@@ -595,6 +595,10 @@
                 <source>table.header.stores</source>
                 <target>Shops</target>
             </trans-unit>
+            <trans-unit id="table.header.store">
+                <source>table.header.store</source>
+                <target>Shop</target>
+            </trans-unit>
             <trans-unit id="table.header.products">
                 <source>table.header.products</source>
                 <target>Products</target>
@@ -2162,7 +2166,7 @@
             </trans-unit>
             <trans-unit id="button.leave.cpmment">
                 <source>button.leave.cpmment</source>
-                <target>Leave a Comment</target>
+                <target>Leave a comment</target>
             </trans-unit>
             <trans-unit id="order.subtotal">
                 <source>order.subtotal</source>
@@ -2170,7 +2174,7 @@
             </trans-unit>
             <trans-unit id="order.view">
                 <source>order.view</source>
-                <target>View Order</target>
+                <target>View order</target>
             </trans-unit>
             <trans-unit id="order.summary">
                 <source>order.summary</source>
@@ -2178,15 +2182,15 @@
             </trans-unit>
             <trans-unit id="order.continue.shopping">
                 <source>order.continue.shopping</source>
-                <target>Continue Shopping</target>
+                <target>Continue shopping</target>
             </trans-unit>
             <trans-unit id="order.update.cart">
                 <source>order.update.cart</source>
-                <target>Update Cart</target>
+                <target>Update cart</target>
             </trans-unit>
             <trans-unit id="order.cart">
                 <source>order.cart</source>
-                <target>Order Cart</target>
+                <target>Order cart</target>
             </trans-unit>
             <trans-unit id="order.your.orders">
                 <source>order.your.orders</source>
@@ -2194,7 +2198,7 @@
             </trans-unit>
             <trans-unit id="product.details">
                 <source>product.details</source>
-                <target>Product Details</target>
+                <target>Product details</target>
             </trans-unit>
             <trans-unit id="product.billing">
                 <source>product.billing</source>

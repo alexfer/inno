@@ -4,15 +4,11 @@
     <h2>{{ 'customer.cabinet'|trans }}
         <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
     </h2>
-    <div class="grid grid-cols-8 gap-4">
-        <aside class="col-span-2 h-screen transition-transform -translate-x-full sm:translate-x-0">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg">
-                {% include 'market_place/cabinet/aside.html.twig' %}
-            </div>
-        </aside>
-        <section class="col-span-6">
-            <div class="pt-2 px-4 relative">
-                <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center text-sm-start">{{ 'customer.cabinet.wishlist'|trans }}
+    <div class="cabinet-container">
+        {% include 'market_place/cabinet/aside.html.twig' %}
+        <section class="w-full md:flex-grow">
+            <div class="pt-2 px-2 md:px-4 relative">
+                <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center">{{ 'customer.cabinet.wishlist'|trans }}
                     {% if wishlist|length %}
                         <button id="bulk-remove"
                                 data-url="{{ path('app_cabinet_wishlist_bulk_delete') }}"
@@ -75,7 +71,7 @@
                 {% else %}
                     <div id="not-found" class="text-center visually-hidden">
                         <img class="block mx-auto"
-                             src="{{ asset('img/404.png') }}"
+                             src="{{ asset('img/empty-result.svg') }}"
                              width="340" alt="{{ 'store.product.wishlist.empty'|trans }}">
                         <p class="text-center">
                             {{ 'store.product.wishlist.empty'|trans }}
