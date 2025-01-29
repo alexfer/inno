@@ -4,13 +4,9 @@
     <h2>{{ 'customer.password'|trans }}
         <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
     </h2>
-    <div class="grid grid-cols-8 gap-4">
-        <aside class="col-span-2 h-screen transition-transform -translate-x-full sm:translate-x-0">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg">
-                {% include 'market_place/cabinet/aside.html.twig' %}
-            </div>
-        </aside>
-        <section class="col-span-6">
+    <div class="cabinet-container">
+        {% include 'market_place/cabinet/aside.html.twig' %}
+        <section class="w-full md:flex-grow">
             <div class="pt-2 px-4">
                 <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center text-sm-start">{{ 'customer.cabinet.password'|trans }}</h4>
                 {% if errors.count %}
@@ -20,24 +16,24 @@
                     </div>
                 {% endif %}
                 {% set _message = app.flashes('success') %}
-                {{ form_start(form, {attr: {novalidate: ''}}) }}
-                <div class="flex mb-3">
-                    {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-3 align-baseline mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                    <div class="w-1/2">
+                {{ form_start(form, {attr: {novalidate: '', class: 'max-w-3xl mx-auto'}}) }}
+                <div class="md:flex mb-2">
+                    {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-0 md:pt-3 mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    <div class="md:w-1/2">
                         {{ form_widget(form.plainPassword.children.first, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: '', autocomplete: 'off'}}) }}
                         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.first) }}</span>
                     </div>
                 </div>
-                <div class="flex mb-3">
-                    {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inline-block mr-2 pt-3 w-32 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                    <div class="w-1/2">
+                <div class="md:flex mb-2">
+                    {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-0 md:pt-3 mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    <div class="md:w-1/2">
                         {{ form_widget(form.plainPassword.children.second, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: '', autocomplete: 'off'}}) }}
                         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.second) }}</span>
                     </div>
                 </div>
                 <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">
                 <div class="text-center mt-5">
-                    <button class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-danger-3 transition duration-150 ease-in-out hover:bg-danger-accent-300 hover:shadow-danger-2 focus:bg-danger-accent-300 focus:shadow-danger-2 focus:outline-none focus:ring-0 active:bg-danger-600 active:shadow-danger-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong group-invalid:pointer-events-none group-invalid:opacity-30"
+                    <button class="inline-block btn-red"
                             type="submit">{{ 'form.action.change'|trans }}</button>
                 </div>
                 {{ form_end(form) }}

@@ -4,15 +4,11 @@
     <h2>{{ 'customer.cabinet'|trans }}
         <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
     </h2>
-<div class="grid grid-cols-8 gap-4">
-    <aside class="col-span-2 h-screen transition-transform -translate-x-full sm:translate-x-0">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg">
-            {% include 'market_place/cabinet/aside.html.twig' %}
-        </div>
-    </aside>
-    <div class="col-span-6">
-        <div class="pt-2 px-4 relative">
-            <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center text-sm-start">{{ 'customer.cabinet.orders'|trans }}
+<div class="cabinet-container">
+    {% include 'market_place/cabinet/aside.html.twig' %}
+    <section class="w-full md:flex-grow ms-0 md:ms-2">
+        <div class="pt-2 relative">
+            <h4 class="pb-2 block w-full mb-4 font-semibold text-red-500 text-center text-xl">{{ 'customer.cabinet.orders'|trans }}
                 {% if orders|length %}
                     <button id="open-message"
                             data-modal-toggle="modal-message"
@@ -27,246 +23,241 @@
                     </button>
                 {% endif %}
             </h4>
-            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white">
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-gray-50"
+                 data-inactive-classes="bg-gray-100">
                 {% for key, order in orders %}
-                    {% set discount = 0 %}
-                    <h3 id="order-flush-heading-{{ key }}" class="mb-0">
-                        <button type="button"
-                                class="flex rounded-t-lg border-s border-e border-t items-center pl-5 justify-between w-full py-5 font-medium bg-gray-50 text-gray-500 dark:border-gray-700 dark:text-gray-400 gap-3"
-                                data-accordion-target="#order-body-{{ key }}"
-                                aria-expanded="true"
-                                aria-controls="order-body-{{ key }}">
-                            <h5 class="flex text-md-start subpixel-antialiased hover:text-black dark:text-white">
-                                <svg class="w-4 h-4 text-gray-800 dark:text-white mr-2"
-                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                     height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"
-                                          d="M10 3v4a1 1 0 0 1-1 1H5m8-2h3m-3 3h3m-4 3v6m4-3H8M19 4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM8 12v6h8v-6H8Z"></path>
-                                </svg>
-                                {{ order.created|date(datetime_format) }}
-                            </h5>
-                            {% if order.coupon is not null %}
-                                {% if order.coupon.discount is not null %}
-                                    {% set discount = ((order.total * order.coupon.discount)/100)|round(2) %}
-                                {% elseif order.coupon.price is not null %}
-                                    {% set discount = (order.total - order.coupon.price)|round(2) %}
-                                {% endif %}
+                {% set discount = 0 %}
+                <h3 id="order-flush-heading-{{ key }}" class="mb-0">
+                    <button type="button"
+                            class="flex rounded-md mb-1 border items-center pl-2 md:pl-3 justify-between w-full py-1.5 md:py-2.5 font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400 gap-x-3"
+                            data-accordion-target="#order-body-{{ key }}"
+                            aria-expanded="true"
+                            aria-controls="order-body-{{ key }}">
+                        <div class="flex text-xs md:text-sm items-center subpixel-antialiased hover:text-gray-600 dark:text-white">
+                            <svg class="w-6 h-6 text-gray-600 dark:text-white mr-1"
+                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="2"
+                                      d="M10 3v4a1 1 0 0 1-1 1H5m8-2h3m-3 3h3m-4 3v6m4-3H8M19 4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM8 12v6h8v-6H8Z"></path>
+                            </svg>
+                            <ul>
+                                <li>{{ order.created|date(date_format) }}</li>
+                                <li class="text-xs text-left font-normal text-gray-500 dark:text-gray-400">{{ order.created|date(time_format) }}</li>
+                            </ul>
+                        </div>
+                        {% if order.coupon is not null %}
+                            {% if order.coupon.discount is not null %}
+                                {% set discount = ((order.total * order.coupon.discount)/100)|round(2) %}
+                            {% elseif order.coupon.price is not null %}
+                                {% set discount = (order.total - order.coupon.price)|round(2) %}
                             {% endif %}
-                            <span class="float-end text-lg mr-5">{{ ((order.total + (order.total * order.tax)/100) - discount)|amount_format(2) }}<small>{{ order.store.currency|currency }}</small></span>
-                        </button>
-                    </h3>
-                    <div id="order-body-{{ key }}"
-                         class="hidden"
-                         aria-labelledby="order-flush-heading-{{ key }}">
-                        <div class="grid grid-cols-4 gap-3 py-5 px-8 bg-gray-100 border">
-                            <div class="font-medium select-all text-info-700">{{ order.number|upper }}</div>
-                            <div class="ms-5 capitalize">
-                                {% if order.status == 'processing' %}
-                                    <a class="text-gray-600 text-sm underline hover:text-black hover:no-underline"
-                                       href="{{ path('app_market_place_order_checkout', {order: order.number, tab: 'customer-info'}) }}">{{ 'order.checkout'|trans }}</a>
-                                {% else %}
-                                    {{ order.status }}
-                                {% endif %}
+                        {% endif %}
+                        <span class="float-end text-gray-800 dark:text-white font-oswald text-base md:text-lg mr-1">{{ ((order.total + (order.total * order.tax)/100) - discount)|amount_format(2) }}<small>{{ order.store.currency|currency }}</small></span>
+                    </button>
+                </h3>
+                <h1 id="order-body-{{ key }}"
+                    class="hidden"
+                    aria-labelledby="order-flush-heading-{{ key }}">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-x-3 py-2 px-2 border">
+                        <div class="font-medium select-all text-gray-700">{{ order.number|upper }}</div>
+                        <div class="ms-0 md:ms-5 capitalize">
+                            {% if order.status == 'processing' %}
+                                <a class="text-gray-600 text-xs md:text-sm underline hover:text-black hover:no-underline"
+                                   href="{{ path('app_market_place_order_checkout', {order: order.number, tab: 'customer-info'}) }}">{{ 'order.checkout'|trans }}</a>
+                            {% else %}
+                                {{ order.status }}
+                            {% endif %}
+                        </div>
+                        <div class="ms-0 md:ms-5 relative">
+                            <a id="dropdown-action-{{ key }}"
+                               role="button"
+                               data-dropdown-toggle="dropdown-status-{{ key }}"
+                               aria-expanded="false"
+                               class="text-gray-800 text-xs md:text-sm underline hover:no-underline font-normal">{{ 'label.form.status'|trans }}</a>
+                            <div id="dropdown-status-{{ key }}" class="z-10 hidden">
+                                <ul class="w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white bg-clip-padding text-left"
+                                    aria-labelledby="dropdown-action-{{ key }}">
+                                    <li>
+                                        <a class="block px-3 py-2 bg-transparent rounded-md dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 text-gray-500 hover:text-gray-700 focus:text-gray-700 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                           href="#">{{ 'order.action.cancel'|trans }}</a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="ms-5 relative">
-                                <a id="dropdown-action-{{ key }}"
+                        </div>
+                        <div class="text-right absolute end-2 md:end-0 mt-1 md:mt-0 md:inline md:relative items-end">
+                            {% if order.status == 'confirmed' %}
+                                <a id="invoice-action-{{ key }}"
                                    role="button"
-                                   data-dropdown-toggle="dropdown-status-{{ key }}"
+                                   data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="click"
                                    aria-expanded="false"
-                                   class="text-gray-800 text-sm underline hover:no-underline font-normal">{{ 'label.form.status'|trans }}</a>
-                                <div id="dropdown-status-{{ key }}" class="z-10 hidden">
-                                    <ul class="w-48 min-w-max list-none overflow-hidden p-2 shadow-lg rounded-md border-none bg-white bg-clip-padding text-left text-base data-[twe-dropdown-show]:block"
-                                        aria-labelledby="dropdown-action-{{ key }}">
+                                   class="bg-indigo-500 hover:bg-indigo-800 text-xs font-medium rounded px-2.5 py-1.5 text-white dark:text-gray-100">{{ 'customer.cabinet.invoice'|trans }}</a>
+                                <div id="invoice-status-{{ key }}" class="z-10 hidden">
+                                    <ul class="w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white bg-clip-padding text-left"
+                                        aria-labelledby="dropdown-invoice-{{ key }}">
                                         <li>
-                                            <a class="block px-4 py-2 mt-2 text-xs font-semibold bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-500 focus:text-gray-50 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                               href="#">{{ 'order.action.cancel'|trans }}</a>
+                                            <a class="block px-3 py-2 bg-transparent rounded-md dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 text-gray-500 hover:text-gray-700 focus:text-gray-700 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                               href="{{ path('app_marketplace_cabinet_invoice_download', {order: order.id, invoice: order.invoice.id}) }}">{{ 'customer.cabinet.download.invoice'|trans }}</a>
+                                        </li>
+                                        <li>
+                                            <a class="send-invoice block px-3 py-2 bg-transparent rounded-md dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 text-gray-500 hover:text-gray-700 focus:text-gray-700 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                               href="{{ path('app_marketplace_cabinet_invoice_send', {order: order.id, invoice: order.invoice.id}) }}">{{ 'customer.cabinet.send.invoice'|trans }}</a>
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="text-right text-sm font-medium relative">
-                                {% if order.status == 'confirmed' %}
-                                    <a id="invoice-action-{{ key }}"
-                                       role="button"
-                                       data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="click"
-                                       aria-expanded="false"
-                                       class="bg-indigo-500 hover:bg-indigo-800 text-sm rounded px-2.5 py-1.5 text-white dark:text-gray-100 font-normal">{{ 'customer.cabinet.invoice'|trans }}</a>
-                                    <div id="invoice-status-{{ key }}" class="z-10 hidden">
-                                        <ul class="w-48 min-w-max list-none overflow-hidden p-2 text-xs shadow-lg rounded-md border-none bg-white bg-clip-padding text-left data-[twe-dropdown-show]:block"
-                                            aria-labelledby="dropdown-invoice-{{ key }}">
-                                            <li>
-                                                <a class="block px-4 py-2 mt-2 font-semibold bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-500 focus:text-gray-50 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                                   href="{{ path('app_marketplace_cabinet_invoice_download', {order: order.id, invoice: order.invoice.id}) }}">{{ 'customer.cabinet.download.invoice'|trans }}</a>
-                                            </li>
-                                            <li>
-                                                <a class="send-invoice block px-4 py-2 mt-2 font-semibold bg-transparent rounded-md dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-500 focus:text-gray-50 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                                   href="{{ path('app_marketplace_cabinet_invoice_send', {order: order.id, invoice: order.invoice.id}) }}">{{ 'customer.cabinet.send.invoice'|trans }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                {% else %}
-                                    <span class="bg-indigo-300 pointer-events-none cursor-default rounded px-2.5 py-1.5 text-white dark:text-gray-100 font-normal">{{ 'customer.cabinet.invoice'|trans }}</span>
-                                {% endif %}
-                            </div>
+                            {% else %}
+                                <span class="bg-indigo-300 pointer-events-none cursor-default rounded px-2.5 py-1.5 text-white dark:text-gray-100 font-normal">{{ 'customer.cabinet.invoice'|trans }}</span>
+                            {% endif %}
                         </div>
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <caption
-                                        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    {{ order.store.name }}
-                                    <p class="mt-1 text-sm text-gray-900 dark:text-gray-400">
-                                        <span class="text-gray-600 font-normal mr-1">{{ 'text.payment'|trans }}:</span>{{ order.invoice.payment_gateway.name|default('n/a') }}
-                                    </p>
-                                    <p class="mt-1 text-sm text-gray-900 dark:text-gray-400">
-                                        <span class="text-gray-600 font-normal mr-1">{{ 'text.shipping'|trans }}:</span>{{ order.invoice.carrier.name|default('n/a') }}
-                                    </p>
-                                </caption>
-                                <thead class="text-xs border-t border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        {{ 'label.form.product_name'|trans }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center">
-                                        {{ 'label.form.quantity'|trans }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center">
-                                        {{ 'label.form.discount'|trans }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-right">
-                                        {{ 'table.header.price'|trans }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-right">
-                                        {{ 'table.header.amount'|trans }}
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% set coupon_discount = 0 %}
-                                {% for product in order.products %}
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row" class="px-6 py-4 text-gray-900 truncate dark:text-white">
+                    </div>
+                    <div class="relative rounded-md border my-2">
+                        <div class="p-1.5 md:p-5 text-lg font-medium text-left text-gray-700 dark:text-white border-b border-dashed">
+                            <span class="text-gray-600 text-xs md:text-sm font-normal mr-1">{{ 'table.header.store'|trans }}:</span>{{ order.store.name }}
+                            <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-400">
+                                <span class="text-gray-600 text-xs md:text-sm font-normal mr-1">{{ 'text.payment'|trans }}:</span>{{ order.invoice.payment_gateway.name|default('n/a') }}
+                            </p>
+                            <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-400">
+                                <span class="text-gray-600 text-xs md:text-sm font-normal mr-1">{{ 'text.shipping'|trans }}:</span>{{ order.invoice.carrier.name|default('n/a') }}
+                            </p>
+                        </div>
+                        {% set coupon_discount = 0 %}
+                        <div class="flex flex-col gap-x-5">
+                            {% for product in order.products %}
+                                <div class="flex items-center space-x-4 border-b border-dashed dark:border-gray-700">
+                                    <div class="p-1.5">
+                                        {% if product.product.attachment %}
+                                            {% set _picture = product.product.attachment.path ~ '/' ~ product.product.attachment.name %}
+                                            <img class="object-scale-down h-auto w-16 rounded-md"
+                                                 src="{{ asset(_picture)|imagine_filter('product_thumb') }}"
+                                                 alt="{{ product.product.short_name }}">
+                                        {% else %}
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="fill-gray-400 h-auto w-16 dark:fill-white text-center"
+                                                 viewBox="0 0 512 512" height="80">
+                                                <path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"></path>
+                                            </svg>
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex w-full">
+                                        <div class="ps-1 py-1.5 dark:text-white">
                                             <a title="{{ product.product.name }}"
                                                target="_blank"
-                                               class="font-semibold text-gray-600 dark:text-gray-50"
+                                               class="font-medium line-clamp-1 text-gray-600 dark:text-gray-50"
                                                href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">
                                                 {{ product.product.short_name|length >= 40 ? product.product.short_name|slice(0, 40) ~ '...' : product.product.short_name }}
                                             </a>
-                                        </th>
-                                        <td class="px-6 py-4 text-center">{{ product.quantity }}{{ 'label.form.quantity_pcs'|trans }}</td>
-                                        <td class="px-6 py-4 text-center">
-                                            {% if product.product.reduce.unit == 'stock' %}
-                                                {{ product.product.reduce.value|amount_format }}
-                                                <small>{{ product.product.reduce.unit|convert(order.store.currency|currency) }}</small>
-                                            {% else %}
-                                                {{ product.product.reduce.value|amount_format }}
-                                                <small>{{ product.product.reduce.unit|convert(order.store.currency|currency) }}</small>
-                                            {% endif %}
-                                        </td>
-                                        <td class="px-6 py-4 text-right cursor-pointer">
-                                            {% set price = discount(product.product.cost, product.product.reduce.value, product.product.fee, 1, product.product.reduce.unit) %}
-                                            <abbr title="{{ (product.product.cost + product.product.fee) }}{{ order.store.currency|currency }}">{{ price|amount_format }}</abbr><small
-                                                    class="ms-1">{{ order.store.currency|currency }}</small>
-                                        </td>
-                                        <td class="px-6 py-4 text-right font-medium">
-                                            {{ (price * product.quantity)|amount_format }}<small
-                                                    class="ms-1">{{ order.store.currency|currency }}</small>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                                <tfoot>
-                                <tr class="font-semibold text-gray-900 dark:text-white">
-                                    <th scope="row" class="px-6 py-3 text-base">{{ 'order.service.tax'|trans }}</th>
-                                    <td class="px-6 py-3"></td>
-                                    <td class="px-6 py-3"></td>
-                                    <td class="px-6 py-3"></td>
-                                    <td class="px-6 py-3 text-right">{{ order.tax }}<small>%</small></td>
-                                </tr>
+                                            <span>{{ product.quantity }}{{ 'label.form.quantity_pcs'|trans }}</span>
+                                            <span class="px-0.5">x</span>
+                                            <span class="inline-flex items-center font-oswald text-gray-500 dark:text-gray-400">
+                                                {% set price = discount(product.product.cost, product.product.reduce.value, product.product.fee, 1, product.product.reduce.unit) %}
+                                                {{ price|amount_format }}<span
+                                                        class="text-xs">{{ order.store.currency|currency }}</span>
+                                            </span>
+                                        </div>
+                                        <div class="flex flex-col ml-auto px-2 items-start">
+                                            <div class="text-nowrap w-full text-end">
+                                                <span class="text-gray-400 text-xs md:text-sm mr-1">{{ 'table.header.total'|trans }}:</span>
+                                                <span class="font-oswald">{{ (price * product.quantity)|amount_format }}<span class="text-xs mt-1">{{ order.store.currency|currency }}</span></span>
+                                            </div>
+                                            <div class="flex-grow text-nowrap text-right">
+                                                <span class="text-gray-400">{{ 'label.form.discount'|trans }}:</span>
+                                                {% if product.product.reduce.unit == 'stock' %}
+                                                    {{ product.product.reduce.value|amount_format }}
+                                                    <span class="text-xs">{{ product.product.reduce.unit|convert(order.store.currency|currency) }}</span>
+                                                {% else %}
+                                                    {{ product.product.reduce.value|amount_format }}
+                                                    <span class="text-xs">{{ product.product.reduce.unit|convert(order.store.currency|currency) }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="bg-gray-50/70 py-2 dark:bg-gray-700 dark:text-gray-400">
+                                <div class="flex justify-between items-center font-medium text-gray-600 dark:text-white py-1.5">
+                                    <span class="ps-1.5 md:ps-5">{{ 'order.service.tax'|trans }}</span>
+                                    <span class="pe-1">{{ order.tax }}<small>%</small></span>
+                                </div>
                                 {% if order.coupon is not null %}
-                                    <tr class="font-semibold text-gray-900 dark:text-white">
-                                        <th scope="row"
-                                            class="px-6 py-3 text-base">{{ 'order.service.coupon'|trans }} {{ 'store.product.off'|trans }}</th>
-                                        <td class="px-6 py-3"></td>
-                                        <td class="px-6 py-3"></td>
-                                        <td class="px-6 py-3"></td>
+                                    <div class="flex justify-between items-center font-medium text-gray-600 dark:text-white py-1.5 border-t border-dashed border-gray-200 dark:border-gray-700">
+                                        <div class="ps-1.5 md:ps-5">{{ 'order.service.coupon'|trans }} {{ 'store.product.off'|trans }}</div>
                                         {% if order.coupon.discount is not null %}
                                             {% set coupon_discount = ((order.total * order.coupon.discount)/100)|round(2) %}
-                                            <td class="px-6 py-3 text-right">
+                                            <span class="pe-1">
                                                 {{ order.coupon.discount|amount_format(2) }}<small>%</small>
-                                            </td>
+                                            </span>
                                         {% elseif order.coupon.price is not null %}
                                             {% set coupon_discount = (order.total - order.coupon.price)|round(2) %}
-                                            <td class="px-6 py-3 text-right">
+                                            <span class="pe-1">
                                                 {{ order.coupon.price|amount_format }}<small>%</small>
-                                            </td>
+                                            </span>
                                         {% endif %}
-                                    </tr>
+                                    </div>
                                 {% endif %}
-                                <tr class="font-semibold text-gray-900 dark:text-white">
-                                    <th scope="row" class="px-6 py-3 text-base">{{ 'table.header.total'|trans }}</th>
-                                    <td class="px-6 py-3 text-center">{{ order.total_quantity }}</td>
-                                    <td class="px-6 py-3 text-center font-medium">
-                                        <span class="font-semibold text-sm text-gray-500">{{ 'order.service.coupon'|trans }}</span>: {{ coupon_discount|amount_format(2) }}
-                                        <small
-                                                class="ms-1">{{ order.store.currency|currency }}</small>
-                                    </td>
-                                    <td class="px-6 py-3 text-center font-medium">
+                                <div class="flex justify-between whitespace-nowrap items-center font-medium text-gray-600 dark:text-white py-1.5 border-t border-dashed border-gray-200 dark:border-gray-700">
+                                    <div class="ps-1.5 md:ps-5">{{ 'table.header.total'|trans }}</div>
+                                    <span class="md:px-5">
+                                        <span class="font-thin text-xs md:text-sm hidden md:inline me-1 text-gray-400">{{ 'table.header.quantity'|trans }}:</span>{{ order.total_quantity }}
+                                    </span>
+                                    <span class="md:px-5">
+                                        <span class="text-xs md:text-sm me-1 font-thin text-gray-400">{{ 'order.service.coupon'|trans }}:</span>{{ coupon_discount|amount_format(2) }}<span class="text-xs ms-1">{{ order.store.currency|currency }}</span>
+                                    </span>
+                                    <span class="px-1.5 md:px-5">
                                         {% if order.coupon is not null %}
                                             {{ (order.total + (order.total * order.tax)/100) |amount_format(2) }}<small
                                                 class="ms-1">{{ order.store.currency|currency }}</small>
                                         {% endif %}
-                                    </td>
-                                    <td class="px-6 py-3 text-right">
+                                    </span>
+                                    <span class="pe-1 font-oswald md:text-lg">
                                         {% if order.coupon is not null %}
                                             {{ ((order.total + (order.total * order.tax)/100) - discount)|amount_format(2) }}
                                             <small class="ms-1">{{ order.store.currency|currency }}</small>
                                         {% else %}
                                             {{ (order.total + (order.total * order.tax)/100) |amount_format(2) }}<small
-                                                class="ms-1">{{ order.store.currency|currency }}</small>
+                                                    class="ms-1">{{ order.store.currency|currency }}</small>
                                         {% endif %}
-                                    </td>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                {% else %}
-                    <div class="flex justify-center">
-                        <svg width="200px" class="w-150 h-auto mt-10" id="_x32_" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 512 512" xml:space="preserve">
-                            <style type="text/css">
-                                .st0 {
-                                    fill: #fca5a5;
-                                }
-                            </style>
-                            <g>
-                                <path class="st0" d="M494.365,133.438c-11.528-15.738-29.35-25.678-48.804-27.219L126.245,80.918l-3.129-17.749
-                            c-5.252-29.676-28.858-52.657-58.671-57.066L24.597,0.187C15.093-1.209,6.253,5.359,4.84,14.846
-                            c-1.409,9.512,5.158,18.356,14.658,19.761v-0.008l39.861,5.907c14.97,2.218,26.868,13.785,29.501,28.71l54.009,306.134
-                            c5.073,28.735,30.027,49.669,59.206,49.678h221.971c9.606,0,17.394-7.792,17.394-17.39c0-9.607-7.788-17.398-17.394-17.398H202.075
-                            c-12.282,0.009-22.813-8.836-24.946-20.934l-5-28.349h244.879c31.234,0,58.346-21.55,65.367-52.005l23.258-100.767
-                            c1.151-5,1.717-10.06,1.717-15.086C507.35,158.962,502.88,145.04,494.365,133.438z M319.692,125.33l72.469,5.745v180.898h-72.469
-                            V125.33z M296.502,311.973h-72.47V117.752l72.47,5.746V311.973z M131.451,110.415l69.395,5.496v196.062h-33.833L131.451,110.415z
-                             M477.378,181.668l-23.245,100.776c-3.986,17.278-19.385,29.53-37.125,29.53h-1.657V132.916l27.926,2.208
-                            c11.049,0.866,21.174,6.516,27.706,15.447c4.838,6.592,7.381,14.495,7.381,22.526C478.363,175.949,478.038,178.809,477.378,181.668
-                            z"></path>
-                                <path class="st0" d="M215.346,450.165c-17.076,0-30.909,13.853-30.909,30.926c0,17.073,13.832,30.909,30.909,30.909
-                            c17.078,0,30.927-13.836,30.927-30.909C246.273,464.018,232.423,450.165,215.346,450.165z"></path>
-                                <path class="st0" d="M381.539,450.165c-17.073,0-30.913,13.853-30.913,30.926c0,17.073,13.84,30.909,30.913,30.909
-                            c17.072,0,30.922-13.836,30.922-30.909C412.461,464.018,398.612,450.165,381.539,450.165z"></path>
-                            </g>
-                        </svg>
-                    </div>
-                    <p class="text-center">
-                        {{ 'store.orders.empty'|trans }}
-                        <a class="d-block fs-6"
-                           href="{{ path('app_market_place_index') }}">{{ 'form.action.back'|trans }}</a>
-                    </p>
-                {% endfor %}
+                    {% else %}
+                        <div class="flex justify-center">
+                            <svg width="200px" class="w-150 h-auto mt-10" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 512 512" xml:space="preserve">
+                                <style type="text/css">
+                                    .st0 {
+                                        fill: #fca5a5;
+                                    }
+                                </style>
+                                <g>
+                                    <path class="st0" d="M494.365,133.438c-11.528-15.738-29.35-25.678-48.804-27.219L126.245,80.918l-3.129-17.749
+                                c-5.252-29.676-28.858-52.657-58.671-57.066L24.597,0.187C15.093-1.209,6.253,5.359,4.84,14.846
+                                c-1.409,9.512,5.158,18.356,14.658,19.761v-0.008l39.861,5.907c14.97,2.218,26.868,13.785,29.501,28.71l54.009,306.134
+                                c5.073,28.735,30.027,49.669,59.206,49.678h221.971c9.606,0,17.394-7.792,17.394-17.39c0-9.607-7.788-17.398-17.394-17.398H202.075
+                                c-12.282,0.009-22.813-8.836-24.946-20.934l-5-28.349h244.879c31.234,0,58.346-21.55,65.367-52.005l23.258-100.767
+                                c1.151-5,1.717-10.06,1.717-15.086C507.35,158.962,502.88,145.04,494.365,133.438z M319.692,125.33l72.469,5.745v180.898h-72.469
+                                V125.33z M296.502,311.973h-72.47V117.752l72.47,5.746V311.973z M131.451,110.415l69.395,5.496v196.062h-33.833L131.451,110.415z
+                                 M477.378,181.668l-23.245,100.776c-3.986,17.278-19.385,29.53-37.125,29.53h-1.657V132.916l27.926,2.208
+                                c11.049,0.866,21.174,6.516,27.706,15.447c4.838,6.592,7.381,14.495,7.381,22.526C478.363,175.949,478.038,178.809,477.378,181.668
+                                z"></path>
+                                    <path class="st0" d="M215.346,450.165c-17.076,0-30.909,13.853-30.909,30.926c0,17.073,13.832,30.909,30.909,30.909
+                                c17.078,0,30.927-13.836,30.927-30.909C246.273,464.018,232.423,450.165,215.346,450.165z"></path>
+                                    <path class="st0" d="M381.539,450.165c-17.073,0-30.913,13.853-30.913,30.926c0,17.073,13.84,30.909,30.913,30.909
+                                c17.072,0,30.922-13.836,30.922-30.909C412.461,464.018,398.612,450.165,381.539,450.165z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="text-center">
+                            {{ 'store.orders.empty'|trans }}
+                            <a class="d-block fs-6"
+                               href="{{ path('app_market_place_index') }}">{{ 'form.action.back'|trans }}</a>
+                        </p>
+                    {% endfor %}
+                </h1>
             </div>
         </div>
-    </div>
+    </section>
     {% if orders|length %}
         {% include 'market_place/cabinet/message/form.html.twig' %}
         {% include 'layouts/toast/success.html.twig' %}

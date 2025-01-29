@@ -4,6 +4,7 @@ twig:
     globals:
         datetime_format: '%app.datetime_format%'
         date_format: '%app.date_format%'
+        time_format: '%app.time_format%'
         shop: '@Inno\Service\MarketPlace\Store\Order\ShopService'
         msg: '@Inno\Service\MessageCounter'
 when@test:

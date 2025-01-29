@@ -90,6 +90,12 @@ BEGIN
                                                           LIMIT 1),
                                                'short_name', p.short_name,
                                                'name', p.name,
+                                               'attachment', (SELECT json_build_object(
+                                                                             'name', a.name,
+                                                                             'path', a.path
+                                                                     ) FROM store_product_attach pa
+                                                                                LEFT JOIN attach a ON pa.attach_id = a.id
+                                                              WHERE pa.product_id = p.id LIMIT 1),
                                                'coupon', (SELECT json_build_object(
                                                                          'id', c.id,
                                                                          'price', c.price,

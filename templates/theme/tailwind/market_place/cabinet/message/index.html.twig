@@ -4,17 +4,11 @@
     <h2>{{ 'customer.cabinet'|trans }}
         <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
     </h2>
-    <div class="grid grid-cols-8 gap-4">
-        <aside class="col-span-2 h-screen transition-transform -translate-x-full sm:translate-x-0">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg">
-                {% include 'market_place/cabinet/aside.html.twig' %}
-            </div>
-        </aside>
-        <section class="col-span-6">
+    <div class="cabinet-container">
+        {% include 'market_place/cabinet/aside.html.twig' %}
+        <section class="w-full md:flex-grow">
             <div class="pt-2 px-4 relative">
-                <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center text-sm-start">
-                    {{ 'customer.cabinet.messages'|trans }}
-                </h4>
+                <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center">{{ 'customer.cabinet.messages'|trans }}</h4>
                 {% if messages|length %}
                     <div class="relative overflow-hidden shadow-md sm:rounded-lg">
                         <table class="w-full table-fixed border-collapse mt-3 text-md text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -83,10 +77,10 @@
                 {% else %}
                     <div id="not-found" class="text-center visually-hidden">
                         <img class="block mx-auto"
-                             src="{{ asset('img/404.png') }}"
-                             width="340" alt="{{ 'store.messages.empty'|trans }}">
+                             src="{{ asset('img/empty-result.svg') }}"
+                             width="340" alt="{{ 'store.product.wishlist.empty'|trans }}">
                         <p class="text-center">
-                            {{ 'store.messages.empty'|trans }}
+                            {{ 'store.product.wishlist.empty'|trans }}
                             <a class="block font-light"
                                href="{{ path('app_cabinet') }}">{{ 'form.action.back'|trans }}</a>
                         </p>

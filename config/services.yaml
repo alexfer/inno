@@ -8,6 +8,7 @@ parameters:
     auto_login: true
     app.datetime_format: 'D, d M Y H:i'
     app.date_format: 'M d, Y'
+    app.time_format: 'H:i'
     locale: 'en'
     default_timezone: 'Europe/Kyiv'
     app.theme: '%env(APP_THEME)%' # theme dir
