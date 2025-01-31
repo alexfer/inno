@@ -2,7 +2,7 @@
     <div class="flex relative">
         <label for="search-dropdown" class="sr-only">{{ 'title.search'|trans }}</label>
         <button id="dropdown-search" data-dropdown-toggle="dropdown"
-                class="hidden absolute flex-shrink-0 shadow-md z-10 md:inline-flex items-center py-2.5 px-4 ps-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
+                class="hidden absolute flex-shrink-0 shadow-md z-10 md:inline-flex items-center py-2.5 px-4 ps-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none focus:ring-0 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
                 type="button">{{ 'search.form.categories'|trans }}
         </button>
         <svg class="absolute hidden md:block z-10 top-4 w-2.5 h-2.5 ms-2.5 dark:text-gray-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -19,10 +19,10 @@
             <input type="hidden" name="category" value="">
             <input type="search" id="search" data-url="{{ path('app_market_place_search_autocomplete') }}" name="query"
                    value="{{ app.request.query.get('query') }}"
-                   class="block py-2.5 px-2.5 md:pl-36 w-full z-20 text-xs md:text-sm text-gray-800 bg-gray-50 rounded-lg lg:rounded-e-lg border-s-gray-50 border-s-1 border focus:outline-none focus:ring-0 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                   class="py-2.5 px-2.5 md:pl-36 w-full z-20 text-xs md:text-sm text-gray-800 bg-gray-50 border-gray-200 rounded-lg lg:rounded-e-lg border-s-gray-50 border-s border focus:outline-none focus:ring-0 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                    placeholder="{{ 'search.form.placeholder'|trans }}" autocomplete="off" required/>
             <button type="submit"
-                    class="absolute top-0 end-0 py-2.5 px-4 md:px-8 h-full bg-black rounded-e-lg border border-gray-700 dark:text-gray-100 hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-900 focus:outline-none">
+                    class="absolute top-0 end-0 py-2.5 px-4 md:px-8 h-full bg-gray-700 text-white rounded-e-lg border border-gray-700 dark:text-gray-100 hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-900 focus:outline-none focus:ring-0">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
                 </svg>
