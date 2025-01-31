@@ -63,7 +63,7 @@
                                 {{ store.coupon.price }}<small>{{ store.currency|currency }}</small>
                             {% endif %}
                         </div>
-                        <p class="text-yellow-500 font-medium">{{ store.coupon.type|capitalize }} {{ 'store.product.off'|trans }}</p>
+                        <p class="text-yellow-500 dark:text-yellow-300 font-medium">{{ store.coupon.type|capitalize }} {{ 'store.product.off'|trans }}</p>
                     </div>
                 </div>
             {% endif %}
@@ -71,90 +71,82 @@
     </div>
 {% endblock %}
 {% block extra %}
-    <div class="max-w-screen-xl flex mx-auto py-2 lg:px-2 mb-5">
-        <div class="mx-auto w-full bg-white px-1 md:px-6 rounded-md shadow-4 dark:bg-gray-700">
+    <div class="max-w-screen-xl flex mx-auto py-2 lg:px-1 mb-5">
+        <div class="mx-auto w-full px-1">
             <h2 class="block line-clamp-1">{{ 'store.best.products'|trans }}</h2>
-            <div class="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid md:grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {% for product in products %}
-                    <div class="min-h-full">
-                        <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700 group">
-                            <div class="relative overflow-hidden h-250 rounded-t-md">
-                                {% if product.attachment %}
-                                    {% set _picture = product.attachment.path ~ '/' ~ product.attachment.name %}
-                                    <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
-                                        <img loading="lazy"
-                                             src="{{ asset(_picture)|imagine_filter('product_preview') }}"
-                                             class="object-contain h-auto max-w-full mx-auto transition duration-700 ease-in-out hover:scale-105"
-                                             alt="{{ product.name }}">
-                                    </a>
-                                {% else %}
-                                    <img loading="lazy" src="{{ asset('img/300x200.png') }}"
-                                         class="object-cover h-full max-w-full rounded-t-lg"
+                    <div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700 group">
+                        <div class="relative overflow-hidden h-250 rounded-t-md">
+                            {% if product.attachment %}
+                                {% set _picture = product.attachment.path ~ '/' ~ product.attachment.name %}
+                                <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
+                                    <img loading="lazy"
+                                         src="{{ asset(_picture)|imagine_filter('product_preview') }}"
+                                         class="object-contain h-auto max-w-full mx-auto transition duration-700 ease-in-out hover:scale-105"
                                          alt="{{ product.name }}">
-                                {% endif %}
-                                <div class="absolute top-5 w-full opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
-                                    <div class="flex justify-between">
-                                        <div class="ml-2 bg-gray-600 bg-opacity-90 text-gray-500 text-xs shadow-xl font-medium px-2.5 pt-2 rounded-md dark:bg-gray-900 dark:text-gray-300">
+                                </a>
+                            {% else %}
+                                <img loading="lazy" src="{{ asset('img/300x200.png') }}"
+                                     class="object-cover h-full max-w-full rounded-t-lg"
+                                     alt="{{ product.name }}">
+                            {% endif %}
+                            <div class="absolute top-5 w-full md:opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
+                                <div class="flex justify-between">
+                                        <span class="ml-2 bg-gray-600 bg-opacity-90 text-gray-500 text-md shadow-xl px-2.5 pt-1 pb-0.5 rounded-md dark:bg-gray-900 dark:text-gray-300">
                                             <a title="{{ product.name }}"
                                                href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
-                                               class="text-white hover:text-neutral-100">{{ 'store.product.details'|trans }}
+                                               class="text-white text-sm hover:text-neutral-100">{{ 'store.product.details'|trans }}
                                             </a>
+                                        </span>
+                                    {% if product.reduce.unit is not empty %}
+                                        <span class="badge-red">{{ product.reduce.value }}{{ product.reduce.unit|convert(product.currency|currency) }} {{ 'store.product.off'|trans }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <ul class="absolute start-2 bottom-0 md:opacity-0 group-hover:opacity-100">
+                                {% for payment in product.payments %}
+                                    <li class="inline-flex relative">
+                                        <img class="w-6 h-6"
+                                             data-tooltip-target="cc-{{ payment.slug }}-{{ product.id }}"
+                                             alt="{{ payment.name }}"
+                                             src="{{ asset('img/payment_gateway/' ~ payment.slug ~'.svg') }}">
+                                        <div class="absolute z-10 invisible inline-block w-48 px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                                             role="tooltip"
+                                             id="cc-{{ payment.slug }}-{{ product.id }}">{{ payment.summary }}
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
-                                        {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
-                                        <span class="badge-red {% if product.reduce.unit is not empty %}text-rose-500{% else %}text-gray-900{% endif %} dark:text-white">{{ price }}<small>{{ product.currency|currency }}</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center py-4 justify-between">
-                                <div class="ml-3">
-                                    <form class="shopping-cart" method="post"
-                                          action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
-                                        <button class="text-white bg-gray-800 shadow-md hover:bg-surface-dark focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                                data-slug="{{ product.slug }}" type="submit"
-                                                {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and  'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                                                 fill="currentColor" class="w-4 h-4 inline-flex me-1">
-                                                <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                                            </svg>{{ 'store.product.add'|trans }}
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="mr-3">
-                                    {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
-                                    <span class="text-2xl font-medium {% if product.reduce.unit is not empty %}text-rose-500{% else %}text-gray-900{% endif %} dark:text-white">{{ price }}<small>{{ product.currency|currency }}</small></span>
-                                </div>
-                            </div>
-                            <a title="{{ product.name }}" class="mt-3"
-                               href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
-                                <h5 class="mx-3 mb-2 text-lg font-medium hover:text-gray-700 tracking-tight line-clamp-1 text-gray-500 dark:text-white">
-                                    {{ product.short_name }}
-                                </h5>
-                            </a>
-                            <div class="flex items-center border-t mt-3 pt-3 bg-gray-50 bg-opacity-75 pb-3 px-3 justify-between">
-                                <div>
-                                    <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
-                                       class="hover:text-red-700 font-medium  hover:text-decoration-underline">{{ 'store.product.details'|trans }}
-                                        <svg class="w-[16px] h-[16px] inline ml-3 hover:scale-110"
-                                             viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <a title="{{ product.name }}" class="mx-3 my-2 text-lg font-medium hover:text-gray-700 tracking-tight line-clamp-1 text-gray-500 dark:text-white"
+                           href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">{{ product.short_name }}</a>
+                        <div class="flex items-center py-4 justify-between">
+                            <div class="ml-3">
+                                <form class="shopping-cart" method="post"
+                                      action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
+                                    <button class="text-white bg-gray-800 cursor-pointer shadow-md hover:bg-surface-dark focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                            data-slug="{{ product.slug }}" type="submit"
+                                            {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and 'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                             class="inline-flex w-4 h-4 me-1.5">
+                                            <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
                                         </svg>
-                                    </a>
-                                </div>
-                                <ul class="list-none">
-                                    {% for payment in product.payments %}
-                                        <li class="inline-flex relative">
-                                            <img class="w-6 h-6"
-                                                 data-tooltip-target="cc-{{ payment.slug }}-{{ product.id }}"
-                                                 alt="{{ payment.name }}"
-                                                 src="{{ asset('img/payment_gateway/' ~ payment.slug ~'.svg') }}">
-                                            <div class="absolute z-10 invisible inline-block w-48 px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
-                                                 role="tooltip"
-                                                 id="cc-{{ payment.slug }}-{{ product.id }}">{{ payment.summary }}
-                                                <div class="tooltip-arrow" data-popper-arrow></div>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                        {{ 'store.product.add'|trans }}
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="mr-3">
+                                {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
+                                <span class="text-xl font-medium {% if product.reduce.unit is not empty %}text-red-500 dark:text-red-400{% else %}text-gray-900  dark:text-white{% endif %}">{{ price }}<span
+                                            class="text-xs md:text-sm">{{ product.currency|currency }}</span></span>
+                                {% if product.reduce.unit is not empty %}
+                                    <div class=" text-right text-gray-500 dark:text-gray-300">
+                                        <span class="line-through">{{ (product.cost + product.fee)|amount_format }}</span><span
+                                                class="text-xs md:text-sm">{{ product.currency|currency }}</span>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

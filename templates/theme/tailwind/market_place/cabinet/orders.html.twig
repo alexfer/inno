@@ -14,7 +14,7 @@
                             data-modal-toggle="modal-message"
                             data-modal-target="modal-message"
                             type="button"
-                            class="flex text-blue-500 hover:text-blue-700 p-3 shadow-md rounded-md hover:shadow-lg focus:shadow-lg absolute me-4 top-2 right-1">
+                            class="flex text-blue-500 hover:text-blue-700 p-3 shadow-md rounded-md hover:shadow-lg focus:shadow-lg dark:bg-gray-700 absolute top-2 right-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                             <path fill-rule="evenodd"
                                   d="M8 2C4.262 2 1 4.57 1 8c0 1.86.98 3.486 2.455 4.566a3.472 3.472 0 0 1-.469 1.26.75.75 0 0 0 .713 1.14 6.961 6.961 0 0 0 3.06-1.06c.403.062.818.094 1.241.094 3.738 0 7-2.57 7-6s-3.262-6-7-6ZM5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm7-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM8 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
@@ -23,27 +23,27 @@
                     </button>
                 {% endif %}
             </h4>
-            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-gray-50"
-                 data-inactive-classes="bg-gray-100">
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-gray-50 dark:bg-gray-700"
+                 data-inactive-classes="bg-gray-100 mb-2.5 rounded-b border-b-2 border-gray-200 border-gray-200 shadow-sm dark:bg-gray-600 dark:hover:bg-gray-700">
                 {% for key, order in orders %}
                 {% set discount = 0 %}
                 <h3 id="order-flush-heading-{{ key }}" class="mb-0">
                     <button type="button"
-                            class="flex rounded-md mb-1 border items-center pl-2 md:pl-3 justify-between w-full py-1.5 md:py-2.5 font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400 gap-x-3"
+                            class="flex  border border-b-0 rounded-t items-center pl-2 md:pl-3 justify-between w-full py-1.5 md:py-2.5 font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400 gap-x-3"
                             data-accordion-target="#order-body-{{ key }}"
                             aria-expanded="true"
                             aria-controls="order-body-{{ key }}">
                         <div class="flex text-xs md:text-sm items-center subpixel-antialiased hover:text-gray-600 dark:text-white">
-                            <svg class="w-6 h-6 text-gray-600 dark:text-white mr-1"
+                            <svg class="w-6 md:w-8 h-6 md:h-8 text-gray-600 dark:text-white mr-1"
                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                  height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round"
                                       stroke-linejoin="round" stroke-width="2"
                                       d="M10 3v4a1 1 0 0 1-1 1H5m8-2h3m-3 3h3m-4 3v6m4-3H8M19 4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM8 12v6h8v-6H8Z"></path>
                             </svg>
-                            <ul>
+                            <ul class="text-xs md:text-sm text-left text-gray-500 dark:text-gray-100">
                                 <li>{{ order.created|date(date_format) }}</li>
-                                <li class="text-xs text-left font-normal text-gray-500 dark:text-gray-400">{{ order.created|date(time_format) }}</li>
+                                <li>{{ order.created|date(time_format) }}</li>
                             </ul>
                         </div>
                         {% if order.coupon is not null %}
@@ -56,12 +56,11 @@
                         <span class="float-end text-gray-800 dark:text-white font-oswald text-base md:text-lg mr-1">{{ ((order.total + (order.total * order.tax)/100) - discount)|amount_format(2) }}<small>{{ order.store.currency|currency }}</small></span>
                     </button>
                 </h3>
-                <h1 id="order-body-{{ key }}"
-                    class="hidden"
-                    aria-labelledby="order-flush-heading-{{ key }}">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-x-3 py-2 px-2 border">
-                        <div class="font-medium select-all text-gray-700">{{ order.number|upper }}</div>
-                        <div class="ms-0 md:ms-5 capitalize">
+                <h1 id="order-body-{{ key }}" class="hidden" aria-labelledby="order-flush-heading-{{ key }}">
+                    <hr class="border-1 border-dashed my-0 mx-0 border-gray-50">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-x-3 py-3 ps-2 pe-1 border border-t-0 rounded-b border-gray-200 dark:border-gray-700">
+                        <div class="font-medium select-all text-gray-700 dark:text-gray-200">{{ order.number|upper }}</div>
+                        <div class="ms-0 md:ms-5 capitalize text-gray-700 dark:text-gray-200">
                             {% if order.status == 'processing' %}
                                 <a class="text-gray-600 text-xs md:text-sm underline hover:text-black hover:no-underline"
                                    href="{{ path('app_market_place_order_checkout', {order: order.number, tab: 'customer-info'}) }}">{{ 'order.checkout'|trans }}</a>
@@ -74,9 +73,9 @@
                                role="button"
                                data-dropdown-toggle="dropdown-status-{{ key }}"
                                aria-expanded="false"
-                               class="text-gray-800 text-xs md:text-sm underline hover:no-underline font-normal">{{ 'label.form.status'|trans }}</a>
+                               class="text-gray-800 text-sm underline hover:no-underline font-normal dark:text-gray-200">{{ 'label.form.status'|trans }}</a>
                             <div id="dropdown-status-{{ key }}" class="z-10 hidden">
-                                <ul class="w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white bg-clip-padding text-left"
+                                <ul class="w-36 md:w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white dark:bg-gray-800 bg-clip-padding text-left"
                                     aria-labelledby="dropdown-action-{{ key }}">
                                     <li>
                                         <a class="block px-3 py-2 bg-transparent rounded-md dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 text-gray-500 hover:text-gray-700 focus:text-gray-700 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
@@ -85,15 +84,18 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="text-right absolute end-2 md:end-0 mt-1 md:mt-0 md:inline md:relative items-end">
+                        <div class="text-right absolute end-1 md:end-0 mt-1 md:mt-0 md:inline md:relative items-end">
                             {% if order.status == 'confirmed' %}
+                                <a href="#"
+                                   class="bg-red-500 hover:bg-red-800 text-xs font-medium rounded px-2.5 py-1.5 text-white dark:text-gray-100">Order
+                                    now</a>
                                 <a id="invoice-action-{{ key }}"
                                    role="button"
                                    data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="click"
                                    aria-expanded="false"
                                    class="bg-indigo-500 hover:bg-indigo-800 text-xs font-medium rounded px-2.5 py-1.5 text-white dark:text-gray-100">{{ 'customer.cabinet.invoice'|trans }}</a>
                                 <div id="invoice-status-{{ key }}" class="z-10 hidden">
-                                    <ul class="w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white bg-clip-padding text-left"
+                                    <ul class="w-36 md:w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white dark:bg-gray-800 bg-clip-padding text-left"
                                         aria-labelledby="dropdown-invoice-{{ key }}">
                                         <li>
                                             <a class="block px-3 py-2 bg-transparent rounded-md dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 text-gray-500 hover:text-gray-700 focus:text-gray-700 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
@@ -110,14 +112,14 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="relative rounded-md border my-2">
-                        <div class="p-1.5 md:p-5 text-lg font-medium text-left text-gray-700 dark:text-white border-b border-dashed">
-                            <span class="text-gray-600 text-xs md:text-sm font-normal mr-1">{{ 'table.header.store'|trans }}:</span>{{ order.store.name }}
-                            <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-400">
-                                <span class="text-gray-600 text-xs md:text-sm font-normal mr-1">{{ 'text.payment'|trans }}:</span>{{ order.invoice.payment_gateway.name|default('n/a') }}
+                    <div class="relative rounded-md border my-2 dark:border-gray-700">
+                        <div class="p-1.5 md:p-5 font-medium text-gray-600 dark:text-white border-b border-dashed dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-xs md:text-sm mr-1">{{ 'table.header.store'|trans }}:</span><a target="_blank" class="text-indigo-500 hover:text-indigo-700 underline hover:no-underline" href="{{ path('app_market_place_market', {slug: order.store.slug}) }}">{{ order.store.name }}</a>
+                            <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-300">
+                                <span class="text-gray-600 dark:text-gray-400 text-xs md:text-sm mr-1">{{ 'text.payment'|trans }}:</span>{{ order.invoice.payment_gateway.name|default('n/a') }}
                             </p>
-                            <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-400">
-                                <span class="text-gray-600 text-xs md:text-sm font-normal mr-1">{{ 'text.shipping'|trans }}:</span>{{ order.invoice.carrier.name|default('n/a') }}
+                            <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-300">
+                                <span class="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-normal mr-1">{{ 'text.shipping'|trans }}:</span>{{ order.invoice.carrier.name|default('n/a') }}
                             </p>
                         </div>
                         {% set coupon_discount = 0 %}
@@ -125,18 +127,22 @@
                             {% for product in order.products %}
                                 <div class="flex items-center space-x-4 border-b border-dashed dark:border-gray-700">
                                     <div class="p-1.5">
-                                        {% if product.product.attachment %}
-                                            {% set _picture = product.product.attachment.path ~ '/' ~ product.product.attachment.name %}
-                                            <img class="object-scale-down h-auto w-16 rounded-md"
-                                                 src="{{ asset(_picture)|imagine_filter('product_thumb') }}"
-                                                 alt="{{ product.product.short_name }}">
-                                        {% else %}
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 class="fill-gray-400 h-auto w-16 dark:fill-white text-center"
-                                                 viewBox="0 0 512 512" height="80">
-                                                <path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"></path>
-                                            </svg>
-                                        {% endif %}
+                                        <a title="{{ product.product.name }}"
+                                           target="_blank"
+                                           href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">
+                                            {% if product.product.attachment %}
+                                                {% set _picture = product.product.attachment.path ~ '/' ~ product.product.attachment.name %}
+                                                <img class="object-scale-down h-auto w-16 rounded-md"
+                                                     src="{{ asset(_picture)|imagine_filter('product_thumb') }}"
+                                                     alt="{{ product.product.short_name }}">
+                                            {% else %}
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="fill-gray-400 h-auto w-16 dark:fill-white text-center"
+                                                     viewBox="0 0 512 512" height="80">
+                                                    <path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"></path>
+                                                </svg>
+                                            {% endif %}
+                                        </a>
                                     </div>
                                     <div class="flex w-full">
                                         <div class="ps-1 py-1.5 dark:text-white">
@@ -154,12 +160,13 @@
                                                         class="text-xs">{{ order.store.currency|currency }}</span>
                                             </span>
                                         </div>
-                                        <div class="flex flex-col ml-auto px-2 items-start">
+                                        <div class="flex flex-col ml-auto px-2 items-start dark:text-white">
                                             <div class="text-nowrap w-full text-end">
                                                 <span class="text-gray-400 text-xs md:text-sm mr-1">{{ 'table.header.total'|trans }}:</span>
-                                                <span class="font-oswald">{{ (price * product.quantity)|amount_format }}<span class="text-xs mt-1">{{ order.store.currency|currency }}</span></span>
+                                                <span class="font-oswald">{{ (price * product.quantity)|amount_format }}<span
+                                                            class="text-xs mt-1">{{ order.store.currency|currency }}</span></span>
                                             </div>
-                                            <div class="flex-grow text-nowrap text-right">
+                                            <div class="flex-grow text-nowrap text-xs md:text-sm">
                                                 <span class="text-gray-400">{{ 'label.form.discount'|trans }}:</span>
                                                 {% if product.product.reduce.unit == 'stock' %}
                                                     {{ product.product.reduce.value|amount_format }}
@@ -197,10 +204,11 @@
                                 <div class="flex justify-between whitespace-nowrap items-center font-medium text-gray-600 dark:text-white py-1.5 border-t border-dashed border-gray-200 dark:border-gray-700">
                                     <div class="ps-1.5 md:ps-5">{{ 'table.header.total'|trans }}</div>
                                     <span class="md:px-5">
-                                        <span class="font-thin text-xs md:text-sm hidden md:inline me-1 text-gray-400">{{ 'table.header.quantity'|trans }}:</span>{{ order.total_quantity }}
+                                        <span class="font-thin text-xs md:text-sm hidden md:inline me-1 text-gray-400">{{ 'table.header.quantity'|trans }}:</span><span class="badge-yellow-border">{{ order.total_quantity }}</span>
                                     </span>
                                     <span class="md:px-5">
-                                        <span class="text-xs md:text-sm me-1 font-thin text-gray-400">{{ 'order.service.coupon'|trans }}:</span>{{ coupon_discount|amount_format(2) }}<span class="text-xs ms-1">{{ order.store.currency|currency }}</span>
+                                        <span class="text-xs md:text-sm me-1 font-thin text-gray-400">{{ 'order.service.coupon'|trans }}:</span>{{ coupon_discount|amount_format(2) }}<span
+                                                class="text-xs ms-1">{{ order.store.currency|currency }}</span>
                                     </span>
                                     <span class="px-1.5 md:px-5">
                                         {% if order.coupon is not null %}

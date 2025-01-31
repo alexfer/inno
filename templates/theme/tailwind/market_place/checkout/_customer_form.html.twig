@@ -16,13 +16,13 @@
     {% endif %}
 </div>
 {% set _tab = app.request.get('tab') %}
-<ul class="flex list-none flex-row flex-nowrap border-b-0 ps-0" data-tabs-toggle="#customerTabContent"
-    data-tabs-active-classes="text-red-600 border-b-2 border-red-500 hover:border-red-700"
-    data-tabs-inactive-classes="text-gray-500 border-b-2 hover:border-red-500 hover:text-red-700"
+<ul class="flex list-none flex-row flex-nowrap space-x-0.5 border-b-0 ps-0" data-tabs-toggle="#customerTabContent"
+    data-tabs-active-classes="text-red-600 border-red-500 dark:hover:bg-gray-950"
+    data-tabs-inactive-classes="dark:text-white dark:hover:bg-gray-800 hover:border-red-500"
     role="tablist">
     <li role="presentation">
         <a href="#"
-           class="my-2 inline-flex px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 focus:isolate focus:border-red-500 dark:text-white/50 dark:hover:bg-neutral-700/60"
+           class="my-2 inline-flex px-7 pb-3.5 pt-4 text-xs font-medium uppercase border-b-2"
            data-tabs-target="#customer-info"
            role="tab"
            aria-controls="customer-info"
@@ -41,7 +41,7 @@
     </li>
     <li role="presentation">
         <a href="#"
-           class="my-2 inline-flex px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 focus:isolate focus:border-red-500 dark:text-white/50 dark:hover:bg-neutral-700/60"
+           class="my-2 inline-flex px-7 pb-3.5 pt-4 text-xs font-medium uppercase border-b-2"
            data-tabs-target="#address-info"
            role="tab"
            aria-controls="address-info"
@@ -64,7 +64,6 @@
     </div>
 {% endif %}
 <div id="checkout-req" class="pt-2 md:mr-5">
-
     {{ form_start(form, {attr: {novalidate: '', action: path('app_market_place_order_checkout', {order: order.number, session: app.request.get('session'), tab: app.request.get('tab')})}}) }}
     <div class="tab-content" id="customerTabContent">
         <div class="hidden p-4 shadow-md rounded-md dark:bg-gray-800 transition-opacity duration-150 ease-linear"
@@ -92,7 +91,7 @@
                 coupon: coupon.id
             } %}
         {% else %}
-            <div class="p-4 my-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+            <div class="p-4 my-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-300"
                  role="alert">
                 <span class="font-medium">{{ 'text.info'|trans }}</span> {{ 'text.info.description'|trans }}
             </div>
@@ -100,11 +99,11 @@
     {% endif %}
     <div id="carrier" class="mt-3">
         <div class="block py-2 text-lg font-medium text-gray-600">{{ 'text.shipping'|trans }}</div>
-        <div class="rounded-t-lg rounded-bl-lg rounded-br-lg shadow-md border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark"
+        <div class="rounded-t-lg rounded-bl-lg rounded-br-lg shadow-md border border-gray-200 bg-white dark:border-gray-700"
              data-accordion="collapse" data-active-classes="bg-neutral-300">
             {% for key, carrier in order.store.storeCarrierStores.toArray %}
-                <h3 class="mb-0 border-b" id="heading-carrier-{{ key }}">
-                    <button class="group relative font-semibold flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white"
+                <h3 class="mb-0 border-b dark:border-gray-600" id="heading-carrier-{{ key }}">
+                    <button class="relative font-medium flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-base text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
                             type="button"
                             data-accordion-target="#collapse-carrier-{{ key }}"
                             aria-expanded="true"
@@ -117,11 +116,11 @@
                                         <img class="h-5" alt="{{ carrier.carrier.name }}"
                                              src="{{ asset(icon)|imagine_filter('carrier_icon') }}">
                                     {% else %}
-                                        <img class="inline-flex me-1.5 h-5" alt="{{ carrier.carrier.name }}"
+                                        <img class="inline-flex h-5 dark:text-white" alt="{{ carrier.carrier.name }}"
                                              src="{{ asset(icon) }}">
                                     {% endif %}
                                 {% else %}
-                                    <img class="inline-flex me-1.5 h-5"
+                                    <img class="inline-flex h-5 dark:text-white"
                                          src="{{ asset('img/carrier/' ~ carrier.carrier.slug ~ '.svg') }}"
                                          alt="{{ carrier.carrier.name }}">
                                 {% endif %}
@@ -135,8 +134,8 @@
                 <div id="collapse-carrier-{{ key }}"
                      class="hidden"
                      aria-labelledby="heading-carrier-{{ key }}">
-                    <div class="px-5 py-4 border-b bg-gray-50 dark:bg-gray-800">
-                        <div class="mb-2">{{ carrier.carrier.description }}</div>
+                    <div class="px-5 py-4 border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-600">
+                        <div class="mb-2 dark:text-white">{{ carrier.carrier.description }}</div>
                         <label class="inline-flex items-center mb-5 cursor-pointer">
                             <input type="radio" name="shipping[{{ carrier.carrier.id }}]"
                                    value="{{ carrier.carrier.id }}"
@@ -151,11 +150,11 @@
     </div>
     <div id="payment-method" class="mt-3">
         <div class="block py-2 text-lg font-medium text-gray-600">{{ 'text.payment'|trans }}</div>
-        <div class="rounded-t-lg rounded-bl-lg rounded-br-lg shadow-md border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark"
+        <div class="rounded-t-lg rounded-bl-lg rounded-br-lg shadow-md border border-gray-200 bg-white dark:border-gray-700"
              data-accordion="collapse" data-active-classes="bg-neutral-300">
             {% for key, gateway in order.store.storePaymentGatewaystores.toArray %}
-                <h3 class="mb-0 border-b" id="heading-{{ key }}">
-                    <button class="group relative font-semibold flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white"
+                <h3 class="mb-0 border-b dark:border-gray-600" id="heading-{{ key }}">
+                    <button class="relative font-medium flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-base text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
                             type="button"
                             data-accordion-target="#collapse-{{ key }}"
                             aria-expanded="true"
@@ -191,8 +190,8 @@
                 <div id="collapse-{{ key }}"
                      class="hidden"
                      aria-labelledby="heading-{{ key }}">
-                    <div class="px-5 py-4 border-b bg-gray-50 dark:bg-gray-800">
-                        <div class="mb-2">{{ gateway.gateway.summary }}</div>
+                    <div class="px-5 py-4 border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-600">
+                        <div class="mb-2 dark:text-white">{{ gateway.gateway.summary }}</div>
                         <button type="submit" name="gateway[{{ gateway.gateway.slug }}]"
                                 class="inline-block justify-start rounded bg-red-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md shadow-red-300 transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-red-200 focus:bg-red-300 focus:shadow-red-200 focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-red-200 motion-reduce:transition-none dark:shadow-black/30 group-invalid:pointer-events-none group-invalid:opacity-30">
                             {{ gateway.gateway.handlerText }}
