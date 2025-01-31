@@ -11,15 +11,15 @@
             <form id="order-summary" name="order[]" action="{{ path('app_market_place_order_update') }}" method="post">
                 <div class="mt-2">
                     {% for order in orders %}
-                        <div class="pt-2 border-b border-gray-200 dark:border-gray-600">
-                            <div class="line-clamp-1 h-9 mx-3 text-xl font-oswald font-thin text-ellipsis text-blue-800 dark:text-white">{{ order.store.name }}</div>
+                        <div class="pt-2 border-b border-gray-200 border-dashed dark:border-gray-600">
+                            <div class="line-clamp-1 h-9 text-lg md:text-xl font-oswald text-blue-800 dark:text-blue-200">{{ order.store.name }}</div>
                         </div>
                         <div class="root mb-5" data-order-id="{{ order.session }}">
                             <input type="hidden" name="store[]" value="{{ order.store.id }}">
                             {% for key, product in order.products %}
                                 <input type="hidden" name="order[]" value="{{ order.id }}">
                                 <div data-product-id="{{ product.product.id }}"
-                                     class="flex flex-row parent my-3 border rounded-md bg-white text-surface hover:shadow dark:bg-gray-700 dark:text-white">
+                                     class="flex flex-row parent my-3 border rounded-lg dark:border-gray-600 bg-white text-surface hover:shadow dark:bg-gray-900 dark:hover:bg-gray-950">
                                     <div class="basis-1/4 flex flex-row">
                                         {% if product.product.attachment %}
                                             {% set _picture = product.product.attachment.path ~ '/' ~ product.product.attachment.name %}
@@ -34,15 +34,11 @@
                                     </div>
                                     <div class="basis-10/12 px-3 pb-5 relative">
                                         {% if product.product.reduce.unit is not empty %}
-                                            <span class="absolute top-1/2 md:top-3 end-3 text-xs text-white opacity-85 bg-red-600 px-1.5 py-1 rounded-lg">{{ product.product.reduce.value }}{{ product.product.reduce.unit|convert(order.store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
+                                            <span class="absolute top-1/2 md:top-3 end-3 md:text-xs text-white opacity-85 bg-red-600 px-1.5 py-1 rounded-lg">{{ product.product.reduce.value }}{{ product.product.reduce.unit|convert(order.store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
                                         {% endif %}
-                                        <a class="text-gray-600 font-semibold pb-3"
+                                        <a class="text-lg md:text-xl line-clamp-1 py-3 text-gray-600 dark:text-gray-100 hover:text-gray-900 dark:hover:text-white font-medium pb-3"
                                            href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}"
-                                           title="{{ product.product.name }}">
-                                            <h5 class="text-xl line-clamp-1 max-w-sm py-3">
-                                                {{ product.product.short_name }}
-                                            </h5>
-                                        </a>
+                                           title="{{ product.product.name }}">{{ product.product.short_name }}</a>
                                         {% if product.coupon is not null %}
                                             <span class="{% if product.coupon.hasUsed >=1 %}hidden{% endif %} absolute -rotate-45 inline-table right-5 bg-red-700 mt-5 end-4 opacity-70 px-2.5 text-white rounded-md pt-1 text-sm">
                                                 <span class="pe-1"
@@ -54,16 +50,16 @@
                                             {% if product.product.reduce.unit is not empty %}
                                                 <div class="font-medium whitespace-nowrap text-lg text-gray-600 dark:text-gray-300">
                                                     {% set price = discount(product.product.cost, product.product.reduce.value, product.product.fee, 1, product.product.reduce.unit) %}
-                                                    {{ price|amount_format }}<small>{{ order.store.currency|currency }}</small>
+                                                    {{ price|amount_format }}
+                                                    <small>{{ order.store.currency|currency }}</small>
                                                     <span class="text-gray-300 ml-2 line-through dark:text-gray-300">{{ (product.product.cost + product.product.fee) }}<small>{{ order.store.currency|currency }}</small></span>
                                                 </div>
                                             {% else %}
                                                 {% set price = (product.product.cost + product.product.fee) %}
-                                                <span class="whitespace-nowrap text-xl">{{ price|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
+                                                <span class="whitespace-nowrap text-lg md:text-xl">{{ price|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
                                             {% endif %}
                                             <div class="font-medium whitespace-nowrap text-lg text-gray-600 dark:text-gray-300">
-                                                <span class="amount-{{ product.id }}"
-                                                      data-price="{{ price }}"
+                                                <span class="amount-{{ product.id }}" data-price="{{ price }}"
                                                       data-amount="{{ (price * product.quantity) }}">{{ (price * product.quantity)|amount_format }}</span><small>{{ order.store.currency|currency }}</small>
                                             </div>
                                         </div>
@@ -101,7 +97,7 @@
                                                 </div>
                                             {% endif %}
                                         {% endif %}
-                                        <hr class="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-gray-400 dark:text-neutral-400"/>
+                                        <hr class="my-3 py-0 border border-t-0 border-dashed bg-gray-100 dark:bg-gray-500 dark:text-neutral-400"/>
                                         <div class="flex w-full justify-between mx-auto items-center">
                                             <a href="#"
                                                class="drops rounded-md bg-red-500 hover:bg-red-700 hover:text-gray-100 text-white px-2 py-1.5 dark:bg-red-400 dark:hover:bg-red-600"
@@ -176,32 +172,36 @@
             <div class="lg:col-span-3 md:col-span-2">
                 {% for order in summary %}
                     <div id="store-{{ order.store_id }}" class="h-auto">
-                        <h5 class="truncate mt-5 mb-1 mx-3 text-xl font-oswald font-thin text-ellipsis text-blue-800 dark:text-white">{{ order.store_name }}</h5>
-                        <div class="block max-w-xl sm:max-w-2xl mb-3 p-4 bg-white border border-gray-200 rounded-lg hover:shadow dark:bg-gray-800 dark:border-gray-700">
+                        <h5 class="line-clamp-1 mt-5 mb-1 text-lg md:text-xl font-oswald text-blue-800 dark:text-blue-300">{{ order.store_name }}</h5>
+                        <div class="block max-w-xl sm:max-w-2xl mb-3 p-4 bg-white border border-gray-200 rounded-lg dark:text-white hover:shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="flex flex-col">
-                                <h6 class="text-lg font-semibold text-gray-600 mb-1">{{ 'order.summary'|trans }}</h6>
+                                <h6 class="text-base md:text-lg border-b border-dashed dark:border-gray-600 font-medium text-gray-600 dark:text-gray-300 mb-1">{{ 'order.summary'|trans }}</h6>
                                 <div class="stores-summary mb-2">
                                     <div class="flex justify-between items-start">
                                         <div class="me-auto">{{ 'order.item.subtotal'|trans }}</div>
-                                        <span class="font-medium text-gray-700 dark:text-gray-100" id="item-subtotal-{{ order.store_id }}">{{ order.total|amount_format }}<small>{{ order.currency }}</small></span>
+                                        <span class="font-medium text-gray-700 dark:text-gray-100"
+                                              id="item-subtotal-{{ order.store_id }}">{{ order.total|amount_format }}<small>{{ order.currency }}</small></span>
                                     </div>
                                     <div class="flex justify-between items-start">
                                         <div class="me-auto">{{ 'order.service.tax'|trans }}</div>
-                                        <span class="font-medium text-gray-700 dark:text-gray-100" id="tax-{{ order.store_id }}">{{ order.tax }}<small>%</small></span>
+                                        <span class="font-medium text-gray-700 dark:text-gray-100"
+                                              id="tax-{{ order.store_id }}">{{ order.tax }}<small>%</small></span>
                                     </div>
                                     <div class="flex justify-between items-start">
                                         <div class="me-auto">{{ 'order.subtotal'|trans }}</div>
                                         {% set tax = order.tax %}
                                         {% set total = (order.total + (order.total * tax)/100) %}
-                                        <span class="font-medium text-gray-700 dark:text-gray-100" id="total-{{ order.store_id }}">{{ total|amount_format(2) }}<small>{{ order.currency }}</small></span>
+                                        <span class="font-medium text-gray-700 dark:text-gray-100"
+                                              id="total-{{ order.store_id }}">{{ total|amount_format(2) }}<small>{{ order.currency }}</small></span>
                                     </div>
                                 </div>
                                 {% if order.cc is not null and order.cc|length %}
                                     <ul class="list-none flex mx-auto space-x-2 justify-between items-center">
                                         {% for cc in order.cc %}
                                             <li class="inline-flex mx-auto ps-0.5">
-                                                <img class="object-cover w-7 h-auto"
-                                                     src="{{ asset('img/cc/' ~ cc ~ '.svg') }}" alt="{{ cc|capitalize }}">
+                                                <img class="object-cover w-7 h-auto bg-white dark:bg-gray-700 rounded-sm"
+                                                     src="{{ asset('img/cc/' ~ cc ~ '.svg') }}"
+                                                     alt="{{ cc|capitalize }}">
                                             </li>
                                         {% endfor %}
                                     </ul>

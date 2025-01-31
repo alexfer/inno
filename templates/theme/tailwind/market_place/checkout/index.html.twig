@@ -5,7 +5,7 @@
 {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}
 {% block childen %}{% endblock %}
 {% block content_body %}
-    <h1 class="block py-1.5 mb-2 text-2xl font-oswald bg-gray-50 dark:text-white line-clamp-1 text-center">{{ 'order.checkout'|trans }} - {{ order.store.name }}</h1>
+    <h1 class="block py-1.5 mb-2 text-2xl font-oswald bg-gray-50 dark:bg-gray-800 dark:text-white rounded-md line-clamp-1 text-center">{{ 'order.checkout'|trans }} - {{ order.store.name }}</h1>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
         <div class="col-span-1 md:col-span-3 pb-4 mb-3">
             {% include 'market_place/checkout/_customer_form.html.twig' with {
@@ -13,14 +13,14 @@
                 'form': form
             } %}
         </div>
-        <div class="relative border rounded-md">
+        <div class="relative border rounded-md dark:border-gray-800 dark:bg-gray-800">
             <div class="px-3 pb-3 h-full">
                 <div class="px-2 pb-2 mb-3">
                     <h4 class="font-medium font-oswald text-gray-600 text-xl mt-5 mb-4 text-center">{{ 'order.summary'|trans }}</h4>
                     {% set product_count = order.storeOrdersProducts.count() %}
                     {% for product in order.storeOrdersProducts %}
                         {% set price = discount(product.product.cost, product.product.storeProductDiscount.value, product.product.fee, 1, product.product.storeProductDiscount.unit) %}
-                        <div class="flex items-center pb-2 border-b">
+                        <div class="flex items-center pb-2 border-b border-dashed dark:border-gray-600">
                             <a class="block shrink-0 mr-2"
                                href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">
                                 {% if product.product.storeProductAttaches.count %}
@@ -35,28 +35,28 @@
                             </a>
                             <div class="pl-1">
                                 <h5 class="font-medium line-clamp-1">
-                                    <a class="text-lg hover:text-red-600" title="{{ product.product.name }}"
+                                    <a class="text-base md:text-lg hover:text-red-600 dark:text-gray-100" title="{{ product.product.name }}"
                                        href="{{ path('app_market_place_product', {slug: product.product.slug, tab: 'about'}) }}">{{ product.product.shortName }}
                                     </a>
                                 </h5>
-                                <span class="text-sm text-gray-500">
+                                <span class="text-xs md:text-sm text-gray-500 dark:text-gray-100">
                                     {{ price }}<small>{{ order.store.currency|currency }}</small>&times;{{ product.quantity }} {{ 'label.form.quantity_pcs'|trans }}
                                 </span>
                             </div>
                         </div>
                     {% endfor %}
-                    <div class="pt-3 pb-2 border-b mt-2">
+                    <div class="pt-3 pb-2 border-b border-dashed dark:border-gray-600 mt-2">
                         <div class="flex justify-between items-center mb-2 text-gray-600 dark:text-gray-200">
                             <span class="me-2">{{ 'order.item.subtotal'|trans }}:</span>
-                            <span class="text-end font-medium text-gray-700">{{ itemSubtotal|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
+                            <span class="text-end font-medium text-gray-700 dark:text-white">{{ itemSubtotal|amount_format }}<small>{{ order.store.currency|currency }}</small></span>
                         </div>
                         <div class="hidden justify-between items-center mb-2 text-gray-600 dark:text-gray-200">
                             <span class="fme-2">{{ 'order.service.coupon'|trans }}:</span>
-                            <span class="text-end font-medium text-gray-700">{{ 'store.product.off'|trans }}</span>
+                            <span class="text-end font-medium text-gray-700 dark:text-white">{{ 'store.product.off'|trans }}</span>
                         </div>
                         <div class="flex justify-between items-center mb-2 text-gray-600 dark:text-gray-200">
                             <span class="me-2">{{ 'order.service.tax'|trans }}:</span>
-                            <span class="text-end font-medium text-gray-700">{{ tax|round(2) }}<small>%</small></span>
+                            <span class="text-end font-medium text-gray-700 dark:text-white">{{ tax|round(2) }}<small>%</small></span>
                         </div>
                     </div>
                     <span class="{{ hasUsed == false or coupon == 0 ? 'hidden' : null }} absolute -rotate-45 inline-table top-100 bg-red-700 mt-5 start-4 opacity-70 px-2.5 text-white rounded-md pt-1 end-0 text-sm"><span
@@ -67,7 +67,7 @@
                         {{ total|amount_format(2) }}<small>{{ order.store.currency|currency }}</small>
                     </h3>
                     {% if creditCards is not null and creditCards|length %}
-                        <ul class="list-none border-t flex mx-auto space-x-2 justify-between items-center">
+                        <ul class="list-none border-t border-dashed  dark:border-gray-600 flex mx-auto space-x-2 justify-between items-center">
                             {% for cc in creditCards %}
                                 <li class="inline-flex mx-auto ps-0.5 pt-3">
                                     <img alt="..." class="object-cover w-7 h-auto"

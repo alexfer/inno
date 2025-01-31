@@ -9,12 +9,12 @@
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 md:col-span-8">
             <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96 gallery">
                     {% if product.attachments_count %}
                         {% set _picture = product.attachments[0].path ~ '/' ~ product.attachments[0].name %}
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
                             <img loading="lazy" src="{{ asset(_picture)|imagine_filter('product_view') }}"
-                                 class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                 class="gallery-image cursor-zoom-in absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                  alt="{{ product.name }}">
                             <div class="absolute inset-x-[15%] left-1/2 transform -translate-x-1/2 w-full bottom-5 py-5 text-center text-white md:block">
                                 <h5 class="text-xl text-ellipsis overflow-hidden">{{ product.short_name }}</h5>
@@ -36,7 +36,7 @@
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
                             {% set _image = image.path ~ '/' ~ image.name %}
                             <img loading="lazy" src="{{ asset(_image)|imagine_filter('product_view') }}"
-                                 class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                 class="absolute gallery-image cursor-zoom-in block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                  alt="{{ product.short_name }}">
                             <div class="absolute inset-x-[15%] left-1/2 transform -translate-x-1/2 w-full bottom-5 py-5 text-center text-white md:block">
                                 <h5 class="text-xl text-ellipsis overflow-hidden">{{ product.short_name }}</h5>
@@ -104,7 +104,7 @@
                     {% endif %}
                     <div class="flex-nowrap mb-2 md:mb-10 block w-72">
                         {% if product.reduce.unit is not empty %}
-                            <span class="font-medium text-2xl text-success pr-2">
+                            <span class="font-medium text-2xl text-gray-500 dark:text-red-300 pr-2">
                                 {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
                                 {{ price|amount_format }}<small>{{ product.store.currency|currency }}</small>
                             </span>
@@ -387,6 +387,10 @@
             </div>
         </div>
     </div>
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="close">&times;</span>
+        <img src="" alt="" class="lightbox-image rounded-md shadow-xl" id="lightbox-image">
+    </div>
 {% endblock %}
 {% block toast %}
     {% include 'layouts/toast/success.html.twig' %}
@@ -394,4 +398,27 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('message-js') }}
+    <script>
+        const gallery = document.querySelector('.gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const closeButton = document.getElementById('close');
+
+        gallery.addEventListener('click', e => {
+            if (e.target.classList.contains('gallery-image')) {
+                lightboxImage.src = e.target.src;
+                lightbox.style.display = 'flex';
+            }
+        });
+
+        closeButton.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
 {% endblock %}

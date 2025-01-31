@@ -1,5 +1,14 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
+import {createRequire} from 'node:module';
+
+const _require = createRequire(import.meta.url);
+const colors = require('tailwindcss/colors');
+delete colors.lightBlue;
+delete colors.warmGray;
+delete colors.trueGray;
+delete colors.coolGray;
+delete colors.blueGray;
+
 module.exports = {
     mode: 'jit',
     content: [
