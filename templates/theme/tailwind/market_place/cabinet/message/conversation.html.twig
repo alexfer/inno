@@ -7,7 +7,7 @@
     <div class="cabinet-container">
         {% include 'market_place/cabinet/aside.html.twig' %}
         <section class="w-full md:flex-grow">
-            <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 max-w-lg truncate text-sm-start">
+            <h4 class="pb-2 block w-full max-w-xl mb-4 text-base md:text-xl font-medium text-red-500 mx-auto line-clamp-1">
                 {% if message.orders %}
                     {{ 'customer.order.messages'|trans }}: {{ message.orders.number }}
                 {% elseif message.product %}
@@ -17,15 +17,15 @@
                 {% endif %}
             </h4>
             {% set priority = {low: 'green', medium: 'yellow', high: 'red'} %}
-            <div class="flex items-start gap-2.5 my-5">
+            <div class="flex items-center justify-center gap-2.5 my-5 px-1 md:mx-4">
                 <img class="w-8 h-8 rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt="...">
-                <div class="flex flex-col w-full max-w-2xl leading-1.5">
-                    <div class="flex justify-between items-stretch space-x-2 rtl:space-x-reverse">
-                        <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ message.customer.firstName }} {{ message.customer.lastName }}</span>
-                        <span class="bg-{{ priority[message.priority] }}-100 text-{{ priority[message.priority] }}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-{{ priority[message.priority] }}-900 dark:text-{{ priority[message.priority] }}-300 capitalize">{{ message.priority }}</span>
-                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ message.createdAt|date(datetime_format) }}</span>
+                <div class="flex flex-col w-full leading-1.5">
+                    <div class="flex justify-between items-center space-x-2">
+                        <span class="text-base font-medium text-gray-900 dark:text-gray-200">{{ message.customer.firstName }} {{ message.customer.lastName }}</span>
+                        <span class="text-xs font-thin text-gray-500 dark:text-gray-400">{{ message.createdAt|date(datetime_format) }}</span>
                     </div>
-                    <p class="text-sm font-normal my-1.5 p-4 bg-gray-50 rounded-lg text-gray-900 dark:bg-gray-500 dark:text-white ">{{ message.message }}</p>
+                    <p class="text-xs md:text-sm my-1.5 p-4 bg-gray-50 rounded-lg text-gray-800 dark:bg-gray-800 dark:text-gray-200">{{ message.message }}</p>
+                    <span class="text-center w-16 bg-{{ priority[message.priority] }}-100 text-{{ priority[message.priority] }}-800 text-xs font-medium py-0.5 rounded dark:bg-{{ priority[message.priority] }}-900 dark:text-{{ priority[message.priority] }}-300 capitalize">{{ message.priority }}</span>
                 </div>
             </div>
             {% for row in conversation %}

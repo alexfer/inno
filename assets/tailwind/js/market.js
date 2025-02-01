@@ -32,19 +32,17 @@ if (bulkRemoveWishlist !== null) {
     bulkRemoveWishlist.addEventListener('click', (event) => {
         event.preventDefault();
         let url = bulkRemoveWishlist.getAttribute('data-url');
-        let tbody = document.getElementById('bulk-item');
-        let items = [];
-        let els = [];
-        Array.from(tbody.children).forEach((el) => {
-            let children = el.firstElementChild.getElementsByTagName('input');
-            Array.from(children).forEach((checkbox) => {
-                if (checkbox.checked) {
-                    items.push(checkbox.value);
-                    els.push(el);
-                }
-            });
+        let bulks = document.getElementsByClassName('bulk-item');
+        let items = [], els = [];
+
+        [...bulks].forEach((bulk) => {
+            if (bulk.querySelector('input').checked) {
+                items.push(bulk.querySelector('input').value);
+                els.push(bulk.querySelector('input').parentElement.parentElement);
+            }
         });
-        if (els.length > 0) {
+
+        if (items.length > 0) {
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify({items: items}),
@@ -54,12 +52,6 @@ if (bulkRemoveWishlist !== null) {
                     if (response.status === 204) {
                         for (let i in els) {
                             els[i].remove();
-                        }
-                        if (tbody.children.length === 0) {
-                            tbody.parentElement.parentElement.remove();
-                            bulkRemoveWishlist.remove();
-                            let notFound = document.getElementById('not-found');
-                            notFound.classList.remove('visually-hidden');
                         }
                     }
                 })
