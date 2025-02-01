@@ -114,7 +114,10 @@
                     </div>
                     <div class="relative rounded-md border my-2 dark:border-gray-700">
                         <div class="p-1.5 md:p-5 font-medium text-gray-600 dark:text-white border-b border-dashed dark:border-gray-700">
-                            <span class="text-gray-600 dark:text-gray-400 text-xs md:text-sm mr-1">{{ 'table.header.store'|trans }}:</span><a target="_blank" class="text-indigo-500 hover:text-indigo-700 underline hover:no-underline" href="{{ path('app_market_place_market', {slug: order.store.slug}) }}">{{ order.store.name }}</a>
+                            <span class="text-gray-600 dark:text-gray-400 text-xs md:text-sm mr-1">{{ 'table.header.store'|trans }}:</span><a
+                                    target="_blank"
+                                    class="text-indigo-500 hover:text-indigo-700 underline hover:no-underline"
+                                    href="{{ path('app_market_place_market', {slug: order.store.slug}) }}">{{ order.store.name }}</a>
                             <p class="mt-1 text-xs md:text-sm text-gray-900 dark:text-gray-300">
                                 <span class="text-gray-600 dark:text-gray-400 text-xs md:text-sm mr-1">{{ 'text.payment'|trans }}:</span>{{ order.invoice.payment_gateway.name|default('n/a') }}
                             </p>
@@ -159,6 +162,16 @@
                                                 {{ price|amount_format }}<span
                                                         class="text-xs">{{ order.store.currency|currency }}</span>
                                             </span>
+                                            {% if product.color %}
+                                                <div class="text-xs text-gray-900 dark:text-gray-300">{{ 'label.color'|trans }}
+                                                    <span class="ms-1 text-sm font-medium" style="color: {{ product.color }}">{{ product.color_title }}</span>
+                                                </div>
+                                            {% endif %}
+                                            {% if product.size %}
+                                                <div class="text-xs text-gray-900 dark:text-gray-300">{{ 'label.color'|trans }}
+                                                    <span class="ms-1 text-sm font-medium">{{ product.size_title }}</span>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                         <div class="flex flex-col ml-auto px-2 items-start dark:text-white">
                                             <div class="text-nowrap w-full text-end">
@@ -204,7 +217,8 @@
                                 <div class="flex justify-between whitespace-nowrap items-center font-medium text-gray-600 dark:text-white py-1.5 border-t border-dashed border-gray-200 dark:border-gray-700">
                                     <div class="ps-1.5 md:ps-5">{{ 'table.header.total'|trans }}</div>
                                     <span class="md:px-5">
-                                        <span class="font-thin text-xs md:text-sm hidden md:inline me-1 text-gray-400">{{ 'table.header.quantity'|trans }}:</span><span class="badge-yellow-border">{{ order.total_quantity }}</span>
+                                        <span class="font-thin text-xs md:text-sm hidden md:inline me-1 text-gray-400">{{ 'table.header.quantity'|trans }}:</span><span
+                                                class="badge-yellow-border">{{ order.total_quantity }}</span>
                                     </span>
                                     <span class="md:px-5">
                                         <span class="text-xs md:text-sm me-1 font-thin text-gray-400">{{ 'order.service.coupon'|trans }}:</span>{{ coupon_discount|amount_format(2) }}<span
