@@ -118,7 +118,7 @@ if (attributes.length) {
 }
 
 if (typeof wishlists != 'undefined') {
-    Array.from(wishlists).forEach((form) => {
+    [...wishlists].forEach((form) => {
         const url = form.getAttribute('action');
         let store = form.querySelector('input[name="store"]');
         let button = form.querySelector('button[type="submit"]');
@@ -132,9 +132,8 @@ if (typeof wishlists != 'undefined') {
                     if (response.status === 401) {
                         return false;
                     }
-                    button.children.item(0).classList.replace('text-secondary', 'text-danger');
-                    button.children.item(0).classList.replace('bi-heart', 'bi-heart-fill');
-                    button.disabled = true;
+                    button.classList.remove('text-gray-600');
+                    button.classList.add('pointer-events-none', 'text-red-500', 'animate__animated', 'animate__heartBeat');
                     return response.json();
                 })
                 .catch(err => {

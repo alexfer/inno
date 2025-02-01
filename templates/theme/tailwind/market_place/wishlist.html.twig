@@ -1,10 +1,10 @@
-{% set _wishlist_bg = 'text-grey-600' %}
+{% set _wishlist_bg = 'text-gray-600 dark:text-gray-100' %}
 {% set _disabled = null %}
 {% if customer is not null %}
     {% for wishlist in customer.storeWishlists.toArray %}
         {% if wishlist.product.id == product.id %}
-            {% set _wishlist_bg = 'text-rose-500' %}
-            {% set _disabled = 'disabled' %}
+            {% set _wishlist_bg = 'text-red-500' %}
+            {% set _disabled = 'pointer-events-none' %}
         {% endif %}
     {% endfor %}
 {% endif %}
@@ -12,15 +12,13 @@
       {% if customer is null %}
           tabindex="0" title="{{ 'title.service.message'|trans }} {{ 'store.unauthorized'|trans }}"
       {% endif %}>
-    <button class="bg-gray-100 text-gray-600 border-spacing-1.5 p-2 cursor-pointer rounded-md hover:bg-gray-300 hover:text-rose-500 {{ extra }}"
+    <button class="{{ _disabled }} {{ _wishlist_bg}} bg-gray-100 dark:bg-gray-500 border-spacing-1.5 p-2 cursor-pointer rounded-md hover:bg-gray-300 hover:text-red-700 dark:hover:text-red-500 transition-all duration-300 ease-in-out delay-1s"
             {% if customer is not null %}
                 title="{{ 'store.product.wishlist'|trans }}"
             {% endif %}
-            role="button" type="submit"
-            {{ _disabled }}
-            {% if customer is null %}disabled{% endif %}>
+            role="button" type="submit">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-             class="w-4 h-4 {{ _wishlist_bg }}">
+             class="w-4 h-4">
           <path d="M2 6.342a3.375 3.375 0 0 1 6-2.088 3.375 3.375 0 0 1 5.997 2.26c-.063 2.134-1.618 3.76-2.955 4.784a14.437 14.437 0 0 1-2.676 1.61c-.02.01-.038.017-.05.022l-.014.006-.004.002h-.002a.75.75 0 0 1-.592.001h-.002l-.004-.003-.015-.006a5.528 5.528 0 0 1-.232-.107 14.395 14.395 0 0 1-2.535-1.557C3.564 10.22 1.999 8.558 1.999 6.38L2 6.342Z"/>
         </svg>
     </button>

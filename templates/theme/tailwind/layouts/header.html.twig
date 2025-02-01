@@ -126,27 +126,27 @@
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-4 lg:mt-0">
                 <li>
                     <a href="{{ path('about') }}"
-                       class="{{ _route == 'about'? 'active': '' }} header-nav-item">{{ 'title.about_us'|trans }}</a>
+                       class="{{ _route == 'about'? 'active': '' }} header-nav-item border-0">{{ 'title.about_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('faq') }}"
-                       class="{{ _route == 'faq'? 'active': '' }} header-nav-item">{{ 'title.questions'|trans }}</a>
+                       class="{{ _route == 'faq'? 'active': '' }} header-nav-item border-0">{{ 'title.questions'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('service') }}"
-                       class="{{ _route == 'service'? 'active': '' }} header-nav-item">{{ 'title.service'|trans }}</a>
+                       class="{{ _route == 'service'? 'active': '' }} header-nav-item border-0">{{ 'title.service'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('contact') }}"
-                       class="{{ _route == 'contact'? 'active': '' }} header-nav-item">{{ 'title.contact_us'|trans }}</a>
+                       class="{{ _route == 'contact'? 'active': '' }} header-nav-item border-0">{{ 'title.contact_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_blog') }}"
-                       class="{{ split|length > 1 and split[1] == 'blog' ? 'active' : '' }} header-nav-item">{{ 'title.blogs'|trans }}</a>
+                       class="{{ split|length > 1 and split[1] == 'blog' ? 'active' : '' }} header-nav-item border-0">{{ 'title.blogs'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_market_place_index') }}"
-                       class="{{ split|length > 1 and split[1] == 'market' ? 'active' : '' }} header-nav-item">{{ 'title.market_places'|trans }}</a>
+                       class="{{ split|length > 1 and split[1] == 'market' ? 'active' : '' }} header-nav-item border-0">{{ 'title.market_places'|trans }}</a>
                 </li>
             </ul>
         </div>
