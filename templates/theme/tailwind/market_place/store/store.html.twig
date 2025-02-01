@@ -196,6 +196,17 @@
                                             {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
                                         </form>
                                     </div>
+                                    <form class="shopping-cart absolute bottom-4 start-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out delay-1s" method="post"
+                                          action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
+                                        <button class="text-red-500 bg-gray-50 bg-opacity-75 border border-gray-200 hover:bg-gray-50 hover:shadow hover:text-red-700 rounded-md p-2 transition-all duration-300 ease-in-out delay-1s dark:border-gray-500 dark:hover:bg-gray-800 dark:text-gray-50 dark:bg-gray-600 dark:hover:text-red-500 cursor-pointer"
+                                                data-slug="{{ product.slug }}" type="submit"
+                                                {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and 'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                                 class="w-4 h-4">
+                                                <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="flex justify-between items-start pb-2">
                                     <a href="{{ path('app_market_place_child_category', {

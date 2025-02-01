@@ -33,30 +33,28 @@
                 {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
             </form>
         </div>
+        <form class="shopping-cart absolute bottom-4 start-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out delay-1s" method="post"
+              action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
+            <button class="text-red-500 bg-gray-50 bg-opacity-75 border border-gray-200 hover:bg-gray-50 hover:shadow hover:text-red-700 rounded-md p-2 transition-all duration-300 ease-in-out delay-1s dark:border-gray-500 dark:hover:bg-gray-800 dark:text-gray-50 dark:bg-gray-600 dark:hover:text-red-500 cursor-pointer"
+                    data-slug="{{ product.slug }}" type="submit"
+                    {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and 'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                     class="w-4 h-4">
+                    <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                </svg>
+            </button>
+        </form>
     </div>
-    <div class="flex items-center py-4 justify-between">
-        <div class="ml-3">
-            <form class="shopping-cart" method="post"
-                  action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
-                <button class="text-white bg-gray-800 shadow-md hover:bg-surface-dark focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        data-slug="{{ product.slug }}" type="submit"
-                        {% if product.quantity == 0 or (app.user and ('ROLE_USER' in app.user.roles or 'ROLE_ADMIN' in app.user.roles)) %}disabled{% endif %}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                         class="inline-flex w-4 h-4 me-1.5">
-                        <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                    </svg>{{ 'store.product.add'|trans }}
-                </button>
-            </form>
-        </div>
-        <div class="mr-3">
-            {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
-            <span class="text-xl font-medium {% if product.reduce.unit is not empty %}text-red-500 dark:text-red-400{% else %}text-gray-900  dark:text-white{% endif %}">{{ price }}<span class="text-xs md:text-sm">{{ product.currency|currency }}</span></span>
-            {% if product.reduce.unit is not empty %}
-                <div class=" text-right text-gray-500 dark:text-gray-300">
-                    <span class="line-through">{{ (product.cost + product.fee)|amount_format }}</span><span class="text-xs md:text-sm">{{ product.currency|currency }}</span>
-                </div>
-            {% endif %}
-        </div>
+    <div class="flex items-center py-4 px-1 md:px-3 justify-between">
+        {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
+        <div class="text-xl font-medium {% if product.reduce.unit is not empty %}text-red-500 dark:text-red-400{% else %}text-gray-900  dark:text-white{% endif %}">{{ price }}<span
+                    class="text-xs md:text-sm">{{ product.currency|currency }}</span></div>
+        {% if product.reduce.unit is not empty %}
+            <div class="text-right text-gray-500 dark:text-gray-300">
+                <span class="line-through">{{ (product.cost + product.fee)|amount_format }}</span><span
+                        class="text-xs md:text-sm">{{ product.currency|currency }}</span>
+            </div>
+        {% endif %}
     </div>
     {% if product.parent_category_name is not null %}
         <a title="{{ product.name }}" class="mt-3"

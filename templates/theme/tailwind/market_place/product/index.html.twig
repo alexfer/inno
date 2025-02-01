@@ -114,7 +114,7 @@
                         {% endif %}
                     </div>
                     {% if product.attributes|length %}
-                        <div id="attributes" class="block w-full">
+                        <div id="attributes" class="block w-full mb-2">
                             {% for attribute in product.attributes %}
                                 <input type="hidden" name="color" value="">
                                 <input type="hidden" name="size" value="">
@@ -151,7 +151,7 @@
                     {% endif %}
                     <button type="submit"
                             id="order"
-                            class="rounded bg-blue-600 dark:bg-blue-950 hover:bg-blue-500 dark:hover:bg-blue-700 px-3 pb-2 pt-2.5 mt-1 md:mt-5 text-xs font-medium uppercase text-white cursor-pointer shadow-md transition-all duration-150 ease-in-out focus:outline-none"
+                            class="rounded bg-blue-600 dark:bg-cyan-500 hover:bg-blue-500 dark:hover:bg-red-700 px-3 pb-2 pt-2.5 mt-1 md:mt-5 text-xs font-medium uppercase text-white cursor-pointer shadow-md transition-all duration-150 ease-in-out focus:outline-none"
                             {% if product.quantity == 0 or (app.user and ('ROLE_USER' in app.user.roles or 'ROLE_ADMIN' in app.user.roles)) %}disabled{% endif %}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                              class="inline-flex w-4 h-4 me-2">

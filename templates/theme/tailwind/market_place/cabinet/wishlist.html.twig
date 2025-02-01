@@ -7,13 +7,13 @@
     <div class="cabinet-container">
         {% include 'market_place/cabinet/aside.html.twig' %}
         <section class="w-full md:flex-grow">
-            <div class="pt-2 px-2 md:px-4 relative">
-                <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center">{{ 'customer.cabinet.wishlist'|trans }}
+            <div class="pt-2 md:px-4 relative">
+                <h4 class="pb-2 block w-full mb-4 text-xl font-medium text-red-500 text-center">{{ 'customer.cabinet.wishlist'|trans }}
                     {% if wishlist|length %}
                         <button id="bulk-remove"
                                 data-url="{{ path('app_cabinet_wishlist_bulk_delete') }}"
                                 type="button"
-                                class="flex text-red-500 hover:text-red-700 p-3 shadow-md rounded-md hover:shadow-lg focus:shadow-lg absolute me-4 top-2 right-1">
+                                class="flex text-red-500 hover:text-red-700 p-3 shadow-md rounded-md hover:shadow-lg focus:shadow-lg absolute me-4 top-2 right-1 dark:bg-gray-700 dark:hover:bg-gray-700 dark:text-red-300 dark:hover:text-red-500">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                  class="w-4 h-4">
                                 <path fill-rule="evenodd"
@@ -24,49 +24,41 @@
                     {% endif %}
                 </h4>
                 {% if wishlist|length %}
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full mt-3 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <caption class="text-slate-500 dark:text-slate-400 pb-4 text-sm caption-top">
-                                {{ 'caption.wishlist'|trans }}
-                            </caption>
-                            <tbody id="bulk-item">
+                    <div class="relative">
+                        <div class="caption dark:bg-gray-900 border-b border-gray-200 border-dashed dark:border-gray-600">
+                            {{ 'caption.wishlist'|trans }}
+                        </div>
+                        <div class="flex flex-col mt-3">
                             {% for item in wishlist %}
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="p-3">
-                                        <label for="id">
-                                            <input type="checkbox" id="id" name="item[{{ item.id }}]"
-                                                   value="{{ item.id }}"
-                                                   class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600">
-                                        </label>
-                                    </th>
-                                    <td class="p-3 text-gray-500 w-2/5">
-                                        <a class="text-ellipsis overflow-hidden font-semibold"
+                                <div class="bulk-item flex flex-row items-center py-1.5 text-gray-700 rounded-md border border-dashed hover:bg-gray-50 hover:bg-opacity-50 border-white hover:border-gray-200 dark:border-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:text-gray-300">
+                                    <label class="inline-flex ps-2" for="id">
+                                        <input type="checkbox" id="id" name="item[{{ item.id }}]"
+                                               value="{{ item.id }}"
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                    </label>
+                                    <div class="ml-2 flex-grow">
+                                        <a class="line-clamp-1 font-medium" target="_blank"
                                            href="{{ path('app_market_place_product', {slug: item.product.slug, tab: 'about'}) }}">{{ item.product.shortName }}</a>
-                                    </td>
-                                    <td class="p-3 text-gray-500 w-2/5">
-                                        <a class="text-ellipsis overflow-hidden"
-                                           href="{{ path('app_market_place_market', {slug: item.store.slug}) }}">{{ item.store.name }}</a>
-                                    </td>
-                                    <td class="p-3 text-gray-500 w-2/5 text-center">
-                                        <span class="pr-1 font-semibold">{{ item.product.cost|amount_format }}{{ item.store.currency|currency }}</span>
-                                    </td>
-                                    <td class="p-3 text-gray-500">
-                                        <form class="shopping-cart" method="post"
-                                              action="{{ path('app_market_place_product_order', {product: item.product.slug}) }}">
-                                            <button class="flex-grow bg-gray-200 px-3 py-2 hover:bg-gray-100 hover:text-gray-950 drop-shadow-2xl border rounded-lg shadow-mdm"
-                                                    data-id="{{ item.store.id }}-{{ item.product.id }}"
-                                                    type="submit">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                                                     fill="currentColor" class="w-4 h-4">
-                                                    <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    </div>
+                                    <a target="_blank" class="line-clamp-1"
+                                       href="{{ path('app_market_place_market', {slug: item.store.slug}) }}">{{ item.store.name }}</a>
+                                    <div class="ps-2.5 flex-1 text-center">
+                                        <span class="pr-1 font-medium">{{ item.product.cost|amount_format }}{{ item.store.currency|currency }}</span>
+                                    </div>
+                                    <form class="shopping-cart me-2 flex items-end justify-end" method="post"
+                                          action="{{ path('app_market_place_product_order', {product: item.product.slug}) }}">
+                                        <button class="flex-grow bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:hover:text-gray-100 px-3 py-2 hover:bg-gray-100 hover:text-gray-950 drop-shadow-2xl border rounded-lg shadow-md"
+                                                data-id="{{ item.store.id }}-{{ item.product.id }}"
+                                                type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                 fill="currentColor" class="w-4 h-4">
+                                                <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 {% else %}
                     <div id="not-found" class="text-center visually-hidden">
@@ -83,4 +75,8 @@
             </div>
         </section>
     </div>
+    {% if wishlist|length %}
+        {% include 'layouts/toast/success.html.twig' %}
+        {% include 'layouts/toast/danger.html.twig' %}
+    {% endif %}
 {% endblock %}
