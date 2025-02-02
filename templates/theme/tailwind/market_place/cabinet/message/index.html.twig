@@ -16,7 +16,7 @@
                         </div>
                         <div class="flex flex-col mt-3">
                             {% for message in messages %}
-                                <div class="{{ message.read ? 'bg-green-200 dark:bg-green-950': 'bg-white dark:bg-gray-900' }} mb-1 flex flex-row items-center py-1.5 text-gray-700 rounded-md border border-dashed hover:bg-gray-50 hover:bg-opacity-50 border-white hover:border-gray-200 dark:border-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:text-gray-300">
+                                <div class="{{ message.read ? 'bg-green-50 dark:bg-green-950': 'bg-white dark:bg-gray-900' }} mb-1 flex flex-row items-center py-1.5 text-gray-700 rounded-md border border-dashed hover:bg-gray-50 hover:bg-opacity-50 border-white hover:border-gray-200 dark:border-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:text-gray-300">
                                     <div class="ml-2 flex-grow font-medium max-w-xs">
                                         {% if message.product is not null %}
                                             <a class="hover:text-gray-700 dark:hover:text-white"
@@ -45,7 +45,7 @@
                                         <span class="badge-green">{{ message.priority }}</span>
                                     </div>
                                     <div class="md:flex text-center pe-5 md:px-5">
-                                        {{ message.answers }}
+                                        <span class="badge-default-border">{{ message.answers }}</span>
                                     </div>
                                     <div class="md:flex-1 text-center justify-center">
                                         <a class="line-clamp-1 capitalize text-cyan-800 hover:text-cyan-600 underline hover:no-underline dark:text-cyan-300 dark:hover:text-cyan-500" href="{{ path('app_market_place_market', {slug: message.store.slug}) }}">

@@ -4,6 +4,7 @@
                     </svg>' %}
 
 <nav class="px-4 lg:px-6 mt-2 py-3.5">
+    <div class="max-w-screen-xl mx-auto py-2"></div>
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <a href="{{ path('app_index') }}" class="flex items-center -mt-2.5 text-white">
             <svg class="h-6 mr-3 sm:h-10 fill-red-600" xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +50,12 @@
                               clip-rule="evenodd"/>
                     </svg>
                     <span class="hidden md:inline-flex">{{ 'title.account'|trans }}</span>
+                    {% set count_messages = 0 %}
+                    {% if app.user %}
+                        {% set count_messages = msg.cabinet(app.user.id) %}
+                    {% endif %}
                     <div id="notify"
-                         class="absolute inline-flex items-center justify-center border-2 border-white w-4 h-4 bg-gray-500 rounded-full -top-2 end-0 md:-end-1">
+                         class="absolute inline-flex items-center justify-center border-1 border-white w-4 h-4 {{ count_messages > 0 ? 'bg-red-500 animate-blinking' : 'bg-gray-500' }} rounded-full -top-2 end-0 md:-end-1">
                     </div>
                 </a>
                 <div id="account-dropdown" class="absolute z-20 hidden">

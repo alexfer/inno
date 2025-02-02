@@ -51,18 +51,20 @@
                 <h5 class="text-base font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_messages'|trans }}</h5>
             </div>
             <ul class="flex flex-col divide-y divide-gray-200 dark:divide-white/10">
-                {% for message in messages %}
+                {% for key, message in messages %}
                 <li class="list-item">
                     <div class="flex items-center space-x-3 w-full">
-                        <div class="flex">
+                        <div class="flex relative">
                             <a class="relative inline-block h-8 w-8 rounded-full" href="">
-                                <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span
-                                        class="online"></span> </a></div>
-                        <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store.id, id: message.id}) }}"
+                                <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span class="online"></span>
+                            </a>
+                            <span class="badge-purple-border absolute -top-2 start-5 rounded-full bg-opacity-50">{{ message.messages_count }}</span>
+                        </div>
+                        <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message[key].store.id, id: message[key].id}) }}"
                            class="w-full">
                             <div class="flex items-center justify-between">
-                                <p class="text-slate-700 font-semibold text-xs dark:text-white capitalize">{{ message.customer.firstName }} {{ message.customer.lastName }}</p>
-                                <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message.createdAt|date(datetime_format) }}</p>
+                                <p class="text-slate-700 font-semibold text-xs dark:text-white capitalize">{{ message[key].customer.firstName }} {{ message[key].customer.lastName }}</p>
+                                <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message[key].createdAt|date(datetime_format) }}</p>
                             </div>
                             <div class="flex items-center justify-between pt-1">
                                 <p class="text-xs text-gray-500 dark:text-white/70 line-clamp-1">
@@ -72,9 +74,9 @@
                                               d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
                                               clip-rule="evenodd"/>
                                     </svg>
-                                    <span class="lg:text-sm">{{ message.message }}</span>
+                                    <span class="lg:text-sm">{{ message[key].message }}</span>
                                 </p>
-                                <span class="badge-green-border capitalize">{{ message.priority }}</span>
+                                <span class="badge-green-border capitalize">{{ message[key].priority }}</span>
                             </div>
                         </a>
                     </div>

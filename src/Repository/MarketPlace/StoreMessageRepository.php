@@ -97,16 +97,34 @@ class StoreMessageRepository extends ServiceEntityRepository
      */
     public function countMessages(array $stores): int
     {
-        return $this->createQueryBuilder('m')
+        $qb = $this->createQueryBuilder('m')
             ->select('COUNT(m.id)')
             ->leftJoin(Store::class, 's', Join::WITH, 's.id = m.store')
             ->where('m.store IN (:ids)')
             ->andWhere('m.read = :read')
-            ->andWhere('m.parent IS NULL')
-            ->setParameter('ids', array_map(fn(Store $s) => $s->getId(), $stores))
-            ->setParameter('read', false)
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->andWhere('m.owner IS NULL')
+            ->setParameter('ids', array_map(fn(Store $store) => $store->getId(), $stores))
+            ->setParameter('read', false);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param array $ids
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
+    public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->select(['m', 'COUNT(mm.id) as messages_count'])
+            ->leftJoin(StoreMessage::class, 'mm', Join::WITH, 'mm.store IN (:ids)')
+            ->where("m.parent is null and m.store IN (:ids)")
+            ->setParameter('ids', $ids)
+            ->groupBy('m.id')
+            ->setFirstResult($offset)->setMaxResults($limit);
+        return $qb->getQuery()->getResult();
     }
 
 }

@@ -64,31 +64,59 @@
     }
 
     .badge-green {
-        @apply inline-block bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300;
+        @apply inline-block bg-green-100 text-green-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300;
     }
 
     .badge-indigo {
-        @apply bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300;
+        @apply bg-indigo-100 text-indigo-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300;
+    }
+
+    .badge-indigo-border {
+        @apply bg-indigo-100 text-indigo-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300;
     }
 
     .badge-yellow {
-        @apply bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300;
+        @apply bg-indigo-100 text-indigo-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-300 border border-indigo-300;
     }
 
     .badge-yellow-border {
-        @apply bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300;
+        @apply bg-yellow-100 text-yellow-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300;
     }
 
     .badge-blue {
-        @apply bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300;
+        @apply bg-blue-100 text-blue-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300;
+    }
+
+    .badge-blue-border {
+        @apply bg-blue-100 text-blue-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 border border-blue-400;
+    }
+
+    .badge-purple-border {
+        @apply bg-purple-100 text-purple-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300 border border-purple-400;
     }
 
     .badge-purple {
-        @apply bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300;
+        @apply bg-purple-100 text-purple-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300;
+    }
+
+    .badge-red {
+        @apply bg-red-100 text-red-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300;
+    }
+
+    .badge-red-border {
+        @apply bg-red-100 text-red-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400;
     }
 
     .badge-green-border {
-        @apply bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400;
+        @apply bg-green-100 text-green-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400;
+    }
+
+    .badge-default {
+        @apply bg-gray-100 text-gray-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300;
+    }
+
+    .badge-default-border {
+        @apply bg-gray-100 text-gray-800 text-xs font-medium px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-400;
     }
 
     .nav-link-btn {

@@ -94,6 +94,8 @@ class StoreCustomerRepository extends ServiceEntityRepository
             ->where('c.member = :user')
             ->setParameter('user', $user)
             ->andWhere('m.owner IS NOT NULL')
+            ->andWhere('m.read = :read')
+            ->setParameter('read', false)
             ->getQuery()
             ->getSingleScalarResult();
     }
