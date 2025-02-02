@@ -32,7 +32,7 @@ class MessageController extends AbstractController
 
         if ($stores['result']) {
             $ids = array_column($stores['result'], 'id');
-            $messages = $manager->getRepository(StoreMessage::class)->findBy(['store' => $ids, 'owner' => null], ['created_at' => 'DESC'], self::LIMIT, 0);
+            $messages = $manager->getRepository(StoreMessage::class)->backdropMessages($ids, self::LIMIT);
         }
 
         return $this->render('dashboard/content/market_place/message/stores.html.twig', [

@@ -70,7 +70,7 @@
                     <span class="hidden md:inline-flex ms-3">{{ 'customer.cabinet.messages'|trans }}</span>
                     {% set count_messages = msg.cabinet(app.user.id) %}
                     <div id="hub"
-                         class="absolute inline-flex items-center{{ count_messages > 0 ? ' animate-bounce' : '' }} justify-center w-6 h-6 text-xs font-medium text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ count_messages }}</div>
+                         class="absolute inline-flex items-center{{ count_messages > 0 ? ' animate-blinking' : '' }} justify-center w-6 h-6 text-xs font-medium text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ count_messages }}</div>
                 </a>
             </li>
             <li>

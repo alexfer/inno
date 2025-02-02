@@ -104,6 +104,7 @@
             toast.querySelector('.created').innerHTML = data.update.createdAt;
             toast.querySelector('.url').setAttribute('href', data.update.url);
             hub.innerHTML = data.update.count;
+            hub.classList.add('animate-blinking');
         }
     </script>
 {% endblock %}

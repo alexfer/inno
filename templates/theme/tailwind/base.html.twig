@@ -58,6 +58,7 @@
         if (user) {
             const hub = document.getElementById('hub'),
                 toast = document.getElementById('hub-notification'),
+                notify = document.getElementById('notify'),
                 eventSource = new EventSource("{{ mercure('/hub/')|escape('js') }}" + user);
 
             eventSource.onmessage = event => {
@@ -68,7 +69,14 @@
                 toast.querySelector('.message').innerHTML = data.update.message;
                 toast.querySelector('.created').innerHTML = data.update.createdAt;
                 toast.querySelector('.url').setAttribute('href', data.update.url);
-                hub.innerHTML = data.update.count;
+                if (hub !== null) {
+                    hub.innerHTML = data.update.count;
+                    hub.classList.add('animate-blinking');
+                }
+                if (notify !== null) {
+                    notify.classList.remove('bg-gray-500');
+                    notify.classList.add('bg-red-500', 'animate-blinking');
+                }
             }
         }
     </script>

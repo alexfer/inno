@@ -55,6 +55,15 @@ module.exports = {
                 'auto-fill-300': 'repeat(auto-fill, minmax(300px, 1fr))',
                 'auto-fit-300': 'repeat(auto-fit, minmax(300px, 1fr))',
             },
+            keyframes: {
+                blinking: {
+                    '0%, 100%': { backgroundColor: '#ef4444' },
+                    '50%': { backgroundColor: '#fee2e2' },
+                }
+            },
+            animation: {
+                blinking: 'blinking 2s ease-in-out infinite',
+            },
         },
     },
     plugins: [
