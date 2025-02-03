@@ -65,10 +65,10 @@ class CabinetController extends AbstractController
         $id = $request->get('id');
         $customer = $this->customer();
 
-        $lastMessage = $this->em->getRepository(StoreMessage::class)->findBy(['parent' => $id, 'customer' => $customer], ['id' => 'DESC'], 1);
+        $lastMessage = $this->em->getRepository(StoreMessage::class)->findBy(['parent' => $id, 'customer' => $customer, 'read' => false], ['id' => 'DESC'], 1);
         $firstMessage = $this->em->getRepository(StoreMessage::class)->findOneBy(['id' => $id, 'customer' => $customer]);
 
-        if (!$firstMessage && !$lastMessage[0]) {
+        if (!$firstMessage || !$lastMessage[0]) {
             throw $this->createNotFoundException();
         }
 
