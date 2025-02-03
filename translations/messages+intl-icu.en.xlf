@@ -1494,6 +1494,14 @@
                 <source>message.success.text</source>
                 <target><![CDATA[Message has been sent successfully.]]></target>
             </trans-unit>
+            <trans-unit id="message.deleted.text">
+                <source>message.deleted.text</source>
+                <target><![CDATA[Message has been deleted successfully.]]></target>
+            </trans-unit>
+            <trans-unit id="message.closed.text">
+                <source>message.closed.text</source>
+                <target><![CDATA[Message has been closed successfully.]]></target>
+            </trans-unit>
             <trans-unit id="user.profile.updated">
                 <source>user.profile.updated</source>
                 <target><![CDATA[Your profile has been updated successfully.]]></target>

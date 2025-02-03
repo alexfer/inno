@@ -1,6 +1,6 @@
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-RgFly E-commerce solution.
+Inno E-commerce marketplaces.
 ============
 
 - Tailwind theme
@@ -64,7 +64,7 @@ Contributing
 ============
 We welcome contributions to this project, including pull requests and issues (and discussions on existing issues).
 
-If you'd like to contribute code but aren't sure what, the [issues list](https://github.com/alexfer/rgbfly/issues) is a good place to start.
+If you'd like to contribute code but aren't sure what, the [issues list](https://github.com/alexfer/inno/issues) is a good place to start.
 If you're a first-time code contributor, you may find GitHub's guide to [forking projects](https://guides.github.com/activities/forking/) helpful.
 
 All contributors (whether contributing code, involved in issue discussions, or involved in any other way) must abide by our [code of conduct](https://github.com/whiteoctober/open-source-code-of-conduct/blob/master/code_of_conduct.md).

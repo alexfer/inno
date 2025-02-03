@@ -14,9 +14,17 @@
                         <div class="caption dark:bg-gray-900 border-b border-gray-200 border-dashed dark:border-gray-600">
                             {{ 'caption.messages.history'|trans }}
                         </div>
+                        {% set _message_seccess = app.flashes('success') %}
                         <div class="flex flex-col mt-3">
+                            {% set last = messages|last %}
                             {% for message in messages %}
-                                <div class="{{ message.read ? 'bg-green-50 dark:bg-green-950': 'bg-white dark:bg-gray-900' }} mb-1 flex flex-row items-center py-1.5 text-gray-700 rounded-md border border-dashed hover:bg-gray-50 hover:bg-opacity-50 border-white hover:border-gray-200 dark:border-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:text-gray-300">
+                                {% set background = 'bg-white dark:bg-gray-900' %}
+                                {% if message.read == true  and message.deleted is null %}
+                                    {% set background = 'bg-green-50 dark:bg-green-950' %}
+                                {% elseif message.read == true and message.deleted is not null %}
+                                    {% set background = 'bg-white dark:bg-gray-900 opacity-75' %}
+                                {% endif %}
+                                <div class="{{ background }} mb-1 flex flex-row items-center py-1.5 text-gray-700 rounded-md border border-dashed hover:bg-gray-50 hover:bg-opacity-50 border-white hover:border-gray-200 dark:border-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:text-gray-300">
                                     <div class="ml-2 flex-grow font-medium max-w-xs">
                                         {% if message.product is not null %}
                                             <a class="hover:text-gray-700 dark:hover:text-white"
@@ -33,13 +41,17 @@
                                                 </svg>
                                             </a>
                                         {% elseif message.order is not null %}
-                                            <abbr title="{{ message.order.number }}">
-                                                {{ message.order.number }}
-                                            </abbr>
+                                            <abbr title="{{ message.order.number }}">{{ message.order.number }}</abbr>
                                         {% else %}
                                             {{ 'store.message.question'|trans }}
                                         {% endif %}
-                                        <div class="block text-xs font-thin mt-0.5">{{ message.created|date(date_format) }}</div>
+                                        <div class="block text-xs font-thin mt-0.5">
+                                            {% if message.deleted is not null %}
+                                                {{ last.deleted|date(datetime_format) }}
+                                            {% else %}
+                                                {{ message.created|date(datetime_format) }}
+                                            {% endif %}
+                                        </div>
                                     </div>
                                     <div class="hidden md:flex text-center justify-center px-5">
                                         <span class="badge-green">{{ message.priority }}</span>
@@ -48,7 +60,8 @@
                                         <span class="badge-default-border">{{ message.answers }}</span>
                                     </div>
                                     <div class="md:flex-1 text-center justify-center">
-                                        <a class="line-clamp-1 capitalize text-cyan-800 hover:text-cyan-600 underline hover:no-underline dark:text-cyan-300 dark:hover:text-cyan-500" href="{{ path('app_market_place_market', {slug: message.store.slug}) }}">
+                                        <a class="line-clamp-1 capitalize text-cyan-800 hover:text-cyan-600 underline hover:no-underline dark:text-cyan-300 dark:hover:text-cyan-500"
+                                           href="{{ path('app_market_place_market', {slug: message.store.slug}) }}">
                                             {{ message.store.name }}
                                         </a>
                                     </div>
@@ -66,11 +79,20 @@
                                                       clip-rule="evenodd"></path>
                                             </svg>
                                         </a>
+                                        <a href="{{ path('app_cabinet_message_delete', {id: message.id}) }}"
+                                           class="ps-0.5 text-red-500 hover:text-red-700 dark:text-red-50 dark:hover:text-red-400{{ message.deleted ? ' pointer-events-none' : '' }}">
+                                            <svg class="w-[20px] h-[20px] ps-0.5" fill="none" viewBox="0 0 24 24"
+                                                 stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                            </svg>
+                                        </a>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
+                    <input type="hidden" name="flash-success" value="{{ _message_seccess[0]|default([]|json_encode) }}">
                 {% else %}
                     <div id="not-found" class="text-center visually-hidden">
                         <img class="block mx-auto"
@@ -86,4 +108,7 @@
             </div>
         </section>
     </div>
+{% endblock %}
+{% block toast %}
+    {{ include ('layouts/toast/success.html.twig') }}
 {% endblock %}

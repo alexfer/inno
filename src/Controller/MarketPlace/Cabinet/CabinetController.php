@@ -56,6 +56,34 @@ class CabinetController extends AbstractController
         ]);
     }
 
+    #[Route('/message/{id}', name: 'app_cabinet_message_delete', methods: ['GET'])]
+    public function messageDelete(
+        Request             $request,
+        TranslatorInterface $translator
+    ): Response
+    {
+        $id = $request->get('id');
+        $customer = $this->customer();
+
+        $lastMessage = $this->em->getRepository(StoreMessage::class)->findBy(['parent' => $id, 'customer' => $customer, 'read' => false], ['id' => 'DESC'], 1);
+        $firstMessage = $this->em->getRepository(StoreMessage::class)->findOneBy(['id' => $id, 'customer' => $customer]);
+
+        if (!$firstMessage || !$lastMessage[0]) {
+            throw $this->createNotFoundException();
+        }
+
+        $firstMessage->setDeletedAt(new \DateTime());
+        $this->em->persist($firstMessage);
+
+        $lastMessage[0]->setRead(true)->setDeletedAt(new \DateTime());
+        $this->em->persist($lastMessage[0]);
+        $this->em->flush();
+
+        $this->addFlash('success', json_encode(['message' => $translator->trans('message.closed.text')]));
+
+        return $this->redirectToRoute('app_cabinet_messages');
+    }
+
     /**
      * @param Request $request
      * @param MessageServiceInterface $processor
