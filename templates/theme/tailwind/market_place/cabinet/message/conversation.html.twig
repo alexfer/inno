@@ -32,7 +32,7 @@
                 {% include 'market_place/cabinet/message/answers.html.twig' %}
             {% endfor %}
             {% set last = conversation|last %}
-            {% if last|length and last.owner is not null %}
+            {% if last|length and last.owner is not null and last.read == false %}
                 {% include 'market_place/cabinet/message/answer_form.html.twig' with {
                     id: message.id,
                     last: last.id,

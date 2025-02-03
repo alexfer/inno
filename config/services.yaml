@@ -6,7 +6,7 @@
 parameters:
     hwi_oauth.connect.registration_form: ''
     auto_login: true
-    app.datetime_format: 'D, d M Y H:i'
+    app.datetime_format: 'D, d M Y, H:i'
     app.date_format: 'M d, Y'
     app.time_format: 'H:i'
     locale: 'en'
