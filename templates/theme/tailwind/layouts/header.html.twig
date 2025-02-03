@@ -8,8 +8,10 @@
         <nav class="contents">
             <ul class="md:mr-4 xl:w-48 flex space-x-1.5 md:space-x-2 items-center justify-end ml-auto mb-1">
                 <li class="relative inline-block">
-                    <button id="theme-toggle" class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
-                        <svg id="theme-toggle-dark-icon" class="hidden h-6 md:h-8 p-1 md:p-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                    <button id="theme-toggle"
+                            class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
+                        <svg id="theme-toggle-dark-icon" class="hidden h-6 md:h-8 p-1 md:p-2 text-gray-500"
+                             fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
@@ -83,13 +85,12 @@
                                 </svg>
                             </span>
                         </div>
-                        {% if app.user %}
-                            <div class="ml-2 flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden line-clamp-1 whitespace-no-wrap lowercase">
-                                {{ app.user.email }}
-                            </div>
-                        {% endif %}
+                        <div class="ml-2 flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden line-clamp-1 whitespace-no-wrap">
+                            {{ app.user ? app.user.email : 'title.account'|trans }}
+                        </div>
                     </button>
-                    <div id="account-dropdown" class="absolute z-20 hidden transition-opacity duration-300 delay-1s ease-out ">
+                    <div id="account-dropdown"
+                         class="absolute z-20 hidden transition-opacity duration-300 delay-1s ease-out ">
                         <ul class="w-48 min-w-max list-none space-y-1 text-xs md:text-sm font-medium overflow-hidden p-0.5 md:p-1 dark:bg-gray-700 rounded-sm border-none bg-white bg-clip-padding shadow-xl"
                             aria-labelledby="account">
                             {% if not app.user %}
