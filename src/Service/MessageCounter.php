@@ -32,11 +32,10 @@ final readonly class MessageCounter
 
     /**
      * @param int $id
-     * @return int
+     * @return array
      */
-    public function cabinet(int $id): int
+    public function cabinet(int $id): array
     {
-        $user = $this->manager->getRepository(User::class)->find($id);
-        return $this->manager->getRepository(StoreCustomer::class)->countMessages($user);
+        return $this->manager->getRepository(StoreCustomer::class)->countMessages($id);
     }
 }
