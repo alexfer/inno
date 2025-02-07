@@ -8,8 +8,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 use Inno\Entity\MarketPlace\StoreAddress;
 use Inno\Entity\MarketPlace\StoreCustomer;
-use Inno\Entity\MarketPlace\StoreMessage;
-use Inno\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<StoreCustomer>
@@ -83,21 +81,20 @@ class StoreCustomerRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param User $user
-     * @return int
+     * @param int $customerId
+     * @return array
+     * @throws Exception
      */
-    public function countMessages(User $user): int
+    public function countMessages(int $customerId): array
     {
-        return $this->createQueryBuilder('c')
-            ->select('COUNT(m.id)')
-            ->leftJoin(StoreMessage::class, 'm', Join::WITH, 'm.customer = c.id')
-            ->where('c.member = :user')
-            ->setParameter('user', $user)
-            ->andWhere('m.owner IS NOT NULL')
-            ->andWhere('m.read = :read')
-            ->setParameter('read', false)
-            ->getQuery()
-            ->getSingleScalarResult();
+        $statement = $this->getEntityManager()
+            ->getConnection()
+            ->prepare('select customer_counters(:customer_id)');
+        $statement->bindValue('customer_id', $customerId);
+
+        $result = $statement->executeQuery()->fetchOne();
+        return json_decode($result, true);
+
     }
 
 }

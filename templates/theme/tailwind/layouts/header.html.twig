@@ -2,7 +2,7 @@
                         <path fill-rule="evenodd" d="M2 8c0 .414.336.75.75.75h8.69l-1.22 1.22a.75.75 0 1 0 1.06 1.06l2.5-2.5a.75.75 0 0 0 0-1.06l-2.5-2.5a.75.75 0 1 0-1.06 1.06l1.22 1.22H2.75A.75.75 0 0 0 2 8Z" clip-rule="evenodd">
                         </path>
                     </svg>' %}
-
+{% set counter = msg.cabinet(app.user ? app.user.id : 0) %}
 <nav class="px-4 lg:px-6">
     <div class="max-w-screen-xl self-start mx-auto py-1 border-b my-2 border-gray-100 dark:border-gray-700 border-dashed">
         <nav class="contents">
@@ -24,17 +24,23 @@
                     </button>
                 </li>
                 <li class="relative inline-block">
-                    <a class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full" href="">
+                    <a class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full"
+                       href="{{ path('app_cabinet_wishlist') }}">
                         <svg class="h-6 md:h-8 p-1 md:p-2 text-gray-500" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 512 512">
                             <path fill="currentColor"
                                   d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path>
                         </svg>
+                        <div class="absolute inline-flex items-center justify-center px-1.5 py-0.5 text-[8px] font-medium text-white bg-green-600 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                            {{ counter.wishlist }}
+                            <span class="sr-only">{{ counter.wishlist }}</span>
+                        </div>
                     </a>
                 </li>
                 <li class="relative inline-block">
-                    <a class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full" href="">
+                    <a class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full"
+                       href="{{ path('app_cabinet_messages') }}">
                         <svg class="h-6 md:h-8 p-1 md:p-2 text-gray-500" xmlns="http://www.w3.org/2000/svg"
                              aria-hidden="true" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -42,12 +48,8 @@
                                   d="M15 17h5l-1.405-1.405A2.03 2.03 0 0 1 18 14.158V11a6 6 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"></path>
                         </svg>
                     </a>
-                    {% set count_messages = 0 %}
-                    {% if app.user %}
-                        {% set count_messages = msg.cabinet(app.user.id) %}
-                    {% endif %}
                     <div id="notify"
-                         class="absolute border-1 border-white w-3 h-3 {{ count_messages > 0 ? 'bg-red-500 animate-blinking' : 'bg-gray-500' }} rounded-full -top-1.5 md:-top-1 -end-1 md:-end-1">
+                         class="absolute border-1 border-white w-3 h-3 {{ counter.messages > 0 ? 'bg-red-500 animate-blinking' : 'bg-gray-500' }} rounded-full -top-1.5 md:-top-1 -end-1 md:-end-1">
                     </div>
                 </li>
                 <li class="relative inline-block">
