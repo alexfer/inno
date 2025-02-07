@@ -12,7 +12,7 @@
     }
 
     h2 {
-        @apply text-2xl font-oswald pb-4 text-gray-700 dark:text-white relative capitalize;
+        @apply text-2xl font-oswald ml-2 pb-4 text-gray-700 dark:text-white relative capitalize;
     }
 
     .grid-loop-cols-2 {
@@ -20,11 +20,11 @@
     }
 
     .grid-loop-cols-3 {
-        @apply grid grid-cols-1 md:grid-cols-3 rounded-md border-b gap-x-6 relative hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
+        @apply grid grid-cols-1 md:grid-cols-3 rounded-md border-b gap-x-6 relative bg-white hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-600 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
     }
 
     .grid-loop-cols-4 {
-        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center rounded-md border-b gap-x-6 hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-700 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center rounded-md border-b gap-x-6 bg-white hover:border-gray-300 dark:bg-gray-700 border-gray-200  bg-gradient-to-l hover:from-gray-50 hover:to-white dark:hover:from-gray-800 dark:hover:to-gray-700 dark:border-gray-500 dark:hover:border-gray-800 mb-2 mt-3 mx-3 px-0 py-3;
     }
 
     .grid-loop-cols-5 {

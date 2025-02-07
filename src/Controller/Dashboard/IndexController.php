@@ -1,17 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Inno\Controller\Dashboard;
 
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\Entry;
-use Inno\Entity\MarketPlace\Enum\EnumStoreOrderStatus;
 use Inno\Entity\MarketPlace\Store;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\MarketPlace\StoreCustomerOrders;
 use Inno\Entity\MarketPlace\StoreMessage;
-use Inno\Entity\MarketPlace\StoreOrders;
-use Inno\Entity\MarketPlace\StoreProduct;
 use Inno\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\{Countries, Locale,};
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/dashboard')]
 class IndexController extends AbstractController
@@ -37,7 +33,6 @@ class IndexController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @return Response
      * @throws Exception
@@ -45,30 +40,22 @@ class IndexController extends AbstractController
     #[Route('/{slug?}', name: 'app_dashboard')]
     public function summaryIndex(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
     ): Response
     {
         $slug = $request->get('slug');
-        $criteria = ['owner' => $user];
-        $adminStore = null;
-        $products = $messages = $customers = $orders = [];
-
-        if ($slug) {
-            $criteria['slug'] = $slug;
-        }
+        $user = $this->getUser();
+        $messages = $customers = $options = [];
 
         if (in_array(User::ROLE_ADMIN, $user->getRoles())) {
-            if ($slug) {
-                $adminStore = $em->getRepository(Store::class)->findOneBy(['slug' => $slug]);
-            }
-            $stores = $em->getRepository(Store::class)->findBy([], ['created_at' => 'DESC'], self::$limit, self::$offset);
-
+            $stores = $em->getRepository(Store::class)->fetchStores(null, $slug ?: null, self::$offset, self::$limit);
+            $options = $stores['options'];
         } else {
-            $stores = $em->getRepository(Store::class)->findBy($criteria);
+            // TODO: add supports handle slug (see public.get_dashboard_stores function)
+            $stores = $em->getRepository(Store::class)->fetchStores($user->getId(), null, self::$offset, self::$limit);
         }
 
-        $store = $adminStore ?: reset($stores);
+        $store = $stores['result'] ? reset($stores['result']) : null;
         $criteriaEntries = ['type' => Entry::TYPE['Blog'], 'user' => $user];
 
         if (in_array(User::ROLE_ADMIN, $user->getRoles())) {
@@ -78,48 +65,43 @@ class IndexController extends AbstractController
         $blogs = $em->getRepository(Entry::class)->findBy($criteriaEntries, ['id' => 'DESC'], self::$limit, self::$offset);
 
         if ($store) {
-            $products = $em->getRepository(StoreProduct::class)->findBy(['store' => $store], ['updated_at' => 'DESC'], self::$limit, self::$offset);
-            $orders = $em->getRepository(StoreOrders::class)->findBy([
-                'store' => $store,
-                'status' => EnumStoreOrderStatus::Confirmed->value,
-            ], ['id' => 'DESC'], self::$limit, self::$offset);
+            $messages = $em->getRepository(StoreMessage::class)->fetchAll($store['id'], 'low', self::$offset, self::$limit);
 
-            $messages = $em->getRepository(StoreMessage::class)->fetchAll($store, 'low', self::$offset, self::$limit);
+            if ($store['orders']) {
+                $ids = array_map(function (array $order) {
+                    return $order['id'];
+                }, $store['orders']);
 
-            $ids = array_map(function ($order) {
-                return $order->getId();
-            }, $orders);
-
-            $customers = $em->getRepository(StoreCustomerOrders::class)->customers($ids, self::$offset, self::$limit);
+                $customers = $em->getRepository(StoreCustomerOrders::class)->customers($ids, self::$offset, self::$limit);
+            }
         }
 
         return $this->render('dashboard/content/index.html.twig', [
-            'stores' => $stores,
+            'stores' => $stores['result'],
+            'options' => $options,
             'store' => $store,
-            'products' => $products,
+            'products' => $store ? $store['products'] : [],
             'limit' => self::$limit,
-            'orders' => $orders,
+            'orders' => $store ? $store['orders'] : [],
             'messages' => $messages ? $messages['data'] : $messages,
             'countries' => Countries::getNames(Locale::getDefault()),
-            'customers' => $customers ? $customers['result'] : $customers,
+            'customers' => count($customers) ? $customers['result'] : $customers,
             'blogs' => $blogs,
         ]);
     }
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
     #[Route('/customer/{id}', name: 'app_dashboard_customer_xhr')]
     public function customerXhr(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
     ): JsonResponse
     {
-        // TODO: check grant access
+        $user = $this->getUser();
         $store = $em->getRepository(Store::class)->findOneBy(['owner' => $user]);
 
         if (!$store && !in_array(User::ROLE_ADMIN, $user->getRoles())) {
@@ -137,7 +119,6 @@ class IndexController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @return JsonResponse
      * @throws \Exception
@@ -145,7 +126,6 @@ class IndexController extends AbstractController
     #[Route('/permit/{target}', name: 'app_dashboard_permit_xhr', methods: ['POST'])]
     public function permit(
         Request                $request,
-        UserInterface          $user,
         EntityManagerInterface $em,
     ): JsonResponse
     {
@@ -153,7 +133,7 @@ class IndexController extends AbstractController
         $payload = $request->getPayload()->all();
         $entry = null;
 
-        if (!in_array(User::ROLE_ADMIN, $user->getRoles())) {
+        if (!in_array(User::ROLE_ADMIN, $this->getUser()->getRoles())) {
             return $this->json(['message' => 'Permission denied'], Response::HTTP_FORBIDDEN);
         }
 

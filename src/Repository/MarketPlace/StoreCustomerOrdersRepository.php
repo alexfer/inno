@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Inno\Repository\MarketPlace;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\{Connection, Exception};
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
-use Inno\Entity\MarketPlace\{StoreCustomer, StoreCustomerOrders};
+use Inno\Entity\MarketPlace\{StoreCustomerOrders};
 
 /**
  * @extends ServiceEntityRepository<StoreCustomerOrders>
@@ -70,6 +69,7 @@ class StoreCustomerOrdersRepository extends ServiceEntityRepository
      * @param int $offset
      * @param int $limit
      * @return array
+     * @throws Exception
      */
     public function customers(
         array $ids,
@@ -77,28 +77,13 @@ class StoreCustomerOrdersRepository extends ServiceEntityRepository
         int   $limit = 20,
     ): array
     {
-        $qb = $this->createQueryBuilder('co')
-            ->select([
-                'c.id',
-                'concat(c.first_name, \' \', c.last_name) as full_name',
-                'c.created_at',
-                'c.country',
-            ])
-            ->addSelect('count(co.id) as orders')
-            ->join(StoreCustomer::class, 'c', Join::WITH, 'co.customer = c.id')
-            ->where('co.orders IN (:ids)')
-            ->setParameter('ids', $ids)->setMaxResults($limit)
-            ->addGroupBy('c.id')
-            ->addGroupBy('c.email')
-            ->orderBy('c.id', 'DESC')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
-        $result = $qb->getQuery()->getResult();
+        $statement = $this->connection->prepare('select get_dashboard_customers(:ids, :offset, :limit)');
+        $statement->bindValue('ids', json_encode($ids));
+        $statement->bindValue('offset', $offset);
+        $statement->bindValue('limit', $limit);
+        $result = $statement->executeQuery()->fetchAllAssociative();
 
-        return [
-            'total' => count($qb->getQuery()->getResult()),
-            'result' => $result,
-        ];
+        return json_decode($result[0]['get_dashboard_customers'], true) ?: [];
     }
 
 }
