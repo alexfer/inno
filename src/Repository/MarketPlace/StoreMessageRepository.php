@@ -47,7 +47,7 @@ class StoreMessageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Store $store
+     * @param int $store
      * @param string|null $priority
      * @param int $offset
      * @param int $limit
@@ -55,14 +55,14 @@ class StoreMessageRepository extends ServiceEntityRepository
      * @throws Exception
      */
     public function fetchAll(
-        Store   $store,
+        int     $store,
         ?string $priority = null,
         int     $offset = 0,
         int     $limit = 25,
     ): array
     {
         $statement = $this->connection->prepare('select get_messages(:store_id, :priority, :offset, :limit)');
-        $statement->bindValue('store_id', $store->getId());
+        $statement->bindValue('store_id', $store);
         $statement->bindValue('priority', $priority);
         $statement = $this->bindPagination($statement, $offset, $limit);
         $result = $statement->executeQuery()->fetchAllAssociative();

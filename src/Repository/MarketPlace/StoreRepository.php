@@ -156,6 +156,7 @@ class StoreRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $limit
      * @return array|null
      * @throws Exception
      */
@@ -170,6 +171,25 @@ class StoreRepository extends ServiceEntityRepository
     public function findStoreSummaryBySlug(string $slug): ?array
     {
         return [];
+    }
+
+    /**
+     * @param int|null $owner
+     * @param string|null $slug
+     * @param int $offset
+     * @param int $limit
+     * @return array|null
+     * @throws Exception
+     */
+    public function fetchStores(?int $owner = null, ?string $slug = null, int $offset = 0, int $limit = 12): ?array
+    {
+        $statement = $this->connection->prepare('select get_dashboard_stores(:offset, :limit, :owner_id, :store_slug)');
+        $statement->bindValue('owner_id', $owner);
+        $statement->bindValue('store_slug', $slug);
+        $statement = $this->bindPagination($statement, $offset, $limit);
+
+        $result = $statement->executeQuery()->fetchAllAssociative();
+        return json_decode($result[0]['get_dashboard_stores'], true) ?: null;
     }
 
 }

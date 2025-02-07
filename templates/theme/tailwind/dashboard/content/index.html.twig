@@ -3,22 +3,22 @@
 {% set _title_extend = store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName %}
 
 {% block content %}
-    {% if stores|length and is_granted('ROLE_ADMIN') %}
+    {% if options|length and is_granted('ROLE_ADMIN') %}
         <form name="store" method="get" id="store" class="ms-2">
             <label for="slug">
                 <select name="slug" id="slug"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
-                    {% if stores|length > 1 %}
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
+                    {% if options|length > 1 %}
                         <option value="{{ url('app_dashboard') }}">{{ 'menu.dashboard'|trans }}</option>
                     {% endif %}
-                    {% for store in stores %}
+                    {% for store in options %}
                         <option value="{{ url('app_dashboard', {slug: store.slug}) }}"{{ store.slug == app.request.get('slug') ? ' selected="selected"' : null }}>{{ store.name }}</option>
                     {% endfor %}
                 </select>
             </label>
         </form>
     {% endif %}
-    <h4 class="my-5 ms-2 text-2xl text-gray-500 dark:text-gray-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
+    <h4 class="my-5 ml-3 text-2xl text-gray-500 dark:text-gray-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
     {% if store %}
         {% if is_granted('ROLE_ADMIN') %}
             <div class="grid grid-cols-1 gap-x-3">
@@ -29,17 +29,17 @@
                 <div class="block w-full py-2">
                     {% for store in stores %}
                         <div id="el-{{ store.id }}"
-                             class="grid-loop-cols-4 {{ store.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
+                             class="grid-loop-cols-4 {{ store.deleted is null ? 'bg-white' : 'bg-red-100' }}">
                             <div class="ps-2.5 p-0 md:py-1.5">
                                 <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
                                    href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
-                                <p class="m-0 sm:mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ store.createdAt|date(date_format) }}</p>
+                                <p class="m-0 sm:mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ store.created|date(date_format) }}</p>
                             </div>
                             <div class="ps-2.5 pt-3 flex-1">
                                 <span class="text-gray-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
-                                        class="badge-indigo ms-1.5">{{ store.products|length }}</span>
+                                        class="badge-indigo ms-1.5">{{ store.products_count }}</span>
                                 <a href="mailto:{{ store.owner.email }}"
-                                   class="mt-1 hidden md:block dark:text-white">{{ store.owner.email }}</a>
+                                   class="mt-1 hidden md:block dark:text-white">{{ store.owner.full_name }}</a>
                             </div>
                             <div class="ps-2.5 pt-2 flex-1">
                                 <p class="mt-1 text-sm font-semibold text-gray-800 dark:text-white">{{ countries[store.country] }}</p>
@@ -52,7 +52,7 @@
                                        class="permit inline-flex"
                                        data-id="{{ store.id }}"
                                        data-url="{{ path('app_dashboard_permit_xhr', {target: 'store'}) }}"
-                                       data-permit="{{ store.lockedTo is null ? 'lock' : 'unlock' }}">
+                                       data-permit="{{ store.locked is null ? 'lock' : 'unlock' }}">
                                         <svg class="w-[20px] h-[20px] text-yellow-300 me-1 dark:text-white"
                                              fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
@@ -94,7 +94,7 @@
                             <a class="customer font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8"
                                href="#" data-modal-target="customer-modal" data-modal-toggle="customer-modal"
                                data-url="{{ path('app_dashboard_customer_xhr', {id: customer.id}) }}">{{ customer.full_name }}</a>
-                            <p class="mt-1 text-nowrap text-xs text-gray-500 dark:text-white">{{ customer.created_at|date(date_format) }}</p>
+                            <p class="mt-1 text-nowrap text-xs text-gray-500 dark:text-white">{{ customer.created|date(date_format) }}</p>
                         </div>
                         <div class="ps-2.5 pt-3 flex-1">
                             <p class="text-sm font-medium text-gray-800 dark:text-white">{{ countries[customer.country] }}</p>
@@ -130,12 +130,12 @@
                     <p>{{ 'table.caption.products'|trans({store: store.name, path: path('app_dashboard_market_place_market_product', {store: store.id})})|raw }}</p>
                 </div>
                 {% for product in products %}
-                    <div class="grid-loop-cols-5 {{ product.deletedAt is null ? 'bg-white' : 'bg-red-100' }}">
+                    <div class="grid-loop-cols-5 {{ product.deleted is null ? 'bg-white' : 'bg-red-100' }}">
                         <div class="ps-2.5 p-0 md:py-1.5 col-span-2">
                             <a target="_blank"
                                class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline line-clamp-1"
-                               href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">{{ product.shortName }}</a>
-                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ product.createdAt|date(date_format) }}</p>
+                               href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">{{ product.name }}</a>
+                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ product.created|date(date_format) }}</p>
                         </div>
                         <div class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1">
                             <p class="md:ps-5 text-sm text-nowrap font-oswald text-gray-500 dark:text-white">{{ (product.cost + product.fee)|amount_format }}
@@ -143,8 +143,7 @@
                             </p>
                         </div>
                         <p class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1 text-sm text-nowrap text-gray-800 dark:text-white">{{ 'table.header.quantity'|trans }}
-                            <span
-                                    class="badge-green me-2">{{ product.quantity }}</span>
+                            <span class="badge-green me-2">{{ product.quantity }}</span>
                         </p>
                         <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
                             <a id="dropdown-menu" role="button" data-dropdown-toggle="dropdown-context"
@@ -165,7 +164,7 @@
                                            class="d-hover">{{ 'text.edit'|trans }}</a>
                                     </li>
                                     <li>
-                                        {% if product.deletedAt is null %}
+                                        {% if product.deleted is null %}
                                             <a href="#"
                                                data-token="{{ csrf_token('delete') }}"
                                                data-bs-toggle="modal"
@@ -173,7 +172,7 @@
                                                data-url="{{ url('app_dashboard_delete_product', {store: store.id, id: product.id}) }}"
                                                class="delete-entry d-drop-hover">{{ 'text.remove'|trans }}</a>
                                         {% else %}
-                                            {% if store.lockedTo is null %}
+                                            {% if store.locked is null %}
                                                 <a href="{{ path('app_dashboard_restore_product', {store: store.id, id: product.id}) }}"
                                                    class="block text-green-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 >{{ 'text.restore'|trans }}</a>
@@ -243,10 +242,10 @@
                         <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
                             <a href="{{ path('app_dashboard_market_place_order_details_market', {store: store.id, number: order.number}) }}"
                                class="text-purple-800 hover:text-gray-900 dark:text-purple-300 dark:hover:text-white">{{ order.number }}</a>
-                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ order.createdAt|date(date_format) }}</p>
+                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ order.created|date(date_format) }}</p>
                         </div>
                         <div class="ps-2.5 pt-2 sm:pt-0 flex-1">
-                            <span class="badge-purple me-2">{{ order.status.name }}</span>
+                            <span class="badge-purple me-2">{{ order.status }}</span>
                         </div>
                         <div class="ps-2.5 pt-0 flex-1 font-oswald text-gray-500 dark:text-white">{{ order.total|amount_format }}
                             <span class="text-xs ps-0.5">{{ store.currency|currency }}</span></div>
