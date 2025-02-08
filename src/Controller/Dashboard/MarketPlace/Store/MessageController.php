@@ -56,7 +56,7 @@ class MessageController extends AbstractController
     ): Response
     {
         $store = $this->store($serveStore, $this->getUser());
-        $messages = $em->getRepository(StoreMessage::class)->fetchAll($store, 'low', 0, 20);
+        $messages = $em->getRepository(StoreMessage::class)->fetchAll($store->getId(), 'low', 0, 20);
 
         $pagination = $this->paginator->paginate(
             $messages['data'] !== null ? $messages['data'] : [],

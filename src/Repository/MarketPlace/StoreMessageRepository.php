@@ -92,21 +92,15 @@ class StoreMessageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $stores
+     * @param int $userId
      * @return int
+     * @throws Exception
      */
-    public function countMessages(array $stores): int
+    public function messageCounter(int $userId): int
     {
-        $qb = $this->createQueryBuilder('m')
-            ->select('COUNT(m.id)')
-            ->leftJoin(Store::class, 's', Join::WITH, 's.id = m.store')
-            ->where('m.store IN (:ids)')
-            ->andWhere('m.read = :read')
-            ->andWhere('m.owner IS NULL')
-            ->setParameter('ids', array_map(fn(Store $store) => $store->getId(), $stores))
-            ->setParameter('read', false);
-
-        return $qb->getQuery()->getSingleScalarResult();
+        $statement = $this->connection->prepare('select dashboard_message_counter(:user_id)');
+        $statement->bindValue('user_id', $userId);
+        return $statement->executeQuery()->fetchOne();
     }
 
     /**

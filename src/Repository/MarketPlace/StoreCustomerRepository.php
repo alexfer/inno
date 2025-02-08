@@ -85,7 +85,7 @@ class StoreCustomerRepository extends ServiceEntityRepository
      * @return array
      * @throws Exception
      */
-    public function countMessages(int $customerId): array
+    public function counter(int $customerId): array
     {
         $statement = $this->getEntityManager()
             ->getConnection()

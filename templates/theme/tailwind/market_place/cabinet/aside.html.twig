@@ -70,7 +70,7 @@
                     <span class="hidden md:inline-flex ms-3">{{ 'customer.cabinet.messages'|trans }}</span>
                     {% set counter = msg.cabinet(app.user.id) %}
                     <div id="hub"
-                         class="absolute inline-flex items-center{{ counter.messages > 0 ? ' animate-blinking' : '' }} justify-center w-6 h-6 text-xs font-medium text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ counter.messages }}</div>
+                         class="absolute{{ counter.messages > 0 ? ' animate-blinking' : '' }} w-5 h-5 text-xs font-medium text-white bg-red-500 border-2 border-white rounded-full -top-2 end-0 dark:border-gray-900">{{ counter.messages }}</div>
                 </a>
             </li>
             <li>

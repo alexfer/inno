@@ -5,7 +5,6 @@ namespace Inno\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\StoreCustomer;
 use Inno\Entity\MarketPlace\StoreMessage;
-use Inno\Entity\User;
 
 final readonly class MessageCounter
 {
@@ -25,9 +24,7 @@ final readonly class MessageCounter
      */
     public function dashboard(int $id): int
     {
-        $user = $this->manager->getRepository(User::class)->find($id);
-        $stores = $user->getStores()->toArray();
-        return $this->manager->getRepository(StoreMessage::class)->countMessages($stores);
+        return $this->manager->getRepository(StoreMessage::class)->messageCounter($id);
     }
 
     /**
@@ -36,6 +33,6 @@ final readonly class MessageCounter
      */
     public function cabinet(int $id): array
     {
-        return $this->manager->getRepository(StoreCustomer::class)->countMessages($id);
+        return $this->manager->getRepository(StoreCustomer::class)->counter($id);
     }
 }

@@ -3,8 +3,8 @@
 namespace Inno\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
 use Inno\Entity\{Attach, Category, Entry, EntryAttachment, EntryCategory, EntryDetails, User, UserDetails, UserSocial};
@@ -200,5 +200,29 @@ class EntryRepository extends ServiceEntityRepository
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param int|null $id
+     * @param string $status
+     * @param string $type
+     * @param int $offset
+     * @param int $limit
+     * @return array|null
+     * @throws Exception
+     */
+    public function dashboard(?int $id, string $status, string $type, int $offset, int $limit = 12): ?array
+    {
+        $statement = $this->getEntityManager()
+            ->getConnection()
+            ->prepare('select get_dashboard_entries(:user_id, :status, :type, :offset, :limit)');
+        $statement->bindValue('user_id', $id);
+        $statement->bindValue('status', $status);
+        $statement->bindValue('type', $type);
+        $statement->bindValue('offset', $offset);
+        $statement->bindValue('limit', $limit);
+
+        $result = $statement->executeQuery()->fetchAllAssociative();
+        return json_decode($result[0]['get_dashboard_entries'], true);
     }
 }
