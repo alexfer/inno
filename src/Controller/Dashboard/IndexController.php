@@ -56,13 +56,13 @@ class IndexController extends AbstractController
         }
 
         $store = $stores['result'] ? reset($stores['result']) : null;
-        $criteriaEntries = ['type' => Entry::TYPE['Blog'], 'user' => $user];
+        $id = $user->getId();
 
         if (in_array(User::ROLE_ADMIN, $user->getRoles())) {
-            $criteriaEntries = ['type' => Entry::TYPE['Blog']];
+            $id = null;
         }
 
-        $blogs = $em->getRepository(Entry::class)->findBy($criteriaEntries, ['id' => 'DESC'], self::$limit, self::$offset);
+        $blogs = $em->getRepository(Entry::class)->dashboard($id, Entry::STATUS['entry.info.published'], Entry::TYPE['Blog'], self::$offset, self::$limit);
 
         if ($store) {
             $messages = $em->getRepository(StoreMessage::class)->fetchAll($store['id'], 'low', self::$offset, self::$limit);
@@ -86,7 +86,7 @@ class IndexController extends AbstractController
             'messages' => $messages ? $messages['data'] : $messages,
             'countries' => Countries::getNames(Locale::getDefault()),
             'customers' => count($customers) ? $customers['result'] : $customers,
-            'blogs' => $blogs,
+            'blogs' => $blogs['result'],
         ]);
     }
 

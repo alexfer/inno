@@ -33,11 +33,11 @@
                                 <div class="block text-end">
                                     <span class="text-xs font-medium lg:font-thin lg:text-sm text-nowrap">
                                         {{ 'table.header.messages'|trans }}<span
-                                                class="badge-green ml-0.5">{{ store.messages }}</span>
+                                                class="badge-green ml-1">{{ store.messages }}</span>
                                     </span>
                                     <p class="text-xs lg:text-sm font-medium lg:font-thin mt-1 md:mt-0.5 text-nowrap">
                                         {{ 'table.header.products'|trans }}<span
-                                                class="badge-purple ml-0.5">{{ store.products }}</span>
+                                                class="badge-purple ml-1">{{ store.products }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -50,10 +50,10 @@
             <div class="box-header">
                 <h5 class="text-base font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_messages'|trans }}</h5>
             </div>
-            <ul class="flex flex-col divide-y divide-gray-200 dark:divide-white/10">
+            <ul class="flex flex-col">
                 {% for key, message in messages %}
                 <li class="list-item">
-                    <div class="flex items-center space-x-3 w-full">
+                    <div class="flex items-center space-x-4 w-full pb-0.5">
                         <div class="flex relative">
                             <a class="relative inline-block h-8 w-8 rounded-full" href="">
                                 <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span class="online"></span>

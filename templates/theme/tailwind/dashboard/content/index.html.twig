@@ -364,19 +364,19 @@
                 <p>{{ 'table.caption.blogs'|trans({path: path('app_dashboard_blog'), create: path('app_dashboard_create_blog')})|raw }}</p>
             </div>
             {% for blog in blogs %}
-                <div class="grid-loop-cols-4 {{ blog.lockedTo is not null ? 'bg-red-100 dark:bg-red-950' : 'bg-white' }}">
+                <div class="grid-loop-cols-4 {{ blog.locked is not null ? 'bg-red-100 dark:bg-red-950' : 'bg-white' }}">
                     <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
                         <a target="_blank"
                            class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
-                           href="{{ path('app_blog_view', {slug: blog.slug}) }}">{{ blog.entryDetails.title }}</a>
+                           href="{{ path('app_blog_view', {slug: blog.slug}) }}">{{ blog.title }}</a>
                         <p class="mt-1 hidden md:block dark:text-white">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a href="mailto:{{ blog.user.email }}"
-                                   class="mt-1 dark:text-white">{{ blog.user.email }}</a>
+                                <a href="{{ path('app_dashboard_details_user', {id: blog.uid, tab: 'summary'}) }}"
+                                   class="mt-1 dark:text-white capitalize">{{ blog.author }}</a>
                             {% endif %}
                         </p>
                     </div>
-                    <div class="ps-2.5 pt-0 flex-1 text-gray-500 dark:text-white">{{ blog.createdAt|date(date_format) }}</div>
+                    <div class="ps-2.5 pt-0 flex-1 text-gray-500 dark:text-white">{{ blog.created|date(date_format) }}</div>
                     <div class="ps-2.5 pt-2 sm:pt-0 me-2 sm:me-0 flex-1 block md:items-end md:justify-end capitalize">
                         <span class="badge-yellow-border">{{ blog.status }}</span>
                     </div>
@@ -385,7 +385,7 @@
                            class="permit inline-flex"
                            data-id="{{ blog.id }}"
                            data-url="{{ path('app_dashboard_permit_xhr', {target: 'entry'}) }}"
-                           data-permit="{{ blog.lockedTo is null ? 'lock' : 'unlock' }}">
+                           data-permit="{{ blog.locked is null ? 'lock' : 'unlock' }}">
                             <svg class="w-[20px] h-[20px] text-yellow-300 me-1 dark:text-white" fill="none"
                                  viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
