@@ -22,7 +22,7 @@
      data-hash="{{ app.user.email|crypto|base64encode }}">
     {{ include('dashboard/sidebar.html.twig') }}
     <div class="lg:ml-64 flex-grow">
-        <div class="grid grid-cols-1 md:grid-cols-2 relative border-b dark:border-gray-600 w-full p-2 justify-between items-center dark:bg-gray-700">
+        <div class="grid grid-cols-1 md:grid-cols-2 bg-white relative border-b dark:border-gray-800 w-full p-2 justify-between items-center dark:bg-gray-700">
             <form class="inline-flex items-center max-w-2xl group" autocomplete="off">
                 <label for="dashboard-search" class="sr-only">{{ 'title.search'|trans }}</label>
                 <div class="relative w-full">
@@ -48,10 +48,9 @@
                     <span class="sr-only">{{ 'title.search'|trans }}</span>
                 </button>
             </form>
-            <div class="lg:flex justify-end hidden text-gray-500 dark:text-gray-400">
-                <a target="_blank" href="{{ path('app_index') }}"
-                   class="p-2 me-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-1 focus:-outline-offset-1 focus:outline-dashed dark:focus:bg-white dark:focus:outline-none dark:bg-gray-400 dark:hover:bg-gray-200 dark:text-gray-800">
-                    <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+            <div class="dashboard-header-nav">
+                <a target="_blank" href="{{ path('app_index') }}" class="item">
+                    <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z"/>
                         <polyline points="5 12 3 12 12 3 21 12 19 12"/>
@@ -59,23 +58,23 @@
                         <rect x="10" y="12" width="4" height="4"/>
                     </svg>
                 </a>
-                <a href="{{ path('app_dashboard_market_place_message_stores') }}" class="p-2 me-2 relative bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-1 focus:-outline-offset-1 focus:outline-dashed dark:focus:bg-white dark:focus:outline-none dark:bg-gray-400 dark:hover:bg-gray-200 dark:text-gray-800">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                <a href="{{ path('app_dashboard_market_place_message_stores') }}" class="item relative">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                     </svg>
                     {% set counter = msg.dashboard(app.user.id) %}
                     <div id="hub"
-                         class="absolute{{ counter > 0 ? ' animate-blinking' : '' }} px-1.5 py-0.5 text-[8px] font-medium text-white bg-red-500 border-1 border-gray-200 rounded-full -top-1 end-1 dark:border-gray-900">{{ counter }}</div>
+                         class="absolute{{ counter > 0 ? ' animate-blinking' : '' }} px-1.5 py-0.5 text-[8px] font-medium text-white bg-red-500 border-1 border-gray-200 rounded-full -top-1.5 -end-1.5 dark:border-gray-900">{{ counter }}</div>
                 </a>
                 <button id="theme-toggle" type="button"
-                        class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-1 focus:-outline-offset-1 focus:outline-dashed dark:focus:bg-white dark:focus:outline-none dark:bg-gray-400 dark:hover:bg-gray-200 dark:text-gray-800">
-                    <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                        class="item">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                     </svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
                               fill-rule="evenodd" clip-rule="evenodd"></path>

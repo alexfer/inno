@@ -28,7 +28,6 @@ class MessageController extends AbstractController
     ): Response
     {
         $stores = $manager->getRepository(Store::class)->stores($this->getUser());
-        $messages = null;
 
         if ($stores['result']) {
             $ids = array_column($stores['result'], 'id');
@@ -37,7 +36,7 @@ class MessageController extends AbstractController
 
         return $this->render('dashboard/content/market_place/message/stores.html.twig', [
             'stores' => $stores['result'],
-            'messages' => $messages,
+            'messages' => $messages['result'] ?? null,
         ]);
     }
 
