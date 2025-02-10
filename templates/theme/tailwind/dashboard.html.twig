@@ -17,17 +17,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-32x32.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 </head>
-<body class="dark:bg-gray-600 bg-body">
+<body class="dark:bg-slate-600 bg-body">
 <div class="flex flex-col h-screen" id="key" data-id="{{ app.user.id }}"
      data-hash="{{ app.user.email|crypto|base64encode }}">
     {{ include('dashboard/sidebar.html.twig') }}
     <div class="lg:ml-64 flex-grow">
-        <div class="grid grid-cols-1 md:grid-cols-2 bg-white relative border-b dark:border-gray-800 w-full p-2 justify-between items-center dark:bg-gray-700">
+        <div class="grid grid-cols-1 md:grid-cols-2 bg-white relative border-b dark:border-slate-800 w-full p-2 justify-between items-center dark:bg-slate-700">
             <form class="inline-flex items-center max-w-2xl group" autocomplete="off">
                 <label for="dashboard-search" class="sr-only">{{ 'title.search'|trans }}</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        <svg class="w-4 h-4 text-slate-400 transition duration-75 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white"
                              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                              viewBox="0 0 22 21">
                             <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"></path>
@@ -35,11 +35,11 @@
                         </svg>
                     </div>
                     <input type="text" minlength="5" name="term" id="dashboard-search"
-                           class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-blue-500"
+                           class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full ps-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-blue-500"
                            placeholder="{{ 'title.search'|trans }} ..." required/>
                 </div>
                 <button type="submit"
-                        class="p-2.5 ms-2 text-sm font-medium text-white bg-gray-700 rounded-lg border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 group-invalid:pointer-events-none group-invalid:opacity-30">
+                        class="p-2.5 ms-2 text-sm font-medium text-white bg-slate-700 rounded-lg border border-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 group-invalid:pointer-events-none group-invalid:opacity-30">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,7 +66,7 @@
                     </svg>
                     {% set counter = msg.dashboard(app.user.id) %}
                     <div id="hub"
-                         class="absolute{{ counter > 0 ? ' animate-blinking' : '' }} px-1.5 py-0.5 text-[8px] font-medium text-white bg-red-500 border-1 border-gray-200 rounded-full -top-1.5 -end-1.5 dark:border-gray-900">{{ counter }}</div>
+                         class="absolute{{ counter > 0 ? ' animate-blinking' : '' }} px-1.5 py-0.5 text-[8px] font-medium text-white bg-red-500 border-1 border-slate-200 rounded-full -top-1.5 -end-1.5 dark:border-slate-900">{{ counter }}</div>
                 </a>
                 <button id="theme-toggle" type="button"
                         class="item">
@@ -86,8 +86,8 @@
             {% block body %}{% endblock %}
         </div>
     </div>
-    <footer class="h-12 sticky bottom-0 z-10 top-[100vh] w-full bg-white dark:bg-gray-900 border-t shadow-sm border-gray-200 dark:border-gray-800">
-        <div class="container mx-auto text-gray-800 dark:text-white pt-1">
+    <footer class="h-12 sticky bottom-0 z-10 top-[100vh] w-full bg-white dark:bg-slate-900 border-t shadow-sm border-slate-200 dark:border-slate-800">
+        <div class="container mx-auto text-slate-800 dark:text-white pt-1">
             <div class="text-center py-3 text-xs md:text-sm">
                 {% set year =  'now' | date('Y') %}
                 {% set build_year = '2023' %}

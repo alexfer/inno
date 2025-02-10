@@ -1,6 +1,6 @@
-<div class="bg-white border rounded-md hover:shadow dark:bg-gray-800 dark:border-gray-700 group">
+<div class="bg-white border rounded-md hover:shadow dark:bg-slate-800 dark:border-slate-700 group">
     <div class="relative overflow-hidden h-250 rounded-t-md">
-        <a title="{{ product.name }}"
+        <a title="{{ product.name }}"{% if product.quantity == 0 %} class="opacity-50 bg-opacity-50"{% endif %}
            href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
             {% if product.attach_name %}
                 {% set _picture = product.attach_path ~ '/' ~ product.attach_name %}
@@ -15,7 +15,7 @@
         </a>
         <div class="absolute top-4 w-full md:opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
             <div class="flex justify-between">
-                <span class="ml-2 bg-gray-600 bg-opacity-90 text-gray-500 text-md shadow-xl px-2.5 pt-1 pb-0.5 rounded-md dark:bg-gray-900 dark:text-gray-300">
+                <span class="ml-2 bg-slate-600 bg-opacity-90 text-slate-500 text-md shadow-xl px-2.5 pt-1 pb-0.5 rounded-md dark:bg-slate-900 dark:text-slate-300">
                     <a title="{{ product.name }}"
                        href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
                        class="text-white text-sm hover:text-neutral-100">{{ 'store.product.details'|trans }}
@@ -33,9 +33,13 @@
                 {% include 'market_place/wishlist.html.twig' with {'extra': null} %}
             </form>
         </div>
-        <form class="shopping-cart absolute bottom-4 start-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out delay-1s" method="post"
+        {% if product.quantity == 0 %}
+            <div class="absolute top-24 start-12 md:opacity-100 border-2 border-slate-600 rounded-lg group-hover:opacity-100 text-3xl text-slate-800 dark:text-slate-300 dark:border-slate-400 pointer-events-none rotate-45 p-2">{{ 'store.product.out_stock'|trans }}</div>
+        {% endif %}
+        <form class="shopping-cart absolute bottom-4 start-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out delay-1s"
+              method="post"
               action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
-            <button class="text-red-500 bg-gray-50 bg-opacity-75 border border-gray-200 hover:bg-gray-50 hover:shadow hover:text-red-700 rounded-md p-2 transition-all duration-300 ease-in-out delay-1s dark:border-gray-500 dark:hover:bg-gray-800 dark:text-gray-50 dark:bg-gray-600 dark:hover:text-red-500 cursor-pointer"
+            <button class="text-red-500 bg-slate-50 bg-opacity-75 border border-slate-200 hover:bg-slate-50 hover:shadow hover:text-red-700 rounded-md p-2 transition-all duration-300 ease-in-out delay-1s dark:border-slate-500 dark:hover:bg-slate-800 dark:text-slate-50 dark:bg-slate-600 dark:hover:text-red-500 cursor-pointer"
                     data-slug="{{ product.slug }}" type="submit"
                     {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and 'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
@@ -46,24 +50,25 @@
         </form>
     </div>
     <div class="flex items-center py-4 px-1 md:px-3 justify-between">
-            {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
-            <div class="text-xl font-medium {% if product.reduce.unit is not empty %}text-red-500 dark:text-red-400{% else %}text-gray-900  dark:text-white{% endif %}">{{ price }}<span
-                        class="text-xs md:text-sm">{{ product.currency|currency }}</span></div>
-            {% if product.reduce.unit is not empty %}
-                <div class="text-right text-gray-500 dark:text-gray-300">
-                    <span class="line-through">{{ (product.cost + product.fee)|amount_format }}</span><span
-                            class="text-xs md:text-sm">{{ product.currency|currency }}</span>
-                </div>
-            {% endif %}
+        {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
+        <div class="text-xl font-medium {% if product.reduce.unit is not empty %}text-red-500 dark:text-red-400{% else %}text-slate-900  dark:text-white{% endif %}">{{ price }}
+            <span
+                    class="text-xs md:text-sm">{{ product.currency|currency }}</span></div>
+        {% if product.reduce.unit is not empty %}
+            <div class="text-right text-slate-500 dark:text-slate-300">
+                <span class="line-through">{{ (product.cost + product.fee)|amount_format }}</span><span
+                        class="text-xs md:text-sm">{{ product.currency|currency }}</span>
+            </div>
+        {% endif %}
     </div>
     <a title="{{ product.name }}" class="mt-3"
        href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
-        <h5 class="mx-3 mb-2 text-lg font-medium hover:text-gray-700 tracking-tight line-clamp-1 text-gray-500 dark:text-white">
+        <h5 class="mx-3 mb-2 text-lg font-medium hover:text-slate-700 tracking-tight line-clamp-1 text-slate-500 dark:text-white">
             {{ product.short_name }}
         </h5>
     </a>
     <a href="{{ path('app_market_place_parent_category', {parent:  product.parent_category_slug}) }}"
-       class="hover:underline line-clamp-1 ml-2 text-gray-500 dark:text-gray-300 w-full block">
+       class="hover:underline line-clamp-1 ml-2 text-slate-500 dark:text-slate-300 w-full block">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
              class="inline-flex w-4 h-4 me-2">
             <path fill-rule="evenodd"
@@ -75,7 +80,7 @@
         parent: product.parent_category_slug,
         child:  product.category_slug
     }) }}" title="{{ product.category_name }}"
-       class="hover:underline hover:w-full line-clamp-1 block w-auto ml-2 mr-3 text-gray-500 dark:text-gray-300">
+       class="hover:underline hover:w-full line-clamp-1 block w-auto ml-2 mr-3 text-slate-500 dark:text-slate-300">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
              class="inline-flex w-4 h-4 me-2">
             <path fill-rule="evenodd"
@@ -97,7 +102,7 @@
             </a>
         </li>
         <li class="flex">
-            <a class="line-clamp-1 inline-block w-auto mr-3 text-gray-700 dark:text-white hover:text-black dark:hover:text-indigo-300 transition-all duration-300 delay-1s ease-in-out"
+            <a class="line-clamp-1 inline-block w-auto mr-3 text-slate-700 dark:text-white hover:text-black dark:hover:text-indigo-300 transition-all duration-300 delay-1s ease-in-out"
                href="{{ path('app_market_place_market', {slug:  product.store_slug}) }}">
                 <svg class="w-4 h-4 mx-2 fill-red-500 inline-flex"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

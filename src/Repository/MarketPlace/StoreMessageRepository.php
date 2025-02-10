@@ -4,9 +4,8 @@ namespace Inno\Repository\MarketPlace;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\{Connection, Exception, Statement};
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
-use Inno\Entity\MarketPlace\{Store, StoreCustomer, StoreMessage};
+use Inno\Entity\MarketPlace\{StoreCustomer, StoreMessage};
 
 /**
  * @extends ServiceEntityRepository<StoreMessage>
@@ -110,7 +109,7 @@ class StoreMessageRepository extends ServiceEntityRepository
      * @return mixed
      * @throws Exception
      */
-        public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
+    public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
     {
         $statement = $this->connection->prepare('select backdrop_messages(:ids, :offset, :limit)');
         $statement->bindValue('ids', json_encode($ids));

@@ -7,7 +7,7 @@
         <form name="store" method="get" id="store" class="ms-2">
             <label for="slug">
                 <select name="slug" id="slug"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
+                        class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:outline-none focus:ring-1 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
                     {% if options|length > 1 %}
                         <option value="{{ url('app_dashboard') }}">{{ 'menu.dashboard'|trans }}</option>
                     {% endif %}
@@ -18,7 +18,7 @@
             </label>
         </form>
     {% endif %}
-    <h4 class="my-5 ml-3 text-2xl text-gray-500 dark:text-gray-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
+    <h4 class="my-5 ml-3 text-2xl text-slate-500 dark:text-slate-50 font-oswald">{{ store ? store.name : 'Welcome ' ~ app.user.userDetails.firstName }}</h4>
     {% if store %}
         {% if is_granted('ROLE_ADMIN') %}
             <div class="grid grid-cols-1 gap-x-3">
@@ -33,17 +33,17 @@
                             <div class="ps-2.5 p-0 md:py-1.5">
                                 <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
                                    href="{{ path('app_dashboard_market_place_edit_market', {id: store.id, tab: 'details'}) }}">{{ store.name }}</a>
-                                <p class="m-0 sm:mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ store.created|date(date_format) }}</p>
+                                <p class="m-0 sm:mt-1 text-xs text-nowrap text-slate-500 dark:text-white">{{ store.created|date(date_format) }}</p>
                             </div>
                             <div class="ps-2.5 pt-3 flex-1">
-                                <span class="text-gray-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
+                                <span class="text-slate-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
                                         class="badge-indigo ms-1.5">{{ store.products_count }}</span>
                                 <a href="mailto:{{ store.owner.email }}"
                                    class="mt-1 hidden md:block dark:text-white">{{ store.owner.full_name }}</a>
                             </div>
                             <div class="ps-2.5 pt-2 flex-1">
-                                <p class="mt-1 text-sm font-semibold text-gray-800 dark:text-white">{{ countries[store.country] }}</p>
-                                <p class="mt-1 text-sm text-nowrap text-gray-500 dark:text-white">{{ 'label.form.store_currency'|trans }}
+                                <p class="mt-1 text-sm font-semibold text-slate-800 dark:text-white">{{ countries[store.country] }}</p>
+                                <p class="mt-1 text-sm text-nowrap text-slate-500 dark:text-white">{{ 'label.form.store_currency'|trans }}
                                     :<span class="font-oswald ps-1">{{ store.currency }}</span></p>
                             </div>
                             <div class="sm:p-3 pt-3 me-6 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
@@ -93,13 +93,13 @@
                             <a class="customer font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8"
                                href="#" data-modal-target="customer-modal" data-modal-toggle="customer-modal"
                                data-url="{{ path('app_dashboard_customer_xhr', {id: customer.id}) }}">{{ customer.full_name }}</a>
-                            <p class="mt-1 text-nowrap text-xs text-gray-500 dark:text-white">{{ customer.created|date(date_format) }}</p>
+                            <p class="mt-1 text-nowrap text-xs text-slate-500 dark:text-white">{{ customer.created|date(date_format) }}</p>
                         </div>
                         <div class="ps-2.5 pt-3 flex-1">
-                            <p class="text-sm font-medium text-gray-800 dark:text-white">{{ countries[customer.country] }}</p>
+                            <p class="text-sm font-medium text-slate-800 dark:text-white">{{ countries[customer.country] }}</p>
                         </div>
                         <div class="ps-2.5 pt-3 flex-1">
-                            <p class="text-sm text-gray-500 dark:text-white">{{ 'table.header.orders'|trans }}<span
+                            <p class="text-sm text-slate-500 dark:text-white">{{ 'table.header.orders'|trans }}<span
                                         class="badge-yellow ms-1.5">{{ customer.orders }}</span>
                             </p>
                         </div>
@@ -134,20 +134,20 @@
                             <a target="_blank"
                                class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline line-clamp-1"
                                href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">{{ product.name }}</a>
-                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ product.created|date(date_format) }}</p>
+                            <p class="mt-1 text-xs text-nowrap text-slate-500 dark:text-white">{{ product.created|date(date_format) }}</p>
                         </div>
                         <div class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1">
-                            <p class="md:ps-5 text-sm text-nowrap font-oswald text-gray-500 dark:text-white">{{ (product.cost + product.fee)|amount_format }}
+                            <p class="md:ps-5 text-sm text-nowrap font-oswald text-slate-500 dark:text-white">{{ (product.cost + product.fee)|amount_format }}
                                 <small class="ps-0.5">{{ store.currency|currency }}</small>
                             </p>
                         </div>
-                        <p class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1 text-sm text-nowrap text-gray-800 dark:text-white">{{ 'table.header.quantity'|trans }}
+                        <p class="mt-0 md:mt-1 ps-2.5 pt-0 flex-1 text-sm text-nowrap text-slate-800 dark:text-white">{{ 'table.header.quantity'|trans }}
                             <span class="badge-green me-2">{{ product.quantity }}</span>
                         </p>
                         <div class="sm:p-3 pt-3 me-4 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
                             <a id="dropdown-menu" role="button" data-dropdown-toggle="dropdown-context"
                                data-dropdown-placement="bottom">
-                                <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
+                                <svg class="h-5 w-5 text-slate-600 dark:text-slate-50" fill="currentColor"
                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                           d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
@@ -155,8 +155,8 @@
                                 </svg>
                             </a>
                             <div id="dropdown-context"
-                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-xs font-medium text-gray-700 dark:text-gray-200"
+                                 class="z-10 hidden bg-white divide-y divide-slate-100 rounded-lg shadow w-44 dark:bg-slate-700">
+                                <ul class="py-2 text-xs font-medium text-slate-700 dark:text-slate-200"
                                     aria-labelledby="dropdown-menu">
                                     <li>
                                         <a href="{{ path('app_dashboard_market_place_edit_product', {store: store.id, id: product.id, tab: 'details'}) }}"
@@ -173,7 +173,7 @@
                                         {% else %}
                                             {% if store.locked is null %}
                                                 <a href="{{ path('app_dashboard_restore_product', {store: store.id, id: product.id}) }}"
-                                                   class="block text-green-600 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                   class="block text-green-600 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white"
                                                 >{{ 'text.restore'|trans }}</a>
                                             {% endif %}
                                         {% endif %}
@@ -198,15 +198,15 @@
                 </div>
                 {% for message in messages %}
                     <div class="grid-loop-cols-4">
-                        <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white col-span-2">
+                        <div class="ps-2.5 pt-0 font-medium text-slate-800 dark:text-white col-span-2">
                             <span data-tooltip-target="tooltip-{{ message.id }}"
-                                  class="font-medium text-gray-900 whitespace-nowrap dark:text-white max-w-10 truncate cursor-pointer">{{ message.customer.full_name }}</span>
+                                  class="font-medium text-slate-900 whitespace-nowrap dark:text-white max-w-10 truncate cursor-pointer">{{ message.customer.full_name }}</span>
                             <div id="tooltip-{{ message.id }}" role="tooltip"
-                                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-slate-900 bg-white border border-slate-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-slate-100">
                                 {{ message.customer.phone }}
                                 <div class="tooltip-arrow" data-popper-arrow=""></div>
                             </div>
-                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ message.created|date(date_format) }}</p>
+                            <p class="mt-1 text-xs text-nowrap text-slate-500 dark:text-white">{{ message.created|date(date_format) }}</p>
                         </div>
                         <div class="ps-2.5 pt-2 sm:pt-0 flex-1">
                             <span class="bg-green-600 text-white text-xs font-medium px-1.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ message.answers }}</span>
@@ -238,15 +238,15 @@
                 </div>
                 {% for order in orders %}
                     <div class="grid-loop-cols-3">
-                        <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
+                        <div class="ps-2.5 pt-0 font-medium text-slate-800 dark:text-white">
                             <a href="{{ path('app_dashboard_market_place_order_details_market', {store: store.id, number: order.number}) }}"
-                               class="text-purple-800 hover:text-gray-900 dark:text-purple-300 dark:hover:text-white">{{ order.number }}</a>
-                            <p class="mt-1 text-xs text-nowrap text-gray-500 dark:text-white">{{ order.created|date(date_format) }}</p>
+                               class="text-purple-800 hover:text-slate-900 dark:text-purple-300 dark:hover:text-white">{{ order.number }}</a>
+                            <p class="mt-1 text-xs text-nowrap text-slate-500 dark:text-white">{{ order.created|date(date_format) }}</p>
                         </div>
                         <div class="ps-2.5 pt-2 sm:pt-0 flex-1">
                             <span class="badge-purple me-2">{{ order.status }}</span>
                         </div>
-                        <div class="ps-2.5 pt-0 flex-1 font-oswald text-gray-500 dark:text-white">{{ order.total|amount_format }}
+                        <div class="ps-2.5 pt-0 flex-1 font-oswald text-slate-500 dark:text-white">{{ order.total|amount_format }}
                             <span class="text-xs ps-0.5">{{ store.currency|currency }}</span></div>
                         <div class="sm:p-3 pt-3 me-0 md:me-2 md:flex md:flex-row md:justify-end items-start absolute right-0 sm:right-2">
                             <a href="{{ path('app_dashboard_market_place_order_details_market', {store: store.id, number: order.number}) }}">
@@ -272,14 +272,14 @@
                  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-2xl max-h-full">
                     <!-- Modal content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
                         <!-- Modal header -->
-                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-slate-600">
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
                                 {{ 'table.header.customer'|trans }}
                             </h3>
                             <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-600 dark:hover:text-white"
                                     data-modal-hide="customer-modal">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                      viewBox="0 0 14 14">
@@ -292,63 +292,63 @@
                         </div>
                         <div id="modal-body" class="p-4 md:p-5 space-y-4">
                             <div class="px-4 sm:px-0">
-                                <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">{{ 'customer.cabinet.personal_information'|trans }}</h3>
+                                <h3 class="text-base font-semibold leading-7 text-slate-900 dark:text-white">{{ 'customer.cabinet.personal_information'|trans }}</h3>
                             </div>
-                            <dl class="divide-y divide-gray-100">
+                            <dl class="divide-y divide-slate-100">
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.first_name'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 first_name"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.first_name'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 first_name"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.last_name'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 last_name"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.last_name'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 last_name"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'customer.phone'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 phone"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'customer.phone'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 phone"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 country"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 country"></dd>
                                 </div>
                             </dl>
                             <div class="px-4 sm:px-0">
-                                <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">{{ 'customer.cabinet.address'|trans }}</h3>
+                                <h3 class="text-base font-semibold leading-7 text-slate-900 dark:text-white">{{ 'customer.cabinet.address'|trans }}</h3>
                             </div>
-                            <dl class="divide-y divide-gray-100">
+                            <dl class="divide-y divide-slate-100">
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.city'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_city"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.city'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_city"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_country"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_country"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.region'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_region"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.region'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_region"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.zip'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_postal"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.zip'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_postal"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.address_line_1'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_line1"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.address_line_1'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_line1"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.address_line_2'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_line2"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.address_line_2'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_line2"></dd>
                                 </div>
                                 <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.phone_number'|trans }}</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_phone"></dd>
+                                    <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.phone_number'|trans }}</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_phone"></dd>
                                 </div>
                             </dl>
                         </div>
-                        <div class="text-right p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <div class="text-right p-4 md:p-5 border-t border-slate-200 rounded-b dark:border-slate-600">
                             <button data-modal-hide="customer-modal" type="button"
-                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{ 'form.action.close'|trans }}</button>
+                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-slate-900 focus:outline-none bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 dark:hover:text-white dark:hover:bg-slate-700">{{ 'form.action.close'|trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -364,7 +364,7 @@
             </div>
             {% for blog in blogs %}
                 <div class="grid-loop-cols-4 {{ blog.locked is not null ? 'bg-red-100 dark:bg-red-950' : 'bg-white' }}">
-                    <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
+                    <div class="ps-2.5 pt-0 font-medium text-slate-800 dark:text-white">
                         <a target="_blank"
                            class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
                            href="{{ path('app_blog_view', {slug: blog.slug}) }}">{{ blog.title }}</a>
@@ -375,7 +375,7 @@
                             {% endif %}
                         </p>
                     </div>
-                    <div class="ps-2.5 pt-0 flex-1 text-gray-500 dark:text-white">{{ blog.created|date(date_format) }}</div>
+                    <div class="ps-2.5 pt-0 flex-1 text-slate-500 dark:text-white">{{ blog.created|date(date_format) }}</div>
                     <div class="ps-2.5 pt-2 sm:pt-0 me-2 sm:me-0 flex-1 block md:items-end md:justify-end capitalize">
                         <span class="badge-yellow-border">{{ blog.status }}</span>
                     </div>

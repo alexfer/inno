@@ -11,7 +11,7 @@
     <div class="box">
         {% for store in stores %}
             <div class="grid-loop-cols-3 last:border-0">
-                <div class="ps-2.5 pt-0 font-medium text-gray-800 dark:text-white">
+                <div class="ps-2.5 pt-0 font-medium text-slate-800 dark:text-white">
                     <a class="font-medium text-indigo-700 dark:text-indigo-300 hover:underline underline-offset-8 line-clamp-1"
                        href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}">{{ store.name }}</a>
                     <p class="mt-1 hidden md:block dark:text-white">
@@ -22,16 +22,16 @@
                     </p>
                 </div>
                 <div class="ps-2.5 pt-2 flex-1">
-                    <div class="text-xs text-gray-500 dark:text-white">{{ store.created|date(date_format) }}</div>
+                    <div class="text-xs text-slate-500 dark:text-white">{{ store.created|date(date_format) }}</div>
                 </div>
                 <div class="ps-2.5 pt-2 flex-1">
-                    <span class="text-gray-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
+                    <span class="text-slate-700 text-sm sm:mt-1 dark:text-white">{{ 'store.products'|trans }}:</span><span
                             class="badge-indigo ms-2">{{ store.products }}</span>
                 </div>
                 <div class="pe-3.5 pt-4 md:pe-2 md:flex md:flex-row md:justify-end text-nowrap items-start absolute right-2">
                     <a id="dropdown-menu-{{ store.id }}" role="button"
                        data-dropdown-toggle="dropdown-context-{{ store.id }}" class="">
-                        <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
+                        <svg class="h-5 w-5 text-slate-600 dark:text-slate-50" fill="currentColor"
                              viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
@@ -39,8 +39,8 @@
                         </svg>
                     </a>
                     <div id="dropdown-context-{{ store.id }}"
-                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-left text-sm font-medium text-indigo-700 dark:text-gray-200"
+                         class="z-10 hidden bg-white divide-y divide-slate-100 rounded-lg shadow w-44 dark:bg-slate-700">
+                        <ul class="py-2 text-left text-sm font-medium text-indigo-700 dark:text-slate-200"
                             aria-labelledby="dropdown-menu-{{ store.id }}">
                             <li>
                                 <a href="{{ path('app_dashboard_market_place_market_product', {store: store.id}) }}"

@@ -1,22 +1,22 @@
 {{ form_start(form, {attr: {id:'login', class: 'mx-auto size-10/12', 'autocomplete': 'off', novalidate: ''}}) }}
 <h2>{{ 'text.login'|trans }}</h2>
 {% if error %}
-    <div class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+    <div class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-slate-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">{{ error.message }}</div>
     </div>
 {% endif %}
 <div class="relative mb-5">
-    {{ form_label(form.email, 'label.form.email', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-    {{ form_widget(form.email, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email', autocomplete: 'off'}}) }}
+    {{ form_label(form.email, 'label.form.email', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+    {{ form_widget(form.email, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email', autocomplete: 'off'}}) }}
 </div>
 <div class="relative mb-5">
-    {{ form_label(form.password, 'label.form.password', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-    {{ form_widget(form.password, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.password', autocomplete: 'off'}}) }}
+    {{ form_label(form.password, 'label.form.password', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+    {{ form_widget(form.password, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.password', autocomplete: 'off'}}) }}
 </div>
 <div class="relative mb-5">
-    {{ form_widget(form._remember_me, {attr: {checked: 'checked', class: 'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800'}}) }}
-    {{ form_label(form._remember_me, 'label.form.keep_me_logged_in', {label_attr: {class: 'ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'}}) }}
+    {{ form_widget(form._remember_me, {attr: {checked: 'checked', class: 'w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-blue-300 dark:bg-slate-700 dark:border-slate-600 dark:focus:ring-blue-600 dark:ring-offset-slate-800 dark:focus:ring-offset-slate-800'}}) }}
+    {{ form_label(form._remember_me, 'label.form.keep_me_logged_in', {label_attr: {class: 'ms-2 text-sm font-medium text-slate-900 dark:text-slate-300'}}) }}
 </div>
 <div class="grid grid-cols-3 gap-1">
     <div class="relative mb-5">
@@ -27,7 +27,7 @@
         } }) }}
     </div>
     <div class="relative text-left pt-2">
-        <a class="text-sm whitespace-nowrap text-gray-950 font-medium hover:underline hover:text-slate-800 dark:text-gray-100"
+        <a class="text-sm whitespace-nowrap text-slate-950 font-medium hover:underline hover:text-slate-800 dark:text-slate-100"
            href="{{ path('app_customer_register') }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                  class="w-4 h-4 inline-flex me-1 mb-1">
@@ -37,7 +37,7 @@
         </a>
     </div>
     <div class="relative text-left pt-2">
-        <a class="text-sm whitespace-nowrap text-gray-950 font-medium hover:underline hover:text-slate-800 dark:text-gray-100"
+        <a class="text-sm whitespace-nowrap text-slate-950 font-medium hover:underline hover:text-slate-800 dark:text-slate-100"
            href="{{ path('app_forgot_password_request') }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                  class="w-4 h-4 inline-flex me-1 mb-1">
@@ -50,7 +50,7 @@
 </div>
 <div class="block mx-auto w-48">
     <a role="button" href="{{ path('connect_google_start') }}"
-       class="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition dark:border-gray-500 duration-150 dark:text-white dark:bg-gray-700">
+       class="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition dark:border-slate-500 duration-150 dark:text-white dark:bg-slate-700">
         <img class="w-6 h-6" src="{{ asset('img/Google-color.svg') }}" loading="lazy" alt="google">
         <span class="text-nowrap">{{ 'login.with.google'|trans }}</span>
     </a>

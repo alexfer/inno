@@ -8,7 +8,7 @@
         {% for key, entry in entries %}
             <h3 id="faq-flush-heading-{{ key }}">
                 <button type="button"
-                        class="group relative flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                        class="group relative flex items-center justify-between w-full py-5 font-medium rtl:text-right text-slate-500 border-b border-slate-200 dark:border-slate-700 dark:text-slate-400 gap-3"
                         data-accordion-target="#faq-body-{{ key }}"
                         aria-expanded="true"
                         aria-controls="faq-body-{{ key }}">
@@ -30,8 +30,8 @@
             </h3>
             <div id="faq-body-{{ key }}" class="hidden border-0"
                  aria-labelledby="faq-flush-heading-{{ key }}">
-                <div class="font-sans py-5 border-b border-gray-200 dark:border-gray-700">
-                    <p class="mb-2 text-gray-500 font-sans dark:text-gray-400">{{ entry.content|raw }}</p>
+                <div class="font-sans py-5 border-b border-slate-200 dark:border-slate-700">
+                    <p class="mb-2 text-slate-500 font-sans dark:text-slate-400">{{ entry.content|raw }}</p>
                 </div>
             </div>
         {% endfor %}

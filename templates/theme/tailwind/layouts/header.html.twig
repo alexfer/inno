@@ -4,13 +4,13 @@
                     </svg>' %}
 {% set counter = msg.cabinet(app.user ? app.user.id : 0) %}
 <nav class="px-4 lg:px-6">
-    <div class="max-w-screen-xl self-start mx-auto py-1 border-b my-2 border-gray-100 dark:border-gray-700 border-dashed">
+    <div class="max-w-screen-xl self-start mx-auto py-1 border-b my-2 border-slate-100 dark:border-slate-700 border-dashed">
         <nav class="contents">
             <ul class="md:mr-4 xl:w-48 flex space-x-1.5 md:space-x-2 items-center justify-end ml-auto mb-1">
                 <li class="relative inline-block">
                     <button id="theme-toggle"
                             class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
-                        <svg id="theme-toggle-dark-icon" class="hidden h-6 md:h-8 p-1 md:p-2 text-gray-500"
+                        <svg id="theme-toggle-dark-icon" class="hidden h-6 md:h-8 p-1 md:p-2 text-slate-500"
                              fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -26,13 +26,13 @@
                 <li class="relative inline-block">
                     <a class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full"
                        href="{{ path('app_cabinet_wishlist') }}">
-                        <svg class="h-6 md:h-8 p-1 md:p-2 text-gray-500" aria-hidden="true"
+                        <svg class="h-6 md:h-8 p-1 md:p-2 text-slate-500" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 512 512">
                             <path fill="currentColor"
                                   d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path>
                         </svg>
-                        <div class="absolute inline-flex items-center justify-center px-1.5 py-0.5 text-[8px] font-medium text-white bg-green-600 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                        <div class="absolute inline-flex items-center border-slate-300 justify-center px-1.5 py-0.5 text-[8px] font-medium text-white bg-green-600 border-2 rounded-full -top-2 -end-2 dark:border-zinc-400">
                             {{ counter.wishlist }}
                             <span class="sr-only">{{ counter.wishlist }}</span>
                         </div>
@@ -41,14 +41,15 @@
                 <li class="relative inline-block">
                     <a class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full"
                        href="{{ path('app_cabinet_messages') }}">
-                        <svg class="h-6 md:h-8 p-1 md:p-2 text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                        <svg class="h-6 md:h-8 p-1 md:p-2 text-slate-500" xmlns="http://www.w3.org/2000/svg"
                              aria-hidden="true" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                   stroke-width="2"
                                   d="M15 17h5l-1.405-1.405A2.03 2.03 0 0 1 18 14.158V11a6 6 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"></path>
                         </svg>
                     </a>
-                    <div id="notify" class="absolute border-2 border-white text-white px-1.5 py-0.5 text-[8px] {{ counter.messages > 0 ? 'bg-red-500 animate-blinking' : 'bg-gray-500' }} rounded-full -top-2 -end-2">{{ counter.messages }}</div>
+                    <div id="notify"
+                         class="absolute border-2 border-slate-300 text-white px-1.5 py-0.5 text-[8px] {{ counter.messages > 0 ? 'bg-red-500 animate-blinking' : 'bg-slate-500' }} rounded-full -top-2 -end-2 dark:border-zinc-400">{{ counter.messages }}</div>
                 </li>
                 <li class="relative inline-block">
                     <button class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full"
@@ -59,7 +60,7 @@
                             data-drawer-body-scrolling="true"
                             data-url="{{ path('app_market_place_product_order_cart') }}">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" class="h-6 md:h-8 p-1 md:p-2 text-gray-500"
+                             aria-hidden="true" class="h-6 md:h-8 p-1 md:p-2 text-slate-500"
                              viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                   stroke-width="1.5"
@@ -67,7 +68,7 @@
                         </svg>
                     </button>
                     <div id="qty"
-                         class="absolute inline-flex items-center justify-center px-1.5 py-0.5 text-[8px] font-medium text-white bg-red-600 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                         class="absolute inline-flex items-center justify-center px-1.5 py-0.5 text-[8px] font-medium text-white bg-red-600 border-2 border-slate-300 rounded-full -top-2 -end-2 dark:border-zinc-400">
                         {{ shop.quantity()|default(0) }}
                         <span class="sr-only">{{ shop.quantity() }}</span>
                     </div>
@@ -78,7 +79,8 @@
                             id="account">
                         <div class="flex-1">
                             <span class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
-                                <svg class="h-6 md:h-8 p-1 md:p-2 {{ app.user ? 'text-blue-500' : 'text-gray-500' }}" fill="none" viewBox="0 0 24 24"
+                                <svg class="h-6 md:h-8 p-1 md:p-2 {{ app.user ? 'text-blue-500' : 'text-slate-500' }}"
+                                     fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -88,47 +90,47 @@
                     </button>
                     <div id="account-dropdown"
                          class="absolute z-20 hidden transition-opacity duration-300 delay-1s ease-out ">
-                        <ul class="w-48 min-w-max list-none space-y-1 text-xs md:text-sm font-medium overflow-hidden p-0.5 md:p-1 dark:bg-gray-700 rounded-sm border-none bg-white bg-clip-padding shadow-xl"
+                        <ul class="w-48 min-w-max list-none space-y-1 text-xs md:text-sm font-medium overflow-hidden p-0.5 md:p-1 dark:bg-slate-700 rounded-sm border-none bg-white bg-clip-padding shadow-xl"
                             aria-labelledby="account">
                             {% if not app.user %}
                                 <li>
-                                    <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                    <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                        href="{{ path('app_login') }}">{{ _arrow_left|raw }}{{ 'title.user.login'|trans }}</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                    <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                        href="{{ path('app_customer_register') }}">{{ _arrow_left|raw }}{{ 'title.user.register'|trans }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                    <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                        href="{{ path('app_forgot_password_request') }}">{{ _arrow_left|raw }}{{ 'text.forgot_password'|trans }}</a>
                                 </li>
                             {% else %}
                                 {% if 'ROLE_USER' in app.user.roles or 'ROLE_ADMIN' in app.user.roles %}
                                     <li>
-                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                            href="{{ path('app_dashboard') }}">{{ _arrow_left|raw }}{{ 'text.dashboard'|trans }}
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                            href="{{ path('app_profile') }}">{{ _arrow_left|raw }}{{ 'text.profile'|trans }}</a>
                                     </li>
                                     <li>
-                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                            href="{{ path('app_logout') }}">{{ _arrow_left|raw }}{{ 'title.user.logoff'|trans }}
                                         </a>
                                     </li>
                                 {% endif %}
                                 {% if 'ROLE_CUSTOMER' in app.user.roles and 'ROLE_ADMIN' not in app.user.roles and 'ROLE_USER' not in app.user.roles %}
                                     <li>
-                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                            href="{{ path('app_cabinet') }}">{{ _arrow_left|raw }}{{ 'title.customer.cabinet'|trans }}
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-50 focus:text-gray-50 hover:bg-red-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline"
+                                        <a class="block px-4 py-2 bg-transparent rounded-sm dark:bg-transparent dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 hover:text-slate-50 focus:text-slate-50 hover:bg-red-600 focus:bg-slate-600 focus:outline-none focus:shadow-outline"
                                            href="{{ path('app_logout') }}">{{ _arrow_left|raw }}{{ 'title.user.logoff'|trans }}
                                         </a>
                                     </li>
@@ -156,7 +158,7 @@
         </a>
         <div class="flex items-center align-bottom lg:order-2 space-x-2 mb-1">
             <button data-collapse-toggle="mobile-menu" type="button"
-                    class="lg:hidden items-center text-gray-400 dark:text-white bg-white dark:bg-slate-900 hover:bg-gray-50 hover:text-gray-900 focus:ring-1 focus:ring-gray-100 font-medium rounded-md px-2 py-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                    class="lg:hidden items-center text-slate-400 dark:text-white bg-white dark:bg-slate-900 hover:bg-slate-50 hover:text-slate-900 focus:ring-1 focus:ring-slate-100 font-medium rounded-md px-2 py-2 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                     aria-controls="mobile-menu" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

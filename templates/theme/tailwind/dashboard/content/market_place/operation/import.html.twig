@@ -17,22 +17,22 @@
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M19,13a1,1,0,0,0-1,1v.38L16.52,12.9a2.79,2.79,0,0,0-3.93,0l-.7.7L9.41,11.12a2.85,2.85,0,0,0-3.93,0L4,12.6V7A1,1,0,0,1,5,6h7a1,1,0,0,0,0-2H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V14A1,1,0,0,0,19,13ZM5,20a1,1,0,0,1-1-1V15.43l2.9-2.9a.79.79,0,0,1,1.09,0l3.17,3.17,0,0L15.46,20Zm13-1a.89.89,0,0,1-.18.53L13.31,15l.7-.7a.77.77,0,0,1,1.1,0L18,17.21ZM22.71,4.29l-3-3a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21l-3,3a1,1,0,0,0,1.42,1.42L18,4.41V10a1,1,0,0,0,2,0V4.41l1.29,1.3a1,1,0,0,0,1.42,0A1,1,0,0,0,22.71,4.29Z"></path>
                     </svg>
-                    <div class="mt-2 text-sm px-5 font-medium text-gray-900">
+                    <div class="mt-2 text-sm px-5 font-medium text-slate-900">
                         <label for="file-upload" class="relative cursor-pointer dark:text-white">
                             {{ 'html.dragdrop'|trans|raw }}
                             <input id="file-upload" name="file-upload" type="file" class="sr-only skip"
                                    accept="text/xml,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/json">
                         </label>
                     </div>
-                    <p class="mt-1 text-xs md:text-sm px-5 text-gray-500 dark:text-gray-100">
+                    <p class="mt-1 text-xs md:text-sm px-5 text-slate-500 dark:text-slate-100">
                         {{ 'constraint.formats'|trans({
                             formats: formats|join(', '),
                             size: maxSize
                         }) }}
                     </p>
-                    <p class="mt-4 mx-auto text-xs text-gray-600 dark:text-white hidden" id="preview"></p>
+                    <p class="mt-4 mx-auto text-xs text-slate-600 dark:text-white hidden" id="preview"></p>
                     <section class="progress-area max-w-xl mx-auto py-1.5"></section>
-                    <section class="uploaded-area text-xs text-gray-700 dark:text-white"></section>
+                    <section class="uploaded-area text-xs text-slate-700 dark:text-white"></section>
                 </div>
                 <div class="flex mb-5">
                     <button id="upload"
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="flex-grow">
                                     <p class="font-medium mb-0.5 text-md-start line-clamp-1">{{ item.filename }}</p>
-                                    <p class="text-gray-500 dark:text-white/50 text-xs md:text-sm">{{ item.createdAt|date(datetime_format) }}</p>
+                                    <p class="text-slate-500 dark:text-white/50 text-xs md:text-sm">{{ item.createdAt|date(datetime_format) }}</p>
                                 </div>
                                 <div class="inline-flex space-x-1">
                                     <a role="button" class="sync text-indigo-500 hover:text-indigo-700"

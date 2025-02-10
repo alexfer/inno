@@ -2,16 +2,16 @@
     <img class="w-8 h-8 rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt="...">
     <div class="flex flex-col w-full max-w-4xl leading-1.5">
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
-            <span class="text-sm font-semibold text-gray-900 dark:text-white capitalize">
+            <span class="text-sm font-semibold text-slate-900 dark:text-white capitalize">
                 {% if row.owner %}
                     {{ row.owner.userDetails.firstName }} {{ row.owner.userDetails.lastName }}
                 {% else %}
                     {{ row.customer.firstName }} {{ row.customer.lastName }}
                 {% endif %}
             </span>
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ row.createdAt|date('F j, H:i') }}</span>
+            <span class="text-sm font-normal text-slate-500 dark:text-slate-400">{{ row.createdAt|date('F j, H:i') }}</span>
         </div>
-        <p class="text-sm font-normal py-4 px-2 my-2 {{ row.owner == null ? 'bg-gray-50 dark:bg-gray-500' : 'bg-indigo-50 dark:bg-gray-800' }} shadow-sm break-all rounded-md text-gray-900 dark:text-white">{{ row.message }}</p>
+        <p class="text-sm font-normal py-4 px-2 my-2 {{ row.owner == null ? 'bg-slate-50 dark:bg-slate-500' : 'bg-indigo-50 dark:bg-slate-800' }} shadow-sm break-all rounded-md text-slate-900 dark:text-white">{{ row.message }}</p>
         {% set priority = {low: 'green', medium: 'yellow', high: 'red'} %}
         <span class="text-center w-16 bg-{{ priority[row.priority] }}-100 text-{{ priority[row.priority] }}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-{{ priority[row.priority] }}-900 dark:text-{{ priority[row.priority] }}-300 capitalize">{{ row.priority }}</span>
     </div>

@@ -12,19 +12,19 @@
 
 {% block content %}
     {% for message in app.flashes('danger') %}
-        <div class="flex p-4 mb-4 rounded-lg bg-red-400 dark:bg-gray-800 dark:text-red-400"
+        <div class="flex p-4 mb-4 rounded-lg bg-red-400 dark:bg-slate-800 dark:text-red-400"
              role="alert">
             <div class="ms-3 text-sm font-medium text-white">{{ message|raw }}</div>
         </div>
     {% endfor %}
     {% if errors.count %}
-        <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+        <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-400"
              role="alert">
             <div class="ms-3 text-sm font-medium">{{ errors.current.message }}</div>
         </div>
     {% endif %}
     {% if app.user.stores|length and not form.vars.data.id %}
-        <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+        <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-400"
              role="alert">
             <h6 class="text-center text-sm">{{ 'dashboard.market.restrict'|trans }}</h6>
         </div>
@@ -100,7 +100,7 @@
             </li>
         </ul>
         <div id="market-tab-content"
-             class="pb-5 shadow-lg border bg-white border-t-gray-200 rounded-md dark:bg-gray-800 dark:border-gray-900 p-3">
+             class="pb-5 shadow-lg border bg-white border-t-slate-200 rounded-md dark:bg-slate-800 dark:border-slate-900 p-3">
             <div class="hidden p-4"
                  id="market-details"
                  role="tabpanel"
@@ -157,12 +157,12 @@
                  aria-labelledby="options-tab">
                 <div class="grid grid-cols-2 gap-6">
                     <div class="flex flex-col flex-wrap mb-3">
-                        <div class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">{{ 'entry.form.store_options'|trans }}</div>
+                        <div class="block mb-4 text-sm font-medium text-slate-900 dark:text-white">{{ 'entry.form.store_options'|trans }}</div>
                         <label for="{{ form.backupSchedule.vars.id }}"
                                class="inline-flex items-center mb-5 cursor-pointer">
                             {{ form_widget(form.backupSchedule, {attr: {class: 'sr-only peer'}}) }}
-                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
-                            <span class="ms-3 relative text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.backupSchedule.vars.label|trans }}</span>
+                            <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-600"></div>
+                            <span class="ms-3 relative text-sm font-medium text-slate-900 dark:text-slate-300">{{ form.backupSchedule.vars.label|trans }}</span>
                         </label>
                     </div>
                 </div>
@@ -188,8 +188,8 @@
                             {% endfor %}
                             <label for="{{ field.vars.id }}" class="inline-flex items-center mb-5 cursor-pointer">
                                 {{ form_widget(field, {attr: {class: 'sr-only peer', checked: _checked}}) }}
-                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
-                                <span class="ms-3 relative text-sm font-medium text-gray-900 dark:text-gray-300">{{ field.vars.label }}</span>
+                                <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-600"></div>
+                                <span class="ms-3 relative text-sm font-medium text-slate-900 dark:text-slate-300">{{ field.vars.label }}</span>
                             </label>
                         {% endfor %}
                     </div>
@@ -214,8 +214,8 @@
                             <label for="{{ field.vars.id }}" title="{{ field.vars.label|capitalize }}"
                                    class="inline-flex items-center mb-5 cursor-pointer">
                                 {{ form_widget(field, {attr: {class: 'sr-only peer', checked: _checked}}) }}
-                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
-                                <span class="ms-1.5 relative text-sm font-medium text-gray-900 dark:text-gray-300">
+                                <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-600"></div>
+                                <span class="ms-1.5 relative text-sm font-medium text-slate-900 dark:text-slate-300">
                                     <img class="object-cover w-8 h-auto" alt="{{ field.vars.label|capitalize }}"
                                          src="{{ asset('img/cc/' ~ field.vars.label ~ '.svg') }}">
                                 </span>
@@ -230,7 +230,7 @@
                  aria-labelledby="carrier-tab">
                 <div class="grid grid-cols-2 gap-6">
                     <div class="flex flex-col flex-wrap mb-3">
-                        <div class="block mb-5 text-sm font-medium text-gray-900 dark:text-white">{{ 'table.header.carriers'|trans }}</div>
+                        <div class="block mb-5 text-sm font-medium text-slate-900 dark:text-white">{{ 'table.header.carriers'|trans }}</div>
                         {% for key, field in form.carrier %}
                             {% set _checked = false %}
                             {% for carrier in form.vars.data.storeCarrierStores.toArray %}
@@ -240,8 +240,8 @@
                             {% endfor %}
                             <label for="{{ field.vars.id }}" class="inline-flex items-center mb-5 cursor-pointer">
                                 {{ form_widget(field, {attr: {class: 'sr-only peer', checked: _checked}}) }}
-                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
-                                <span class="ms-3 relative text-sm font-medium text-gray-900 dark:text-gray-300">{{ field.vars.label }}</span>
+                                <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-600"></div>
+                                <span class="ms-3 relative text-sm font-medium text-slate-900 dark:text-slate-300">{{ field.vars.label }}</span>
                             </label>
                         {% endfor %}
                     </div>
@@ -259,8 +259,8 @@
                              class="h-20 w-20 rounded-full">
                     {% endif %}
                     <div class="max-w-full mt-3 mx-auto">
-                        {{ form_label(form.logo, 'label.form.store_picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.logo, {attr: {class: 'skip block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'}}) }}
+                        {{ form_label(form.logo, 'label.form.store_picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.logo, {attr: {class: 'skip block w-full text-sm text-slate-900 border border-slate-300 rounded-lg cursor-pointer bg-slate-50 dark:text-slate-400 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400'}}) }}
                         <span class="input-wrong">{{ form_errors(form.logo) }}</span>
                     </div>
                 </div>
@@ -285,10 +285,10 @@
                             <div class="flex flex-col flex-wrap mb-3 w-1/2">
                                 <label for="{{ field.vars.id }}"
                                        class="inline-flex items-center -mb-1.5 cursor-pointer">
-                                    {{ form_widget(form.children[field.vars.value], {attr: {class: 'source float-end inline-flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', value: value}}) }}
+                                    {{ form_widget(form.children[field.vars.value], {attr: {class: 'source float-end inline-flex bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', value: value}}) }}
                                     {{ form_widget(field, {attr: {class: 'sr-only peer', checked: checked}}) }}
-                                    <div class="ms-2 relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
-                                    <span class="ms-3 relative text-sm font-medium text-gray-900 dark:text-gray-300">{{ field.vars.label }}</span>
+                                    <div class="ms-2 relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-600"></div>
+                                    <span class="ms-3 relative text-sm font-medium text-slate-900 dark:text-slate-300">{{ field.vars.label }}</span>
                                 </label>
                             </div>
                         {% endfor %}
@@ -304,7 +304,7 @@
             <div class="w-full text-center pb-1">
                 {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'btn-red'}}) }}
                 <a type="button" href="{{ url('app_dashboard_market_place_market') }}"
-                   class="btn-gray-strong">{{ 'form.action.back'|trans }}</a>
+                   class="btn-slate-strong">{{ 'form.action.back'|trans }}</a>
             </div>
         </div>
         {{ form_end(form) }}

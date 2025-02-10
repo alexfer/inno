@@ -2,8 +2,8 @@
 
 {% block content_body %}
     <h2>{{ 'search.results'|trans }}</h2>
-    <div class="text-gray-500 mb-5 dark:text-gray-50">{{ 'search.results.term'|trans }}: <span
-                class="text-primary-600 dark:text-gray-50">{{ app.request.query.get('query')|e }}</span></div>
+    <div class="text-slate-500 mb-5 dark:text-slate-50">{{ 'search.results.term'|trans }}: <span
+                class="text-primary-600 dark:text-slate-50">{{ app.request.query.get('query')|e }}</span></div>
     {% if products|length %}
         <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
             {% for product in products %}
@@ -11,9 +11,9 @@
             {% endfor %}
         </div>
     {% else %}
-        <div class="flex w-full items-center flex-wrap justify-center bg-gray-50 border rounded-xl">
+        <div class="flex w-full items-center flex-wrap justify-center bg-slate-50 border rounded-xl">
             <div class="h-full w-full relative">
-                <div class="text-3xl text-center p-8 text-gray-400 font-bold">No results for
+                <div class="text-3xl text-center p-8 text-slate-400 font-bold">No results for
                     "{{ app.request.query.get('query')|e|striptags }}"
                 </div>
             </div>

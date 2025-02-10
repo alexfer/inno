@@ -15,18 +15,18 @@
                     <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
                 </label>
             </div>
-            <div class="inline-flex delete-entries border rounded ms-1.5 px-2.5 bg-rose-50 hover:bg-rose-500 pointer-events-none hover:text-white transition-shadow duration-300 ease-in dark:border-gray-700 dark:hover:bg-gray-800">
+            <div class="inline-flex delete-entries border rounded ms-1.5 px-2.5 bg-rose-50 hover:bg-rose-500 pointer-events-none hover:text-white transition-shadow duration-300 ease-in dark:border-slate-700 dark:hover:bg-slate-800">
                 <a role="button" class="relative flex px-2.5 py-2" href="">{{ 'text.delete'|trans }}</a>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3">
             {% for key, order in orders %}
                 <div id="el-{{ order.id }}"
-                     class="p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-gray-950 dark:border-gray-700">
+                     class="p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-slate-800 dark:hover:bg-slate-950 dark:border-slate-700">
                     <div class="absolute end-2">
                         <a id="dropdown-menu-{{ order.id }}" role="button" class="flex justify-center"
                            data-dropdown-toggle="dropdown-context-{{ order.id }}" data-dropdown-placement="bottom">
-                            <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor"
+                            <svg class="h-5 w-5 text-slate-600 dark:text-slate-50" fill="currentColor"
                                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
@@ -34,8 +34,8 @@
                             </svg>
                         </a>
                         <div id="dropdown-context-{{ order.id }}"
-                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                            <ul class="py-2 text-left text-sm font-medium text-indigo-700 dark:text-gray-200"
+                             class="z-10 hidden bg-white divide-y divide-slate-100 rounded-lg shadow w-44 dark:bg-slate-700">
+                            <ul class="py-2 text-left text-sm font-medium text-indigo-700 dark:text-slate-200"
                                 aria-labelledby="dropdown-menu-{{ order.id }}">
                                 <li>
                                     <a href="{{ path('app_dashboard_market_place_order_change_status', {store: order.store.id, order: order.id, status: 'delivered' }) }}"
@@ -56,7 +56,7 @@
                         <input type="checkbox" name="product[{{ key }}]" value="{{ order.id }}"
                                class="checks checkbox-indigo"
                                id="i-{{ key }}"/>
-                        <span class="text-xs md:text-sm ms-3 text-nowrap text-gray-500 dark:text-white">{{ order.createdAt|date(datetime_format) }}</span>
+                        <span class="text-xs md:text-sm ms-3 text-nowrap text-slate-500 dark:text-white">{{ order.createdAt|date(datetime_format) }}</span>
                     </label>
                     <div class="my-1.5 flex justify-between items-center">
                         {% if order.status.name ==  constant('Inno\\Entity\\MarketPlace\\Enum\\EnumStoreOrderStatus::Processing').name %}
@@ -65,15 +65,15 @@
                             <a href="{{ path('app_dashboard_market_place_order_details_market', {store: order.store.id, number: order.number }) }}"
                                class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">{{ order.number|upper }}</a>
                         {% endif %}
-                        <div class="text-nowrap text-gray-500 dark:text-white">
+                        <div class="text-nowrap text-slate-500 dark:text-white">
                             <span class="font-oswald text-base">{{ (order.total + (order.total * order.tax)/100)|round(2) }}</span><span
                                     class="ms-1 font-sans text-xs">{{ order.store.currency|currency }}</span>
                         </div>
                     </div>
-                    <div class="my-1.5 pt-1.5 flex justify-between items-center border-t dark:border-gray-600">
+                    <div class="my-1.5 pt-1.5 flex justify-between items-center border-t dark:border-slate-600">
                         <div><span class="badge-green me-1">{{ order.storeOrdersProducts.count }}</span><span
                                     class="text-xs">{{ 'label.form.quantity_pcs'|trans }}</span></div>
-                        <div class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-pink-400 border border-pink-400">{{ order.status.name }}</div>
+                        <div class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-slate-700 dark:text-pink-400 border border-pink-400">{{ order.status.name }}</div>
                     </div>
                 </div>
             {% endfor %}

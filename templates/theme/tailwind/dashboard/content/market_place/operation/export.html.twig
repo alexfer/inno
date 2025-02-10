@@ -10,11 +10,11 @@
             <form method="post"
                   action="{{ path('app_dashboard_market_place_operation_export', {'store': app.request.get('store')}) }}">
                 <div id="options-block" data-accordion="collapse"
-                     data-active-classes="text-gray-900 dark:text-white"
-                     data-inactive-classes="text-gray-500 dark:text-gray-400">
+                     data-active-classes="text-slate-900 dark:text-white"
+                     data-inactive-classes="text-slate-500 dark:text-slate-400">
                     <h3 id="options">
                         <button type="button"
-                                class="flex items-center justify-between w-full py-2.5 font-medium bg-gray-100 border-b dark:bg-gray-700 dark:border-gray-500 text-gray-500 dark:text-gray-400 gap-3"
+                                class="flex items-center justify-between w-full py-2.5 font-medium bg-slate-100 border-b dark:bg-slate-700 dark:border-slate-500 text-slate-500 dark:text-slate-400 gap-3"
                                 data-accordion-target="#options-body" aria-expanded="true"
                                 aria-controls="options-body">
                             <span class="ps-3 flex font-medium text-base">
@@ -35,10 +35,10 @@
                     </h3>
                     <div id="options-body" class="hidden mb-4" aria-labelledby="options">
                         <div class="px-4">
-                            <h3 class="text-base mb-2 font-medium text-gray-800 dark:text-white">{{ 'entry.form.data_fields'|trans }}</h3>
-                            <div class="grid grid-cols-2 gap-6 mb-3 border-b dark:border-gray-500 pb-1">
+                            <h3 class="text-base mb-2 font-medium text-slate-800 dark:text-white">{{ 'entry.form.data_fields'|trans }}</h3>
+                            <div class="grid grid-cols-2 gap-6 mb-3 border-b dark:border-slate-500 pb-1">
                                 <div class="p-1">
-                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white sr-only"
+                                    <label class="block mb-2 text-sm font-medium text-slate-900 dark:text-white sr-only"
                                            for="format">{{ 'table.header.format'|trans }}</label>
                                     <select name="format" id="format"
                                             class="input-widget">
@@ -52,8 +52,8 @@
                                         <input type="checkbox" name="select-all" id="select-all" value=""
                                                class="sr-only peer"
                                                checked>
-                                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-500"></div>
-                                        <span class="hidden sm:block ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'option.select.all'|trans }}</span>
+                                        <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-500"></div>
+                                        <span class="hidden sm:block ms-3 text-sm font-medium text-slate-900 dark:text-slate-300">{{ 'option.select.all'|trans }}</span>
                                     </label>
                                 </div>
                             </div>
@@ -63,8 +63,8 @@
                                         <label for="{{ option }}" class="inline-flex items-center mb-5 cursor-pointer">
                                             <input type="checkbox" name="option[{{ option }}]" id="{{ option }}"
                                                    value="{{ option }}" class="sr-only peer" checked>
-                                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gray-300 dark:peer-focus:ring-green-800 rounded-xl peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-500"></div>
-                                            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300 capitalize">{{ option|replace({'_': ' '}) }}</span>
+                                            <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-slate-300 dark:peer-focus:ring-green-800 rounded-xl peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-slate-500"></div>
+                                            <span class="ms-3 text-sm font-medium text-slate-900 dark:text-slate-300 capitalize">{{ option|replace({'_': ' '}) }}</span>
                                         </label>
                                     </div>
                                 {% endfor %}
@@ -87,7 +87,7 @@
         </div>
         <div>
             {% for message in app.flashes('danger') %}
-                <div class="flex items-center p-4 mb-4 text-red-900 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                <div class="flex items-center p-4 mb-4 text-red-900 rounded-lg bg-red-50 dark:bg-slate-800 dark:text-red-400"
                      role="alert">
                     <div class="ms-3 text-sm font-medium">{{ message }}</div>
                 </div>
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="flex-grow">
                                     <p class="font-medium mb-0.5 text-md-start">.{{ item.format.name|upper }}</p>
-                                    <p class="text-gray-500 dark:text-white/50 text-xs md:text-sm">{{ item.createdAt|date(datetime_format) }}</p>
+                                    <p class="text-slate-500 dark:text-white/50 text-xs md:text-sm">{{ item.createdAt|date(datetime_format) }}</p>
                                 </div>
                                 <div>
                                     <a href="{{ path('app_dashboard_market_place_operation_download', {store: item.store.id, revision: item.revision, format: item.format.value}) }}">

@@ -5,14 +5,14 @@
 {% block title_content %}{{ _title_extend }}{% endblock %}
 
 {% block content %}
-    <div class="border-b border-gray-200 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tab"
+    <div class="border-b border-slate-200 dark:border-slate-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-slate-500 dark:text-slate-400" id="tab"
             data-tabs-toggle="#tab-content" role="tablist">
             <li class="me-2" role="presentation">
                 <a href="" role="tab" id="pg-tab" data-tabs-target="#pg" aria-controls="pg"
                    aria-selected="{{ app.request.get('tab') == 'pg' ? 'true' : 'false' }}"
-                   class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                    <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                   class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300 group">
+                    <svg class="w-4 h-4 me-2 text-slate-400 group-hover:text-slate-500 dark:text-slate-500 dark:group-hover:text-slate-300"
                          aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 512 512" xml:space="preserve">
                         <g>
@@ -40,8 +40,8 @@
             <li class="me-2" role="presentation">
                 <a href="" role="tab" id="carriers-tab" data-tabs-target="#carriers" aria-controls="carriers"
                    aria-selected="{{ app.request.get('tab') == 'carriers' ? 'true' : 'false' }}"
-                   class="inline-flex exclude items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                    <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                   class="inline-flex exclude items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300 group">
+                    <svg class="w-4 h-4 me-2 text-slate-400 group-hover:text-slate-500 dark:text-slate-500 dark:group-hover:text-slate-300"
                          viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19.9597 8.95844C19.2897 8.21844 18.2797 7.78844 16.8797 7.63844V6.87844C16.8797 5.50844 16.2997 4.18844 15.2797 3.26844C14.2497 2.32844 12.9097 1.88844 11.5197 2.01844C9.12975 2.24844 7.11975 4.55844 7.11975 7.05844V7.63844C5.71975 7.78844 4.70975 8.21844 4.03975 8.95844C3.06975 10.0384 3.09975 11.4784 3.20975 12.4784L3.90975 18.0484C4.11975 19.9984 4.90975 21.9984 9.20975 21.9984H14.7897C19.0897 21.9984 19.8797 19.9984 20.0897 18.0584L20.7897 12.4684C20.8997 11.4784 20.9197 10.0384 19.9597 8.95844ZM11.6597 3.40844C12.6597 3.31844 13.6097 3.62844 14.3497 4.29844C15.0797 4.95844 15.4897 5.89844 15.4897 6.87844V7.57844H8.50975V7.05844C8.50975 5.27844 9.97975 3.56844 11.6597 3.40844ZM8.41975 13.1484H8.40975C7.85975 13.1484 7.40975 12.6984 7.40975 12.1484C7.40975 11.5984 7.85975 11.1484 8.40975 11.1484C8.96975 11.1484 9.41975 11.5984 9.41975 12.1484C9.41975 12.6984 8.96975 13.1484 8.41975 13.1484ZM15.4197 13.1484H15.4097C14.8597 13.1484 14.4097 12.6984 14.4097 12.1484C14.4097 11.5984 14.8597 11.1484 15.4097 11.1484C15.9697 11.1484 16.4197 11.5984 16.4197 12.1484C16.4197 12.6984 15.9697 13.1484 15.4197 13.1484Z"
                               fill="currentColor"></path>
@@ -51,8 +51,8 @@
             <li class="me-2" role="presentation">
                 <a href="" role="tab" id="settings-tab" data-tabs-target="#settings" aria-controls="settings"
                    aria-selected="{{ app.request.get('tab') == 'settings' ? 'true' : 'false' }}"
-                   class="inline-flex exclude items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                    <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                   class="inline-flex exclude items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300 group">
+                    <svg class="w-4 h-4 me-2 text-slate-400 group-hover:text-slate-500 dark:text-slate-500 dark:group-hover:text-slate-300"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M5 11.424V1a1 1 0 1 0-2 0v10.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.228 3.228 0 0 0 0-6.152ZM19.25 14.5A3.243 3.243 0 0 0 17 11.424V1a1 1 0 0 0-2 0v10.424a3.227 3.227 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.243 3.243 0 0 0 2.25-3.076Zm-6-9A3.243 3.243 0 0 0 11 2.424V1a1 1 0 0 0-2 0v1.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0V8.576A3.243 3.243 0 0 0 13.25 5.5Z"></path>
                     </svg>{{ 'menu.dashboard.config'|trans }}
@@ -61,16 +61,16 @@
         </ul>
     </div>
     <div id="tab-content">
-        <div class="hidden p-4 mt-2 rounded-lg bg-gray-50 dark:bg-gray-800" id="pg" role="tabpanel"
+        <div class="hidden p-4 mt-2 rounded-lg bg-slate-50 dark:bg-slate-800" id="pg" role="tabpanel"
              aria-labelledby="pg-tab">
             <div class="flex justify-end mb-3">
                 <button type="button" data-modal-target="payment_method-modal" data-modal-toggle="payment_method-modal"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{{ 'config.action.create_pg'|trans }}</button>
             </div>
             <div class="sm:shadow-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                <table class="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400"
                        data-for="payment_gateway">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-slate-700 uppercase bg-slate-100 dark:bg-slate-700 dark:text-slate-400">
                     <tr>
                         <th class="px-6 py-3">{{ 'label.form.icon'|trans }}</th>
                         <th class="px-6 py-3">{{ 'label.form.short_name'|trans }}</th>
@@ -88,16 +88,16 @@
                 </table>
             </div>
         </div>
-        <div class="hidden p-4 mt-2 rounded-lg bg-gray-50 dark:bg-gray-800" id="carriers" role="tabpanel"
+        <div class="hidden p-4 mt-2 rounded-lg bg-slate-50 dark:bg-slate-800" id="carriers" role="tabpanel"
              aria-labelledby="carriers-tab">
             <div class="flex justify-end mb-3">
                 <button type="button" data-modal-target="carrier-modal" data-modal-toggle="carrier-modal"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{{ 'config.action.create_carrier'|trans }}</button>
             </div>
             <div class="sm:shadow-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                <table class="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400"
                        data-for="carrier">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-slate-700 uppercase bg-slate-100 dark:bg-slate-700 dark:text-slate-400">
                     <tr>
                         <th class="px-6 py-3">{{ 'label.form.icon'|trans }}</th>
                         <th class="px-6 py-3">{{ 'label.form.short_name'|trans }}</th>
@@ -114,9 +114,9 @@
                 </table>
             </div>
         </div>
-        <div class="hidden p-4 mt-2 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel"
+        <div class="hidden p-4 mt-2 rounded-lg bg-slate-50 dark:bg-slate-800" id="settings" role="tabpanel"
              aria-labelledby="settings-tab">
-            <p class="text-sm text-gray-500 dark:text-gray-400">settings</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">settings</p>
         </div>
     </div>
     {% include 'dashboard/content/market_place/config/form/payment_gateway.html.twig' %}

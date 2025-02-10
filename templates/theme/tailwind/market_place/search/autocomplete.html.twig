@@ -1,7 +1,7 @@
 {% for resulut in results %}
     <li role="option"
-        class="flex flex-row items-start justify-start w-full px-4 my-0.5 py-0.5 truncate text-gray-700 bg-transparent select-none cursor-pointer dark:text-white">
-        <a class="font-semibold text-gray-500 w-44 truncate"
+        class="flex flex-row items-start justify-start w-full px-4 my-0.5 py-0.5 truncate text-slate-700 bg-transparent select-none cursor-pointer dark:text-white">
+        <a class="font-semibold text-slate-500 w-44 truncate"
            href="{{ path('app_market_place_market', {slug: resulut.store_slug}) }}">{{ resulut.store }}</a>
         <a class="ms-3 pt-0.5 max-w-sm truncate" title="{{ resulut.short_name }}"
            href="{{ path('app_market_place_product', {slug: resulut.product_slug, tab: 'about'}) }}">{{ resulut.name }}</a>

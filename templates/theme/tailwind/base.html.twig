@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-32x32.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 </head>
-<body class="dark:bg-gray-900 bg-white">
+<body class="dark:bg-slate-900 bg-white">
 {% set _route = app.request.get('_route') %}
 <div class="flex flex-col h-screen justify-between bg-transparent" id="key"
      data-id="{{ app.user ? app.user.id : null }}">
@@ -32,11 +32,11 @@
         {% include 'layouts/header.html.twig' %}
     </header>
     <main class="mb-auto" id="key" data-hash="{{ app.user ? app.user.email|crypto|base64encode : null }}">
-        <section class="bg-white dark:bg-gray-900 shadow-inner">
+        <section class="bg-white dark:bg-slate-900 shadow-inner">
             {% block search %}{% endblock %}
             {% block extra_search %}{% endblock %}
             <div class="max-w-screen-xl flex mx-auto {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}">
-                <div class="mx-auto w-full bg-white p-1 {% block class %}rounded-lg shadow-4{% endblock %} dark:bg-gray-900">
+                <div class="mx-auto w-full bg-white p-1 {% block class %}rounded-lg shadow-4{% endblock %} dark:bg-slate-900">
                     {% block body %}{% endblock %}
                 </div>
             </div>
@@ -44,7 +44,7 @@
             {% block loading %}{% endblock %}
         </section>
     </main>
-    <footer class="bg-gray-950 h-auto sticky top-[100vh]">
+    <footer class="bg-slate-950 h-auto sticky top-[100vh]">
         {% include 'layouts/footer.html.twig' %}
     </footer>
 </div>
@@ -74,7 +74,7 @@
                     hub.classList.add('animate-blinking');
                 }
                 if (notify !== null) {
-                    notify.classList.remove('bg-gray-500');
+                    notify.classList.remove('bg-slate-500');
                     notify.classList.add('bg-red-500', 'animate-blinking');
                 }
             }

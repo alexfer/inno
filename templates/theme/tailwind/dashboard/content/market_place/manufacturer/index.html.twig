@@ -20,7 +20,7 @@
                     <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
                 </label>
             </div>
-            <div class="inline-flex delete-entries border rounded ms-1.5 px-2.5 bg-rose-50 hover:bg-rose-500 pointer-events-none hover:text-white transition-shadow duration-300 ease-in dark:border-gray-700 dark:hover:bg-gray-800">
+            <div class="inline-flex delete-entries border rounded ms-1.5 px-2.5 bg-rose-50 hover:bg-rose-500 pointer-events-none hover:text-white transition-shadow duration-300 ease-in dark:border-slate-700 dark:hover:bg-slate-800">
                 <a role="button" class="relative flex px-2.5 py-2" href="">{{ 'text.delete'|trans }}</a>
             </div>
         </div>
@@ -51,11 +51,11 @@
                         <input type="checkbox" name="product[{{ key }}]" value="{{ manufacturer.id }}"
                                class="checks checkbox-indigo"
                                id="i-{{ key }}" {{ manufacturer.storeProductManufacturers.count ? 'disabled' : '' }}/>
-                        <span class="text-xs ms-3 text-nowrap text-gray-500 dark:text-white">{{ manufacturer.storeProductManufacturers.count ? 'text.cant.delete'|trans : 'text.notused'|trans }}</span>
+                        <span class="text-xs ms-3 text-nowrap text-slate-500 dark:text-white">{{ manufacturer.storeProductManufacturers.count ? 'text.cant.delete'|trans : 'text.notused'|trans }}</span>
                     </label>
                     <div class="my-1.5 flex justify-between items-center">
                         <div class="font-medium w-1/2 text-lg text-indigo-700 dark:text-indigo-300 line-clamp-1">{{ manufacturer.name }}</div>
-                        <div class="font-medium w-1/2 text-sm text-gray-700 dark:text-indigo-300 line-clamp-1">{{ manufacturer.description }}</div>
+                        <div class="font-medium w-1/2 text-sm text-slate-700 dark:text-indigo-300 line-clamp-1">{{ manufacturer.description }}</div>
                     </div>
                 </div>
             {% endfor %}

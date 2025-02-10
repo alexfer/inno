@@ -3,7 +3,7 @@
         <div class="flex flex-row w-auto space-x-1">
             {% if first is defined and current != first %}
                 <a href="{{ path(route, query|merge({(pageParameterName): first})) }}"
-                   class="bg-white text-gray-600 px-2 border rounded-md py-1 text-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900">
+                   class="bg-white text-slate-600 px-2 border rounded-md py-1 text-sm hover:bg-slate-50 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                         <path fill-rule="evenodd"
                               d="M3.22 7.595a.75.75 0 0 0 0 1.06l3.25 3.25a.75.75 0 0 0 1.06-1.06l-2.72-2.72 2.72-2.72a.75.75 0 0 0-1.06-1.06l-3.25 3.25Zm8.25-3.25-3.25 3.25a.75.75 0 0 0 0 1.06l3.25 3.25a.75.75 0 1 0 1.06-1.06l-2.72-2.72 2.72-2.72a.75.75 0 0 0-1.06-1.06Z"
@@ -13,7 +13,7 @@
             {% endif %}
 
             {% if previous is defined %}
-                <a class="bg-white hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm"
+                <a class="bg-white hover:bg-slate-50 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900 text-slate-600 px-2 mx-1 border rounded-md py-1 text-sm"
                    rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                         <path fill-rule="evenodd"
@@ -25,16 +25,16 @@
 
             {% for page in pagesInRange %}
                 {% if page != current %}
-                    <a class="text-gray-600 px-3 mx-1 border rounded-md py-1 text-sm hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900"
+                    <a class="text-slate-600 px-3 mx-1 border rounded-md py-1 text-sm hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900"
                        href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
                 {% else %}
-                    <span class="text-gray-500 font-medium pointer-events-none px-3 mx-1 border rounded-md py-1 text-sm hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900">{{ page }}</span>
+                    <span class="text-slate-500 font-medium pointer-events-none px-3 mx-1 border rounded-md py-1 text-sm hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900">{{ page }}</span>
                 {% endif %}
             {% endfor %}
 
             {% if next is defined %}
                 <a rel="next"
-                   class="hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm"
+                   class="hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900 text-slate-600 px-2 mx-1 border rounded-md py-1 text-sm"
                    href="{{ path(route, query|merge({(pageParameterName): next})) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                         <path fill-rule="evenodd"
@@ -45,7 +45,7 @@
             {% endif %}
 
             {% if last is defined and current != last %}
-                <a class="hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm"
+                <a class="hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900 text-slate-600 px-2 mx-1 border rounded-md py-1 text-sm"
                    href="{{ path(route, query|merge({(pageParameterName): last})) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                         <path fill-rule="evenodd"

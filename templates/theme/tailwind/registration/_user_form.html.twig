@@ -1,50 +1,50 @@
 {{ form_start(form, {attr: {id:'registration', class: 'mx-auto size-10/12 group', 'autocomplete': 'off', novalidate: ''}}) }}
 <h2 class="text-2xl pb-4 font-extrabold text-primary-700 dark:text-white">{{ 'text.register'|trans }}</h2>
 {% if errors.count %}
-    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">{{ errors.current.message }}</div>
     </div>
 {% endif %}
 <div class="grid grid-cols-2 gap-5">
     <div class="relative mb-5">
-        <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+        <label class="block mb-1 text-sm font-medium text-slate-900 dark:text-white"
                for="{{ form.email.vars.id }}">{{ 'label.form.email'|trans }} <abbr
                     title="{{ 'required.value'|trans }}">*</abbr></label>
-        {{ form_widget(form.email, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email'}}) }}
+        {{ form_widget(form.email, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email'}}) }}
         <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.email.invalid'|trans }}</span>
     </div>
     <div class="relative mb-5">
-        <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+        <label class="block mb-1 text-sm font-medium text-slate-900 dark:text-white"
                for="{{ form.plainPassword.vars.id }}">{{ 'label.form.password'|trans }} <abbr
                     title="{{ 'required.value'|trans }}">*</abbr></label>
-        {{ form_widget(form.plainPassword, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'label.form.password'}}) }}
+        {{ form_widget(form.plainPassword, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'label.form.password'}}) }}
         <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.password.invalid'|trans }}</span>
     </div>
 </div>
 <div class="grid grid-cols-2 gap-5">
     <div class="relative mb-5">
-        <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+        <label class="block mb-1 text-sm font-medium text-slate-900 dark:text-white"
                for="{{ form.first_name.vars.id }}">{{ 'label.form.first_name'|trans }} <abbr
                     title="{{ 'required.value'|trans }}">*</abbr></label>
-        {{ form_widget(form.first_name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 bg-gray-50 peer border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'label.form.first_name'}}) }}
+        {{ form_widget(form.first_name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 bg-slate-50 peer border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'label.form.first_name'}}) }}
         <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.first_name.invalid'|trans }}</span>
     </div>
     <div class="relative mb-5">
-        <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+        <label class="block mb-1 text-sm font-medium text-slate-900 dark:text-white"
                for="{{ form.last_name.vars.id }}">{{ 'label.form.last_name'|trans }} <abbr
                     title="{{ 'required.value'|trans }}">*</abbr></label>
-        {{ form_widget(form.last_name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 bg-gray-50 peer border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'label.form.last_name'}}) }}
+        {{ form_widget(form.last_name, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 bg-slate-50 peer border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'label.form.last_name'}}) }}
         <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.last_name.invalid'|trans }}</span>
     </div>
 </div>
 <div class="relative">
     <div class="mb-3">
-        {{ form_widget(form.agreeTerms, {attr: {class: 'valid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800'}}) }}
-        {{ form_label(form.agreeTerms, 'label.agree_terms'|trans, {label_attr: {class: 'ml-1 text-sm font-medium text-gray-900 dark:text-gray-300'}}) }}
+        {{ form_widget(form.agreeTerms, {attr: {class: 'valid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-slate-300 dark:bg-slate-700 dark:border-slate-600 dark:focus:ring-slate-600 dark:ring-offset-slate-800 dark:focus:ring-offset-slate-800'}}) }}
+        {{ form_label(form.agreeTerms, 'label.agree_terms'|trans, {label_attr: {class: 'ml-1 text-sm font-medium text-slate-900 dark:text-slate-300'}}) }}
         <p class="text-xs text-red-500 float-right my-3">{{ 'required.text'|trans }} <abbr
                     title="{{ 'required.field'|trans }}">*</abbr></p>
-        <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ 'form.agree_terms.help'|trans({
+        <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ 'form.agree_terms.help'|trans({
                 '%policy%': url('policy'),
                 '%terms%': url('terms')
             })|raw }}</div>

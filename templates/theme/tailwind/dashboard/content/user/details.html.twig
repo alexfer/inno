@@ -3,13 +3,13 @@
 {% block title_content %}{{ user.userDetails.firstName|capitalize }} {{ user.userDetails.lastName|capitalize }}{% endblock %}
 
 {% block content %}
-    <div class="box p-1 md:p-3 lg:p-4 dark:bg-gray-700">
+    <div class="box p-1 md:p-3 lg:p-4 dark:bg-slate-700">
         {% set _tab = app.request.get('tab') %}
         <div class="md:flex">
             <ul data-tabs-toggle="#user-tab-content"
                 data-tabs-active-classes="tab-list-active-indigo"
                 data-tabs-inactive-classes="tab-list-inactive-indigo"
-                class="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0"
+                class="flex-column space-y space-y-4 text-sm font-medium text-slate-500 dark:text-slate-400 md:me-4 mb-4 md:mb-0"
                 role="tablist">
                 <li role="presentation">
                     <button
@@ -72,71 +72,71 @@
                 </li>
             </ul>
             <div id="user-tab-content"
-                 class="flex-grow p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+                 class="flex-grow p-6 bg-slate-50 text-medium text-slate-500 dark:text-slate-400 dark:bg-slate-800 rounded-lg w-full">
                 <div id="summary" role="tabpanel" aria-labelledby="summary-tab">
                     <h3>{{ 'user.tab.summary'|trans }}</h3>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             {{ 'user.info.first_name'|trans }}
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.userDetails.firstName }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             {{ 'user.info.last_name'|trans }}
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.userDetails.lastName }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.phone_number'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.userDetails.phone|default('n/a') }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.birth_date'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.userDetails.dateBirth|date(date_format)|default('n/a') }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.registered'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.createdAt|date(datetime_format) }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.last_login'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.lastLoginAt|date(datetime_format) }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.ip_address'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.ip|default('0.0.0.0') }}
                         </div>
                     </div>
                     {% if user.deletedAt is not null %}
                         <div class="flex flex-row py-3">
-                            <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                            <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                                 <label>{{ 'user.locked'|trans }}</label>
                             </div>
-                            <div class="w-auto text-gray-700 dark:text-gray-200">
+                            <div class="w-auto text-slate-700 dark:text-slate-200">
                                 {{ user.deletedAt|date(datetime_format) }}
                             </div>
                         </div>
@@ -145,18 +145,18 @@
                 <div id="location" role="tabpanel" aria-labelledby="location-tab">
                     <h3>{{ 'user.tab.location'|trans }}</h3>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.country'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ country|default('n/a') }}
                         </div>
                     </div>
                     <div class="flex flex-row py-3">
-                        <div class="w-48 font-medium text-gray-700 dark:text-gray-200">
+                        <div class="w-48 font-medium text-slate-700 dark:text-slate-200">
                             <label>{{ 'user.info.city'|trans }}</label>
                         </div>
-                        <div class="w-auto text-gray-700 dark:text-gray-200">
+                        <div class="w-auto text-slate-700 dark:text-slate-200">
                             {{ user.userDetails.city|default('n/a') }}
                         </div>
                     </div>
@@ -217,7 +217,7 @@
             <div class="p-1 md:p-3 lg:p-4">
                 <div class="flex justify-end px-4 pt-4">
                     <button id="dropdownButton" data-dropdown-toggle="dropdown"
-                            class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-0 focus:outline-none rounded-lg text-sm p-1.5"
+                            class="inline-block text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:ring-0 focus:outline-none rounded-lg text-sm p-1.5"
                             type="button">
                         <span class="sr-only">{{ 'alert.confirm.delete'|trans }}</span>
                         <svg class="w-4 h-4 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -227,8 +227,8 @@
                         </svg>
                     </button>
                     <div id="dropdown"
-                         class="z-10 hidden rounded-lg shadow-lg w-36 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-                        <ul class="py-1 text-xs md:text-sm font-medium text-indigo-700 dark:text-gray-200"
+                         class="z-10 hidden rounded-lg shadow-lg w-36 border bg-slate-50 dark:border-slate-600 dark:bg-slate-800">
+                        <ul class="py-1 text-xs md:text-sm font-medium text-indigo-700 dark:text-slate-200"
                             aria-labelledby="dropdownButton">
                             {% if user.deletedAt is null %}
                                 <li>
@@ -252,8 +252,8 @@
                     {% else %}
                         <img src="{{ asset('img/200x200.png') }}" class="w-24 h-24 mb-3 rounded-full shadow-lg" alt="">
                     {% endfor %}
-                    <h5 class="mb-1 text-xl text-center font-medium text-gray-900 dark:text-white">{{ user.userDetails.firstName|capitalize }} {{ user.userDetails.lastName|capitalize }}</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.email }}</span>
+                    <h5 class="mb-1 text-xl text-center font-medium text-slate-900 dark:text-white">{{ user.userDetails.firstName|capitalize }} {{ user.userDetails.lastName|capitalize }}</h5>
+                    <span class="text-sm text-slate-500 dark:text-slate-400">{{ user.email }}</span>
                 </div>
             </div>
         </div>

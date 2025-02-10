@@ -1,4 +1,4 @@
-<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="row-{{ pg.id }}">
+<tr class="bg-white border-b dark:bg-slate-800 dark:border-slate-700" id="row-{{ pg.id }}">
     <td class="px-6 py-4">
         {% set remove = true %}
         {% if pg.attach is not null %}
@@ -17,7 +17,7 @@
     <td class="px-6 py-4">{{ pg.summary }}</td>
     <td class="px-6 py-4">
         <svg xmlns="http://www.w3.org/2000/svg"
-             class="w-4 h-4 {{ pg.active ? ' text-blue-600' : 'text-gray-400' }} sm:h-5 sm:w-5"
+             class="w-4 h-4 {{ pg.active ? ' text-blue-600' : 'text-slate-400' }} sm:h-5 sm:w-5"
              viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -28,7 +28,8 @@
     <td class="px-6 py-4 text-end">
         <a id="dropdown-menu-pg" role="button" data-dropdown-toggle="dropdown-context-pg-{{ pg.id }}"
            data-dropdown-placement="bottom">
-            <svg class="h-5 w-5 text-gray-600 dark:text-gray-50" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+            <svg class="h-5 w-5 text-slate-600 dark:text-slate-50" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 32 32" xml:space="preserve">
                 <g>
                     <path d="M16,10c1.7,0,3-1.3,3-3s-1.3-3-3-3s-3,1.3-3,3S14.3,10,16,10z"></path>
@@ -38,14 +39,14 @@
             </svg>
         </a>
         <div id="dropdown-context-pg-{{ pg.id }}"
-             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-32 dark:bg-gray-700">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+             class="z-10 hidden bg-white divide-y divide-slate-100 rounded-lg shadow w-32 dark:bg-slate-700">
+            <ul class="py-2 text-sm text-slate-700 dark:text-slate-200"
                 aria-labelledby="dropdown-menu-pg">
                 <li>
                     <a role="button" data-modal-target="payment_method-modal" data-modal-toggle="payment_method-modal"
                        data-url="{{ path('app_dashboard_config_change', {target: 'payment_gateway', id: pg.id}) }}"
                        data-target="payment_gateway"
-                       class="block change text-start text-sm font-light text-gray-600 px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                       class="block change text-start text-sm font-light text-slate-600 px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
                         {{ 'text.edit'|trans }}
                     </a>
                 </li>
@@ -54,7 +55,7 @@
                         <a role="button" data-target="payment_gateway"
                            data-url="{{ path('app_dashboard_config_remove', {target: 'payment_gateway', id: pg.id}) }}"
                            data-id="{{ pg.id }}"
-                           class="block rm text-start text-sm font-light text-red-600 px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                           class="block rm text-start text-sm font-light text-red-600 px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
                             {{ 'text.remove'|trans }}
                         </a>
                     </li>

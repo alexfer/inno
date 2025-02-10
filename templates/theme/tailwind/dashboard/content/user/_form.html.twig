@@ -6,14 +6,14 @@
 {% endif %}
 {{ form_start(form, {attr: {class: 'm-3 w-full lg:w-2/3 mx-auto', action: path(_path, {id: user.id, tab: 'security'}), novalidate: 'novalidate'}}) }}
 <div class="flex flex-col md:flex-row mb-3">
-    {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inlin-block w-32 mr-2 pt-3 align-baseline mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+    {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inlin-block w-32 mr-2 pt-3 align-baseline mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
     <div class="w-full md:w-1/2">
         {{ form_widget(form.plainPassword.children.first, {attr: {class: 'input-widget', placeholder: 'label.form.new_password', autocomplete: 'off'}}) }}
         <span class="input-wrong">{{ form_errors(form.plainPassword.children.first) }}</span>
     </div>
 </div>
 <div class="flex flex-col md:flex-row mb-3">
-    {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inlin-block mr-2 pt-3 w-32 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+    {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inlin-block mr-2 pt-3 w-32 text-sm font-medium text-slate-900 dark:text-white'}}) }}
     <div class="w-full md:w-1/2">
         {{ form_widget(form.plainPassword.children.second, {attr: {class: 'input-widget', placeholder: 'label.form.repeat_password', autocomplete: 'off'}}) }}
         <span class="input-wrong">{{ form_errors(form.plainPassword.children.second) }}</span>

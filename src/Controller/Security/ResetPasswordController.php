@@ -99,7 +99,7 @@ class ResetPasswordController extends AbstractController
         Request                     $request,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $translator,
-        EntityManagerInterface     $manager,
+        EntityManagerInterface      $manager,
         string                      $token = null,
     ): Response
     {

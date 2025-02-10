@@ -3,7 +3,7 @@
         <button id="store-search"
                 data-dropdown-toggle="stores"
                 data-url="{{ path('app_dashboard_market_place_search_store') }}"
-                class="relative text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-1 w-60 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 m-2 text-center inline-flex items-center dark:text-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-800"
+                class="relative text-slate-500 bg-slate-50 hover:bg-slate-100 focus:ring-1 w-60 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 m-2 text-center inline-flex items-center dark:text-slate-200 dark:bg-slate-700 dark:hover:bg-slate-800 dark:focus:ring-slate-800"
                 type="button">{{ 'title.search'|trans }}
             <svg class="w-2.5 h-2.5 absolute end-0 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                  fill="none"
@@ -13,30 +13,30 @@
             </svg>
         </button>
         <div id="stores"
-             class="z-10 hidden rounded-lg shadow-lg w-60 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
+             class="z-10 hidden rounded-lg shadow-lg w-60 border bg-slate-50 dark:border-slate-600 dark:bg-slate-800">
             {% if stores|length > 1 %}
                 <div class="p-1.5">
                     <label for="input-store-search" class="sr-only">{{ 'title.search'|trans }}</label>
                     <div class="relative">
                         <div class="absolute z-50 inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                       stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
                             </svg>
                         </div>
                         <input type="text" id="input-store-search"
-                               class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               class="block w-full p-2 ps-10 text-sm text-slate-900 border border-slate-300 rounded-lg bg-slate-50 focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="{{ 'title.search'|trans }}">
                     </div>
                 </div>
             {% endif %}
             <ul id="search-list"
-                class="p-1.5 h-auto space-y-1 overflow-y-auto font-medium text-sm text-gray-700 dark:text-gray-200">
+                class="p-1.5 h-auto space-y-1 overflow-y-auto font-medium text-sm text-slate-700 dark:text-slate-200">
                 {% for store in stores %}
                     <li>
                         <a href="{{ path(route_name, {store: store.id}) }}"
-                           class="block rounded hover:text-white hover:bg-indigo-800 hover:bg-opacity-75 px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white line-clamp-1">
+                           class="block rounded hover:text-white hover:bg-indigo-800 hover:bg-opacity-75 px-4 py-2 dark:hover:bg-slate-600 dark:hover:text-white line-clamp-1">
                             {{ store.name }}
                         </a>
                     </li>

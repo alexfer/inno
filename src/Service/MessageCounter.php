@@ -33,6 +33,12 @@ final readonly class MessageCounter
      */
     public function cabinet(int $id): array
     {
+        if ($id == 0) {
+            return [
+                'messages' => 0,
+                'wishlist' => 0,
+            ];
+        }
         return $this->manager->getRepository(StoreCustomer::class)->counter($id);
     }
 }

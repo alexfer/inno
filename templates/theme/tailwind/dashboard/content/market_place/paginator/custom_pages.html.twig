@@ -3,7 +3,7 @@
 <div class="inline-block float-end">
     <div class="flex flex-row w-auto space-x-1">
         {% if requestPage > 1 %}
-            <a class="bg-white text-gray-600 px-2 border rounded-md py-1 text-sm font-medium hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900"
+            <a class="bg-white text-slate-600 px-2 border rounded-md py-1 text-sm font-medium hover:bg-slate-50 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900"
                href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: 1})) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                     <path fill-rule="evenodd"
@@ -14,7 +14,7 @@
         {% endif %}
         {% if requestPage > 2 %}
             <a rel="prev"
-               class="bg-white hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm"
+               class="bg-white hover:bg-slate-50 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900 text-slate-600 px-2 mx-1 border rounded-md py-1 text-sm"
                href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: (0 + requestPage|number_format - 1)})) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                     <path fill-rule="evenodd"
@@ -25,22 +25,22 @@
         {% endif %}
         {% for i in 1..pages %}
             {% if 0 == ((requestPage) - middle) - loop.index %}
-                <span class="bg-white text-gray-600 px-3 mx-1 border rounded-md py-1 text-sm">..</span>
+                <span class="bg-white text-slate-600 px-3 mx-1 border rounded-md py-1 text-sm">..</span>
             {% elseif 0 == (requestPage + middle) - loop.index %}
-                <span class="bg-white text-gray-600 px-3 mx-1 border rounded-md py-1 text-sm">..</span>
+                <span class="bg-white text-slate-600 px-3 mx-1 border rounded-md py-1 text-sm">..</span>
             {% elseif 0 < (requestPage - middle) - loop.index %}
             {% elseif 0 > (requestPage + middle) - loop.index %}
             {% else %}
-                <a class="{{ loop.index == requestPage ? 'bg-gray-400 text-gray-500 dark:bg-gray-900 font-medium pointer-events-none' : 'bg-white text-gray-600' }} px-3 mx-1 border rounded-md py-1 text-sm hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900"
+                <a class="{{ loop.index == requestPage ? 'bg-slate-400 text-slate-500 dark:bg-slate-900 font-medium pointer-events-none' : 'bg-white text-slate-600' }} px-3 mx-1 border rounded-md py-1 text-sm hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900"
                    href="{{ path(route, app.request.attributes.get('_route_params')|merge({page: i})) }}">{{ loop.index }}</a>
             {% endif %}
         {% endfor %}
         {% if middle < requestPage %}
-            <span class="bg-white text-gray-600 px-3 mx-1 border rounded-md py-1 text-sm">..</span>
+            <span class="bg-white text-slate-600 px-3 mx-1 border rounded-md py-1 text-sm">..</span>
         {% endif %}
         {% if requestPage < pages - 1 %}
             <a rel="next"
-               class="hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm"
+               class="hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900 text-slate-600 px-2 mx-1 border rounded-md py-1 text-sm"
                href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: (0 + requestPage|number_format + 1)})) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                     <path fill-rule="evenodd"
@@ -50,7 +50,7 @@
             </a>
         {% endif %}
         {% if requestPage < pages %}
-            <a class="flex hover:bg-gray-50 bg-white dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-900 text-gray-600 px-2 mx-1 border rounded-md py-1 text-sm font-medium"
+            <a class="flex hover:bg-slate-50 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600 dark:hover:bg-slate-900 text-slate-600 px-2 mx-1 border rounded-md py-1 text-sm font-medium"
                href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: pages})) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
                     <path fill-rule="evenodd"

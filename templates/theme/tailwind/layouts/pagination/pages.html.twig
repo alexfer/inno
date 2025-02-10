@@ -2,7 +2,7 @@
     {% set requestPage = app.request.get('page') is null ? 1 : app.request.get('page') %}
     <div class="flex justify-between items-center gap-4">
         <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: (0 + requestPage|number_format - 1)})) }}"
-           class="{{ requestPage > 1 ? null : 'pointer-events-none text-opacity-50 ' }}flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+           class="{{ requestPage > 1 ? null : 'pointer-events-none text-opacity-50 ' }}flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-slate-900 uppercase align-middle transition-all rounded-full select-none hover:bg-slate-900/10 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                  stroke="currentColor"
                  aria-hidden="true" class="w-4 h-4">
@@ -16,19 +16,19 @@
                 {% if 1+key == requestPage %}
                     <a aria-label="current-page"
                        href="{{ path(route, app.request.attributes.get('_route_params')|merge({page: page})) }}"
-                       class="pointer-events-none relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full bg-red-600 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                       class="pointer-events-none relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full bg-red-600 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-slate-900/10 transition-all hover:shadow-lg hover:shadow-slate-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                         <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">{{ page }}</span>
                     </a>
                 {% else %}
                     <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: page})) }}"
-                       class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                       class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-slate-900 transition-all hover:bg-slate-900/10 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                         <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">{{ page }}</span>
                     </a>
                 {% endif %}
             {% endfor %}
         </div>
         <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({page: (0 + requestPage|number_format + 1)})) }}"
-           class="{{ requestPage < pages ? null : 'pointer-events-none text-opacity-50 ' }}flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+           class="{{ requestPage < pages ? null : 'pointer-events-none text-opacity-50 ' }}flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-slate-900 uppercase align-middle transition-all rounded-full select-none hover:bg-slate-900/10 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             {{ 'pagination.next'|trans }}
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                  stroke="currentColor"
