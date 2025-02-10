@@ -108,7 +108,7 @@ class IndexController extends AbstractController
             return $this->json(['message' => 'Permission denied'], Response::HTTP_FORBIDDEN);
         }
 
-        $customer = $em->getRepository(StoreCustomer::class)->get($request->get('id'));
+        $customer = $em->getRepository(StoreCustomer::class)->get((int)$request->get('id'));
 
         if (!$customer) {
             return $this->json(['message' => 'Not found'], Response::HTTP_NOT_FOUND);

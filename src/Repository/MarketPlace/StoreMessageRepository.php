@@ -110,7 +110,7 @@ class StoreMessageRepository extends ServiceEntityRepository
      * @return mixed
      * @throws Exception
      */
-    public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
+        public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
     {
         $statement = $this->connection->prepare('select backdrop_messages(:ids, :offset, :limit)');
         $statement->bindValue('ids', json_encode($ids));

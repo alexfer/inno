@@ -282,8 +282,8 @@ class MessageService implements MessageServiceInterface
             'identity' => $answer->getIdentity(),
             'from' => $recipientName,
             'count' => $customer ?
-                $this->em->getRepository(StoreMessage::class)->countMessages($previous->getOwner()->getStores()->toArray()) :
-                $this->em->getRepository(StoreCustomer::class)->countMessages($message->getCustomer()->getMember()),
+                $this->em->getRepository(StoreMessage::class)->messageCounter($previous->getOwner()->getId()) :
+                $this->em->getRepository(StoreCustomer::class)->counter($message->getCustomer()->getMember()->getId()),
             'recipient_id' => $customer ? $previous->getOwner()->getId() : $message->getCustomer()->getMember()->getId(),
             'recipient' => $customer ? $previous->getOwner()->getEmail() : $previous->getCustomer()->getEmail(),
             'customer' => $answer->getCustomer(),
