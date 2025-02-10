@@ -7,14 +7,13 @@
 {% block content %}
     <div class="box">
         <ul class="flex flex-col">
-            {% for message in messages %}
+            {% for key, message in messages %}
                 <li class="list-item cursor-default">
                     <div class="flex items-start">
                         <div class="mt-1 me-2">
                             {% if message.product is not null %}
-                                <a data-tooltip-target="tooltip-{{ message.id }}" target="_blank"
-                                   href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}"
-                                   class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">
+                                <a data-tooltip-target="tooltip-{{ message.id }}-{{ key }}" target="_blank"
+                                   href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}">
                                     {% if message.product.picture %}
                                         {% set _picture = message.product.path ~ '/' ~ message.product.picture %}
                                         <picture class="block bg-white dark:bg-gray-600">
@@ -31,15 +30,15 @@
                                         </svg>
                                     {% endif %}
                                 </a>
-                                <div id="tooltip-{{ message.id }}" role="tooltip"
-                                     class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                <div id="tooltip-{{ message.id }}-{{ key }}" role="tooltip"
+                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
                                     {{ message.product.short_name }}
                                     <div class="tooltip-arrow" data-popper-arrow=""></div>
                                 </div>
                             {% elseif message.order is not null %}
-                                <a data-tooltip-target="tooltip-{{ message.id }}"
+                                <a data-tooltip-target="tooltip-{{ message.id }}-{{ key }}"
                                    href="{{ path('app_dashboard_market_place_order_details_market', {store: message.store, number: message.order.number }) }}"
-                                   class="text-indigo-500 font-medium hover:underline underline-offset-4 line-clamp-1">
+                                   class="text-indigo-500 mx-3 font-medium hover:underline underline-offset-4 line-clamp-1">
                                     <svg class="h-10 w-10" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                          stroke="currentColor" fill="none" stroke-linecap="round"
                                          stroke-linejoin="round">
@@ -51,19 +50,32 @@
                                         <line x1="13" y1="17" x2="15" y2="17"/>
                                     </svg>
                                 </a>
-                                <div id="tooltip-{{ message.id }}" role="tooltip"
-                                     class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
-                                    #-{{ message.order.number }}
+                                <div id="tooltip-{{ message.id }}-{{ key }}" role="tooltip"
+                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                    #{{ message.order.number }}
                                     <div class="tooltip-arrow" data-popper-arrow=""></div>
                                 </div>
                             {% else %}
-                                {{ 'store.message.question'|trans }}
+                                <svg data-tooltip-target="tooltip-{{ message.id }}-{{ key }}"
+                                     class="h-10 w-10 mx-3 text-red-500 cursor-pointer" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <div id="tooltip-{{ message.id }}-{{ key }}" role="tooltip"
+                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                    {{ 'store.message.question'|trans }}
+                                    <div class="tooltip-arrow" data-popper-arrow=""></div>
+                                </div>
                             {% endif %}
                         </div>
-                        <div class="flex-grow ps-3">
+                        <a href="javascript:void(0)" data-modal-target="customer-modal"
+                           data-modal-toggle="customer-modal"
+                           data-url="{{ path('app_dashboard_customer_xhr', {id: message.customer.id}) }}"
+                           class="flex-grow ps-3 customer">
                             <span class="block font-medium text-base text-balance capitalize">{{ message.customer.full_name }}</span>
                             <span class="text-xs">{{ message.created|date(datetime_format) }}</span>
-                        </div>
+                        </a>
                         <div class="inline-flex pt-1 space-x-4">
                             {% set priority = {low: 'green', medium: 'yellow', high: 'red'} %}
                             <span class="hidden sm:block px-2">
@@ -72,7 +84,7 @@
                             </span>
                             <span class="hidden sm:inline-block">
                                 {{ 'table.header.priority'|trans }}<span
-                                        class="ms-1 w-16 bg-{{ priority[message.priority|lower] }}-100 text-{{ priority[message.priority|lower] }}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-{{ priority[message.priority|lower] }}-900 dark:text-{{ priority[message.priority|lower] }}-300 capitalize border border-green-400">{{ message.priority }}</span>
+                                        class="ms-1 w-16 bg-{{ priority[message.priority|lower] }}-100 text-{{ priority[message.priority|lower] }}-800 text-xs font-medium mx-2 px-1.5 py-0.5 rounded dark:bg-{{ priority[message.priority|lower] }}-900 dark:text-{{ priority[message.priority|lower] }}-300 capitalize border border-green-400">{{ message.priority }}</span>
                             </span>
                             <a role="button"
                                href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}"
@@ -98,4 +110,91 @@
     <div class="navigation mt-5 w-full mx-auto">
         {{ knp_pagination_render(messages) }}
     </div>
+    <div id="customer-modal" tabindex="-1" aria-hidden="true"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        {{ 'table.header.customer'|trans }}
+                    </h3>
+                    <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="customer-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+                        </svg>
+                        <span class="sr-only">{{ 'form.action.close'|trans }}</span>
+                    </button>
+                </div>
+                <div id="modal-body" class="p-4 md:p-5 space-y-4">
+                    <div class="px-4 sm:px-0">
+                        <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">{{ 'customer.cabinet.personal_information'|trans }}</h3>
+                    </div>
+                    <dl class="divide-y divide-gray-100">
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.first_name'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 first_name"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.last_name'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 last_name"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'customer.phone'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 phone"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 country"></dd>
+                        </div>
+                    </dl>
+                    <div class="px-4 sm:px-0">
+                        <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">{{ 'customer.cabinet.address'|trans }}</h3>
+                    </div>
+                    <dl class="divide-y divide-gray-100">
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.city'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_city"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_country"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.region'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_region"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.zip'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_postal"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.address_line_1'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_line1"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.address_line_2'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_line2"></dd>
+                        </div>
+                        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.phone_number'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_phone"></dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="text-right p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button data-modal-hide="customer-modal" type="button"
+                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{ 'form.action.close'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard-js') }}
 {% endblock %}

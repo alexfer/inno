@@ -108,17 +108,16 @@ class StoreMessageRepository extends ServiceEntityRepository
      * @param int $limit
      * @param int $offset
      * @return mixed
+     * @throws Exception
      */
-    public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
+        public function backdropMessages(array $ids = [], int $limit = 25, int $offset = 0): mixed
     {
-        $qb = $this->createQueryBuilder('m')
-            ->select(['m', 'COUNT(mm.id) as messages_count'])
-            ->leftJoin(StoreMessage::class, 'mm', Join::WITH, 'mm.store IN (:ids)')
-            ->where("m.parent is null and m.store IN (:ids)")
-            ->setParameter('ids', $ids)
-            ->groupBy('m.id')
-            ->setFirstResult($offset)->setMaxResults($limit);
-        return $qb->getQuery()->getResult();
+        $statement = $this->connection->prepare('select backdrop_messages(:ids, :offset, :limit)');
+        $statement->bindValue('ids', json_encode($ids));
+        $statement = $this->bindPagination($statement, $offset, $limit);
+        $result = $statement->executeQuery()->fetchAllAssociative();
+
+        return json_decode($result[0]['backdrop_messages'], true) ?: [];
     }
 
 }

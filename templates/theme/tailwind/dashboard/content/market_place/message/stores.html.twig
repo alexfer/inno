@@ -8,7 +8,7 @@
     {% if stores|length > 1 %}
         {% include 'dashboard/content/market_place/navbar/stores-nav.html.twig' with {route_name: 'app_dashboard_market_place_message_current'} %}
     {% endif %}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div class="box">
             <div class="box-header">
                 <h5 class="text-base font-medium ps-4 my-2.5">{{ 'title.dashboard.overview_store'|trans }}</h5>
@@ -39,6 +39,10 @@
                                         {{ 'table.header.products'|trans }}<span
                                                 class="badge-purple ml-1">{{ store.products }}</span>
                                     </p>
+                                    <p class="text-xs lg:text-sm font-medium lg:font-thin mt-1 md:mt-0.5 text-nowrap">
+                                        {{ 'table.header.orders'|trans }}<span
+                                                class="badge-purple ml-1">{{ store.orders }}</span>
+                                    </p>
                                 </div>
                             </div>
                         </a>
@@ -54,31 +58,43 @@
                 {% for key, message in messages %}
                 <li class="list-item">
                     <div class="flex items-center space-x-4 w-full pb-0.5">
-                        <div class="flex relative">
-                            <a class="relative inline-block h-8 w-8 rounded-full" href="">
-                                <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span class="online"></span>
+                        <div class="flex">
+                            <a class="relative inline-block h-8 w-8 rounded-full" href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}">
+                                <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span
+                                        class="online"></span>
                             </a>
-                            <span class="badge-purple-border absolute -top-2 start-5 rounded-full bg-opacity-50">{{ message.messages_count }}</span>
                         </div>
-                        <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message[key].store.id, id: message[key].id}) }}"
-                           class="w-full">
+                        <div class="w-full">
                             <div class="flex items-center justify-between">
-                                <p class="text-slate-700 font-semibold text-xs dark:text-white capitalize">{{ message[key].customer.firstName }} {{ message[key].customer.lastName }}</p>
-                                <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message[key].createdAt|date(datetime_format) }}</p>
+                                <p class="text-slate-700 font-semibold text-xs dark:text-white capitalize">{{ message.customer }}</p>
+                                <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message.created|date(datetime_format) }}</p>
                             </div>
+                            <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message.created|date(datetime_format) }}</p>
                             <div class="flex items-center justify-between pt-1">
-                                <p class="text-xs text-gray-500 dark:text-white/70 line-clamp-1">
+                                <div class="text-xs text-gray-500 dark:text-white/70 line-clamp-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                                         class="w-4 h-4 text-green-500 inline-flex mr-1">
+                                         class="w-3.5 h-3.5 text-green-500 inline-flex mr-0.5">
                                         <path fill-rule="evenodd"
                                               d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
                                               clip-rule="evenodd"/>
                                     </svg>
-                                    <span class="lg:text-sm">{{ message[key].message }}</span>
-                                </p>
-                                <span class="badge-green-border capitalize">{{ message[key].priority }}</span>
+                                    <span class="text-xs md:text-sm mx-w-sm">{{ message.message }}</span>
+                                </div>
+                                {% set name = 'title.questions'|trans %}
+                                {% set path = null %}
+                                {% if message.product %}
+                                    {% set name = message.product %}
+                                    {% set path = path('app_market_place_product', {slug: message.product_slug, tab: 'about'}) %}
+                                {% elseif message.order %}
+                                    {% set name = message.order %}
+                                    {% set path = path('app_dashboard_market_place_order_details_market', {store: message.store, number: message.order}) %}
+                                {% endif %}
+                                <button{% if path %} onclick="window.open('{{ path }}', '_blank')"{% endif %}
+                                                     class="text-xs font-medium text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300">
+                                    {{ name }}
+                                </button>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     {% endfor %}
                 </li>

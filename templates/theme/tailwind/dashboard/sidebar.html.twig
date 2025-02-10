@@ -8,10 +8,10 @@
 </button>
 {% set _part = app.request.pathinfo|split('/')[2]|default(0) %}
 <aside id="sidebar"
-       class="fixed top-0 left-0 mr-2 z-40 w-64 border-r dark:border-gray-600 h-screen transition-transform -translate-x-full lg:translate-x-0"
+       class="fixed top-0 left-0 mr-2 z-10 w-64 border-r dark:border-gray-600 h-screen transition-transform -translate-x-full lg:translate-x-0"
        aria-labelledby="sidebar-a" aria-hidden="true">
     <div id="sidebar-a" class="h-full px-3 py-4 overflow-y-auto overflow-ellipsis bg-indigo-700 dark:bg-gray-900">
-        <a href="{{ url('app_dashboard') }}" target="_blank" class="flex items-center ps-2.5 text-white mb-5">
+        <a href="{{ url('app_dashboard') }}" class="flex items-center ps-2.5 text-white mb-5">
             <svg class="h-8 me-2 sm:h-12 dark:text-indigo-500" xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 17.481 17.481" xml:space="preserve" fill="currentColor">
                 <g stroke-width="0"></g>

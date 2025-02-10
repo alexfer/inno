@@ -78,15 +78,12 @@
                             id="account">
                         <div class="flex-1">
                             <span class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
-                                <svg class="h-6 md:h-8 p-1 md:p-2 text-gray-500" fill="none" viewBox="0 0 24 24"
+                                <svg class="h-6 md:h-8 p-1 md:p-2 {{ app.user ? 'text-blue-500' : 'text-gray-500' }}" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                 </svg>
                             </span>
-                        </div>
-                        <div class="ml-2 flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden line-clamp-1 whitespace-no-wrap">
-                            {{ app.user ? app.user.email : 'title.account'|trans }}
                         </div>
                     </button>
                     <div id="account-dropdown"
@@ -157,9 +154,9 @@
             </svg>
             <span class="self-center text-2xl font-oswald whitespace-nowrap text-black dark:text-white uppercase">{{ 'site.title'|trans }}</span>
         </a>
-        <div class="flex items-center align-bottom lg:order-2 space-x-2">
+        <div class="flex items-center align-bottom lg:order-2 space-x-2 mb-1">
             <button data-collapse-toggle="mobile-menu" type="button"
-                    class="lg:hidden items-center text-white dark:text-white bg-red-500 dark:bg-slate-900 hover:bg-gray-50 hover:text-red-900 focus:ring-1 focus:ring-gray-100 font-medium rounded-md px-2 py-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                    class="lg:hidden items-center text-gray-400 dark:text-white bg-white dark:bg-slate-900 hover:bg-gray-50 hover:text-gray-900 focus:ring-1 focus:ring-gray-100 font-medium rounded-md px-2 py-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
                     aria-controls="mobile-menu" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -178,30 +175,30 @@
         </div>
         <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu">
             {% set split = app.request.get('_route')|split('_') %}
-            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-4 lg:mt-0">
+            <ul class="flex flex-col list-disc md:list-none list-inside marker:text-red-800 mt-4 font-medium lg:flex-row lg:space-x-4 lg:mt-0">
                 <li>
                     <a href="{{ path('about') }}"
-                       class="{{ _route == 'about'? 'active': '' }} header-nav-item border-0">{{ 'title.about_us'|trans }}</a>
+                       class="{{ _route == 'about'? 'active': '' }} header-nav-item">{{ 'title.about_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('faq') }}"
-                       class="{{ _route == 'faq'? 'active': '' }} header-nav-item border-0">{{ 'title.questions'|trans }}</a>
+                       class="{{ _route == 'faq'? 'active': '' }} header-nav-item">{{ 'title.questions'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('service') }}"
-                       class="{{ _route == 'service'? 'active': '' }} header-nav-item border-0">{{ 'title.service'|trans }}</a>
+                       class="{{ _route == 'service'? 'active': '' }} header-nav-item">{{ 'title.service'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('contact') }}"
-                       class="{{ _route == 'contact'? 'active': '' }} header-nav-item border-0">{{ 'title.contact_us'|trans }}</a>
+                       class="{{ _route == 'contact'? 'active': '' }} header-nav-item">{{ 'title.contact_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_blog') }}"
-                       class="{{ split|length > 1 and split[1] == 'blog' ? 'active' : '' }} header-nav-item border-0">{{ 'title.blogs'|trans }}</a>
+                       class="{{ split|length > 1 and split[1] == 'blog' ? 'active' : '' }} header-nav-item">{{ 'title.blogs'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_market_place_index') }}"
-                       class="{{ split|length > 1 and split[1] == 'market' ? 'active' : '' }} header-nav-item border-0">{{ 'title.market_places'|trans }}</a>
+                       class="{{ split|length > 1 and split[1] == 'market' ? 'active' : '' }} header-nav-item">{{ 'title.market_places'|trans }}</a>
                 </li>
             </ul>
         </div>
