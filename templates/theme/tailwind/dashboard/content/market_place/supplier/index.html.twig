@@ -20,14 +20,14 @@
                     <span class="dark:text-white ms-1.5">{{ 'option.select.all'|trans }}</span>
                 </label>
             </div>
-            <div class="inline-flex delete-entries border rounded ms-1.5 px-2.5 bg-rose-50 hover:bg-rose-500 pointer-events-none hover:text-white transition-shadow duration-300 ease-in dark:border-gray-700 dark:hover:bg-gray-800">
+            <div class="inline-flex delete-entries border rounded ms-1.5 px-2.5 bg-rose-50 hover:bg-rose-500 pointer-events-none hover:text-white transition-shadow duration-300 ease-in dark:border-slate-700 dark:hover:bg-slate-800">
                 <a role="button" class="relative flex px-2.5 py-2" href="">{{ 'text.delete'|trans }}</a>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3">
             {% for key, supplier in suppliers %}
                 <div id="el-{{ supplier.id }}"
-                     class="p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-gray-950 dark:border-gray-700">
+                     class="p-2.5 relative rounded-md bg-white border transition-shadow duration-300 ease-in hover:bg-opacity-25 hover:shadow hover:bg-indigo-50 dark:bg-slate-800 dark:hover:bg-slate-950 dark:border-slate-700">
                     <div class="absolute end-2">
                         <a href="{{ path('app_dashboard_market_place_edit_supplier', {store: supplier.store.id, id: supplier.id}) }}"
                            class="inline-flex">
@@ -52,11 +52,11 @@
                         <input type="checkbox" name="product[{{ key }}]" value="{{ supplier.id }}"
                                class="checks checkbox-indigo"
                                id="i-{{ key }}" {{ supplier.storeProductSuppliers.count ? 'disabled' : '' }}/>
-                        <span class="text-xs ms-3 text-nowrap text-gray-500 dark:text-white">{{ supplier.storeProductSuppliers.count ? 'text.cant.delete'|trans : 'text.notused'|trans }}</span>
+                        <span class="text-xs ms-3 text-nowrap text-slate-500 dark:text-white">{{ supplier.storeProductSuppliers.count ? 'text.cant.delete'|trans : 'text.notused'|trans }}</span>
                     </label>
                     <div class="my-1.5 flex justify-between items-center">
                         <div class="font-medium text-lg text-indigo-700 dark:text-indigo-300 line-clamp-1">{{ supplier.name }}</div>
-                        <div class="font-medium text-sm text-gray-700 dark:text-indigo-300 line-clamp-1">{{ countries[supplier.country]|default('--') }}</div>
+                        <div class="font-medium text-sm text-slate-700 dark:text-indigo-300 line-clamp-1">{{ countries[supplier.country]|default('--') }}</div>
                     </div>
                 </div>
             {% endfor %}

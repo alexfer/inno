@@ -1,4 +1,4 @@
-<nav class="relative py-1.5 pe-1.5 lg:rounded-md lg:shadow-sm mb-2 flex justify-between items-start bg-transparent lg:bg-white dark:bg-gray-700 lg:dark:shadow-lg">
+<nav class="relative py-1.5 pe-1.5 lg:rounded-md lg:shadow-sm mb-2 flex justify-between items-start bg-transparent lg:bg-white dark:bg-slate-700 lg:dark:shadow-lg">
     <div class="lg:hidden">
         <button class="navbar-burger h-4 absolute end-0 w-full">
             <svg class="flex ml-auto h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -51,15 +51,15 @@
                 </a>
                 {% if coupons|length %}
                     <div id="coupons"
-                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-xs font-medium text-gray-700 dark:text-gray-200"
+                         class="z-10 hidden font-normal bg-white divide-y divide-slate-100 rounded-lg shadow w-44 dark:bg-slate-700 dark:divide-slate-600">
+                        <ul class="py-2 text-xs font-medium text-slate-700 dark:text-slate-200"
                             data-url="{{ path('app_dashboard_market_place_apply_coupon', {store: store.id}) }}"
                             data-token="{{ csrf_token('apply') }}"
                             aria-labelledby="handler">
                             {% for coupon in coupons %}
                                 <li>
                                     <a data-id="{{ coupon.id }}" href="#"
-                                       class="coupons block mx-1.5 rounded px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ coupon.name }}</a>
+                                       class="coupons block mx-1.5 rounded px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">{{ coupon.name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -73,11 +73,12 @@
     </div>
 </nav>
 <div class="navbar-menu relative z-50 hidden">
-    <div class="navbar-backdrop fixed inset-0 bg-gray-400 opacity-25"></div>
-    <nav class="fixed top-0 right-0 bottom-0 flex flex-col w-48 max-w-sm py-6 px-6 bg-white dark:bg-gray-900 border-r overflow-y-auto">
+    <div class="navbar-backdrop fixed inset-0 bg-slate-400 opacity-25"></div>
+    <nav class="fixed top-0 right-0 bottom-0 flex flex-col w-48 max-w-sm py-6 px-6 bg-white dark:bg-slate-900 border-r overflow-y-auto">
         <div class="flex justify-end mb-2">
             <button class="navbar-close">
-                <svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                <svg class="h-6 w-6 text-slate-400 cursor-pointer hover:text-slate-500"
+                     xmlns="http://www.w3.org/2000/svg"
                      fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M6 18L18 6M6 6l12 12"></path>
@@ -130,15 +131,15 @@
                         </button>
                         {% if coupons|length %}
                             <div id="dropdown-coupons"
-                                 class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                 class="z-10 hidden font-normal bg-white divide-y divide-slate-100 rounded-lg shadow w-44 dark:bg-slate-700 dark:divide-slate-600">
+                                <ul class="py-2 text-sm text-slate-700 dark:text-slate-200"
                                     data-url="{{ path('app_dashboard_market_place_apply_coupon', {store: store.id}) }}"
                                     data-token="{{ csrf_token('apply') }}"
                                     aria-labelledby="dropdownLargeButton">
                                     {% for coupon in coupons %}
                                         <li>
                                             <a data-id="{{ coupon.id }}" href="#"
-                                               class="coupons block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ coupon.name }}</a>
+                                               class="coupons block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">{{ coupon.name }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>

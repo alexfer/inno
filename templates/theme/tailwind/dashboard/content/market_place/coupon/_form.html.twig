@@ -61,42 +61,42 @@
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <div class="flex mb-3 items-center ps-4 border border-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
+            <div class="flex mb-3 items-center ps-4 border border-slate-200 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700 dark:border-slate-700">
                 <input {% if form.discount.vars.data is not null %}checked{% endif %} id="coupon-discount" type="radio"
                        value="coupon[discount]" name="discount"
-                       class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600">
+                       class="w-4 h-4 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-slate-800 focus:ring-1 dark:bg-slate-700 dark:border-slate-600">
                 <label for="coupon-discount"
-                       class="w-full cursor-pointer py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'label.form.discount'|trans }}</label>
+                       class="w-full cursor-pointer py-4 ms-2 text-sm font-medium text-slate-900 dark:text-slate-300">{{ 'label.form.discount'|trans }}</label>
             </div>
-            <div class="flex mb-3 items-center ps-4 border border-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700  dark:border-gray-700">
+            <div class="flex mb-3 items-center ps-4 border border-slate-200 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700  dark:border-slate-700">
                 <input {% if form.price.vars.data is not null %}checked{% endif %} id="coupon-price" type="radio"
                        value="coupon[price]" name="discount"
-                       class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:indigo-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600">
+                       class="w-4 h-4 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-indigo-500 dark:focus:indigo-blue-600 dark:ring-offset-slate-800 focus:ring-1 dark:bg-slate-700 dark:border-slate-600">
                 <label for="coupon-price"
-                       class="w-full cursor-pointer py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'label.form.price.help'|trans }}</label>
+                       class="w-full cursor-pointer py-4 ms-2 text-sm font-medium text-slate-900 dark:text-slate-300">{{ 'label.form.price.help'|trans }}</label>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div class="block mb-3">
-                {{ form_label(form.discount, 'label.form.discount', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                {{ form_widget(form.discount, {attr: {class: 'w-full h-1.5 bg-gray-200 rounded-sm appearance-none cursor-pointer dark:bg-gray-700', placeholder: '0', disabled: form.discount.vars.data is null ? 'disabled' : false }}) }}
+                {{ form_label(form.discount, 'label.form.discount', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                {{ form_widget(form.discount, {attr: {class: 'w-full h-1.5 bg-slate-200 rounded-sm appearance-none cursor-pointer dark:bg-slate-700', placeholder: '0', disabled: form.discount.vars.data is null ? 'disabled' : false }}) }}
                 <div class="relative text-center">
-                    <span class="px-1.5 py-1.5 bg-gray-200 rounded-md text-gray-500 discount-output mt-2 mb-5 font-light"></span>
+                    <span class="px-1.5 py-1.5 bg-slate-200 rounded-md text-slate-500 discount-output mt-2 mb-5 font-light"></span>
                 </div>
                 <span class="input-wrong">{{ form_errors(form.discount) }}</span>
             </div>
             <div class="block mb-3">
                 {{ form_label(form.price, 'label.form.price', {label_attr: {class: 'form-label'}}) }}
                 {{ form_widget(form.price, {attr: {class: 'input-widget', placeholder: '0', disabled: form.price.vars.data is null ? 'disabled' : false}}) }}
-                <span class="text-xs text-gray-600 mt-0.5">{{ 'label.form.price.help'|trans }}</span>
+                <span class="text-xs text-slate-600 mt-0.5">{{ 'label.form.price.help'|trans }}</span>
                 <span class="input-wrong">{{ form_errors(form.price) }}</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
             {% for field in form.event.children %}
-                <div class="flex mb-3 items-center ps-4 hover:bg-gray-50 dark:hover:bg-gray-700 checked:bg-gray-50 border border-gray-200 rounded-md dark:border-gray-700">
-                    {{ form_widget(field, {attr: {class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600'}}) }}
-                    {{ form_label(field, field.vars.label, {label_attr: {class: 'w-full cursor-pointer py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'}}) }}
+                <div class="flex mb-3 items-center ps-4 hover:bg-slate-50 dark:hover:bg-slate-700 checked:bg-slate-50 border border-slate-200 rounded-md dark:border-slate-700">
+                    {{ form_widget(field, {attr: {class: 'w-4 h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-1 dark:bg-slate-700 dark:border-slate-600'}}) }}
+                    {{ form_label(field, field.vars.label, {label_attr: {class: 'w-full cursor-pointer py-4 ms-2 text-sm font-medium text-slate-900 dark:text-slate-300'}}) }}
                 </div>
             {% endfor %}
         </div>
@@ -105,7 +105,7 @@
             {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'btn-red'}}) }}
             <a type="button"
                href="{{ url('app_dashboard_market_place_product_coupon', {store: app.request.get('store')}) }}"
-               class="btn-gray-strong">{{ 'form.action.back'|trans }}</a>
+               class="btn-slate-strong">{{ 'form.action.back'|trans }}</a>
         </div>
         {{ form_end(form) }}
     </div>
@@ -116,7 +116,7 @@
              data-accordion="collapse">
             <h3 id="accordion-collapse-heading">
                 <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium text-gray-500 border border-gray-200 rounded-t-lg focus:ring-1 dark:bg-gray-700 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        class="flex items-center justify-between w-full p-5 font-medium text-slate-500 border border-slate-200 rounded-t-lg focus:ring-1 dark:bg-slate-700 focus:ring-slate-200 dark:focus:ring-slate-800 dark:border-slate-700 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 gap-3"
                         data-accordion-target="#accordion-collapse-body" aria-expanded="false"
                         aria-controls="accordion-collapse-body">
                     <span>{{ 'Available coupons'|trans }}</span>
@@ -128,8 +128,8 @@
                 </button>
             </h3>
             <div id="accordion-collapse-body" class="hidden" aria-labelledby="accordion-collapse-heading">
-                <div class="p-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700">
-                    <ul id="codes" class="w-full space-y-3 text-gray-500 dark:text-gray-400"></ul>
+                <div class="p-5 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700">
+                    <ul id="codes" class="w-full space-y-3 text-slate-500 dark:text-slate-400"></ul>
                 </div>
             </div>
         </div>

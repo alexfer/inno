@@ -1,5 +1,5 @@
 <button data-drawer-target="sidebar" data-drawer-toggle="sidebar" aria-controls="sidebar" type="button"
-        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg 2xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-slate-500 rounded-lg 2xl:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600">
     <span class="sr-only">{{ 'open.sidebar'|trans }}</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path clip-rule="evenodd" fill-rule="evenodd"
@@ -8,9 +8,9 @@
 </button>
 {% set _part = app.request.pathinfo|split('/')[2]|default(0) %}
 <aside id="sidebar"
-       class="fixed top-0 left-0 mr-2 z-10 w-64 border-r dark:border-gray-600 h-screen transition-transform -translate-x-full lg:translate-x-0"
+       class="fixed top-0 left-0 mr-2 z-10 w-64 border-r dark:border-slate-600 h-screen transition-transform -translate-x-full lg:translate-x-0"
        aria-labelledby="sidebar-a" aria-hidden="true">
-    <div id="sidebar-a" class="h-full px-3 py-4 overflow-y-auto overflow-ellipsis bg-indigo-700 dark:bg-gray-900">
+    <div id="sidebar-a" class="h-full px-3 py-4 overflow-y-auto overflow-ellipsis bg-indigo-700 dark:bg-slate-900">
         <a href="{{ url('app_dashboard') }}" class="flex items-center ps-2.5 text-white mb-5">
             <svg class="h-8 me-2 sm:h-12 dark:text-indigo-500" xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 17.481 17.481" xml:space="preserve" fill="currentColor">

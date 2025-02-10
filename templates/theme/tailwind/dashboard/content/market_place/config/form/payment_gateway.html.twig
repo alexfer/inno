@@ -1,13 +1,13 @@
 <div id="payment_method-modal" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-slate-600">
+                <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
                     {{ 'config.action.create_pg'|trans }}
                 </h3>
                 <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-600 dark:hover:text-white"
                         data-modal-hide="payment_method-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 14 14">
@@ -21,17 +21,17 @@
             <div class="p-4 md:p-5 space-y-4">
                 <div class="relative">
                     {{ form_label(pgForm.name, 'label.form.short_name', {label_attr: {class: 'form-label'}}) }}
-                    {{ form_widget(pgForm.name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white', placeholder: 'label.form.short_name'}}) }}
+                    {{ form_widget(pgForm.name, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white', placeholder: 'label.form.short_name'}}) }}
                     <div class="counter ordinal slashed-zero tabular-nums text-end mt-0.5 text-xs"></div>
                 </div>
                 <div class="relative">
                     {{ form_label(pgForm.handlerText, 'label.form.text', {label_attr: {class: 'form-label'}}) }}
-                    {{ form_widget(pgForm.handlerText, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white', placeholder: 'label.form.text'}}) }}
+                    {{ form_widget(pgForm.handlerText, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white', placeholder: 'label.form.text'}}) }}
                     <div class="counter ordinal slashed-zero tabular-nums text-end mt-0.5 text-xs"></div>
                 </div>
                 <div class="relative">
                     {{ form_label(pgForm.summary, 'label.form.description', {label_attr: {class: 'form-label'}}) }}
-                    {{ form_widget(pgForm.summary, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 resize-none dark:text-white', placeholder: 'label.form.description'}}) }}
+                    {{ form_widget(pgForm.summary, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 resize-none dark:text-white', placeholder: 'label.form.description'}}) }}
                 </div>
                 <div class="relative mt-2">
                     <img alt="..." src="" id="_preview_payment_gateway" data-target="payment_gateway"
@@ -40,23 +40,23 @@
                     <input type="hidden" name="payment_gateway[media]" id="_media_payment_gateway" value="">
                 </div>
                 <div class="max-w-full mx-auto">
-                    {{ form_label(pgForm.logo, 'label.form.store_picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                    {{ form_widget(pgForm.logo, {attr: {'data-target': 'payment_gateway', class: 'skip block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'}}) }}
+                    {{ form_label(pgForm.logo, 'label.form.store_picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                    {{ form_widget(pgForm.logo, {attr: {'data-target': 'payment_gateway', class: 'skip block w-full text-sm text-slate-900 border border-slate-300 rounded-lg cursor-pointer bg-slate-50 dark:text-slate-400 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400'}}) }}
                     <span id="error-message" class="input-wrong"></span>
                 </div>
                 <div>
                     <label for="{{ pgForm.active.vars.id }}"
                            class="inline-flex items-center -mb-1.5 cursor-pointer">
                         {{ form_widget(pgForm.active, {attr: {class: 'sr-only peer', checked: pgForm.active.vars.data == true ? true : false}}) }}
-                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                        <span class="ms-3 relative text-sm font-medium text-gray-900 dark:text-gray-300">{{ 'label.form.enabled'|trans }}</span>
+                        <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-slate-600 peer-checked:bg-blue-600"></div>
+                        <span class="ms-3 relative text-sm font-medium text-slate-900 dark:text-slate-300">{{ 'label.form.enabled'|trans }}</span>
                     </label>
                 </div>
             </div>
-            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b dark:border-slate-600">
                 {{ form_widget(pgForm.save, { label: 'form.action.save', attr: {class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'}}) }}
                 <button data-modal-hide="payment_method-modal" type="reset"
-                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-slate-900 focus:outline-none bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 dark:hover:text-white dark:hover:bg-slate-700">
                     {{ 'form.action.cancel'|trans }}
                 </button>
             </div>

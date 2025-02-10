@@ -2,96 +2,97 @@
 {{ form_start(form, {attr: {id: 'profile', novalidate: ''}}) }}
 <h2>{{ 'text.profile'|trans }}</h2>
 {% if errors.count %}
-    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">{{ errors.current.message }}</div>
     </div>
 {% endif %}
 <div class="grid grid-cols-2 gap-5">
     <div class="relative mb-5">
-        {{ form_label(form.first_name, 'label.form.first_name', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.first_name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'label.form.first_name'}}) }}
+        {{ form_label(form.first_name, 'label.form.first_name', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.first_name, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'label.form.first_name'}}) }}
         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.first_name) }}</span>
     </div>
     <div class="relative mb-5">
-        {{ form_label(form.last_name, 'label.form.last_name', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.last_name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'label.form.last_name'}}) }}
+        {{ form_label(form.last_name, 'label.form.last_name', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.last_name, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'label.form.last_name'}}) }}
         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.last_name) }}</span>
     </div>
 </div>
 <div class="grid grid-cols-2 gap-5">
     <div class="relative mb-5">
-        {{ form_label(form.date_birth, 'label.form.date_birth', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.date_birth, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: '2006-05-15'}}) }}
+        {{ form_label(form.date_birth, 'label.form.date_birth', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.date_birth, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: '2006-05-15'}}) }}
     </div>
     <div class="relative mb-5">
-        {{ form_label(form.phone, 'label.form.phone', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+        {{ form_label(form.phone, 'label.form.phone', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
         <div class="absolute mt-7 inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg"
                  fill="currentColor" viewBox="0 0 19 18">
                 <path d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z"></path>
             </svg>
         </div>
-        {{ form_widget(form.phone, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: '+3106398200'}}) }}
+        {{ form_widget(form.phone, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full ps-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: '+3106398200'}}) }}
     </div>
 </div>
 <div class="grid grid-cols-2 gap-5">
     <div class="relative mb-5">
-        {{ form_label(form.country, 'label.form.country', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.country, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500'}}) }}
+        {{ form_label(form.country, 'label.form.country', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.country, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500'}}) }}
     </div>
     <div class="relative mb-5">
-        {{ form_label(form.city, 'label.form.city', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.city, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'label.form.city'}}) }}
+        {{ form_label(form.city, 'label.form.city', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.city, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'label.form.city'}}) }}
     </div>
 </div>
 <div class="grid grid-cols-3 gap-3">
     <div class="relative mb-5">
-        {{ form_label(form.facebook_profile, 'Facebook Profile', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+        {{ form_label(form.facebook_profile, 'Facebook Profile', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-            <svg class="w-5 h-5 mt-7 text-gray-800 dark:text-white" aria-hidden="true"
+            <svg class="w-5 h-5 mt-7 text-slate-800 dark:text-white" aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
                       d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
                       clip-rule="evenodd"/>
             </svg>
         </div>
-        {{ form_widget(form.facebook_profile, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'https://facebook-url'}}) }}
+        {{ form_widget(form.facebook_profile, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full ps-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'https://facebook-url'}}) }}
     </div>
     <div class="relative mb-5">
-        {{ form_label(form.twitter_profile, 'Twitter Profile', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+        {{ form_label(form.twitter_profile, 'Twitter Profile', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-            <svg class="w-5 h-5 mt-7 text-gray-800 dark:text-white" aria-hidden="true"
+            <svg class="w-5 h-5 mt-7 text-slate-800 dark:text-white" aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
                       d="M22 5.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.343 8.343 0 0 1-2.605.981A4.13 4.13 0 0 0 15.85 4a4.068 4.068 0 0 0-4.1 4.038c0 .31.035.618.105.919A11.705 11.705 0 0 1 3.4 4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 6.1 13.635a4.192 4.192 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 2 18.184 11.732 11.732 0 0 0 8.291 20 11.502 11.502 0 0 0 19.964 8.5c0-.177 0-.349-.012-.523A8.143 8.143 0 0 0 22 5.892Z"
                       clip-rule="evenodd"/>
             </svg>
         </div>
-        {{ form_widget(form.twitter_profile, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'https://twitter-url'}}) }}
+        {{ form_widget(form.twitter_profile, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full ps-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'https://twitter-url'}}) }}
     </div>
     <div class="relative mb-5">
-        {{ form_label(form.instagram_profile, 'Instagram Profile', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+        {{ form_label(form.instagram_profile, 'Instagram Profile', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-            <svg class="w-5 h-5 mt-7 text-gray-800 dark:text-white" aria-hidden="true"
+            <svg class="w-5 h-5 mt-7 text-slate-800 dark:text-white" aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path fill="currentColor" fill-rule="evenodd"
                       d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
                       clip-rule="evenodd"/>
             </svg>
         </div>
-        {{ form_widget(form.instagram_profile, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500', placeholder: 'https://instagram-url'}}) }}
+        {{ form_widget(form.instagram_profile, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 dark:bg-slate-800 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full ps-10 p-2.5  dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500', placeholder: 'https://instagram-url'}}) }}
     </div>
 </div>
 <div class="grid grid-cols-1">
     <div class="relative mb-5">
-        {{ form_label(form.about, 'label.form.about', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.about, {attr: {class: 'block p-2.5 w-full resize-none text-sm text-gray-900 dark:bg-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500'}}) }}
+        {{ form_label(form.about, 'label.form.about', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.about, {attr: {class: 'block p-2.5 w-full resize-none text-sm text-slate-900 dark:bg-slate-800 bg-slate-50 rounded-lg border border-slate-300 focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500'}}) }}
     </div>
 </div>
 <div class="text-center">
     <div role="status" class="hidden">
-        <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
+        <svg aria-hidden="true" class="inline w-8 h-8 text-slate-200 animate-spin dark:text-slate-600 fill-slate-600"
              viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                   fill="currentColor"></path>
@@ -104,13 +105,13 @@
 <div class="grid grid-cols-1 mb-3">
     <ul id="attachments" class="flex flex-wrap items-left justify-start">
         <li class="template relative my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
-            <img class="h-auto max-w-xs shadow-xl dark:shadow-gray-800 rounded" src="">
+            <img class="h-auto max-w-xs shadow-xl dark:shadow-slate-800 rounded" src="">
             <div class="absolute bottom-0 right-0 bg-opacity-60 bg-white block w-full justify-end"></div>
         </li>
         {% for key, picture in app.user.userDetails.attach|slice(0, 16) %}
             <li class="relative my-1 mx-0.5 overflow-hidden bg-cover bg-no-repeat">
                 {% set _picture = 'storage/user/picture/' ~ app.user.id ~ '/' ~ picture.name %}
-                <img class="h-auto max-w-xs shadow-xl dark:shadow-gray-800 rounded"
+                <img class="h-auto max-w-xs shadow-xl dark:shadow-slate-800 rounded"
                      src="{{ asset(_picture) | imagine_filter('user_thumb') }}" alt="...">
                 <div id="overlay"
                      class="overlay"></div>
@@ -140,9 +141,9 @@
 </div>
 <div class="grid grid-cols-1">
     <div class="relative mb-5">
-        {{ form_label(form.picture, 'label.form.picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white', 'data-label': 'label.form.picture'|trans}}) }}
-        {{ form_widget(form.picture, {attr: {class: 'block w-full text-sm text-gray-900 dark:bg-gray-800 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400', 'data-url': path('app_profile_attach'), 'aria-describedby': 'picture' }}) }}
-        <small class="mt-1 text-xs font-thin text-gray-400 dark:text-gray-200"
+        {{ form_label(form.picture, 'label.form.picture', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white', 'data-label': 'label.form.picture'|trans}}) }}
+        {{ form_widget(form.picture, {attr: {class: 'block w-full text-sm text-slate-900 dark:bg-slate-800 border border-slate-300 rounded-lg cursor-pointer bg-slate-50 dark:text-slate-400 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400', 'data-url': path('app_profile_attach'), 'aria-describedby': 'picture' }}) }}
+        <small class="mt-1 text-xs font-thin text-slate-400 dark:text-slate-200"
                id="file_input_help">{{ form.picture.vars.attr.accept|capitalize }}
             (max. {{ form.picture.vars.attr.max|format_bytes|capitalize }}).</small>
     </div>

@@ -26,7 +26,7 @@
                             <img loading="lazy" src="{{ asset('img/carousel.svg') }}"
                                  class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-20"
                                  alt="{{ product.name }}">
-                            <div class="absolute z-10 inset-x-[15%] left-1/2 transform -translate-x-1/2 w-full bottom-5 py-5 text-center text-gray-600 md:block">
+                            <div class="absolute z-10 inset-x-[15%] left-1/2 transform -translate-x-1/2 w-full bottom-5 py-5 text-center text-slate-600 md:block">
                                 <h5 class="text-xl text-ellipsis overflow-hidden">{{ product.short_name }}</h5>
                                 <p class="text-ellipsis overflow-hidden">{{ product.store.name }}</p>
                             </div>
@@ -56,8 +56,8 @@
                     <button type="button"
                             class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                             data-carousel-prev>
-                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-slate-800/30 group-hover:bg-white/50 dark:group-hover:bg-slate-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-slate-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-slate-800 rtl:rotate-180"
                                              aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -69,8 +69,8 @@
                     <button type="button"
                             class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                             data-carousel-next>
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                <svg class="w-4 h-4 text-white dark:text-gray-800"
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-slate-800/30 group-hover:bg-white/50 dark:group-hover:bg-slate-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-slate-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-slate-800"
                                      aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -85,7 +85,7 @@
         <div class="col-span-12 md:col-span-4 relative">
             <a href="{{ path('app_market_place_market', {slug:  product.store.slug}) }}"
                class="mb-1 w-75 block truncate">
-                <h5 class="text-lg font-medium hover:text-gray-700 tracking-tight truncate text-gray-500 dark:text-white">
+                <h5 class="text-lg font-medium hover:text-slate-700 tracking-tight truncate text-slate-500 dark:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                          class="inline-flex w-5 h-5 text-yellow-300 me-2">
                         <path d="M3.75 2a.75.75 0 0 0-.75.75v10.5a.75.75 0 0 0 1.28.53L8 10.06l3.72 3.72a.75.75 0 0 0 1.28-.53V2.75a.75.75 0 0 0-.75-.75h-8.5Z"/>
@@ -104,11 +104,11 @@
                     {% endif %}
                     <div class="flex-nowrap mb-2 md:mb-10 block w-72">
                         {% if product.reduce.unit is not empty %}
-                            <span class="font-medium text-2xl text-gray-500 dark:text-red-300 pr-2">
+                            <span class="font-medium text-2xl text-slate-500 dark:text-red-300 pr-2">
                                 {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
                                 {{ price|amount_format }}<small>{{ product.store.currency|currency }}</small>
                             </span>
-                            <span class="line-through text-lg font-medium text-gray-400 dark:text-white">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
+                            <span class="line-through text-lg font-medium text-slate-400 dark:text-white">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
                         {% else %}
                             <span class="font-medium text-2xl text-surface-dark dark:text-white">{{ (product.cost + product.fee)|amount_format }}<small>{{ product.store.currency|currency }}</small></span>
                         {% endif %}
@@ -119,13 +119,13 @@
                                 <input type="hidden" name="color" value="">
                                 <input type="hidden" name="size" value="">
                                 {% if attribute.in_front %}
-                                    <span class="block mt-3 text-gray-600 dark:text-white md:text-sm tracking-widest">
+                                    <span class="block mt-3 text-slate-600 dark:text-white md:text-sm tracking-widest">
                                        {{ attribute.name|capitalize }}
                                     </span>
                                     <div class="flex mt-1" id="{{ attribute.name }}">
                                         {% for attr in product.attribute_values %}
                                             {% if attribute.id == attr.attribute_id %}
-                                                <div class="inline-block mr-1 p-1 border-2 {% if attribute.name == 'color' %} rounded-full{% else %} text-xs rounded-md px-1.5 py-0.5 hover:bg-gray-100{% endif %}">
+                                                <div class="inline-block mr-1 p-1 border-2 {% if attribute.name == 'color' %} rounded-full{% else %} text-xs rounded-md px-1.5 py-0.5 hover:bg-slate-100{% endif %}">
                                                     <input type="radio" name="attr[{{ attribute.name }}]"
                                                            class="hidden peer"
                                                            data-name="{{ attr.value }}"
@@ -165,7 +165,7 @@
                 </form>
                 <span class="absolute end-0 top-16 md:top-28 pt-3">
                     <div class="flex items-center w-full">
-                        <button class="bg-gray-100 text-gray-600 border-spacing-1.5 p-2 mr-2 rounded-md hover:bg-gray-300 hover:text-gray-500"
+                        <button class="bg-slate-100 text-slate-600 border-spacing-1.5 p-2 mr-2 rounded-md hover:bg-slate-300 hover:text-slate-500"
                                 title="{{ 'store.product.compare'|trans }}">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                  class="w-4 h-4">
@@ -235,8 +235,8 @@
              id="about"
              role="tabpanel"
              aria-labelledby="about-tab">
-            <h5 class="block text-lg font-medium text-gray-600 py-3 dark:text-gray-300">{{ product.short_name }}</h5>
-            <div class="text-sm font-light text-gray-500 dark:text-gray-100">{{ product.description|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
+            <h5 class="block text-lg font-medium text-slate-600 py-3 dark:text-slate-300">{{ product.short_name }}</h5>
+            <div class="text-sm font-light text-slate-500 dark:text-slate-100">{{ product.description|striptags|replace({'<p>': '<p class="text-sm text-slate-400 dark:text-slate-300 mb-5">'})|raw|nl2br }}</div>
         </div>
         <div class="hidden tab-content-info"
              id="product-info"
@@ -285,14 +285,14 @@
              id="seller-info"
              role="tabpanel"
              aria-labelledby="seller-info-tab">
-            <h5 class="block text-lg font-medium text-gray-600 dark:text-gray-300 py-3">{{ product.store.name }}</h5>
-            <div class="text-sm font-light text-gray-500 dark:text-gray-100">{{ product.store.description|default('info.no_content'|trans)|striptags|replace({'<p>': '<p class="text-sm text-gray-400 dark:text-gray-300 mb-5">'})|raw|nl2br }}</div>
+            <h5 class="block text-lg font-medium text-slate-600 dark:text-slate-300 py-3">{{ product.store.name }}</h5>
+            <div class="text-sm font-light text-slate-500 dark:text-slate-100">{{ product.store.description|default('info.no_content'|trans)|striptags|replace({'<p>': '<p class="text-sm text-slate-400 dark:text-slate-300 mb-5">'})|raw|nl2br }}</div>
         </div>
         <div class="hidden tab-content-info"
              id="seller-contact"
              role="tabpanel"
              aria-labelledby="seller-contact-tab">
-            <h5 class="block text-lg font-medium text-gray-600 dark:text-gray-300 py-3">{{ 'product.seller.contact'|trans }}</h5>
+            <h5 class="block text-lg font-medium text-slate-600 dark:text-slate-300 py-3">{{ 'product.seller.contact'|trans }}</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {% if product.store.phone is not null or product.store.email is not null or product.store.website is not null %}
                     <div>
@@ -301,7 +301,7 @@
                             <div class="relative">
                                 <label for="message" class="sr-only"></label>
                                 <textarea id="message"
-                                          class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-400 focus:border-gray-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                          class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer block p-2.5 w-full text-sm text-slate-900 bg-slate-50 rounded-lg border border-slate-300 focus:ring-slate-400 focus:border-slate-400 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                           rows="6"
                                           minlength="20"
                                           maxlength="250"
@@ -318,7 +318,7 @@
                             </button>
                             {% if not app.user %}
                                 <p id="helper-text-explanation"
-                                   class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ 'login.warning'|trans({
+                                   class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ 'login.warning'|trans({
                                         url: path('app_login'),
                                         class: 'font-medium text-blue-600 hover:underline dark:text-blue-500'
                                     })|raw }}
@@ -330,7 +330,7 @@
                         <ul class="ms-2">
                             {% if product.store.phone %}
                                 <li class="mb-1">
-                                    <a class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
+                                    <a class="text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100 hover:animate-pulse"
                                        href="tel:{{ product.store.phone }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                              class="w-4 h-4 inline-flex me-3">
@@ -342,7 +342,7 @@
                             {% endif %}
                             {% if product.store.email %}
                                 <li class="mb-1">
-                                    <a class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
+                                    <a class="text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100 hover:animate-pulse"
                                        href="mailto:{{ product.store.email }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                              class="w-4 h-4 inline-flex me-3">
@@ -356,7 +356,7 @@
                             {% if product.store.website %}
                                 <li class="mb-1">
                                     <a target="_blank" rel="noreferrer"
-                                       class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
+                                       class="text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100 hover:animate-pulse"
                                        href="{{ path('app_market_place_market_redirect', {slug: product.store.slug}) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                              class="w-4 h-4 inline-flex me-3">
@@ -369,7 +369,7 @@
                             {% endif %}
                             {% if product.store.address %}
                                 <li class="mb-1">
-                                    <a class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:animate-pulse"
+                                    <a class="text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100 hover:animate-pulse"
                                        href="#">
                                         <svg class="w-4 h-4 inline-flex me-3" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"

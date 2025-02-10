@@ -4,23 +4,23 @@
             <ul class="inline-block md:inline-flex my-4 w-full space-y-4 md:space-y-0 md:space-x-10">
                 <li>
                     <a href="{{ path('about') }}"
-                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.about_us'|trans }}</a>
+                       class="text-xs md:text-sm text-slate-400 hover:text-white">{{ 'title.about_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('faq') }}"
-                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.questions'|trans }}</a>
+                       class="text-xs md:text-sm text-slate-400 hover:text-white">{{ 'title.questions'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('contact') }}"
-                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.contact_us'|trans }}</a>
+                       class="text-xs md:text-sm text-slate-400 hover:text-white">{{ 'title.contact_us'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_blog') }}"
-                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.blogs'|trans }}</a>
+                       class="text-xs md:text-sm text-slate-400 hover:text-white">{{ 'title.blogs'|trans }}</a>
                 </li>
                 <li>
                     <a href="{{ path('app_market_place_index') }}"
-                       class="text-xs md:text-sm text-gray-400 hover:text-white">{{ 'title.market_places'|trans }}</a>
+                       class="text-xs md:text-sm text-slate-400 hover:text-white">{{ 'title.market_places'|trans }}</a>
                 </li>
             </ul>
             <a class="flex" href="{{ path('app_index') }}">
@@ -34,7 +34,7 @@
                         </g>
                     </g>
                 </svg>
-                <span class="font-medium text-gray-300 uppercase">{{ 'site.title'|trans }}
+                <span class="font-medium text-slate-300 uppercase">{{ 'site.title'|trans }}
             </a>
         </div>
         <div class="flex justify-between items-center">
@@ -56,7 +56,8 @@
                 <h2 class="text-slate-300">{{ 'title.legal'|trans }}</h2>
                 <ul class="text-slate-400 text-xs md:text-sm font-medium">
                     <li class="mb-2">
-                        <a href="{{ path('policy') }}" class="hover:text-slate-50">{{ 'title.privacy_policy'|trans }}</a>
+                        <a href="{{ path('policy') }}"
+                           class="hover:text-slate-50">{{ 'title.privacy_policy'|trans }}</a>
                     </li>
                     <li class="mb-2">
                         <a href="{{ path('terms') }}" class="hover:text-slate-50">{{ 'title.terms'|trans|raw }}</a>
@@ -69,7 +70,7 @@
         </div>
     </div>
 </div>
-<div class="bg-slate-900 p-3 text-gray-200 mt-3 border-t border-slate-700">
+<div class="bg-slate-900 p-3 text-slate-200 mt-3 border-t border-slate-700">
     <div class="max-w-screen-xl mx-auto flex justify-between items-center">
         <div class="text-xs md:text-sm">
             {% set year =  'now' | date('Y') %}
@@ -78,7 +79,7 @@
         </div>
         <div class="flex justify-end space-x-2 md:space-x-5">
             <a href="https://www.facebook.com/AlexanderShtyher/"
-               class="text-gray-400 hover:text-gray-100 dark:hover:text-white">
+               class="text-slate-400 hover:text-slate-100 dark:hover:text-white">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                      viewBox="0 0 8 19">
                     <path fill-rule="evenodd"
@@ -87,7 +88,7 @@
                 </svg>
                 <span class="sr-only">Facebook page</span>
             </a>
-            <a href="https://github.com/alexfer" class="text-gray-400 hover:text-gray-100 dark:hover:text-white">
+            <a href="https://github.com/alexfer" class="text-slate-400 hover:text-slate-100 dark:hover:text-white">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                      viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
@@ -97,7 +98,7 @@
                 <span class="sr-only">GitHub</span>
             </a>
             <a href="https://www.linkedin.com/in/alexander-shtykher-4822b339/"
-               class="text-gray-400 hover:text-gray-100 dark:hover:text-white">
+               class="text-slate-400 hover:text-slate-100 dark:hover:text-white">
                 <svg width="64px" height="64px" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <g stroke-width="0"></g>
@@ -121,20 +122,20 @@
 </div>
 {% if app.request.cookies.get('accept-cookie') != 'accepted' %}
     <div id="cookie-alert" class="toast fixed bottom-0 right-0 mb-4 mr-4 w-64">
-        <div class="bg-gray-50 bg-opacity-90 rounded-lg shadow-lg p-4">
+        <div class="bg-slate-50 bg-opacity-90 rounded-lg shadow-lg p-4">
             <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center">
                     <img src="https://www.svgrepo.com/show/401340/cookie.svg" alt="Cookie" class="h-6 w-6 mr-2">
-                    <span class="text-gray-700 font-bold text-sm">Cookie Policy</span>
+                    <span class="text-slate-700 font-bold text-sm">Cookie Policy</span>
                 </div>
-                <button class="text-gray-500 hover:text-gray-700 focus:outline-none" data-dismiss-target=".toast">
+                <button class="text-slate-500 hover:text-slate-700 focus:outline-none" data-dismiss-target=".toast">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
                 </button>
             </div>
-            <p class="text-gray-600 text-sm">
+            <p class="text-slate-600 text-sm">
                 We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of
                 cookies. <a class="underline text-green-700 hover:no-underline" href="{{ path('cookie') }}">cookie
                     policy</a>.

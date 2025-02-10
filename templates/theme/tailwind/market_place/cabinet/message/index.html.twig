@@ -11,28 +11,28 @@
                 <h4 class="pb-2 block w-full mb-4 text-xl font-medium text-red-500 text-center">{{ 'customer.cabinet.messages'|trans }}</h4>
                 {% if messages|length %}
                     <div class="relative">
-                        <div class="caption dark:bg-gray-900 border-b border-gray-200 border-dashed dark:border-gray-600">
+                        <div class="caption dark:bg-slate-900 border-b border-slate-200 border-dashed dark:border-slate-600">
                             {{ 'caption.messages.history'|trans }}
                         </div>
                         {% set _message_seccess = app.flashes('success') %}
                         <div class="flex flex-col mt-3">
                             {% set last = messages|last %}
                             {% for message in messages %}
-                                {% set background = 'bg-white dark:bg-gray-900' %}
+                                {% set background = 'bg-white dark:bg-slate-900' %}
                                 {% if message.read == true  and message.deleted is null %}
                                     {% set background = 'bg-green-50 dark:bg-green-950' %}
                                 {% elseif message.read == true and message.deleted is not null %}
-                                    {% set background = 'bg-white dark:bg-gray-900 opacity-75' %}
+                                    {% set background = 'bg-white dark:bg-slate-900 opacity-75' %}
                                 {% endif %}
-                                <div class="{{ background }} mb-1 flex flex-row items-center py-1.5 text-gray-700 rounded-md border border-dashed hover:bg-gray-50 hover:bg-opacity-50 border-white hover:border-gray-200 dark:border-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:text-gray-300">
+                                <div class="{{ background }} mb-1 flex flex-row items-center py-1.5 text-slate-700 rounded-md border border-dashed hover:bg-slate-50 hover:bg-opacity-50 border-white hover:border-slate-200 dark:border-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-800 dark:text-slate-300">
                                     <div class="ml-2 flex-grow font-medium max-w-xs">
                                         {% if message.product is not null %}
-                                            <a class="hover:text-gray-700 dark:hover:text-white"
+                                            <a class="hover:text-slate-700 dark:hover:text-white"
                                                title="{{ message.product.short_name }}"
                                                target="_blank"
                                                href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}">
                                                 {{ message.product.short_name }}
-                                                <svg class="w-4 h-4 inline-block text-gray-800 dark:text-white"
+                                                <svg class="w-4 h-4 inline-block text-slate-800 dark:text-white"
                                                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                      height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round"
@@ -66,7 +66,7 @@
                                         </a>
                                     </div>
                                     <div class="flex me-2 ps-2 md:ps-0 justify-end items-end">
-                                        <a class="text-gray-800 dark:text-white"
+                                        <a class="text-slate-800 dark:text-white"
                                            href="{{ path('app_cabinet_messages', {id: message.id}) }}">
                                             <svg class="w-[20px] h-[20px]"
                                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

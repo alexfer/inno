@@ -7,7 +7,7 @@
         <div class="mb-4 flex flex-col w-full">
             {% for product in products %}
                 {% if product.order_id == order.id %}
-                    <div class="flex justify-start items-center h-auto mb-1.5 pt-1 pb-2 shadow-sm dark:shadow-lg border-b border-dashed border-gray-200 dark:border-gray-400">
+                    <div class="flex justify-start items-center h-auto mb-1.5 pt-1 pb-2 shadow-sm dark:shadow-lg border-b border-dashed border-slate-200 dark:border-slate-400">
                         <div class="mx-1 w-1/3">
                             <a class="mb-2"
                                href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">
@@ -19,7 +19,7 @@
                                 {% else %}
                                     <div class="flex justify-center items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="fill-gray-400 dark:fill-white text-center"
+                                             class="fill-slate-400 dark:fill-white text-center"
                                              viewBox="0 0 512 512" height="80">
                                             <path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"></path>
                                         </svg>
@@ -30,22 +30,22 @@
                         <div class="w-2/3">
                             <div class="ml-1 mb-1 inline-block align-top">
                                 <a title="{{ product.name }}"
-                                   class="font-medium line-clamp-1 inline-block align-top text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
+                                   class="font-medium line-clamp-1 inline-block align-top text-slate-800 dark:text-slate-300 dark:hover:text-slate-100"
                                    href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}">{{ product.short_name }}</a>
                                 <div class="flex w-full justify-between">
-                                    <div class="inline-block text-xs pt-1 text-gray-800 dark:text-gray-100">{{ product.quantity }}{{ 'label.form.quantity_pcs'|trans }}</div>
+                                    <div class="inline-block text-xs pt-1 text-slate-800 dark:text-slate-100">{{ product.quantity }}{{ 'label.form.quantity_pcs'|trans }}</div>
                                     <div>
                                         {% if product.reduce.unit is not empty %}
                                             {% set price = discount(product.cost, product.reduce.value, product.fee, 1, product.reduce.unit) %}
-                                            <span class="font-light inline-block dark:text-gray-100">
+                                            <span class="font-light inline-block dark:text-slate-100">
                                                 {{ price|amount_format }}<small>{{ order.store.currency|currency }}</small>
                                                 <span class="ml-2 text-xs text-red-500">{{ product.reduce.value }}{{ product.reduce.unit|convert(order.store.currency|currency) }} {{ 'store.product.off'|trans }}</span>
                                             </span>
-                                            <span class="block line-through font-light text-gray-300">
+                                            <span class="block line-through font-light text-slate-300">
                                                 {{ (product.cost + product.fee)|amount_format }}<small>{{ order.store.currency|currency }}</small>
                                             </span>
                                         {% else %}
-                                            <div class="text-gray-500 text-lg">
+                                            <div class="text-slate-500 text-lg">
                                                 {{ (product.cost + product.fee)|amount_format }}
                                                 <small>{{ order.store.currency|currency }}</small>
                                             </div>
@@ -59,7 +59,7 @@
             {% endfor %}
         </div>
     {% endfor %}
-    <div class="justify-between mb-3 bg-gray-100 dark:bg-gray-800 dark:text-gray-100 rounded-lg p-2">
+    <div class="justify-between mb-3 bg-slate-100 dark:bg-slate-800 dark:text-slate-100 rounded-lg p-2">
         <strong class="text-lg">{{ 'order.subtotal'|trans }}</strong>
         <strong class="text-lg float-end pr-3">{{ order.total|amount_format }}
             <small>{{ order.store.currency|currency }}</small></strong>
@@ -91,6 +91,6 @@
 {% if orders|length != 0 %}
     <div class="flex justify-center items-center mt-4 mb-6">
         <a href="{{ path('app_market_place_order_summary') }}"
-           class="inline-block rounded bg-gray-950 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-200 hover:text-white shadow-gray-700 transition duration-150 ease-in-out hover:bg-gray-700 focus:outline-none focus:ring-0 motion-reduce:transition-none">{{ 'order.view'|trans }}</a>
+           class="inline-block rounded bg-slate-950 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-slate-200 hover:text-white shadow-slate-700 transition duration-150 ease-in-out hover:bg-slate-700 focus:outline-none focus:ring-0 motion-reduce:transition-none">{{ 'order.view'|trans }}</a>
     </div>
 {% endif %}

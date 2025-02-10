@@ -6,7 +6,7 @@
             <span class="input-wrong">{{ form_errors(form.quantity) }}</span>
         </div>
         <div class="relative mb-3">
-            {{ form_label(form.cost, 'label.form.cost', {label_attr: {class: 'inline-block text-sm font-medium text-gray-900 dark:text-white'}}) }}
+            {{ form_label(form.cost, 'label.form.cost', {label_attr: {class: 'inline-block text-sm font-medium text-slate-900 dark:text-white'}}) }}
             {{ form_widget(form.cost, {attr: {class: 'input-widget', placeholder: '0.00'}}) }}
             <span class="input-wrong">{{ form_errors(form.cost) }}</span>
         </div>
@@ -25,25 +25,25 @@
     </div>
     <div class="grid grid-cols-2 gap-4">
         <div class="relative mb-3">
-            {{ form_label(form.pckg_discount, 'label.form.pckg_discount', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(form.pckg_discount, {attr: {class: 'w-full h-1.5 bg-gray-200 rounded-sm appearance-none cursor-pointer dark:bg-gray-700', placeholder: '0'}}) }}
+            {{ form_label(form.pckg_discount, 'label.form.pckg_discount', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+            {{ form_widget(form.pckg_discount, {attr: {class: 'w-full h-1.5 bg-slate-200 rounded-sm appearance-none cursor-pointer dark:bg-slate-700', placeholder: '0'}}) }}
             <div class="relative text-center">
-                <span class="px-1.5 py-1.5 bg-gray-200 rounded-md text-gray-500 discount-output mt-2 mb-5 font-light"></span>
+                <span class="px-1.5 py-1.5 bg-slate-200 rounded-md text-slate-500 discount-output mt-2 mb-5 font-light"></span>
             </div>
         </div>
         <div class="relative mb-3">
-            {{ form_label(form.fee, 'label.form.fee', {label_attr: {class: 'inline-block text-sm font-medium text-gray-900 dark:text-white'}}) }}
+            {{ form_label(form.fee, 'label.form.fee', {label_attr: {class: 'inline-block text-sm font-medium text-slate-900 dark:text-white'}}) }}
             {{ form_widget(form.fee, {attr: {class: 'input-widget', placeholder: '0'}}) }}
-            <span class="text-xs text-gray-600 mt-0.5">{{ 'label.form.fee.help'|trans }}</span>
+            <span class="text-xs text-slate-600 mt-0.5">{{ 'label.form.fee.help'|trans }}</span>
         </div>
     </div>
     <div class="grid grid-cols-2 gap-4 mb-3">
         <div class="relative mb-3">
-            {{ form_label(form.value, '', {label_attr: {class: 'inline-block text-sm font-medium text-gray-900 dark:text-white'}}) }}
+            {{ form_label(form.value, '', {label_attr: {class: 'inline-block text-sm font-medium text-slate-900 dark:text-white'}}) }}
             {{ form_widget(form.value, {attr: {class: 'input-widget', placeholder: '0'}}) }}
         </div>
         <div class="relative mb-3">
-            {{ form_label(form.unit, 'label.form.unit', {label_attr: {class: 'inline-block text-sm font-medium text-gray-900 dark:text-white'}}) }}
+            {{ form_label(form.unit, 'label.form.unit', {label_attr: {class: 'inline-block text-sm font-medium text-slate-900 dark:text-white'}}) }}
             {{ form_widget(form.unit, {attr: {class: 'input-widget', placeholder: '0'}}) }}
         </div>
     </div>

@@ -22,11 +22,11 @@
     <ul class="flex list-none flex-row flex-wrap text-sm font-medium space-x-4 text-center justify-stretch border-b-1 items-stretch"
         id="market-tab"
         data-tabs-toggle="#product-tab-content"
-        data-tabs-active-classes="text-gray-950 hover:text-red-600 dark:text-white dark:hover:text-white border-red-600 dark:border-red-500"
-        data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+        data-tabs-active-classes="text-slate-950 hover:text-red-600 dark:text-white dark:hover:text-white border-red-600 dark:border-red-500"
+        data-tabs-inactive-classes="dark:border-transparent text-slate-500 hover:text-slate-600 dark:text-slate-400 border-slate-100 hover:border-slate-300 dark:border-slate-700 dark:hover:text-slate-300"
         role="tablist">
         <li class="me-2 flex-auto text-center" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300"
                     id="description-tab"
                     data-tabs-target="#details"
                     type="button"
@@ -36,7 +36,7 @@
             </button>
         </li>
         <li class="me-2 flex-auto text-center" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300"
                     id="billing-tab"
                     data-tabs-target="#billing"
                     type="button" role="tab"
@@ -45,7 +45,7 @@
             </button>
         </li>
         <li class="me-2 flex-auto text-center" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300"
                     id="categories-tab"
                     data-tabs-target="#categories"
                     type="button"
@@ -55,7 +55,7 @@
             </button>
         </li>
         <li class="me-2 flex-auto text-center" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300"
                     id="attributes-tab"
                     data-tabs-target="#attributes"
                     type="button"
@@ -65,7 +65,7 @@
             </button>
         </li>
         <li class="me-2 flex-auto text-center" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300"
                     id="attachments-block"
                     data-tabs-target="#attachments-tab"
                     type="button"
@@ -132,7 +132,7 @@
             {{ form_widget(form.save, { label: form.vars.data.id ? 'form.action.update' : 'form.action.save', attr: {class: 'btn-red'}}) }}
             <a type="button"
                href="{{ url('app_dashboard_market_place_market_product', {store: app.request.get('store')}) }}"
-               class="btn-gray-strong group-invalid:pointer-events-none group-invalid:opacity-30">{{ 'form.action.back'|trans }}</a>
+               class="btn-slate-strong group-invalid:pointer-events-none group-invalid:opacity-30">{{ 'form.action.back'|trans }}</a>
         </div>
     </div>
     {{ form_end(form) }}

@@ -6,7 +6,7 @@
         {% endif %}
         <a href="javascript:;" class="pictures object-fit-scale">
             <img loading="lazy"
-                 class="h-100 object-contain w-full md:max-w-xs rounded-lg cursor-pointer  bg-white dark:bg-gray-800 hover:shadow-lg"
+                 class="h-100 object-contain w-full md:max-w-xs rounded-lg cursor-pointer  bg-white dark:bg-slate-800 hover:shadow-lg"
                  src="{{ asset(picture)|imagine_filter('image_thumb') }}" alt="...">
             <label class="absolute -top-1 -left-1 cursor-pointer" for="i-{{ key }}">
                 <input type="checkbox" name="item[{{ image.attachment.id }}]" value="{{ image.attachment.id }}"

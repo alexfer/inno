@@ -1,31 +1,31 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
     <div class="relative">
-        {{ form_label(form.first_name, 'label.form.first_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.first_name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.first_name'|trans}}) }}
+        {{ form_label(form.first_name, 'label.form.first_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.first_name, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.first_name'|trans}}) }}
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.first_name) }}</span>
     </div>
     <div class="relative">
-        {{ form_label(form.last_name, 'label.form.last_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.last_name, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.last_name'|trans}}) }}
+        {{ form_label(form.last_name, 'label.form.last_name', {label_attr: {class: 'block mb-1 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.last_name, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.last_name'|trans}}) }}
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.last_name) }}</span>
     </div>
 </div>
 <div class="grid grid-cols-1 gap-4 mb-4">
     <div class="relative">
-        {{ form_label(form.email, 'label.form.email', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.email, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email'|trans}}) }}
+        {{ form_label(form.email, 'label.form.email', {label_attr: {class: 'block mb-1 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.email, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.email'|trans}}) }}
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.email) }}</span>
     </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
     <div class="relative">
-        {{ form_label(form.phone, 'label.form.phone', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.phone, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.phone'|trans}}) }}
+        {{ form_label(form.phone, 'label.form.phone', {label_attr: {class: 'block mb-1 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.phone, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.phone'|trans}}) }}
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.phone) }}</span>
     </div>
     <div class="relative">
-        {{ form_label(form.country, 'label.form.country', {label_attr: {class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-        {{ form_widget(form.country, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.country'|trans}}) }}
+        {{ form_label(form.country, 'label.form.country', {label_attr: {class: 'block mb-1 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+        {{ form_widget(form.country, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.country'|trans}}) }}
         <span class="mt-1 text-xs text-red-500">{{ form_errors(form.country) }}</span>
     </div>
 </div>

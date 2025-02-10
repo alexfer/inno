@@ -1,6 +1,8 @@
 <aside id="sidebar" class="h-screen relative z-20">
-    <button type="button" class="opacity-100 md:opacity-0 absolute -start-3 px-5 py-3 top-2 z-10 cursor-pointer border border-l-0 rounded-lg shadow-md bg-white dark:bg-gray-700 nav-open" aria-label="Open">
-        <svg class="h-5 w-5 text-gray-500 dark:text-white" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+    <button type="button"
+            class="opacity-100 md:opacity-0 absolute -start-3 px-5 py-3 top-2 z-10 cursor-pointer border border-l-0 rounded-lg shadow-md bg-white dark:bg-slate-700 nav-open"
+            aria-label="Open">
+        <svg class="h-5 w-5 text-slate-500 dark:text-white" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z"/>
             <circle cx="14" cy="6" r="2"/>
@@ -14,11 +16,11 @@
             <line x1="19" y1="18" x2="20" y2="18"/>
         </svg>
     </button>
-    <div class="fixed hidden md:w-64 animate__animated opacity-90 md:opacity-100 md:block md:relative z-30 md:h-full p-3 overflow-y-auto bg-white md:bg-gray-50 border md:border-0 shadow-xl md:shadow dark:bg-gray-800 rounded-lg">
+    <div class="fixed hidden md:w-64 animate__animated opacity-90 md:opacity-100 md:block md:relative z-30 md:h-full p-3 overflow-y-auto bg-white md:bg-slate-50 border md:border-0 shadow-xl md:shadow dark:bg-slate-800 rounded-lg">
         <ul class="space-y-2 font-medium">
             <li>
                 <button type="button" class="md:hidden cabinet-sidebar-item rotate-180 cursor-pointer nav-close">
-                    <svg class="h-5 w-5 text-gray-500 dark:text-white rotate-0" width="24" height="24"
+                    <svg class="h-5 w-5 text-slate-500 dark:text-white rotate-0" width="24" height="24"
                          viewBox="0 0 24 24" stroke-width="2"
                          stroke="currentColor"
                          fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -31,7 +33,7 @@
                 </button>
             </li>
             <li>
-                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet' ? 'bg-white dark:bg-gray-700' : '' }}"
+                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet' ? 'bg-white dark:bg-slate-700' : '' }}"
                    href="{{ path('app_cabinet') }}">
                     <svg class="w-5 h-5 {{ _route == 'app_cabinet' ? 'text-red-500' : '' }}" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@
                 </a>
             </li>
             <li>
-                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_wishlist' ? 'bg-white dark:bg-gray-700' : '' }}"
+                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_wishlist' ? 'bg-white dark:bg-slate-700' : '' }}"
                    href="{{ path('app_cabinet_wishlist') }}">
                     <svg class="w-5 h-5 {{ _route == 'app_cabinet_wishlist' ? 'fill-red-500 text-red-500' : '' }}"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +57,7 @@
                 </a>
             </li>
             <li>
-                <a class="relative cabinet-sidebar-item {{ _route == 'app_cabinet_messages' ? 'bg-white dark:bg-gray-700' : '' }}"
+                <a class="relative cabinet-sidebar-item {{ _route == 'app_cabinet_messages' ? 'bg-white dark:bg-slate-700' : '' }}"
                    href="{{ path('app_cabinet_messages') }}">
                     <svg class="w-5 h-5 {{ _route == 'app_cabinet_messages' ? 'fill-red-500 text-red-500' : '' }}"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +73,7 @@
                 </a>
             </li>
             <li>
-                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_personal_information' ? 'bg-white dark:bg-gray-700' : '' }}"
+                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_personal_information' ? 'bg-white dark:bg-slate-700' : '' }}"
                    href="{{ path('app_cabinet_personal_information') }}">
                     <svg class="w-6 h-6 {{ _route == 'app_cabinet_personal_information' ? 'fill-red-500 text-red-500' : '' }}"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -83,9 +85,9 @@
                 </a>
             </li>
             <li>
-                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_secure' ? 'bg-white dark:bg-gray-700' : '' }}"
+                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_secure' ? 'bg-white dark:bg-slate-700' : '' }}"
                    href="{{ path('app_cabinet_secure') }}">
-                    <svg class="w-6 h-6 {{ _route == 'app_cabinet_secure' ? 'fill-red-500 text-gray-200 dark:text-gray-600' : '' }}"
+                    <svg class="w-6 h-6 {{ _route == 'app_cabinet_secure' ? 'fill-red-500 text-slate-200 dark:text-slate-600' : '' }}"
                          aria-hidden="true" viewBox="0 0 24 24" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <g stroke-width="0"></g>
@@ -102,9 +104,9 @@
                 </a>
             </li>
             <li>
-                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_address' ? 'bg-white dark:bg-gray-700' : '' }}"
+                <a class="cabinet-sidebar-item {{ _route == 'app_cabinet_address' ? 'bg-white dark:bg-slate-700' : '' }}"
                    href="{{ path('app_cabinet_address') }}">
-                    <svg class="w-5 h-5 {{ _route == 'app_cabinet_address' ? 'fill-red-500 text-gray-200 dark:text-gray-600' : '' }}"
+                    <svg class="w-5 h-5 {{ _route == 'app_cabinet_address' ? 'fill-red-500 text-slate-200 dark:text-slate-600' : '' }}"
                          aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                          width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -116,7 +118,7 @@
             <li>
                 <a class="cabinet-sidebar-item"
                    href="{{ path('app_logout') }}">
-                    <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                    <svg class="w-5 h-5 text-slate-800 dark:text-white" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg"
                          width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -132,7 +134,7 @@
     <script type="text/javascript">
         const navClose = document.querySelector('.nav-close');
         const navOpen = document.querySelector('.nav-open');
-        const sideBar =  document.getElementById('sidebar');
+        const sideBar = document.getElementById('sidebar');
 
         navClose.addEventListener('click', () => {
             sideBar.children[1].classList.toggle('hidden');

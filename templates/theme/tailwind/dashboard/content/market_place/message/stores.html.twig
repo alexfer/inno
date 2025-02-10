@@ -28,9 +28,9 @@
                                 </div>
                                 <div class="flex-auto ml-2">
                                     <p class="text-sm font-medium line-clamp-1 text-indigo-700 dark:text-indigo-300">{{ store.name }}</p>
-                                    <p class="text-xs text-gray-400 dark:text-white/80 mb-0 !font-normal">{{ store.created|date(date_format) }}</p>
+                                    <p class="text-xs text-slate-400 dark:text-white/80 mb-0 !font-normal">{{ store.created|date(date_format) }}</p>
                                 </div>
-                                <div class="block text-end">
+                                <div class="block text-end space-y-1">
                                     <span class="text-xs font-medium lg:font-thin lg:text-sm text-nowrap">
                                         {{ 'table.header.messages'|trans }}<span
                                                 class="badge-green ml-1">{{ store.messages }}</span>
@@ -59,19 +59,20 @@
                 <li class="list-item">
                     <div class="flex items-center space-x-4 w-full pb-0.5">
                         <div class="flex">
-                            <a class="relative inline-block h-8 w-8 rounded-full" href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}">
+                            <a class="relative inline-block h-8 w-8 rounded-full"
+                               href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}">
                                 <img class="rounded-full" src="{{ asset('img/user-picture.jpg') }}" alt=""> <span
                                         class="online"></span>
                             </a>
                         </div>
                         <div class="w-full">
-                            <div class="flex items-center justify-between">
+                            <a href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}" class="flex items-center justify-between">
                                 <p class="text-slate-700 font-semibold text-xs dark:text-white capitalize">{{ message.customer }}</p>
-                                <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message.created|date(datetime_format) }}</p>
-                            </div>
-                            <p class="text-gray-500 font-normal text-xs dark:text-white/70">{{ message.created|date(datetime_format) }}</p>
+                                <p class="text-slate-500 font-normal text-xs dark:text-white/70">{{ message.created|date(datetime_format) }}</p>
+                            </a>
+                            <p class="text-slate-500 font-normal text-xs dark:text-white/70">{{ message.created|date(datetime_format) }}</p>
                             <div class="flex items-center justify-between pt-1">
-                                <div class="text-xs text-gray-500 dark:text-white/70 line-clamp-1">
+                                <div class="text-xs text-slate-500 dark:text-white/70 line-clamp-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                          class="w-3.5 h-3.5 text-green-500 inline-flex mr-0.5">
                                         <path fill-rule="evenodd"
@@ -90,7 +91,7 @@
                                     {% set path = path('app_dashboard_market_place_order_details_market', {store: message.store, number: message.order}) %}
                                 {% endif %}
                                 <button{% if path %} onclick="window.open('{{ path }}', '_blank')"{% endif %}
-                                                     class="text-xs font-medium text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300">
+                                        class="text-xs font-medium text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300">
                                     {{ name }}
                                 </button>
                             </div>

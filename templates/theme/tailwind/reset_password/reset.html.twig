@@ -3,18 +3,18 @@
 {% block title %}{{ 'form.password.text'|trans }}{% endblock %}
 {% block class %}{% endblock %}
 {% block body %}
-    <div class="max-w-xl mx-auto bg-white rounded-xl shadow-xl px-1 md:px-8 my-4 md:my-8 py-2 md:py-4 dark:bg-gray-600">
+    <div class="max-w-xl mx-auto bg-white rounded-xl shadow-xl px-1 md:px-8 my-4 md:my-8 py-2 md:py-4 dark:bg-slate-600">
         {{ form_start(resetForm, {attr: {class: 'w-full group', novalidate: ''}}) }}
         <h2>{{ 'form.password.text'|trans }}</h2>
         <div class="col-md-12 mb-5">
-            {{ form_label(resetForm.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(resetForm.plainPassword.children.first, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.new_password'}}) }}
+            {{ form_label(resetForm.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+            {{ form_widget(resetForm.plainPassword.children.first, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.new_password'}}) }}
             <span class="mt-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.password.invalid'|trans }}</span>
             <span class="text-xs text-red-500">{{ form_errors(resetForm.plainPassword.children.first) }}</span>
         </div>
         <div class="col-md-12 mb-5">
-            {{ form_label(resetForm.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
-            {{ form_widget(resetForm.plainPassword.children.second, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.repeat_password'}}) }}
+            {{ form_label(resetForm.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'block mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
+            {{ form_widget(resetForm.plainPassword.children.second, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.repeat_password'}}) }}
             <span class="mt-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.password.invalid'|trans }}</span>
             <span class="text-xs text-red-500">{{ form_errors(resetForm.plainPassword.children.second) }}</span>
         </div>

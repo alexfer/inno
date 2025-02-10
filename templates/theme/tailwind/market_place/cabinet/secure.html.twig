@@ -10,7 +10,7 @@
             <div class="pt-2 px-4">
                 <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center text-sm-start">{{ 'customer.cabinet.password'|trans }}</h4>
                 {% if errors.count %}
-                    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+                    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-400"
                          role="alert">
                         <div class="ms-3 text-sm font-medium">{{ errors.current.message }}</div>
                     </div>
@@ -18,16 +18,16 @@
                 {% set _message = app.flashes('success') %}
                 {{ form_start(form, {attr: {novalidate: '', class: 'max-w-3xl mx-auto'}}) }}
                 <div class="md:flex mb-2">
-                    {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-0 md:pt-3 mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    {{ form_label(form.plainPassword.children.first, 'label.form.new_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-0 md:pt-3 mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
                     <div class="md:w-1/2">
-                        {{ form_widget(form.plainPassword.children.first, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: '', autocomplete: 'off'}}) }}
+                        {{ form_widget(form.plainPassword.children.first, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: '', autocomplete: 'off'}}) }}
                         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.first) }}</span>
                     </div>
                 </div>
                 <div class="md:flex mb-2">
-                    {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-0 md:pt-3 mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
+                    {{ form_label(form.plainPassword.children.second, 'label.form.repeat_password', {label_attr: {class: 'inline-block w-32 mr-2 pt-0 md:pt-3 mb-2 text-sm font-medium text-slate-900 dark:text-white'}}) }}
                     <div class="md:w-1/2">
-                        {{ form_widget(form.plainPassword.children.second, {attr: {class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: '', autocomplete: 'off'}}) }}
+                        {{ form_widget(form.plainPassword.children.second, {attr: {class: 'bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: '', autocomplete: 'off'}}) }}
                         <span class="mt-1 text-sm text-red-500">{{ form_errors(form.plainPassword.children.second) }}</span>
                     </div>
                 </div>

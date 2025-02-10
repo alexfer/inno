@@ -1230,7 +1230,7 @@
             </trans-unit>
             <trans-unit id="store.product.out_stock">
                 <source>store.product.out_stock</source>
-                <target>Out Stock</target>
+                <target>Out of stock</target>
             </trans-unit>
             <trans-unit id="store.product.code">
                 <source>store.product.code</source>

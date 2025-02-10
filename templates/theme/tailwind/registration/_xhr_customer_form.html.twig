@@ -1,71 +1,71 @@
 <form name="register-xhr" id="register-xhr" action="{{ path('app_customer_register_xhr') }}" class="group"
       autocomplete="off" novalidate>
     <div id="alert-register"
-         class="hidden animate__animated animate__bounceIn p-4 mx-5 mt-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+         class="hidden animate__animated animate__bounceIn p-4 mx-5 mt-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-slate-800 dark:text-red-400"
          role="alert"></div>
     <div class="p-4 md:p-5 space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="first_name">{{ 'label.form.first_name'|trans }} <abbr class="text-red-700"
                                                                                   title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input id="first_name" name="first_name" type="text" pattern=".{3,250}"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.first_name'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.first_name.invalid'|trans }}</span>
             </div>
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="last_name">{{ 'label.form.last_name'|trans }} <abbr class="text-red-700"
                                                                                 title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input name="last_name" id="last_name" type="text" pattern=".{2,200}"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.last_name'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.last_name.invalid'|trans }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="email">{{ 'label.form.email'|trans }} <abbr class="text-red-700"
                                                                         title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input name="email" id="email" type="email" pattern=".{5,254}"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.email'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.email.invalid'|trans }}</span>
             </div>
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="plainPassword">{{ 'label.form.password'|trans }} <abbr class="text-red-700"
                                                                                    title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input id="plainPassword" name="plainPassword" type="password" pattern=".{7,}"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.password'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.password.invalid'|trans }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="city">{{ 'label.form.city'|trans }} <abbr class="text-red-700"
                                                                       title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input id="city" name="city" type="text" pattern=".{3,250}"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.city'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.city.invalid'|trans }}</span>
             </div>
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="country">{{ 'label.form.country'|trans }} <abbr class="text-red-700"
                                                                             title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <select id="country" name="country"
-                        class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                         required>
                     <option value="">{{ 'form.country.placeholder'|trans }}</option>
                     {% for key, name in countries %}
@@ -77,22 +77,22 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="relative">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="phone">{{ 'label.form.phone'|trans }} <abbr class="text-red-700"
                                                                         title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input id="phone" name="phone" type="tel"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.phone'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.phone.invalid'|trans }}</span>
             </div>
             <div class="mb-0.5">
-                <label class="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"
+                <label class="block mb-1 text-xs md:text-sm font-medium text-slate-900 dark:text-white"
                        for="address">{{ 'label.form.address'|trans }} <abbr class="text-red-700"
                                                                             title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
                 <input id="address" name="address" type="text" pattern=".{10,250}"
-                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                       class="invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                        placeholder="{{ 'label.form.address'|trans }}" required>
                 <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.address.invalid'|trans }}</span>
             </div>
@@ -100,13 +100,13 @@
         <div class="relative">
             <div class="mb-3">
                 <input id="agreeTerms" name="agreeTerms" type="checkbox" value="1"
-                       class="valid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                       class="valid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-slate-300 dark:bg-slate-700 dark:border-slate-600 dark:focus:ring-slate-600 dark:ring-offset-slate-800 dark:focus:ring-offset-slate-800"
                        required>
-                <label class="ml-1 text-xs md:text-sm font-medium text-gray-900 dark:text-gray-300"
+                <label class="ml-1 text-xs md:text-sm font-medium text-slate-900 dark:text-slate-300"
                        for="agreeTerms">{{ 'label.agree_terms'|trans }}
                     <abbr class="text-red-700" title="{{ 'required.value'|trans }}">*</abbr>
                 </label>
-                <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ 'form.agree_terms.help'|trans({
+                <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">{{ 'form.agree_terms.help'|trans({
                         '%policy%': url('policy'),
                         '%terms%': url('terms')
                     })|raw }}</div>
@@ -114,15 +114,16 @@
         </div>
     </div>
     <input type="hidden" name="order" value="{{ order }}">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 pb-4 items-center border-t border-gray-200 rounded-b dark:border-gray-600">
-        <p class="whitespace-nowrap text-xs text-red-500 ml-4 my-2 md:my-0">{{ 'required.text'|trans }} <abbr class="text-red-700"
-                                                                               title="{{ 'required.field'|trans }}">*</abbr>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 pb-4 items-center border-t border-slate-200 rounded-b dark:border-slate-600">
+        <p class="whitespace-nowrap text-xs text-red-500 ml-4 my-2 md:my-0">{{ 'required.text'|trans }} <abbr
+                    class="text-red-700"
+                    title="{{ 'required.field'|trans }}">*</abbr>
         </p>
         <div class="mr-4 text-center md:text-right md:pt-3">
             <button type="submit"
                     class="inline-block btn-red group-invalid:pointer-events-none group-invalid:opacity-30">{{ 'form.action.register'|trans }}</button>
             <button data-modal-hide="register" type="reset"
-                    class="btn-gray-strong">
+                    class="btn-slate-strong">
                 {{ 'form.action.cancel'|trans }}
             </button>
         </div>

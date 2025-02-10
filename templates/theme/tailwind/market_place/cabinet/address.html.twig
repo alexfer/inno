@@ -10,7 +10,7 @@
             <div class="pt-2 px-4">
                 <h4 class="pb-2 block w-full mb-4 text-xl font-semibold text-red-500 text-center">{{ 'title.address'|trans }}</h4>
                 {% if errors.count %}
-                    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400"
+                    <div class="flex items-center p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-400"
                          role="alert">
                         <div class="ms-3 text-xs md:text-sm font-medium">{{ errors.current.message }}</div>
                     </div>
@@ -19,43 +19,43 @@
                 {{ form_start(form, {attr: {id:'address', class: 'group', 'autocomplete': 'off', novalidate: ''}}) }}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                     <div class="relative mb-3">
-                        {{ form_label(form.line1, 'label.form.address_line_1', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.line1, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_line_1'|trans}}) }}
+                        {{ form_label(form.line1, 'label.form.address_line_1', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.line1, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_line_1'|trans}}) }}
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.address.invalid'|trans }}</span>
                     </div>
                     <div class="relative mb-3">
-                        {{ form_label(form.line2, 'label.form.address_line_2', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.line2, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_line_2'|trans}}) }}
+                        {{ form_label(form.line2, 'label.form.address_line_2', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.line2, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_line_2'|trans}}) }}
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.address.invalid'|trans }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                     <div class="relative mb-3">
-                        {{ form_label(form.region, 'label.form.region', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.region, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.region'|trans}}) }}
+                        {{ form_label(form.region, 'label.form.region', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.region, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.region'|trans}}) }}
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.region.invalid'|trans }}</span>
                     </div>
                     <div class="relative mb-3">
-                        {{ form_label(form.city, 'label.form.city', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.city, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.city'|trans}}) }}
+                        {{ form_label(form.city, 'label.form.city', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.city, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.city'|trans}}) }}
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.city.invalid'|trans }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                     <div class="relative mb-3">
-                        {{ form_label(form.postal, 'label.form.postal', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.postal, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.postal'|trans}}) }}
+                        {{ form_label(form.postal, 'label.form.postal', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.postal, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.postal'|trans}}) }}
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.postal.invalid'|trans }}</span>
                     </div>
                     <div class="relative mb-3">
-                        {{ form_label(form.phone, 'label.form.phone', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                        {{ form_widget(form.phone, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.phone'|trans}}) }}
+                        {{ form_label(form.phone, 'label.form.phone', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                        {{ form_widget(form.phone, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.phone'|trans}}) }}
                         <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.phone.invalid'|trans }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-x-4 mb-2">
-                    {{ form_label(form.address_country, 'label.form.address_country', {label_attr: {class: 'block text-xs md:text-sm font-medium text-gray-900 dark:text-white'}}) }}
-                    {{ form_widget(form.address_country, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_country'|trans}}) }}
+                    {{ form_label(form.address_country, 'label.form.address_country', {label_attr: {class: 'block text-xs md:text-sm font-medium text-slate-900 dark:text-white'}}) }}
+                    {{ form_widget(form.address_country, {attr: {class: 'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer bg-slate-50 border border-slate-300 text-slate-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'label.form.address_country'|trans}}) }}
                     <span class="mt-1 hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">{{ 'form.country.invalid'|trans }}</span>
                 </div>
                 <input type="hidden" name="flash-success" value="{{ _message[0]|default([]|json_encode) }}">

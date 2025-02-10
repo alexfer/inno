@@ -16,7 +16,7 @@
                                    href="{{ path('app_market_place_product', {slug: message.product.slug, tab: 'about'}) }}">
                                     {% if message.product.picture %}
                                         {% set _picture = message.product.path ~ '/' ~ message.product.picture %}
-                                        <picture class="block bg-white dark:bg-gray-600">
+                                        <picture class="block bg-white dark:bg-slate-600">
                                             <img src="{{ asset(_picture) }}"
                                                  class="block w-16 h-auto border rounded-lg p-3"
                                                  alt="{{ message.product.short_name }}">
@@ -31,7 +31,7 @@
                                     {% endif %}
                                 </a>
                                 <div id="tooltip-{{ message.id }}-{{ key }}" role="tooltip"
-                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-slate-900 bg-white border border-slate-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-slate-100">
                                     {{ message.product.short_name }}
                                     <div class="tooltip-arrow" data-popper-arrow=""></div>
                                 </div>
@@ -51,7 +51,7 @@
                                     </svg>
                                 </a>
                                 <div id="tooltip-{{ message.id }}-{{ key }}" role="tooltip"
-                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-slate-900 bg-white border border-slate-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-slate-100">
                                     #{{ message.order.number }}
                                     <div class="tooltip-arrow" data-popper-arrow=""></div>
                                 </div>
@@ -63,7 +63,7 @@
                                           d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                                 <div id="tooltip-{{ message.id }}-{{ key }}" role="tooltip"
-                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-100">
+                                     class="absolute z-20 invisible inline-block px-3 py-2 text-sm font-medium text-slate-900 bg-white border border-slate-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-slate-100">
                                     {{ 'store.message.question'|trans }}
                                     <div class="tooltip-arrow" data-popper-arrow=""></div>
                                 </div>
@@ -88,7 +88,7 @@
                             </span>
                             <a role="button"
                                href="{{ path('app_dashboard_market_place_message_conversation', {store: message.store, id: message.id}) }}"
-                               class="text-blue-500 dark:text-gray-100 hover:text-blue-700 dark:hover:bg-white">
+                               class="text-blue-500 dark:text-slate-100 hover:text-blue-700 dark:hover:bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                      class="w-5 h-5">
                                     <path fill-rule="evenodd"
@@ -113,13 +113,13 @@
     <div id="customer-modal" tabindex="-1" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-slate-600">
+                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
                         {{ 'table.header.customer'|trans }}
                     </h3>
                     <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-600 dark:hover:text-white"
                             data-modal-hide="customer-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 14 14">
@@ -132,63 +132,63 @@
                 </div>
                 <div id="modal-body" class="p-4 md:p-5 space-y-4">
                     <div class="px-4 sm:px-0">
-                        <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">{{ 'customer.cabinet.personal_information'|trans }}</h3>
+                        <h3 class="text-base font-semibold leading-7 text-slate-900 dark:text-white">{{ 'customer.cabinet.personal_information'|trans }}</h3>
                     </div>
-                    <dl class="divide-y divide-gray-100">
+                    <dl class="divide-y divide-slate-100">
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.first_name'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 first_name"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.first_name'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 first_name"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.last_name'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 last_name"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.last_name'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 last_name"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'customer.phone'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 phone"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'customer.phone'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 phone"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 country"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 country"></dd>
                         </div>
                     </dl>
                     <div class="px-4 sm:px-0">
-                        <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">{{ 'customer.cabinet.address'|trans }}</h3>
+                        <h3 class="text-base font-semibold leading-7 text-slate-900 dark:text-white">{{ 'customer.cabinet.address'|trans }}</h3>
                     </div>
-                    <dl class="divide-y divide-gray-100">
+                    <dl class="divide-y divide-slate-100">
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.city'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_city"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.city'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_city"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_country"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.country'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_country"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.region'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_region"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.region'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_region"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.zip'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_postal"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.zip'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_postal"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.address_line_1'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_line1"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.address_line_1'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_line1"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'label.form.address_line_2'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_line2"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'label.form.address_line_2'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_line2"></dd>
                         </div>
                         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">{{ 'user.info.phone_number'|trans }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 dark:text-gray-200 address_phone"></dd>
+                            <dt class="text-sm font-medium leading-6 text-slate-900 dark:text-white">{{ 'user.info.phone_number'|trans }}</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0 dark:text-slate-200 address_phone"></dd>
                         </div>
                     </dl>
                 </div>
-                <div class="text-right p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <div class="text-right p-4 md:p-5 border-t border-slate-200 rounded-b dark:border-slate-600">
                     <button data-modal-hide="customer-modal" type="button"
-                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{ 'form.action.close'|trans }}</button>
+                            class="py-2.5 px-5 ms-3 text-sm font-medium text-slate-900 focus:outline-none bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 dark:hover:text-white dark:hover:bg-slate-700">{{ 'form.action.close'|trans }}</button>
                 </div>
             </div>
         </div>

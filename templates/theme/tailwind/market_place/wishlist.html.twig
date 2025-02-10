@@ -1,4 +1,4 @@
-{% set _wishlist_bg = 'text-gray-600 dark:text-gray-100' %}
+{% set _wishlist_bg = 'text-slate-600 dark:text-slate-100' %}
 {% set _disabled = null %}
 {% if customer is not null %}
     {% for wishlist in customer.storeWishlists.toArray %}
@@ -12,7 +12,7 @@
       {% if customer is null %}
           tabindex="0" title="{{ 'title.service.message'|trans }} {{ 'store.unauthorized'|trans }}"
       {% endif %}>
-    <button class="{{ _disabled }} {{ _wishlist_bg}} bg-gray-100 dark:bg-gray-500 border-spacing-1.5 p-2 cursor-pointer rounded-md hover:bg-gray-300 hover:text-red-700 dark:hover:text-red-500 transition-all duration-300 ease-in-out delay-1s"
+    <button class="{{ _disabled }} {{ _wishlist_bg }} bg-slate-100 dark:bg-slate-500 border-spacing-1.5 p-2 cursor-pointer rounded-md hover:bg-slate-300 hover:text-red-700 dark:hover:text-red-500 transition-all duration-300 ease-in-out delay-1s"
             {% if customer is not null %}
                 title="{{ 'store.product.wishlist'|trans }}"
             {% endif %}

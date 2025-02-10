@@ -10,20 +10,20 @@
             <div class="block px-5 pt-5">
                 <div class="relative z-0 w-full mb-10 group">
                     <input type="text" name="name" id="name"
-                           class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none dark:bg-gray-700 dark:text-white dark:border-gray-300 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           class="block py-2.5 px-2 w-full text-sm text-slate-900 bg-slate-50 border-0 border-b-2 border-slate-300 appearance-none dark:bg-slate-700 dark:text-white dark:border-slate-300 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                            placeholder="{{ 'customer.name'|trans }}" value="{{ contact.name }}" readonly/>
                     <label for="name"
-                           class="peer-focus:font-medium absolute text-[1.095rem] text-gray-700 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-gray-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                           class="peer-focus:font-medium absolute text-[1.095rem] text-slate-700 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-slate-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ 'customer.name'|trans }}
                     </label>
                 </div>
                 <div class="relative z-0 w-full mb-10 group">
                     <input type="email" name="email" id="email"
-                           class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none dark:bg-gray-700 dark:text-white dark:border-gray-300 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           class="block py-2.5 px-2 w-full text-sm text-slate-900 bg-slate-50 border-0 border-b-2 border-slate-300 appearance-none dark:bg-slate-700 dark:text-white dark:border-slate-300 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                            placeholder="{{ 'title.email'|trans }}" value="{{ contact.email }}" readonly/>
                     <button data-copy-to-clipboard-target="email"
                             data-tooltip-target="tooltip-copy-email"
-                            class="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">
+                            class="absolute end-2 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg p-2 inline-flex items-center justify-center">
                         <span id="default-icon-email">
                             <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor"
@@ -41,23 +41,23 @@
                         </span>
                     </button>
                     <div id="tooltip-copy-email" role="tooltip"
-                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-slate-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-slate-700">
                         <span id="default-tooltip-message-email">{{ 'text.copy'|trans }}</span>
                         <span id="success-tooltip-message-email" class="hidden">{{ 'text.copied'|trans }}</span>
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
                     <label for="email"
-                           class="peer-focus:font-medium absolute text-[1.095rem] text-gray-700 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-gray-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                           class="peer-focus:font-medium absolute text-[1.095rem] text-slate-700 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-slate-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ 'title.email'|trans }}
                     </label>
                 </div>
                 <div class="relative z-0 w-full mb-10 group">
                     <input type="tel" name="phone" id="phone"
-                           class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none dark:bg-gray-700 dark:text-white dark:border-gray-300 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           class="block py-2.5 px-2 w-full text-sm text-slate-900 bg-slate-50 border-0 border-b-2 border-slate-300 appearance-none dark:bg-slate-700 dark:text-white dark:border-slate-300 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                            placeholder="{{ 'customer.phone'|trans }}" value="{{ contact.phone }}" readonly/>
                     <button data-copy-to-clipboard-target="phone"
                             data-tooltip-target="tooltip-copy-phone"
-                            class="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">
+                            class="absolute end-2 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg p-2 inline-flex items-center justify-center">
                         <span id="default-icon-phone">
                             <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor"
@@ -75,13 +75,13 @@
                         </span>
                     </button>
                     <div id="tooltip-copy-phone" role="tooltip"
-                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-slate-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-slate-700">
                         <span id="default-tooltip-message-phone">{{ 'text.copy'|trans }}</span>
                         <span id="success-tooltip-message-phone" class="hidden">{{ 'text.copied'|trans }}</span>
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
                     <label for="phone"
-                           class="peer-focus:font-medium absolute text-[1.095rem] text-gray-700 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-gray-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                           class="peer-focus:font-medium absolute text-[1.095rem] text-slate-700 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-slate-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ 'customer.phone'|trans }}
                     </label>
                 </div>
@@ -89,19 +89,19 @@
             <div class="col-span-1 md:col-span-2 lg:col-span-3 block mt-3 px-5 py-2">
                 <div class="relative z-0 w-full mb-10 group">
                     <input type="text" name="subject" id="subject"
-                           class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none dark:bg-gray-700 dark:text-white dark:border-gray-300 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           class="block py-2.5 px-2 w-full text-sm text-slate-900 bg-slate-50 border-0 border-b-2 border-slate-300 appearance-none dark:bg-slate-700 dark:text-white dark:border-slate-300 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                            placeholder="{{ 'label.form.subject'|trans }}" value="{{ contact.subject }}" readonly/>
                     <label for="subject"
-                           class="peer-focus:font-medium absolute text-[1.095rem] text-gray-700 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-gray-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                           class="peer-focus:font-medium absolute text-[1.095rem] text-slate-700 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-slate-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ 'label.form.subject'|trans }}
                     </label>
                 </div>
                 <div class="relative z-0 w-full mb-10 group">
                     <textarea name="message" id="message" rows="5"
-                              class="resize-none block py-2.5 px-2 w-full text-sm text-gray-900 bg-indigo-50 border-0 border-b-2 border-gray-300 appearance-none dark:bg-gray-700 dark:text-white dark:border-gray-300 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                              class="resize-none block py-2.5 px-2 w-full text-sm text-slate-900 bg-indigo-50 border-0 border-b-2 border-slate-300 appearance-none dark:bg-slate-700 dark:text-white dark:border-slate-300 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                               placeholder="{{ 'label.form.message'|trans }}" readonly>{{ contact.message }}</textarea>
                     <label for="message"
-                           class="peer-focus:font-medium absolute text-[1.095rem] text-gray-700 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-gray-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                           class="peer-focus:font-medium absolute text-[1.095rem] text-slate-700 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-slate-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ 'label.form.message'|trans }}
                     </label>
                 </div>
@@ -111,13 +111,13 @@
             <div class="flex flex-col gap-1 w-full">
                 {% for answer in answers %}
                     <div class="flex items-center space-x-2">
-                        <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ answer.user.userDetails.firstName }}</span>
-                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ answer.createdAt|date(datetime_format) }}</span>
+                        <span class="text-sm font-semibold text-slate-900 dark:text-white">{{ answer.user.userDetails.firstName }}</span>
+                        <span class="text-sm font-normal text-slate-500 dark:text-slate-400">{{ answer.createdAt|date(datetime_format) }}</span>
                     </div>
-                    <div class="flex flex-col leading-1.5 p-4 border-gray-200 odd:bg-gray-100 even:bg-indigo-50 rounded-e-xl rounded-es-xl odd:dark:bg-gray-700 even:dark:bg-gray-800">
-                        <p class="text-sm font-normal text-gray-900 dark:text-white">{{ answer.message|nl2br }}</p>
+                    <div class="flex flex-col leading-1.5 p-4 border-slate-200 odd:bg-slate-100 even:bg-indigo-50 rounded-e-xl rounded-es-xl odd:dark:bg-slate-700 even:dark:bg-slate-800">
+                        <p class="text-sm font-normal text-slate-900 dark:text-white">{{ answer.message|nl2br }}</p>
                     </div>
-                    <span class="text-xs md:text-sm text-end text-gray-500 dark:text-gray-200 mb-4">Delivered</span>
+                    <span class="text-xs md:text-sm text-end text-slate-500 dark:text-slate-200 mb-4">Delivered</span>
                 {% endfor %}
             </div>
         </div>
@@ -128,7 +128,7 @@
             <div class="border-1 border-spacing-1 p-4 mx-4">
                 <div class="relative z-0 w-full mb-10 group">
                     <textarea name="answer" id="answer" rows="8"
-                              class="block py-2.5 px-2 w-full text-sm text-gray-950 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none dark:bg-gray-700 dark:text-white dark:border-gray-300 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                              class="block py-2.5 px-2 w-full text-sm text-slate-950 bg-slate-50 border-0 border-b-2 border-slate-300 appearance-none dark:bg-slate-700 dark:text-white dark:border-slate-300 dark:focus:border-slate-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                               placeholder="{{ 'label.form.message'|trans }}">RE: =======================
 {{ contact.message|striptags|raw }}
 ==========================
@@ -137,7 +137,7 @@ Hello {{ contact.name }}!
 your message here
 ==========================</textarea>
                     <label for="answer"
-                           class="peer-focus:font-medium absolute text-[1.095rem] text-gray-700 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-gray-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                           class="peer-focus:font-medium absolute text-[1.095rem] text-slate-700 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-1 z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-slate-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ 'label.form.message'|trans }}
                     </label>
                 </div>

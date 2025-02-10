@@ -18,31 +18,31 @@
                 {% for key, category in categories %}
                     {% if key < 7 %}
                         <a href="{{ path('app_blog_category', {slug: category.slug}) }}"
-                           class="text-gray-500 hover:text-gray-500 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-500 dark:focus:ring-gray-800 inline-flex items-center justify-center"
+                           class="text-slate-500 hover:text-slate-500 border border-slate-200 hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-slate-500 dark:text-slate-500 dark:hover:text-white dark:hover:bg-slate-500 dark:focus:ring-slate-800 inline-flex items-center justify-center"
                            title="{{ category.description }}">{{ category.name }}</a>
                     {% else %}
                         <a href="{{ path('app_blog_category', {slug: category.slug}) }}"
-                           class="sr-only text-gray-500 hover:text-gray-500 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-500 dark:focus:ring-gray-800 inline-flex items-center justify-center"
+                           class="sr-only text-slate-500 hover:text-slate-500 border border-slate-200 hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-slate-500 dark:text-slate-500 dark:hover:text-white dark:hover:bg-slate-500 dark:focus:ring-slate-800 inline-flex items-center justify-center"
                            title="{{ category.description }}">{{ category.name }}</a>
                     {% endif %}
                 {% endfor %}
                 {% if categories|length > 7 %}
                     <a href="#" id="load-categories"
-                       class="text-gray-500 hover:text-gray-500 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-500 dark:focus:ring-gray-800 inline-flex items-center justify-center"
+                       class="text-slate-500 hover:text-slate-500 border border-slate-200 hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-slate-500 dark:text-slate-500 dark:hover:text-white dark:hover:bg-slate-500 dark:focus:ring-slate-800 inline-flex items-center justify-center"
                        title="...">...</a>
                 {% endif %}
             </li>
         {% endif %}
     </ul>
     {% if category %}
-        <div class="w-full mb-3 flex p-4 rounded-xl bg-gray-50 text-gray-500">
+        <div class="w-full mb-3 flex p-4 rounded-xl bg-slate-50 text-slate-500">
             {{ category.description }}
         </div>
     {% endif %}
     <div class="grid w-full gap-6 md:grid-cols-3">
         {% for entry in entries %}
             <div class="min-h-full flex-col justify-between">
-                <div class="min-h-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="min-h-full max-w-md bg-white border border-slate-200 rounded-lg shadow dark:bg-slate-800 dark:border-slate-700">
                     <div class="lg:max-w-xl relative overflow-hidden bg-cover bg-no-repeat rounded-t-lg">
                         <a href="{{ path('app_blog_view', {slug: entry.slug}) }}">
                             {% if entry.attach %}
@@ -60,7 +60,7 @@
                     <div class="m-2">
                         <a title="{{ entry.title }}"
                            href="{{ path('app_blog_view', {slug: entry.slug}) }}">
-                            <h5 class="text-lg font-bold hover:text-gray-700 tracking-tight truncate text-gray-500 dark:text-white">
+                            <h5 class="text-lg font-bold hover:text-slate-700 tracking-tight truncate text-slate-500 dark:text-white">
                                 {{ entry.title }}
                             </h5>
                         </a>
@@ -84,7 +84,7 @@
                             {% if entry.twitter_profile is not null %}
                                 <li>
                                     <a href="{{ entry.twitter_profile }}" target="_blank" class="mx-2">
-                                        <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                                        <svg class="w-5 h-5 text-slate-800 dark:text-white" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/>
@@ -107,7 +107,7 @@
                             {% endif %}
                         </ul>
                     </div>
-                    <div class="flex items-center border-t mt-3 pt-3 bg-gray-50 bg-opacity-75 pb-3 px-3 justify-between">
+                    <div class="flex items-center border-t mt-3 pt-3 bg-slate-50 bg-opacity-75 pb-3 px-3 justify-between">
                         <ul class="list-none inline-flex justify-between">
                             <li class="list-inline-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"

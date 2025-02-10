@@ -1,8 +1,8 @@
-<div id="deleteConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full">
-    <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white dark:bg-gray-800 max-w-md">
+<div id="deleteConfirm" class="fixed hidden z-50 inset-0 bg-slate-900 bg-opacity-60 overflow-y-auto h-full w-full">
+    <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white dark:bg-slate-800 max-w-md">
         <div class="flex justify-end p-2">
             <button onclick="closeModal('deleteConfirm')" type="button"
-                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -17,13 +17,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 class="text-xs md:text-sm text-gray-600 dark:text-white my-5">{{ 'alert.confirm.delete'|trans }}</h3>
+            <h3 class="text-xs md:text-sm text-slate-600 dark:text-white my-5">{{ 'alert.confirm.delete'|trans }}</h3>
             <a href="#" role="button"
                class="btn-red">
                 {{ 'form.action.confirm'|trans }}
             </a>
             <button onclick="closeModal('deleteConfirm')"
-                    class="btn-gray-strong">
+                    class="btn-slate-strong">
                 {{ 'form.action.cancel'|trans }}
             </button>
         </div>

@@ -7,19 +7,20 @@
     {{ _title_extend }}
     {% if app.request.get('id') %}
         {#        <a role="button" target="_blank" #}
-        {#           class="text-sm font-normal border shadow-md hover:border-gray-400 hover:bg-gray-100 hover:shadow-lg rounded-md px-3 py-2 float-end mb-1 dark:text-white dark:hover:bg-black" #}
+        {#           class="text-sm font-normal border shadow-md hover:border-slate-400 hover:bg-slate-100 hover:shadow-lg rounded-md px-3 py-2 float-end mb-1 dark:text-white dark:hover:bg-black" #}
         {#           href="{{ path('app_blog_view', {slug: form.vars.data.slug}) }}">{{ 'user.entry.preview'|trans }}</a> #}
     {% endif %}
 {% endblock %}
 {% block content %}
     {{ form_start(form, {attr: {novalidate: ''}}) }}
     {% if form_errors(form) %}
-        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-slate-800 dark:text-red-400"
+             role="alert">
             {{ form_errors(form) }}
         </div>
     {% endif %}
     {% if error %}
-        <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
+        <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-slate-800 dark:text-yellow-300"
              role="alert">
             {{ error }}
         </div>
@@ -62,7 +63,7 @@
         <div class="block text-center mx-3">
             {{ form_widget(form.next, { label: app.request.get('id') ? 'form.action.update' : 'form.action.next', attr: {class: 'btn-red'}}) }}
             <a role="button" href="{{ url('app_dashboard_blog') }}"
-               class="btn-gray-strong">{{ 'form.action.back'|trans }}</a>
+               class="btn-slate-strong">{{ 'form.action.back'|trans }}</a>
         </div>
     </div>
     {{ form_end(form) }}
