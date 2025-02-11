@@ -8,11 +8,41 @@ const cart = document.getElementById('show-cart');
 const attributes = document.querySelectorAll('#attributes');
 const forms = document.querySelectorAll('.shopping-cart');
 const wishlists = document.querySelectorAll('.add-wishlist');
+const comparison = document.querySelectorAll('.compare');
 const headers = {'Content-type': 'application/json; charset=utf-8'};
 const bulkRemoveWishlist = document.getElementById('bulk-remove');
 const target = document.getElementById('dropdown');
 const trigger = document.getElementById('dropdown-search');
 const success = document.getElementById('toast-success');
+
+if (typeof comparison != 'undefined') {
+    [...comparison].forEach((form) => {
+        const url = form.getAttribute('action');
+        let product = form.querySelector('input[name="product"]');
+        let button = form.querySelector('button[type="submit"]');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({product: product.value})
+            })
+                .then((response) => {
+                    if (response.status === 401) {
+                        return false;
+                    }
+                    button.classList.remove('text-gray-600');
+                    button.classList.add('pointer-events-none', 'text-blue-500', 'animate__animated', 'animate__heartBeat');
+                    return response.json();
+                })
+                .then((data) => {
+                    document.getElementById('comparison').innerText = data.count;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        });
+    });
+}
 
 if (target !== null) {
     [...target.getElementsByTagName('button')].forEach((btn) => {
