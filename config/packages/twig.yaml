@@ -6,7 +6,7 @@ twig:
         date_format: '%app.date_format%'
         time_format: '%app.time_format%'
         shop: '@Inno\Service\MarketPlace\Store\Order\ShopService'
-        msg: '@Inno\Service\MessageCounter'
+        msg: '@Inno\Service\Counter'
 when@test:
     twig:
         strict_variables: true

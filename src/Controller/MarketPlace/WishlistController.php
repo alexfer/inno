@@ -20,7 +20,6 @@ class WishlistController extends AbstractController
     #[Route('/add/{slug}', name: 'app_market_place_add_wishlist', methods: ['POST'])]
     public function add(Request $request): Response
     {
-
         $product = $this->em->getRepository(StoreProduct::class)->findOneBy(['slug' => $request->get('slug')]);
         $parameters = json_decode($request->getContent(), true);
 
