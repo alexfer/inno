@@ -32,7 +32,7 @@
         {% include 'layouts/header.html.twig' %}
     </header>
     <main class="mb-auto" id="key" data-hash="{{ app.user ? app.user.email|crypto|base64encode : null }}">
-        <section class="bg-white dark:bg-slate-900 shadow-inner">
+        <section class="bg-white dark:bg-slate-900 shadow-inner dark:shadow-slate-950/20">
             {% block search %}{% endblock %}
             {% block extra_search %}{% endblock %}
             <div class="max-w-screen-xl flex mx-auto {% block offest %}pt-4 py-8 lg:py-16 lg:px-2{% endblock %}">

@@ -194,7 +194,7 @@
                 </tr>
                 <tr>
                     <td class="font-medium whitespace-nowrap">{{ 'store.product.availability'|trans }}</td>
-                    <td>{% if product.quantity == 0 %}{{ 'store.product.out_stock'|trans }}{% else %}{{ 'store.product.in_stock'|trans }}{% endif %}</td>
+                    <td>{% if product.quantity == 0 %}<span class="text-slate-300 dark:text-slate-500">{{ 'store.product.out_stock'|trans }}</span>{% else %}{{ 'store.product.in_stock'|trans }}{% endif %}</td>
                 </tr>
                 </tbody>
             </table>
