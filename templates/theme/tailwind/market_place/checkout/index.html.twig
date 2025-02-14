@@ -80,7 +80,7 @@
                     {% endif %}
                 </div>
                 {% if app.request.get('session') == null %}
-                    <a href="{{ path('app_market_place_order_summary') }}"
+                    <a href="{{ app.request.headers.get('referer') }}"
                        class="text-center block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-slate-200 hover:text-white shadow-black-3 transition duration-150 ease-in-out hover:bg-black-accent-300 hover:shadow-black-2 focus:bg-black-accent-300 focus:shadow-black-2 focus:outline-none focus:ring-0 active:bg-black-600 active:shadow-black-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">{{ 'form.action.back_order'|trans }}</a>
                 {% endif %}
             </div>
