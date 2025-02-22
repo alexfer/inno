@@ -1,8 +1,7 @@
-create function backdrop_products(store_id integer, query text DEFAULT NULL::text, start integer DEFAULT 0,
-                                  row_count integer DEFAULT 25) returns json
-    language 'plpgsql'
-as
-$$
+CREATE OR REPLACE FUNCTION public.backdrop_products(store_id integer, query text DEFAULT NULL::text, start integer DEFAULT 0, row_count integer DEFAULT 25)
+    RETURNS json
+    LANGUAGE plpgsql
+AS $function$
 DECLARE
     results    JSON;
     rows_count INTEGER;
@@ -61,6 +60,4 @@ BEGIN
             'rows', rows_count
            );
 END ;
-$$;
-
-alter function backdrop_products(integer, text, integer, integer) owner to inno;
+$function$
