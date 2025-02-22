@@ -74,17 +74,17 @@
                                data-dropdown-toggle="dropdown-status-{{ key }}"
                                aria-expanded="false"
                                class="text-slate-800 text-sm underline hover:no-underline font-normal dark:text-slate-200">{{ 'label.form.status'|trans }}</a>
-                            <div id="dropdown-status-{{ key }}" class="z-10 hidden">
-                                <ul class="w-36 md:w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white dark:bg-slate-800 bg-clip-padding text-left"
+                            <div id="dropdown-status-{{ key }}" class="absolute z-20 start-0 hidden origin-top-left dark:bg-slate-700 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none bg-white dark:shadow-xl">
+                                <ul class="w-36 md:w-48 space-y-1 text-xs md:text-sm font-medium py-0.5 md:py-1"
                                     aria-labelledby="dropdown-action-{{ key }}">
                                     <li>
-                                        <a class="block px-3 py-2 bg-transparent rounded-md dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 text-slate-500 hover:text-slate-700 focus:text-slate-700 hover:bg-slate-100 focus:bg-slate-200 focus:outline-none focus:shadow-outline"
+                                        <a class="dropdown-item"
                                            href="#">{{ 'order.action.cancel'|trans }}</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="text-right absolute end-1 md:end-0 mt-1 md:mt-0 md:inline md:relative items-end">
+                        <div class="absolute end-1 md:me-2 md:-mt-1 md:inline-flex space-x-1 items-end">
                             {% if order.status == 'confirmed' %}
                                 <a href="#"
                                    class="bg-red-500 hover:bg-red-800 text-xs font-medium rounded px-2.5 py-1.5 text-white dark:text-slate-100">Order
@@ -94,15 +94,15 @@
                                    data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="click"
                                    aria-expanded="false"
                                    class="bg-indigo-500 hover:bg-indigo-800 text-xs font-medium rounded px-2.5 py-1.5 text-white dark:text-slate-100">{{ 'customer.cabinet.invoice'|trans }}</a>
-                                <div id="invoice-status-{{ key }}" class="z-10 hidden">
-                                    <ul class="w-36 md:w-48 min-w-max list-none overflow-hidden p-2 text-xs md:text-sm font-medium shadow-lg rounded-md border-none bg-white dark:bg-slate-800 bg-clip-padding text-left"
+                                <div id="invoice-status-{{ key }}" class="absolute z-20 start-0 hidden origin-top-left dark:bg-slate-700 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none bg-white dark:shadow-xl">
+                                    <ul class="w-36 md:w-48 space-y-1 text-xs md:text-sm font-medium py-0.5 md:py-1"
                                         aria-labelledby="dropdown-invoice-{{ key }}">
                                         <li>
-                                            <a class="block px-3 py-2 bg-transparent rounded-md dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 text-slate-500 hover:text-slate-700 focus:text-slate-700 hover:bg-slate-100 focus:bg-slate-200 focus:outline-none focus:shadow-outline"
+                                            <a class="dropdown-item"
                                                href="{{ path('app_marketplace_cabinet_invoice_download', {order: order.id, invoice: order.invoice.id}) }}">{{ 'customer.cabinet.download.invoice'|trans }}</a>
                                         </li>
                                         <li>
-                                            <a class="send-invoice block px-3 py-2 bg-transparent rounded-md dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:focus:text-white dark:hover:text-white dark:text-slate-200 md:mt-0 text-slate-500 hover:text-slate-700 focus:text-slate-700 hover:bg-slate-100 focus:bg-slate-200 focus:outline-none focus:shadow-outline"
+                                            <a class="send-invoice dropdown-item"
                                                href="{{ path('app_marketplace_cabinet_invoice_send', {order: order.id, invoice: order.invoice.id}) }}">{{ 'customer.cabinet.send.invoice'|trans }}</a>
                                         </li>
                                     </ul>
