@@ -213,10 +213,10 @@ final class OrderService implements OrderServiceInterface
 
     /**
      * @param array $orders
-     * @param StoreCustomer $customer
+     * @param StoreCustomer|null $customer
      * @return void
      */
-    public function updateAfterAuthenticate(array $orders, StoreCustomer $customer): void
+    public function updateAfterAuthenticate(array $orders, ?StoreCustomer $customer): void
     {
         foreach ($orders as $key => $order) {
             $customerOrder = $this->em->getRepository(StoreCustomerOrders::class)->find($key);

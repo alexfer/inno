@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="flex flex-col md:flex-row gap-2">
+        {% for product in products %}
+            <div class="max-w-sm bg-white border py-2 px-0.5 border-slate-200 rounded-lg shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}" class="">
+                    {% if product.storeProductAttaches %}
+                        {% set _picture = product.storeProductAttaches.first.attach.path ~ '/' ~ product.storeProductAttaches.first.attach.name %}
+                        <img loading="lazy" src="{{ asset(_picture)|imagine_filter('product_preview') }}"
+                             class="h-48 w-96 object-cover rounded-t-lg" alt="{{ product.name }}">
+                    {% else %}
+                        <img loading="lazy" src="{{ asset('img/300x200.png') }}"
+                             class="h-48 w-96 object-cover rounded-t-lg"
+                             alt="{{ product.name }}">
+                    {% endif %}
+                </a>
+                <div class="p-5">
+                    <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
+                       class="line-clamp-1">
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">{{ product.shortName }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-slate-700 dark:text-slate-400 line-clamp-1">{{ product.name }}</p>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="p-1.5 bg-slate-50 rounded-md text-3xl font-medium text-indigo-400">
+                            {% set price = discount(product.cost, product.storeProductDiscount.value, product.fee, 1, product.storeProductDiscount.unit) %}
+                            {{ price|amount_format }}{{ product.store.currency|currency }}
+                        </div>
+                        {% if product.storeProductDiscount.unit is not empty %}
+                            <div class="badge-red">{{ product.storeProductDiscount.value }}{{ product.storeProductDiscount.unit|convert(product.store.currency|currency) }} {{ 'store.product.off'|trans }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <div>{{ 'store.brand'|trans }}</div>
+                        <div>{{ product.storeProductBrand.brand.name|default('N/a') }}</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <div>{{ 'store.supplier'|trans }}</div>
+                        <div>{{ product.storeProductSupplier.supplier.name|default('N/a') }}</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div>{{ 'store.manufacturer'|trans }}</div>
+                        <div>{{ product.storeProductManufacturer.manufacturer.name|default('N/a') }}</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <form class="shopping-cart transition-all duration-300 ease-in-out delay-1s"
+                              method="post"
+                              action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
+                            <button class="text-slate-500 bg-slate-50 bg-opacity-75 border border-slate-200 hover:bg-slate-50 hover:shadow hover:text-slate-700 rounded-md p-2 transition-all duration-300 ease-in-out delay-1s dark:border-slate-500 dark:hover:bg-slate-800 dark:text-slate-50 dark:bg-slate-600 dark:hover:text-red-500 cursor-pointer"
+                                    data-slug="{{ product.slug }}" type="submit"
+                                    {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and 'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                     class="w-6 h-6">
+                                    <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <div>
+                            {% if product.quantity == 0 %}
+                                {{ 'store.product.sold_out'|trans }}
+                            {% else %}
+                                <span class="me-1">{{ 'store.product.in_stock'|trans }}</span>{{ product.quantity }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block toast %}
+    {% include 'layouts/toast/success.html.twig' %}
+{% endblock %}

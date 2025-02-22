@@ -28,6 +28,10 @@ class ProductController extends AbstractController
             throw $this->createNotFoundException();
         }
 
+        if ($product['product']['store']['website'] !== null) {
+            $product['product']['store']['website'] = parse_url($product['product']['store']['website'], PHP_URL_HOST);
+        }
+
         return $this->render('market_place/product/index.html.twig', [
             'product' => $product['product'],
             'customer' => $this->getCustomer($this->getUser()),
