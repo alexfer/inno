@@ -80,7 +80,7 @@ class UserAuthenticator extends AbstractAuthenticator
         }
 
         return new Passport(
-            new UserBadge($payload['email'], function ($userIdentifier) use ($request, $orders) {
+            new UserBadge($payload['email'], function ($userIdentifier) use ($cookies, $request, $orders) {
                 // optionally pass a callback to load the User manually
                 $user = $this->em->getRepository(User::class)->loadUserByIdentifier($userIdentifier);
 
@@ -90,7 +90,8 @@ class UserAuthenticator extends AbstractAuthenticator
 
                 if ($orders) {
                     $customer = $this->em->getRepository(StoreCustomer::class)->findOneBy(['member' => $user]);
-                    $this->processor->updateAfterAuthenticate($orders, $customer);
+                    $this->processor->frontSession = $this->frontSession;
+                    $this->processor->updateAfterAuthenticate($orders, $customer, $cookies);
                 }
 
                 $user->setIp($request->getClientIp())

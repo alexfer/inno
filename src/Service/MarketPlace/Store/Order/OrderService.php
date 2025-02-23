@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Inno\Entity\MarketPlace\{Store, StoreCustomer, StoreCustomerOrders, StoreOrders, StoreOrdersProduct, StoreProduct};
 use Inno\Helper\MarketPlace\MarketPlaceHelper;
 use Inno\Service\MarketPlace\Store\Order\Interface\OrderServiceInterface;
+use Inno\Storage\MarketPlace\FrontSessionInterface;
 use Symfony\Component\HttpFoundation\{RequestStack};
 use Symfony\Component\Uid\Uuid;
 
@@ -15,6 +16,11 @@ final class OrderService implements OrderServiceInterface
      * @var string|null
      */
     private ?string $sessionId;
+
+    /**
+     * @var FrontSessionInterface 
+     */
+    public FrontSessionInterface $frontSession;
 
     /**
      * @param RequestStack $requestStack
@@ -214,16 +220,43 @@ final class OrderService implements OrderServiceInterface
     /**
      * @param array $orders
      * @param StoreCustomer|null $customer
+     * @param string|null $cookies
      * @return void
      */
-    public function updateAfterAuthenticate(array $orders, ?StoreCustomer $customer): void
+    public function updateAfterAuthenticate(
+        array          $orders,
+        ?StoreCustomer $customer,
+        ?string        $cookies = null,
+    ): void
     {
         foreach ($orders as $key => $order) {
-            $customerOrder = $this->em->getRepository(StoreCustomerOrders::class)->find($key);
-            $customerOrder->setCustomer($customer);
-            $this->em->persist($customerOrder);
+            if ($customer === null) {
+                $this->flushOrder($order);
+                $this->frontSession->delete($cookies);
+            } else {
+                $customerOrder = $this->em->getRepository(StoreCustomerOrders::class)->find($key);
+                $customerOrder->setCustomer($customer);
+                $this->em->persist($customerOrder);
+            }
         }
-
         $this->em->flush();
+    }
+
+    /**
+     * @param string|int $id
+     * @return void
+     */
+    protected function flushOrder(string|int $id): void
+    {
+        $order = $this->em->getRepository(StoreOrders::class)->find($id);
+        foreach ($order->getStoreOrdersProducts() as $storeOrdersProduct) {
+            $order->removeStoreOrdersProduct($storeOrdersProduct);
+            $this->em->remove($storeOrdersProduct);
+        }
+        foreach ($order->getStoreCustomerOrders() as $storeCustomerOrder) {
+            $order->removeStoreCustomerOrder($storeCustomerOrder);
+            $this->em->remove($storeCustomerOrder);
+        }
+        $this->em->remove($order);
     }
 }

@@ -61,15 +61,10 @@
                         </div>
                     </div>
                 {% else %}
-                    <div id="not-found" class="text-center visually-hidden">
-                        <img class="block mx-auto"
-                             src="{{ asset('img/empty-result.svg') }}"
-                             width="340" alt="{{ 'store.product.wishlist.empty'|trans }}">
-                        <p class="text-center">
-                            {{ 'store.product.wishlist.empty'|trans }}
-                            <a class="block font-light"
-                               href="{{ path('app_cabinet') }}">{{ 'form.action.back'|trans }}</a>
-                        </p>
+                    <div class="mx-auto text-center text-slate-700 dark:text-slate-200 mt-5">
+                        <h4 class="text-xl font-medium">{{ 'empty.list.header'|trans }}</h4>
+                        <div class="max-w-sm mx-auto my-5 text-sm md:text-base">{{ 'empty.list.text'|trans }}</div>
+                        <a href="{{ path('app_market_place_index') }}" class="px-5 py-1.5 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">{{ 'start.shopping'|trans }}</a>
                     </div>
                 {% endif %}
             </div>

@@ -12,6 +12,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/market-place/comparison')]
 class CompareController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/add', name: 'app_market_place_add_compare', methods: ['POST'])]
     public function add(Request $request): Response
     {
@@ -46,6 +50,10 @@ class CompareController extends AbstractController
         ], Response::HTTP_OK);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/remove/{id}', name: 'app_market_place_remove_compare', methods: ['GET'])]
     public function remove(Request $request): Response
     {
@@ -55,6 +63,11 @@ class CompareController extends AbstractController
 
         if ($items) {
             $items = unserialize($items);
+
+            if (count($items) == 1) {
+                $session->remove('products');
+                return $this->redirect($this->generateUrl('app_market_place_index'));
+            }
 
             foreach ($items as $item) {
                 if ($request->get('id') == $item) {
@@ -68,6 +81,11 @@ class CompareController extends AbstractController
         return $this->redirect($this->generateUrl('app_market_place_overview_comparison'));
     }
 
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('', name: 'app_market_place_overview_comparison', methods: ['GET'])]
     public function getCompareProducts(Request $request, EntityManagerInterface $manager): Response
     {

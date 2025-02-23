@@ -4,12 +4,12 @@
      aria-labelledby="shopping-cart-label"
      data-url="{{ path('app_market_place_product_order_cart') }}">
     <div class="flex items-center justify-between">
-        <h5 class="mb-0 ml-5 font-light text-base leading-normal dark:text-slate-100"
+        <h5 class="mb-0 ml-5 font-light text-sm md:text-base leading-normal dark:text-slate-100"
             id="shopping-cart-label">{{ 'store.product.cart'|trans }}
             ({{ shop.quantity()|default(0) }})
         </h5>
         <button type="button"
-                class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+                class="box-content rounded-none border-none text-slate-500 hover:text-slate-800 hover:no-underline focus:text-slate-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-slate-300"
                 data-drawer-hide="shopping-cart" aria-controls="shopping-cart"
                 aria-label="{{ 'form.action.close'|trans }}">
               <span class="[&>svg]:h-6 [&>svg]:w-6">
@@ -23,11 +23,5 @@
               </span>
         </button>
     </div>
-    <div class="offcanvas-body flex-grow overflow-y-auto pt-2" id="order-body">
-        <div class="text-center sr-only">
-            <img class="d-block mx-auto mb-5 border-0 h-50 w-50 shadow-none" src="{{ asset('img/empty-result.svg') }}"
-                 alt="{{ 'store.product.cart.empty'|trans }}">
-            <p class="lead dark:text-white">{{ 'store.product.cart.empty'|trans }}</p>
-        </div>
-    </div>
+    <div class="offcanvas-body flex-grow pt-2" id="order-body"></div>
 </div>
