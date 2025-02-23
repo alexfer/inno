@@ -7,7 +7,6 @@ window.addEventListener('load', function () {
     const injectBtn = document.getElementById('inject');
     const attachments = document.getElementById('attachments');
     const message = document.querySelector('[role="alert"]');
-    const list = document.querySelectorAll('.pictures');
     let pictures = NodeList, ids = [];
 
     const loadContent = async (url) => {
@@ -31,13 +30,9 @@ window.addEventListener('load', function () {
         loadMore.setAttribute('href', `${data.url}/?page=${data.nextPage}`);
     });
 
-    btn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        await loadContent(url);
-        pictures = await document.querySelectorAll('.pictures');
-
-        if (pictures.length > 0) {
-            [...pictures].forEach((item) => {
+    const handleImages = async (images) => {
+        if (images.length > 0) {
+            [...images].forEach((item) => {
                 item.addEventListener('click', async (e) => {
                     e.preventDefault();
                     const checkbox = item.querySelector('input[type="checkbox"]');
@@ -49,6 +44,13 @@ window.addEventListener('load', function () {
                 });
             });
         }
+    };
+
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await loadContent(url);
+        pictures = await document.querySelectorAll('.pictures');
+        await handleImages(pictures);
     });
 
     injectBtn.addEventListener('click', async () => {

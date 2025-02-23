@@ -27,6 +27,7 @@ BEGIN
                             'number', o.number,
                             'created', o.created_at,
                             'completed', o.completed_at,
+                            'cancelled', o.cancelled_at,
                             'status', o.status,
                             'tax', o.tax,
                             'total_quantity',

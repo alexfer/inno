@@ -3,12 +3,19 @@
 namespace Inno\Controller\MarketPlace\Cabinet;
 
 use Inno\Controller\Trait\ControllerTrait;
-use Inno\Entity\MarketPlace\{StoreCustomer, StoreCustomerOrders, StoreMessage, StoreOrders, StoreWishlist};
+use Inno\Entity\MarketPlace\{Enum\EnumStoreOrderStatus,
+    StoreCustomer,
+    StoreCustomerOrders,
+    StoreMessage,
+    StoreOrders,
+    StoreWishlist};
 use Inno\Entity\User;
 use Inno\Form\Type\MarketPlace\{AddressType, CustomerProfileType};
 use Inno\Form\Type\User\ChangePasswordFormType;
 use Inno\Service\MarketPlace\Store\Customer\Interface\CustomerServiceInterface as CustomerInterface;
 use Inno\Service\MarketPlace\Store\Message\Interface\MessageServiceInterface;
+use Inno\Storage\MarketPlace\FrontSessionHandler;
+use Inno\Storage\MarketPlace\FrontSessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -35,6 +42,32 @@ class CabinetController extends AbstractController
         return $this->em->getRepository(StoreCustomer::class)->findOneBy([
             'member' => $user,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param FrontSessionInterface $frontSession
+     * @return Response
+     */
+    #[Route(path: '/order/cancel/{number}', name: 'app_cabinet_order_cancel', methods: ['GET'])]
+    public function cancel(Request $request, FrontSessionInterface $frontSession): Response
+    {
+
+        $order = $this->em->getRepository(StoreOrders::class)->findOneBy(['number' => $request->get('number')]);
+
+        if ($order) {
+            $order->setStatus(EnumStoreOrderStatus::Cancelled)
+                ->setSession(null)
+                ->setCancelledAt(new \DateTime());
+            $this->em->persist($order);
+            $this->em->flush();
+
+            $cookies = $request->cookies->get(FrontSessionHandler::NAME);
+            if ($cookies && $frontSession->has($cookies)) {
+                $frontSession->delete($cookies);
+            }
+        }
+        return $this->redirectToRoute('app_cabinet');
     }
 
     /**

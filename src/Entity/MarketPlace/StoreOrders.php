@@ -60,6 +60,9 @@ class StoreOrders
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $completed_at = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $cancelled_at = null;
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
@@ -360,6 +363,25 @@ class StoreOrders
     public function setTax(?string $tax): static
     {
         $this->tax = $tax;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCancelledAt(): ?\DateTimeInterface
+    {
+        return $this->cancelled_at;
+    }
+
+    /**
+     * @param DateTimeInterface|null $cancelled_at
+     * @return $this
+     */
+    public function setCancelledAt(?\DateTimeInterface $cancelled_at): static
+    {
+        $this->cancelled_at = $cancelled_at;
 
         return $this;
     }

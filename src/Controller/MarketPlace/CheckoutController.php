@@ -4,6 +4,7 @@ namespace Inno\Controller\MarketPlace;
 
 use Inno\Entity\MarketPlace\Enum\EnumStoreOrderStatus;
 use Inno\Entity\MarketPlace\StoreInvoice;
+use Inno\Entity\User;
 use Inno\Form\Type\MarketPlace\CustomerType;
 use Inno\Form\Type\User\LoginType;
 use Inno\Service\MarketPlace\Store\Checkout\Interface\CheckoutServiceInterface as Checkout;
@@ -48,6 +49,10 @@ class CheckoutController extends AbstractController
         $session = $request->getSession();
         $hasUsed = false;
         $user = $this->getUser();
+
+        if ($user && (in_array(User::ROLE_ADMIN, $user->getRoles(), true) || in_array(User::ROLE_USER, $user->getRoles(), true))) {
+            return $this->redirectToRoute('app_dashboard');
+        }
 
         $customer = $userManager->get($user);
         $form = $this->createForm(CustomerType::class, $customer);
