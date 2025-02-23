@@ -33,8 +33,9 @@ interface OrderServiceInterface
 
     /**
      * @param array $orders
-     * @param StoreCustomer $customer
+     * @param StoreCustomer|null $customer
+     * @param string|null $cookies
      * @return void
      */
-    public function updateAfterAuthenticate(array $orders, StoreCustomer $customer): void;
+    public function updateAfterAuthenticate(array $orders, ?StoreCustomer $customer, ?string $cookies = null): void;
 }

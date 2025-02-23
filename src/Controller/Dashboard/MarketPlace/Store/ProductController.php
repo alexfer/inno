@@ -317,6 +317,7 @@ class ProductController extends AbstractController
         $oldFile = $this->getTargetDir($product->getId(), $params) . '/' . $attach->getName();
 
         $exists = $em->getRepository(FileManager::class)->findOneBy(['file' => $attach, 'owner' => $this->getUser()]);
+        $em->remove($productAttach);
 
         if ($exists === null) {
             foreach (['product_preview', 'product_view'] as $filter) {
@@ -331,8 +332,6 @@ class ProductController extends AbstractController
             $em->remove($attach);
         }
 
-        $productAttach->setAttach(null)->setProduct(null);
-        $em->remove($productAttach);
         $em->flush();
 
         return $this->json(['message' => $translator->trans('user.picture.delete'), 'file' => $attach->getName()]);

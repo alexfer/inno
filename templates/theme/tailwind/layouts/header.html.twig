@@ -24,7 +24,7 @@
                     </button>
                 </li>
                 <li class="relative inline-block">
-                    <a href="javascript:void(0)" class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
+                    <a href="{{ path('app_market_place_overview_comparison') }}" class="block w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-slate-200 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                              class="h-6 md:h-8 p-1 md:p-2 text-slate-500">
                             <path fill-rule="evenodd"
@@ -140,6 +140,16 @@
                                     <li>
                                         <a class="dropdown-item"
                                            href="{{ path('app_cabinet') }}">{{ _arrow_left|raw }}{{ 'title.customer.cabinet'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           href="{{ path('app_cabinet_wishlist') }}">{{ _arrow_left|raw }}{{ 'customer.cabinet.wishlist'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           href="{{ path('app_cabinet_messages') }}">{{ _arrow_left|raw }}{{ 'customer.cabinet.messages'|trans }}
                                         </a>
                                     </li>
                                     <li>

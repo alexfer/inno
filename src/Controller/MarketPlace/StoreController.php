@@ -37,7 +37,7 @@ class StoreController extends AbstractController
     public function redirectTo(Request $request): Response
     {
         $store = $this->em->getRepository(Store::class)->findOneBy(['slug' => $request->get('slug')]);
-        return $this->redirect($store->getUrl(), 301);
+        return $this->redirect($store->getWebsite(), 301);
     }
 
     /**

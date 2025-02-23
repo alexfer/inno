@@ -1064,6 +1064,22 @@
                 <source>label.form.quantity_pcs</source>
                 <target>pcs.</target>
             </trans-unit>
+            <trans-unit id="empty.list.header">
+                <source>empty.list.header</source>
+                <target>Ooops...your list is empty!</target>
+            </trans-unit>
+            <trans-unit id="empty.list.text">
+                <source>empty.list.text</source>
+                <target><![CDATA[No products have been added yet. Go to homepage and search for products!]]></target>
+            </trans-unit>
+            <trans-unit id="empty.orders.list.text">
+                <source>empty.orders.list.text</source>
+                <target><![CDATA[No orders have been added yet. Go to homepage and search for products!]]></target>
+            </trans-unit>
+            <trans-unit id="empty.messages.list.text">
+                <source>empty.messages.list.text</source>
+                <target><![CDATA[No messages have been added yet.]]></target>
+            </trans-unit>
             <trans-unit id="label.form.cost">
                 <source>label.form.cost</source>
                 <target>Cost</target>
@@ -1226,7 +1242,7 @@
             </trans-unit>
             <trans-unit id="store.product.in_stock">
                 <source>store.product.in_stock</source>
-                <target>In Stock</target>
+                <target>In stock</target>
             </trans-unit>
             <trans-unit id="store.product.out_stock">
                 <source>store.product.out_stock</source>
@@ -2192,9 +2208,13 @@
                 <source>order.summary</source>
                 <target>Summary</target>
             </trans-unit>
-            <trans-unit id="order.continue.shopping">
-                <source>order.continue.shopping</source>
+            <trans-unit id="continue.shopping">
+                <source>continue.shopping</source>
                 <target>Continue shopping</target>
+            </trans-unit>
+            <trans-unit id="start.shopping">
+                <source>start.shopping</source>
+                <target>Start shopping</target>
             </trans-unit>
             <trans-unit id="order.update.cart">
                 <source>order.update.cart</source>
@@ -2207,6 +2227,10 @@
             <trans-unit id="order.your.orders">
                 <source>order.your.orders</source>
                 <target>Your orders</target>
+            </trans-unit>
+            <trans-unit id="list.comparison">
+                <source>list.comparison</source>
+                <target>List comparison</target>
             </trans-unit>
             <trans-unit id="product.details">
                 <source>product.details</source>

@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'list.comparison'|trans }}{% endblock %}
+{% block childen %}{% endblock %}
+{% block body %}
+    <h2 class="block line-clamp-1">{{ 'list.comparison'|trans }}</h2>
+    <div class="flex flex-col md:flex-row gap-2">
+        {% for product in products %}
+            <div class="max-w-sm relative bg-white border border-slate-200 rounded-lg shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <div class="absolute -end-2 -top-2">
+                    <a class="block p-1 md:p-1.5 text-slate-50 bg-slate-500 hover:bg-slate-700 rounded-full"
+                       href="{{ path('app_market_place_remove_compare', {id: product.id}) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true" role="img" class="w-4 h-4" width="1em" height="1em"
+                             viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="1.5"
+                                  d="m14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21q.512.078 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48 48 0 0 0-3.478-.397m-12 .562q.51-.088 1.022-.165m0 0a48 48 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a52 52 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a49 49 0 0 0-7.5 0"></path>
+                        </svg>
+                    </a>
+                </div>
+                <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}" class="">
+                    {% if product.storeProductAttaches.count %}
+                        {% set _picture = product.storeProductAttaches.first.attach.path ~ '/' ~ product.storeProductAttaches.first.attach.name %}
+                        <img loading="lazy" src="{{ asset(_picture)|imagine_filter('product_preview') }}"
+                             class="h-48 w-96 object-cover rounded-t-lg" alt="{{ product.name }}">
+                    {% else %}
+                        <img loading="lazy" src="{{ asset('img/300x200.png') }}"
+                             class="h-48 w-96 object-cover rounded-t-lg"
+                             alt="{{ product.name }}">
+                    {% endif %}
+                </a>
+                <div class="p-5">
+                    <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}"
+                       class="line-clamp-1">
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">{{ product.shortName }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-slate-700 dark:text-slate-400 line-clamp-1">{{ product.name }}</p>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="p-1.5 bg-slate-50 rounded-md text-3xl font-medium text-indigo-400">
+                            {% set price = discount(product.cost, product.storeProductDiscount.value, product.fee, 1, product.storeProductDiscount.unit) %}
+                            {{ price|amount_format }}{{ product.store.currency|currency }}
+                        </div>
+                        {% if product.storeProductDiscount.unit is not empty %}
+                            <div class="badge-red">{{ product.storeProductDiscount.value }}{{ product.storeProductDiscount.unit|convert(product.store.currency|currency) }} {{ 'store.product.off'|trans }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center justify-between mb-2 text-slate-700 dark:text-slate-400">
+                        <div>{{ 'store.brand'|trans }}</div>
+                        <div class="font-medium">{{ product.storeProductBrand.brand.name|default('N/a') }}</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-2 text-slate-700 dark:text-slate-400">
+                        <div>{{ 'store.supplier'|trans }}</div>
+                        <div class="font-medium">{{ product.storeProductSupplier.supplier.name|default('N/a') }}</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-5 text-slate-700 dark:text-slate-400">
+                        <div>{{ 'store.manufacturer'|trans }}</div>
+                        <div class="font-medium">{{ product.storeProductManufacturer.manufacturer.name|default('N/a') }}</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <form class="shopping-cart transition-all duration-300 ease-in-out delay-1s"
+                              method="post"
+                              action="{{ path('app_market_place_product_order', {product: product.slug}) }}">
+                            <button class="text-slate-500 bg-slate-50 bg-opacity-75 border border-slate-200 hover:bg-slate-50 hover:shadow hover:text-red-700 rounded-md p-2 transition-all duration-300 ease-in-out delay-1s dark:border-slate-500 dark:hover:bg-slate-800 dark:text-slate-50 dark:bg-slate-600 dark:hover:text-red-500 cursor-pointer"
+                                    data-slug="{{ product.slug }}" type="submit"
+                                    {% if product.quantity == 0 or (app.user and 'ROLE_USER' in app.user.roles or app.user and 'ROLE_ADMIN' in app.user.roles) %}disabled{% endif %}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                     class="w-6 h-6">
+                                    <path d="M1.75 1.002a.75.75 0 1 0 0 1.5h1.835l1.24 5.113A3.752 3.752 0 0 0 2 11.25c0 .414.336.75.75.75h10.5a.75.75 0 0 0 0-1.5H3.628A2.25 2.25 0 0 1 5.75 9h6.5a.75.75 0 0 0 .73-.578l.846-3.595a.75.75 0 0 0-.578-.906 44.118 44.118 0 0 0-7.996-.91l-.348-1.436a.75.75 0 0 0-.73-.573H1.75ZM5 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <div class="text-slate-700 dark:text-slate-400">
+                            {% if product.quantity == 0 %}
+                                <span class="text-slate-500 dark:text-slate-700">{{ 'store.product.sold_out'|trans }}</span>
+                            {% else %}
+                                <span class="me-1">{{ 'store.product.in_stock'|trans }}:</span>{{ product.quantity }}{{ 'label.form.quantity_pcs'|trans }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% if products|length == 0 %}
+            <div class="mx-auto text-center text-slate-700 dark:text-slate-200 mt-5">
+                <h4 class="text-xl font-medium">{{ 'empty.list.header'|trans }}</h4>
+                <div class="max-w-sm mx-auto my-5 text-sm md:text-base">{{ 'empty.list.text'|trans }}</div>
+                <a href="{{ path('app_market_place_index') }}" class="px-5 py-1.5 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">{{ 'start.shopping'|trans }}</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block toast %}
+    {% include 'layouts/toast/success.html.twig' %}
+{% endblock %}
