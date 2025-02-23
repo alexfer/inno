@@ -83,9 +83,9 @@ class EntryRepository extends ServiceEntityRepository
      * @throws \Exception
      */
     public function findEntriesByCondition(
-        string $slug = null,
-        string $date = null,
-        string $type = null,
+        ?string $slug = null,
+        ?string $date = null,
+        ?string $type = null,
         int    $limit = 12,
         int    $offset = 0
     ): ?array

@@ -268,7 +268,7 @@ class RegistrationController extends AbstractController
         UserPasswordHasherInterface $hasher,
         string                      $role,
         ?FormInterface              $form = null,
-        array                       $inputs = null
+        ?array                       $inputs = null
     ): array
     {
         return [

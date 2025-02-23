@@ -44,6 +44,40 @@ $$;
 
 alter function get_coupons(integer, varchar, integer, integer) owner to inno;
 
+create function get_dashboard_customers(ids jsonb, start integer DEFAULT 0, rows_count integer DEFAULT 12) returns jsonb
+    language plpgsql
+as
+$$
+DECLARE
+    results jsonb;
+BEGIN
+    WITH customers AS (SELECT DISTINCT jsonb_build_object(
+                                               'id', c.id,
+                                               'country', c.country,
+                                               'created', c.created_at,
+                                               'full_name', INITCAP(c.first_name || ' ' || c.last_name),
+                                               'orders', (SELECT COUNT(co.id)
+                                                          FROM store_customer_orders co
+                                                          WHERE co.customer_id = c.id
+                                                            AND co.id IN (SELECT jsonb_array_elements_text(ids)::INT))
+                                       ) AS customer
+                       FROM store_customer c
+                                JOIN store_customer_orders sco ON sco.customer_id = c.id AND sco.id IN (SELECT jsonb_array_elements_text(ids)::INT)
+                       GROUP BY c.id, c.email
+                       OFFSET start LIMIT rows_count)
+
+    SELECT json_agg(customer ORDER BY customer ->> 'id' DESC)
+    INTO results
+    FROM customers;
+
+    RETURN json_build_object(
+            'result', results
+           );
+END;
+$$;
+
+alter function get_dashboard_customers(jsonb, integer, integer) owner to inno;
+
 create function backdrop_admin_stores(start integer DEFAULT 0, row_count integer DEFAULT 25) returns json
     language plpgsql
 as
@@ -84,6 +118,54 @@ $$;
 
 alter function backdrop_admin_stores(integer, integer) owner to inno;
 
+create function get_dashboard_entries(user_id integer DEFAULT NULL::integer, status character varying DEFAULT NULL::character varying, type character varying DEFAULT NULL::character varying, start integer DEFAULT 0, row_count integer DEFAULT 25) returns jsonb
+    language plpgsql
+as
+$$
+DECLARE
+    results jsonb;
+    rows    int = 0;
+BEGIN
+    SELECT json_agg(json_build_object(
+            'id', e.id,
+            'title', ed.title,
+            'created', e.created_at,
+            'status', e.status,
+            'deleted', e.deleted_at,
+            'locked', e.locked_to,
+            'slug', e.slug,
+            'uid', u.id,
+            'author', ud.first_name || ' ' || ud.last_name
+                    ))
+    FROM entry e
+             JOIN entry_details ed ON e.id = ed.entry_id
+             JOIN "user" u on u.id = e.user_id
+             JOIN user_details ud ON u.id = ud.user_id
+    WHERE CASE
+              WHEN get_dashboard_entries.user_id IS NOT NULL THEN e.user_id = get_dashboard_entries.user_id
+              ELSE e.user_id > 0 END
+      AND e.type = get_dashboard_entries.type
+      AND e.status = get_dashboard_entries.status
+    GROUP BY e.id
+    ORDER BY e.id DESC
+    OFFSET start LIMIT row_count
+    INTO results;
+
+    SELECT count(e2.id)
+    FROM entry e2
+    WHERE e2.type = get_dashboard_entries.type
+      AND e2.status = get_dashboard_entries.status
+    INTO rows;
+
+    RETURN json_build_object(
+            'result', results,
+            'rows', rows
+           );
+END;
+$$;
+
+alter function get_dashboard_entries(integer, varchar, varchar, integer, integer) owner to inno;
+
 create function owner_store_search(query text, oid integer DEFAULT 0) returns json
     language plpgsql
 as
@@ -102,6 +184,39 @@ RETURN json_build_object(
 END;$$;
 
 alter function owner_store_search(text, integer) owner to inno;
+
+create function customer_counters(customer_id integer) returns jsonb
+    language plpgsql
+as
+$$
+DECLARE
+    msg_counter      int = 0;
+    wishlist_counter int = 0;
+BEGIN
+
+    WITH customer AS (SELECT id FROM store_customer WHERE member_id = customer_id)
+
+    SELECT COUNT(*)
+    FROM store_wishlist w
+    WHERE w.customer_id = (SELECT c2.id FROM customer c2)
+    INTO wishlist_counter;
+
+    SELECT COUNT(m.id)
+    FROM store_customer c
+             LEFT JOIN store_message m ON c.id = m.customer_id
+    WHERE c.member_id = customer_counters.customer_id
+      AND m.owner_id IS NOT NULL
+      AND m.read = false
+    INTO msg_counter;
+
+    return json_build_object(
+            'messages', msg_counter,
+            'wishlist', wishlist_counter
+           );
+END;
+$$;
+
+alter function customer_counters(integer) owner to inno;
 
 create function create_customer(user_id integer, "values" json) returns integer
     language plpgsql
@@ -260,6 +375,89 @@ END;
 $$;
 
 alter function get_product(varchar) owner to inno;
+
+create function get_dashboard_stores(start integer DEFAULT 0, rows_count integer DEFAULT 12, owner integer DEFAULT NULL::integer, store_slug character varying DEFAULT NULL::character varying) returns jsonb
+    language plpgsql
+as
+$$
+DECLARE
+    results JSON;
+BEGIN
+    WITH stores AS (SELECT DISTINCT jsonb_build_object(
+                                            'id', s.id,
+                                            'name', s.name,
+                                            'slug', s.slug,
+                                            'country', s.country,
+                                            'currency', s.currency,
+                                            'orders', (SELECT json_agg(json_build_object(
+                                            'id', o.id,
+                                            'number', o.number,
+                                            'created', o.created_at,
+                                            'status', o.status,
+                                            'total', o.total
+                                                                       )) FROM store_orders o
+                                                       WHERE o.store_id = s.id AND o.status = 'confirmed'
+                                                       OFFSET start LIMIT rows_count),
+                                            'products_count',
+                                            (SELECT COUNT(p.id) FROM store_product p WHERE p.store_id = s.id),
+                                            'products', (SELECT json_agg(json_build_object(
+                                                            'id', sp.id,
+                                                            'deleted', sp.deleted_at,
+                                                            'created', sp.created_at,
+                                                            'name', sp.short_name,
+                                                            'slug', sp.slug,
+                                                            'cost', sp.cost,
+                                                            'fee', sp.fee,
+                                                            'quantity', sp.quantity
+                                                                         ))
+                                                         FROM store_product sp
+                                                         WHERE sp.store_id = s.id
+                                                         OFFSET start LIMIT rows_count
+                                            ),
+                                            'owner', (SELECT json_build_object(
+                                                                     'email', u.email,
+                                                                     'roles', u.roles,
+                                                                     'full_name', ud.first_name || ' ' || ud.last_name
+                                                             )
+                                                      FROM "user" u
+                                                               JOIN user_details ud ON u.id = ud.user_id
+                                                      WHERE u.id = s.owner_id
+                                                      LIMIT 1),
+                                            'created', s.created_at,
+                                            'deleted', s.deleted_at,
+                                            'locked', s.locked_to
+                                    ) AS store
+                    FROM store s
+                    WHERE CASE WHEN get_dashboard_stores.owner IS NOT NULL
+                                   THEN s.owner_id = get_dashboard_stores.owner
+                               ELSE s.owner_id != 0 AND
+                                    CASE WHEN get_dashboard_stores.store_slug IS NOT NULL
+                                             THEN s.slug = get_dashboard_stores.store_slug ELSE s.slug LIKE '%' || '%' END
+                              END
+                    OFFSET start LIMIT rows_count)
+    SELECT json_agg(store ORDER BY store ->> 'id' DESC)
+    INTO results
+    FROM stores;
+
+    RETURN json_build_object(
+            'result', results,
+            'options', (SELECT json_agg(json_build_object(
+                    'id', s2.id,
+                    'slug', s2.slug,
+                    'name', s2.name
+                                        )) FROM store s2 OFFSET start LIMIT rows_count),
+            'rows', (SELECT COUNT(*)
+                     FROM store s WHERE CASE WHEN get_dashboard_stores.owner IS NOT NULL
+                                                 THEN s.owner_id = get_dashboard_stores.owner
+                                             ELSE s.owner_id != 0 AND
+                                                  CASE WHEN get_dashboard_stores.store_slug IS NOT NULL
+                                                           THEN s.slug = get_dashboard_stores.store_slug ELSE s.slug LIKE '%' || '%' END
+                                            END)
+           );
+END;
+$$;
+
+alter function get_dashboard_stores(integer, integer, integer, varchar) owner to inno;
 
 create function get_random_store(_limit integer DEFAULT 4) returns jsonb
     language plpgsql
@@ -651,6 +849,28 @@ $$;
 
 alter function get_products_by_child_category(integer, integer, integer, text) owner to inno;
 
+create function dashboard_message_counter(user_id integer) returns integer
+    language plpgsql
+as
+$$
+DECLARE
+    counter int = 0;
+BEGIN
+    WITH ids AS (SELECT id
+                 FROM store
+                 WHERE owner_id = user_id)
+
+    SELECT COUNT(m.id)
+    FROM store_message m
+    WHERE m.store_id IN (SELECT ids.id FROM ids) AND m.read = false AND m.owner_id IS NULL
+    INTO counter;
+
+    RETURN counter;
+END;
+$$;
+
+alter function dashboard_message_counter(integer) owner to inno;
+
 create function get_coupon_codes(store_id integer, coupon_id integer, type character varying) returns json
     language plpgsql
 as
@@ -748,8 +968,8 @@ BEGIN
                                                       'slug', p.slug,
                                                       'quantity', p.quantity,
                                                       'attachment', (SELECT json_build_object(
-                                                                            'name', a.name,
-                                                                            'path', a.path
+                                                                                    'name', a.name,
+                                                                                    'path', a.path
                                                                             )
                                                                      FROM store_product_attach spa
                                                                               LEFT JOIN attach a ON a.id = spa.attach_id
@@ -854,6 +1074,51 @@ $$;
 
 alter function get_customer_messages(integer, integer, integer) owner to inno;
 
+create function backdrop_messages(ids jsonb, start integer DEFAULT 0, row_count integer DEFAULT 25) returns jsonb
+    language plpgsql
+as
+$$
+DECLARE
+    results jsonb;
+    rows    int = 0;
+BEGIN
+    SELECT json_agg(json_build_object(
+            'id', m.id,
+            'created', m.created_at,
+            'priority', m.priority,
+            'product', sp.short_name,
+            'product_slug', sp.slug,
+            'order', so.number,
+            'store', m.store_id,
+            'message', m.message,
+            'customer', initcap(c.first_name || ' ' || c.last_name)
+                    ))
+    FROM store_message m
+             LEFT JOIN store_customer c ON c.id = m.customer_id
+             LEFT JOIN store_orders so ON m.orders_id = so.id
+             LEFT JOIN store_product sp ON m.product_id = sp.id
+    WHERE m.store_id IN (SELECT jsonb_array_elements_text(ids)::INT)
+      AND m.parent_id IS NULL
+    ORDER BY MAX(m.id) DESC
+    OFFSET start LIMIT row_count
+    INTO results;
+
+    SELECT COUNT(m2.id)
+    FROM store_message m2
+             LEFT JOIN store_customer c1 ON c1.id = m2.customer_id
+    WHERE m2.parent_id IS NULL
+      AND m2.store_id IN (SELECT jsonb_array_elements_text(ids)::INT)
+    INTO rows;
+
+    RETURN json_build_object(
+            'rows', rows,
+            'result', results
+           );
+END;
+$$;
+
+alter function backdrop_messages(jsonb, integer, integer) owner to inno;
+
 create function get_customer_orders(customer_id integer, start integer DEFAULT 0, row_count integer DEFAULT 25) returns json
     language plpgsql
 as
@@ -881,6 +1146,7 @@ BEGIN
                             'number', o.number,
                             'created', o.created_at,
                             'completed', o.completed_at,
+                            'cancelled', o.cancelled_at,
                             'status', o.status,
                             'tax', o.tax,
                             'total_quantity',
@@ -945,11 +1211,11 @@ BEGIN
                                                'short_name', p.short_name,
                                                'name', p.name,
                                                'attachment', (SELECT json_build_object(
-                                                                     'name', a.name,
-                                                                     'path', a.path
+                                                                             'name', a.name,
+                                                                             'path', a.path
                                                                      ) FROM store_product_attach pa
-                                                                         LEFT JOIN attach a ON pa.attach_id = a.id
-                                                                        WHERE pa.product_id = p.id LIMIT 1),
+                                                                                LEFT JOIN attach a ON pa.attach_id = a.id
+                                                              WHERE pa.product_id = p.id LIMIT 1),
                                                'coupon', (SELECT json_build_object(
                                                                          'id', c.id,
                                                                          'price', c.price,
@@ -1001,7 +1267,6 @@ BEGIN
     WITH stores AS (SELECT DISTINCT jsonb_build_object(
                                             'id', s.id,
                                             'name', s.name,
-                                            'slug', s.slug,
                                             'products',
                                             (SELECT COUNT(p.id) FROM store_product p WHERE p.store_id = s.id),
                                             'owner', (SELECT json_build_object(
@@ -1562,270 +1827,5 @@ END ;
 $$;
 
 alter function backdrop_products(integer, text, integer, integer) owner to inno;
-
-create function get_dashboard_stores(start integer DEFAULT 0, rows_count integer DEFAULT 12, owner integer DEFAULT NULL::integer, store_slug character varying DEFAULT NULL::character varying) returns jsonb
-    language plpgsql
-as
-$$
-DECLARE
-    results JSON;
-BEGIN
-    WITH stores AS (SELECT DISTINCT jsonb_build_object(
-                                            'id', s.id,
-                                            'name', s.name,
-                                            'slug', s.slug,
-                                            'country', s.country,
-                                            'currency', s.currency,
-                                            'orders', (SELECT json_agg(json_build_object(
-                                                                       'id', o.id,
-                                                                       'number', o.number,
-                                                                       'created', o.created_at,
-                                                                       'status', o.status,
-                                                                       'total', o.total
-                                                                       )) FROM store_orders o
-                                                                          WHERE o.store_id = s.id AND o.status = 'confirmed'
-                                                       OFFSET start LIMIT rows_count),
-                                            'products_count',
-                                            (SELECT COUNT(p.id) FROM store_product p WHERE p.store_id = s.id),
-                                            'products', (SELECT json_agg(json_build_object(
-                                                                'id', sp.id,
-                                                                'deleted', sp.deleted_at,
-                                                                'created', sp.created_at,
-                                                                'name', sp.short_name,        
-                                                                'slug', sp.slug,
-                                                                'cost', sp.cost,
-                                                                'fee', sp.fee,
-                                                                'quantity', sp.quantity
-                                                                )) 
-                                                         FROM store_product sp 
-                                                         WHERE sp.store_id = s.id 
-                                                         OFFSET start LIMIT rows_count
-                                                ),
-                                            'owner', (SELECT json_build_object(
-                                                                     'email', u.email,
-                                                                     'roles', u.roles,
-                                                                     'full_name', ud.first_name || ' ' || ud.last_name
-                                                             )
-                                                      FROM "user" u
-                                                               JOIN user_details ud ON u.id = ud.user_id
-                                                      WHERE u.id = s.owner_id
-                                                      LIMIT 1),
-                                            'created', s.created_at,
-                                            'deleted', s.deleted_at,
-                                            'locked', s.locked_to
-                                    ) AS store
-                    FROM store s
-                    WHERE CASE WHEN get_dashboard_stores.owner IS NOT NULL
-                                   THEN s.owner_id = get_dashboard_stores.owner
-                               ELSE s.owner_id != 0 AND
-                                    CASE WHEN get_dashboard_stores.store_slug IS NOT NULL
-                                             THEN s.slug = get_dashboard_stores.store_slug ELSE s.slug LIKE '%' || '%' END
-                              END
-                    OFFSET start LIMIT rows_count)
-    SELECT json_agg(store ORDER BY store ->> 'id' DESC)
-    INTO results
-    FROM stores;
-
-    RETURN json_build_object(
-            'result', results,
-            'options', (SELECT json_agg(json_build_object(
-                                        'id', s2.id,
-                                        'slug', s2.slug,
-                                        'name', s2.name
-                                        )) FROM store s2 OFFSET start LIMIT rows_count),
-            'rows', (SELECT COUNT(*)
-                     FROM store s WHERE CASE WHEN get_dashboard_stores.owner IS NOT NULL
-                                                 THEN s.owner_id = get_dashboard_stores.owner
-                                             ELSE s.owner_id != 0 AND
-                                                  CASE WHEN get_dashboard_stores.store_slug IS NOT NULL
-                                                           THEN s.slug = get_dashboard_stores.store_slug ELSE s.slug LIKE '%' || '%' END
-                                            END)
-           );
-END;
-$$;
-
-alter function get_dashboard_stores(integer, integer, integer, varchar) owner to postgres;
-
-create function get_dashboard_customers(ids jsonb, start integer DEFAULT 0, rows_count integer DEFAULT 12) returns jsonb
-    language plpgsql
-as
-$$
-DECLARE
-    results jsonb;
-BEGIN
-    WITH customers AS (SELECT DISTINCT jsonb_build_object(
-                                               'id', c.id,
-                                               'country', c.country,
-                                               'created', c.created_at,
-                                               'full_name', INITCAP(c.first_name || ' ' || c.last_name),
-                                               'orders', (SELECT COUNT(co.id)
-                                                          FROM store_customer_orders co
-                                                          WHERE co.customer_id = c.id
-                                                            AND co.id IN (SELECT jsonb_array_elements_text(ids)::INT))
-                                       ) AS customer
-                       FROM store_customer c
-                                JOIN store_customer_orders sco ON sco.customer_id = c.id AND sco.id IN (SELECT jsonb_array_elements_text(ids)::INT)
-                       GROUP BY c.id, c.email
-                       OFFSET start LIMIT rows_count)
-
-    SELECT json_agg(customer ORDER BY customer ->> 'id' DESC)
-    INTO results
-    FROM customers;
-
-    RETURN json_build_object(
-            'result', results
-           );
-END;
-$$;
-
-alter function get_dashboard_customers(jsonb, integer, integer) owner to postgres;
-
-create function customer_counters(customer_id integer) returns jsonb
-    language plpgsql
-as
-$$
-DECLARE
-    msg_counter      int = 0;
-    wishlist_counter int = 0;
-BEGIN
-
-    WITH customer AS (SELECT id FROM store_customer WHERE member_id = customer_id)
-
-    SELECT COUNT(*)
-    FROM store_wishlist w
-    WHERE w.customer_id = (SELECT c2.id FROM customer c2)
-    INTO wishlist_counter;
-
-    SELECT COUNT(m.id)
-    FROM store_customer c
-             LEFT JOIN store_message m ON c.id = m.customer_id
-    WHERE c.member_id = customer_counters.customer_id
-      AND m.owner_id IS NOT NULL
-      AND m.read = false
-    INTO msg_counter;
-
-    return json_build_object(
-            'messages', msg_counter,
-            'wishlist', wishlist_counter
-           );
-END;
-$$;
-
-alter function customer_counters(integer) owner to postgres;
-
-create function dashboard_message_counter(user_id integer) returns integer
-    language plpgsql
-as
-$$
-DECLARE
-    counter int = 0;
-BEGIN
-    WITH ids AS (SELECT id
-                 FROM store
-                 WHERE owner_id = user_id)
-    
-    SELECT COUNT(m.id)
-    FROM store_message m
-    WHERE m.store_id IN (SELECT ids.id FROM ids) AND m.read = false AND m.owner_id IS NULL 
-    INTO counter;
-
-    RETURN counter;
-END;
-$$;
-
-alter function dashboard_message_counter(integer) owner to postgres;
-
-create function get_dashboard_entries(user_id integer DEFAULT NULL::integer, status character varying DEFAULT NULL::character varying, type character varying DEFAULT NULL::character varying, start integer DEFAULT 0, row_count integer DEFAULT 25) returns jsonb
-    language plpgsql
-as
-$$
-DECLARE
-    results jsonb;
-    rows    int = 0;
-BEGIN
-    SELECT json_agg(json_build_object(
-            'id', e.id,
-            'title', ed.title,
-            'created', e.created_at,
-            'status', e.status,
-            'deleted', e.deleted_at,
-            'locked', e.locked_to,
-            'slug', e.slug,
-            'uid', u.id,
-            'author', ud.first_name || ' ' || ud.last_name
-                    ))
-    FROM entry e
-             JOIN entry_details ed ON e.id = ed.entry_id
-             JOIN "user" u on u.id = e.user_id
-             JOIN user_details ud ON u.id = ud.user_id
-    WHERE CASE
-              WHEN get_dashboard_entries.user_id IS NOT NULL THEN e.user_id = get_dashboard_entries.user_id
-              ELSE e.user_id > 0 END
-      AND e.type = get_dashboard_entries.type
-      AND e.status = get_dashboard_entries.status
-    GROUP BY e.id
-    ORDER BY e.id DESC
-    OFFSET start LIMIT row_count
-    INTO results;
-
-    SELECT count(e2.id)
-    FROM entry e2
-    WHERE e2.type = get_dashboard_entries.type
-      AND e2.status = get_dashboard_entries.status
-    INTO rows;
-
-    RETURN json_build_object(
-            'result', results,
-            'rows', rows
-           );
-END;
-$$;
-
-alter function get_dashboard_entries(integer, varchar, varchar, integer, integer) owner to postgres;
-
-create function backdrop_messages(ids jsonb, start integer DEFAULT 0, row_count integer DEFAULT 25) returns jsonb
-    language plpgsql
-as
-$$
-DECLARE
-    results jsonb;
-    rows    int = 0;
-BEGIN
-    SELECT json_agg(json_build_object(
-            'id', m.id,
-            'created', m.created_at,
-            'priority', m.priority,
-            'product', sp.short_name,
-            'product_slug', sp.slug,
-            'order', so.number,
-            'store', m.store_id,
-            'message', m.message,
-            'customer', initcap(c.first_name || ' ' || c.last_name)
-                    ))
-    FROM store_message m
-             LEFT JOIN store_customer c ON c.id = m.customer_id
-             LEFT JOIN store_orders so ON m.orders_id = so.id
-             LEFT JOIN store_product sp ON m.product_id = sp.id
-    WHERE m.store_id IN (SELECT jsonb_array_elements_text(ids)::INT)
-      AND m.parent_id IS NULL
-    ORDER BY MAX(m.id) DESC
-    OFFSET start LIMIT row_count
-    INTO results;
-
-    SELECT COUNT(m2.id)
-    FROM store_message m2
-             LEFT JOIN store_customer c1 ON c1.id = m2.customer_id
-    WHERE m2.parent_id IS NULL
-      AND m2.store_id IN (SELECT jsonb_array_elements_text(ids)::INT)
-    INTO rows;
-
-    RETURN json_build_object(
-            'rows', rows,
-            'result', results
-           );
-END;
-$$;
-
-alter function backdrop_messages(jsonb, integer, integer) owner to inno;
 
 

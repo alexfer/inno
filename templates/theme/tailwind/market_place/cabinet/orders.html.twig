@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>{{ 'customer.cabinet'|trans }}
-        <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
-    </h2>
+<h2>{{ 'customer.cabinet'|trans }}
+    <span class="absolute right-0 mr-2 text-lg pe-4 font-normal">{{ customer.firstName }} {{ customer.lastName }}</span>
+</h2>
 <div class="cabinet-container">
     {% include 'market_place/cabinet/aside.html.twig' %}
     <section class="w-full md:flex-grow ms-0 md:ms-2">
@@ -68,22 +68,27 @@
                                 {{ order.status }}
                             {% endif %}
                         </div>
-                        <div class="ms-0 md:ms-5 relative">
-                            <a id="dropdown-action-{{ key }}"
-                               role="button"
-                               data-dropdown-toggle="dropdown-status-{{ key }}"
-                               aria-expanded="false"
-                               class="text-slate-800 text-sm underline hover:no-underline font-normal dark:text-slate-200">{{ 'label.form.status'|trans }}</a>
-                            <div id="dropdown-status-{{ key }}" class="absolute z-20 start-0 hidden origin-top-left dark:bg-slate-700 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none bg-white dark:shadow-xl">
-                                <ul class="w-36 md:w-48 space-y-1 text-xs md:text-sm font-medium py-0.5 md:py-1"
-                                    aria-labelledby="dropdown-action-{{ key }}">
-                                    <li>
-                                        <a class="dropdown-item"
-                                           href="#">{{ 'order.action.cancel'|trans }}</a>
-                                    </li>
-                                </ul>
+                        {% if order.cancelled %}
+                        <div class="ms-0 md:ms-5">{{ order.cancelled|date(datetime_format) }}</div>
+                        {% else %}
+                            <div class="ms-0 md:ms-5 relative">
+                                <a id="dropdown-action-{{ key }}"
+                                   role="button"
+                                   data-dropdown-toggle="dropdown-status-{{ key }}"
+                                   aria-expanded="false"
+                                   class="text-slate-800 text-sm underline hover:no-underline font-normal dark:text-slate-200">{{ 'label.form.status'|trans }}</a>
+                                <div id="dropdown-status-{{ key }}"
+                                     class="absolute z-20 start-0 hidden origin-top-left dark:bg-slate-700 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none bg-white dark:shadow-xl">
+                                    <ul class="w-36 md:w-48 space-y-1 text-xs md:text-sm font-medium py-0.5 md:py-1"
+                                        aria-labelledby="dropdown-action-{{ key }}">
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{{ path('app_cabinet_order_cancel', {number: order.number}) }}">{{ 'order.action.cancel'|trans }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                         <div class="absolute end-1 md:me-2 md:-mt-1 md:inline-flex space-x-1 items-end">
                             {% if order.status == 'confirmed' %}
                                 <a href="#"
@@ -94,7 +99,8 @@
                                    data-dropdown-toggle="invoice-status-{{ key }}" data-dropdown-trigger="click"
                                    aria-expanded="false"
                                    class="bg-indigo-500 hover:bg-indigo-800 text-xs font-medium rounded px-2.5 py-1.5 text-white dark:text-slate-100">{{ 'customer.cabinet.invoice'|trans }}</a>
-                                <div id="invoice-status-{{ key }}" class="absolute z-20 start-0 hidden origin-top-left dark:bg-slate-700 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none bg-white dark:shadow-xl">
+                                <div id="invoice-status-{{ key }}"
+                                     class="absolute z-20 start-0 hidden origin-top-left dark:bg-slate-700 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none bg-white dark:shadow-xl">
                                     <ul class="w-36 md:w-48 space-y-1 text-xs md:text-sm font-medium py-0.5 md:py-1"
                                         aria-labelledby="dropdown-invoice-{{ key }}">
                                         <li>
@@ -243,7 +249,8 @@
                         <div class="mx-auto text-center text-slate-700 dark:text-slate-200 mt-5">
                             <h4 class="text-xl font-medium">{{ 'empty.list.header'|trans }}</h4>
                             <div class="max-w-sm mx-auto my-5 text-sm md:text-base">{{ 'empty.orders.list.text'|trans }}</div>
-                            <a href="{{ path('app_market_place_index') }}" class="px-5 py-1.5 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">{{ 'start.shopping'|trans }}</a>
+                            <a href="{{ path('app_market_place_index') }}"
+                               class="px-5 py-1.5 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">{{ 'start.shopping'|trans }}</a>
                         </div>
                     {% endfor %}
                 </h1>

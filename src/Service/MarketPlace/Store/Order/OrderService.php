@@ -38,7 +38,7 @@ final class OrderService implements OrderServiceInterface
      * @param string|null $sessionId
      * @return StoreOrders|null
      */
-    public function findOrder(int $id = null, ?string $sessionId = null): ?StoreOrders
+    public function findOrder(?int $id = null, ?string $sessionId = null): ?StoreOrders
     {
         $this->sessionId = $sessionId;
 
