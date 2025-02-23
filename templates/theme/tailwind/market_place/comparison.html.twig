@@ -5,7 +5,7 @@
     <h2 class="block line-clamp-1">{{ 'list.comparison'|trans }}</h2>
     <div class="flex flex-col md:flex-row gap-2">
         {% for product in products %}
-            <div class="max-w-sm relative bg-white border py-2 px-0.5 border-slate-200 rounded-lg shadow-sm dark:bg-slate-800 dark:border-slate-700">
+            <div class="max-w-sm relative bg-white border border-slate-200 rounded-lg shadow-sm dark:bg-slate-800 dark:border-slate-700">
                 <div class="absolute -end-2 -top-2">
                     <a class="block p-1 md:p-1.5 text-slate-50 bg-slate-500 hover:bg-slate-700 rounded-full"
                        href="{{ path('app_market_place_remove_compare', {id: product.id}) }}">
@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <a href="{{ path('app_market_place_product', {slug: product.slug, tab: 'about'}) }}" class="">
-                    {% if product.storeProductAttaches %}
+                    {% if product.storeProductAttaches.count %}
                         {% set _picture = product.storeProductAttaches.first.attach.path ~ '/' ~ product.storeProductAttaches.first.attach.name %}
                         <img loading="lazy" src="{{ asset(_picture)|imagine_filter('product_preview') }}"
                              class="h-48 w-96 object-cover rounded-t-lg" alt="{{ product.name }}">

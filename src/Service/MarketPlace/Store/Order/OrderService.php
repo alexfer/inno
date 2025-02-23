@@ -18,7 +18,7 @@ final class OrderService implements OrderServiceInterface
     private ?string $sessionId;
 
     /**
-     * @var FrontSessionInterface 
+     * @var FrontSessionInterface
      */
     public FrontSessionInterface $frontSession;
 
