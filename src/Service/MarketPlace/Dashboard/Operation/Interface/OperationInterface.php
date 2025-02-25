@@ -43,7 +43,7 @@ interface OperationInterface
      * @param string|null $format
      * @return string
      */
-    public function storage(string $format = null): string;
+    public function storage(?string $format = null): string;
 
     /**
      * @return array
@@ -60,7 +60,7 @@ interface OperationInterface
     /**
      * @param string $dir
      * @param StoreOperation $operation
-     * @return mixed
+     * @return void
      */
     public function compose(string $dir, StoreOperation $operation): void;
 }

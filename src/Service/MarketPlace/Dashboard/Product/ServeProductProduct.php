@@ -116,6 +116,7 @@ class ServeProductProduct extends Handle implements ServeProductInterface
 
     /**
      * @param StoreProduct $product
+     * @param bool $up
      * @return void
      */
     protected function category(StoreProduct $product, bool $up = false): void
@@ -150,7 +151,7 @@ class ServeProductProduct extends Handle implements ServeProductInterface
      * @param int $limit
      * @return array
      */
-    public function index(Store $store, string $search = null, int $offset = 0, int $limit = 20): array
+    public function index(Store $store, ?string $search = null, int $offset = 0, int $limit = 20): array
     {
         return $this->em->getRepository(StoreProduct::class)
             ->products($store, $search, $offset, $limit) ?? [];
