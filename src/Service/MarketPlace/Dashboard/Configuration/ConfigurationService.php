@@ -19,7 +19,7 @@ class ConfigurationService extends HandleService implements ConfigurationService
      * @param string|null $target
      * @return $this
      */
-    public function take(string $target = null): self
+    public function take(?string $target = null): self
     {
         $this->target = $target;
         return $this;
@@ -70,7 +70,7 @@ class ConfigurationService extends HandleService implements ConfigurationService
      * @param array|null $media
      * @return StoreCarrier|StorePaymentGateway|null
      */
-    public function create(array $data, array $media = null): null|StoreCarrier|StorePaymentGateway
+    public function create(array $data, ?array $media = null): null|StoreCarrier|StorePaymentGateway
     {
         if ($this->target == 'carrier') {
             return $this->createCarrier($data, $media);
@@ -88,7 +88,7 @@ class ConfigurationService extends HandleService implements ConfigurationService
      * @param array|null $media
      * @return StoreCarrier|StorePaymentGateway|null
      */
-    public function update(int $id, array $data, array $media = null): null|StoreCarrier|StorePaymentGateway
+    public function update(int $id, array $data, ?array $media = null): null|StoreCarrier|StorePaymentGateway
     {
         if ($this->target == 'carrier') {
             $carrier = $this->get($id, StoreCarrier::class);

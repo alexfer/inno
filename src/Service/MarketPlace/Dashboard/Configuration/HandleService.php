@@ -96,7 +96,7 @@ class HandleService
      * @param array|null $media
      * @return StoreCarrier
      */
-    protected function createCarrier(array $data, array $media = null): StoreCarrier
+    protected function createCarrier(array $data, ?array $media = null): StoreCarrier
     {
         if ($media) {
             try {
@@ -133,7 +133,7 @@ class HandleService
      * @param array|null $media
      * @return StorePaymentGateway
      */
-    protected function createPaymentGateway(array $data, array $media = null): StorePaymentGateway
+    protected function createPaymentGateway(array $data, ?array $media = null): StorePaymentGateway
     {
         if ($media) {
             try {
@@ -173,7 +173,7 @@ class HandleService
      * @param array|null $media
      * @return StoreCarrier
      */
-    protected function updateCarrier(array $data, StoreCarrier $storeCarrier, array $media = null): StoreCarrier
+    protected function updateCarrier(array $data, StoreCarrier $storeCarrier, ?array $media = null): StoreCarrier
     {
         if ($media) {
             try {
@@ -220,7 +220,7 @@ class HandleService
      * @param array|null $media
      * @return StorePaymentGateway
      */
-    protected function updatePaymentGateway(array $data, StorePaymentGateway $paymentGateway, array $media = null): StorePaymentGateway
+    protected function updatePaymentGateway(array $data, StorePaymentGateway $paymentGateway, ?array $media = null): StorePaymentGateway
     {
 
         if ($media) {
@@ -268,7 +268,7 @@ class HandleService
      * @param array|null $media
      * @return Attach|null
      */
-    protected function setAttach(?string $attach, string $storage, array $media = null): ?Attach
+    protected function setAttach(?string $attach, string $storage, ?array $media = null): ?Attach
     {
         $filePath = null;
 

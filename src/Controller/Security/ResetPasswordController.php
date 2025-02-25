@@ -100,7 +100,7 @@ class ResetPasswordController extends AbstractController
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $translator,
         EntityManagerInterface      $manager,
-        string                      $token = null,
+        ?string                      $token = null,
     ): Response
     {
         if ($token) {

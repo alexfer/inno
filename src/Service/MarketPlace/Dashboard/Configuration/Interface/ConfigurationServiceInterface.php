@@ -38,7 +38,7 @@ interface ConfigurationServiceInterface
      * @param array|null $media
      * @return StoreCarrier|StorePaymentGateway|null
      */
-    public function create(array $data, array $media = null): null|StoreCarrier|StorePaymentGateway;
+    public function create(array $data, ?array $media = null): null|StoreCarrier|StorePaymentGateway;
 
     /**
      * @param int $id
@@ -46,5 +46,5 @@ interface ConfigurationServiceInterface
      * @param array|null $media
      * @return StoreCarrier|StorePaymentGateway|null
      */
-    public function update(int $id, array $data, array $media = null): null|StoreCarrier|StorePaymentGateway;
+    public function update(int $id, array $data, ?array $media = null): null|StoreCarrier|StorePaymentGateway;
 }

@@ -65,7 +65,7 @@ class Operation extends FactoryHandler implements OperationInterface
      * @param string|null $format
      * @return string
      */
-    public function storage(string $format = null): string
+    public function storage(?string $format = null): string
     {
         $storage = $this->params->get('private_storage');
         $format = $format ?? $this->options['format'];

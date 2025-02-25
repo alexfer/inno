@@ -92,7 +92,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @param int $offset
      * @return array
      */
-    public function fetch(string $query = null, int $limit = 25, int $offset = 0): array
+    public function fetch(?string $query = null, int $limit = 25, int $offset = 0): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select([

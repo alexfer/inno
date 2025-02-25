@@ -33,7 +33,7 @@ class MarketPlaceHelper
      * @param string|null $key
      * @return string
      */
-    public static function slug(int $id, int $length = 10, string $key = null): string
+    public static function slug(int $id, int $length = 10, ?string $key = null): string
     {
         $parts = [
             $key ?: 'p',

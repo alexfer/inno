@@ -143,7 +143,7 @@ class GoogleAuthenticator extends OAuth2Authenticator implements AuthenticationE
      * @param AuthenticationException|null $authException
      * @return Response
      */
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         return new RedirectResponse(
             '/web/login',

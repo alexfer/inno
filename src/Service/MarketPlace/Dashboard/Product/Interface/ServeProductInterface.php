@@ -20,7 +20,7 @@ interface ServeProductInterface
      * @param int $limit
      * @return array
      */
-    public function index(Store $store, string $search = null, int $offset = 0, int $limit = 20): array;
+    public function index(Store $store, ?string $search = null, int $offset = 0, int $limit = 20): array;
 
     /**
      * @param Store $store
