@@ -8,7 +8,7 @@ Inno E-commerce marketplaces.
 
 ### Requirements:
 - [Nginx HTTP Server `1.26.0`](http://nginx.org/en/CHANGES-1.24)
-- [PHP `>=8.3`](https://www.php.net/releases/8.3/en.php)
+- [PHP `>=8.2`](https://www.php.net/releases/8.3/en.php)
 - [PostgreSQL `16.*`](https://www.postgresql.org/)
 - [Symfony `7.1.*`](https://symfony.com/releases/7.1)
 - [Redis `7.*`](https://redis.io/downloads/)
@@ -56,6 +56,11 @@ Build production:
 ```shell
     $ npm run build
 ```
+#### Populate indices (Elastic search)
+```shell
+  $ php bin/console app:populate:indices --create
+```
+
 Code of Conduct
 ============
 I as member, contributor, and leader pledge to make participation in  community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.
