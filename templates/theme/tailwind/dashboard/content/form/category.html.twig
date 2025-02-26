@@ -8,7 +8,7 @@
                aria-controls="categories">{{ 'entry.form.categories'|trans }}</a>
         </h3>
     </div>
-    {% set cat = app.request.get('category')|keys %}
+    {% set cat = app.request.get('category') %}
     <div class="hidden" id="category-body" aria-labelledby="category-heading">
         <div class="p-5 border rounded-b-lg border-slate-200 dark:border-slate-700 dark:bg-slate-900">
             {% for key, category in categories %}
@@ -18,9 +18,9 @@
                         {% set _checked = 'checked' %}
                     {% endif %}
                 {% endfor %}
-                {#                {% if category.id == cat[key]|default %} #}
-                {#                    {% set _checked = 'checked' %} #}
-                {#                {% endif %} #}
+                {% if cat[category.id] is defined and cat[category.id] == 'on' %}
+                    {% set _checked = 'checked' %}
+                {% endif %}
                 <div class="flex flex-col flex-wrap mb-3">
                     <label for="category-{{ category.id }}" class="inline-flex items-center -mb-1.5 cursor-pointer">
                         <input type="checkbox" name="category[{{ category.id }}]" class="peer sr-only"

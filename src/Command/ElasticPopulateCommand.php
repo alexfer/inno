@@ -105,7 +105,6 @@ class ElasticPopulateCommand extends Command
         }
 
         if ($populate) {
-
             $queryBuilder = $this->manager
                 ->getRepository(StoreProduct::class)
                 ->createQueryBuilder('p');

@@ -232,7 +232,7 @@
     }
 
     .counter-helper {
-        @apply text-xs md:text-[0.85rem] text-slate-400 dark:text-white mt-0.5 text-end space-x-1;
+        @apply text-xs md:text-[0.85rem] text-slate-400 dark:text-white mt-0.5 mb-2 float-end space-x-1 w-auto;
     }
 
     .counter-helper span:first-of-type {

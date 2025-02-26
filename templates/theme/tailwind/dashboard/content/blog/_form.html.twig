@@ -5,11 +5,6 @@
 {% block title_extend %}{{ _title_extend }} - {% endblock %}
 {% block title_content %}
     {{ _title_extend }}
-    {% if app.request.get('id') %}
-        {#        <a role="button" target="_blank" #}
-        {#           class="text-sm font-normal border shadow-md hover:border-slate-400 hover:bg-slate-100 hover:shadow-lg rounded-md px-3 py-2 float-end mb-1 dark:text-white dark:hover:bg-black" #}
-        {#           href="{{ path('app_blog_view', {slug: form.vars.data.slug}) }}">{{ 'user.entry.preview'|trans }}</a> #}
-    {% endif %}
 {% endblock %}
 {% block content %}
     {{ form_start(form, {attr: {novalidate: ''}}) }}
@@ -25,7 +20,12 @@
             {{ error }}
         </div>
     {% endif %}
-    <div class="form-box">
+    <div class="form-box relative">
+        {% if app.request.get('id') %}
+            <a role="button" target="_blank"
+               class="absolute top-2 end-2 text-sm border text-white border-slate-500 shadow-md bg-slate-500 hover:bg-slate-700 hover:shadow-lg rounded-md px-3.5 py-2 dark:hover:bg-slate-900"
+               href="{{ path('app_blog_view', {slug: form.vars.data.slug}) }}">{{ 'user.entry.preview'|trans }}</a>
+        {% endif %}
         <div class="block mb-3">
             {{ form_label(form.title, 'label.form.title', {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(form.title, {attr: {class: 'input-widget', 'data-showcounter': 'true', placeholder: 'label.form.title'}}) }}
