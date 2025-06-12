@@ -56,7 +56,7 @@ Build production:
 ```shell
     $ npm run build
 ```
-#### Populate indices (Elastic search)
+#### Populate indices ()
 ```shell
   $ php bin/console app:populate:indices --create
 ```
