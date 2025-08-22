@@ -32,7 +32,7 @@ You should change database configuration
 ### 3. Install dependencies use Composer
 Use [Composer](https://getcomposer.org/) install to download and install the package.
 ```shell
-    $ composer install
+    $ composer update
 ```
 ### 4. Creating a database and fill it with data
 ```shell
